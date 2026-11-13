@@ -9,98 +9,143 @@ permalink: /vhealth/
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VHealth 项目时间线</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Layout: header with logo, a vertical timeline, then a deliverables list. */
-  --bg: #f4f7f6; --surface: #ffffff; --ink: #17262b; --muted: #5b6c71; --line: #d9e3e1; --accent: #1a8f7c; --accent-soft: #e2f2ef;
+  /* Layout: vertical timeline (structure A) in the warm paper palette (C). Each event: description, deliverables, actions. */
+  --paper: #fbf8f2;
+  --card: #ffffff;
+  --ink: #2a2620;
+  --muted: #6d6558;
+  --line: #ebe3d4;
+  --rail: #e3cfb6;
+  --accent: #c9772e;
+  --accent-ink: #a85f1f;
   --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #10181b; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3; --line: #2a393e; --accent: #4fc2b8; --accent-soft: #163634; color-scheme: dark; }
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--font); }
-main { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 40px; }
-a { color: var(--accent); }
-a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.65 var(--font); }
+main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; display: grid; gap: 32px; }
+a { color: var(--accent-ink); }
+a:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
 .back { font-size: .92rem; text-decoration: none; }
-.head { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
-.head .logo { background: #fff; border-radius: 12px; padding: 10px 14px; border: 1px solid var(--line); }
-.head .logo img { height: 64px; width: auto; display: block; }
-h1 { margin: 0; font-size: 1.9rem; font-weight: 800; line-height: 1.15; }
-h2 { margin: 0; font-size: 1.25rem; font-weight: 800; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
-.sub { color: var(--muted); margin: 4px 0 0; }
-section { display: grid; gap: 18px; }
 
-.timeline { list-style: none; margin: 0; padding: 0 0 0 28px; position: relative; display: grid; gap: 24px; }
-.timeline::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
-.event { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 10px; }
-.event::before { content: ""; position: absolute; left: -27px; top: 22px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--bg); }
-.event .date { font-size: .85rem; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
-.event h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
-.event p { margin: 0; }
-.event ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
-.event .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
-.btn { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; font-size: .92rem; }
-.btn.ghost { background: var(--accent-soft); color: var(--accent); }
-.event.next { border-style: dashed; background: transparent; }
-.event.next::before { background: var(--bg); border: 2px solid var(--accent); box-shadow: none; }
+.hd { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
+.logo-plate { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; }
+.logo-plate img { height: 56px; width: auto; display: block; }
+.hd h1 { margin: 0; font-family: var(--serif); font-size: 1.9rem; line-height: 1.2; }
+.hd p { margin: 2px 0 0; color: var(--muted); }
 
-.docs { display: grid; gap: 12px; }
-a.doc { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: inherit; }
-a.doc:hover { border-color: var(--accent); }
-a.doc b { font-size: 1.05rem; }
-a.doc span { color: var(--muted); font-size: .92rem; grid-column: 1; }
-a.doc i { font-style: normal; color: var(--accent); font-weight: 600; grid-row: 1 / span 2; grid-column: 2; }
+h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
+
+.timeline { list-style: none; margin: 0; padding: 0 0 0 38px; position: relative; display: grid; gap: 28px; }
+.timeline::before { content: ""; position: absolute; left: 13px; top: 10px; bottom: 10px; width: 2px; background: var(--rail); }
+.ev { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; display: grid; gap: 18px; }
+.ev::before { content: attr(data-n); position: absolute; left: -38px; top: 20px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 .85rem/28px var(--font); text-align: center; box-shadow: 0 0 0 4px var(--paper); }
+.ev.next { background: transparent; border-style: dashed; }
+.ev.next::before { content: ""; background: var(--paper); border: 2px dashed var(--accent); }
+.top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.top h3 { margin: 0; font-family: var(--serif); font-size: 1.45rem; line-height: 1.25; }
+.date { color: var(--accent-ink); font-weight: 700; font-size: .92rem; font-variant-numeric: tabular-nums; }
+.blk { display: grid; gap: 10px; }
+.lbl { font-size: .78rem; font-weight: 800; letter-spacing: .1em; color: #8c7f6a; }
+.blk p { margin: 0; max-width: 66ch; }
+
+.docs { display: flex; flex-wrap: wrap; gap: 8px; }
+.docs a { text-decoration: none; background: #fbf3e9; color: var(--accent-ink); border: 1px solid #efdcc4; border-radius: 10px; padding: 7px 12px; font-weight: 600; font-size: .93rem; }
+.docs a:hover { border-color: var(--accent); }
+.docs a small { font-weight: 700; font-size: .7rem; color: #8c7f6a; margin-left: 6px; }
+
+.acts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.acts li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 10px 14px; background: #fdfbf7; border: 1px solid var(--line); border-radius: 10px; }
+.acts label { display: contents; cursor: default; }
+.acts input[type="checkbox"] { appearance: none; -webkit-appearance: none; margin: 0; width: 20px; height: 20px; border: 2px solid #b9ad99; border-radius: 5px; background: #fff; display: grid; place-items: center; pointer-events: none; }
+.acts input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+.acts input[type="checkbox"]:checked::after { content: ""; width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
+.acts .txt { min-width: 0; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.owner, .st { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.o-fde { background: #ece8fb; color: #4b3fb5; }
+.o-vh { background: #e2f3ee; color: #10715f; }
+.st-todo { background: #fff1d6; color: #8a5a00; }
+.st-done { background: #e3f4e6; color: #1f7a3a; }
+@media (max-width: 560px) {
+  .acts li { grid-template-columns: auto 1fr; }
+  .tags { grid-column: 2; justify-content: flex-start; }
+  .ev { padding: 18px; }
+}
 </style>
 </head>
 <body>
 <main>
   <a class="back" href="../">← 所有客户</a>
 
-  <header class="head">
-    <div class="logo"><img src="../VHealth/assets/logo.jpg" alt="V-Health Rehab Clinic logo"></div>
+  <header class="hd">
+    <span class="logo-plate"><img src="../VHealth/assets/logo.jpg" alt="V-Health Rehab Clinic logo"></span>
     <div>
-      <h1>VHealth</h1>
-      <p class="sub">V-Health Rehab Clinic · Calgary NW · 4间治疗室 · 8位治疗师 · 每天约10位客户</p>
+      <h1>VHealth 项目时间线</h1>
+      <p>V-Health Rehab Clinic · Calgary NW · 4间治疗室 · 8位治疗师 · 每天约10位客户</p>
     </div>
   </header>
 
-  <section>
-    <h2>时间线</h2>
-    <ol class="timeline">
-      <li class="event">
-        <span class="date">2026-11-12</span>
-        <h3>Grill Me 诊断</h3>
-        <p>和诊所老板做了4轮、共32个问题的追问式访谈，同时调研了官网、预约网站、各类目录和周边竞争对手。</p>
-        <ul>
-          <li><b>目标</b>：每月预约 300 → 600 次（2027年5月底前），并增加说英语的本地客户</li>
-          <li><b>关键发现</b>：不缺治疗师，也不缺口碑（260条5星评价）。真正的问题是上午和周一、周二空着，而这些时段来的老人没有保险；同时网站给非华人"不是为我开的"的印象</li>
-          <li><b>最高优先级</b>：拿回 SEO 外包手里的账号、装好追踪、抓住12月31日保险福利清零前的时间窗口</li>
-        </ul>
-        <div class="links">
-          <a class="btn" href="../VHealth/interview-qa-zh.html">查看访谈详情 →</a>
-          <a class="btn ghost" href="../VHealth/priority-analysis.html">问题优先级分析</a>
-        </div>
-      </li>
-      <li class="event next">
-        <span class="date">下一步</span>
-        <h3>第1周执行：拿回账号 + 装好追踪 + 发出年底福利提醒</h3>
-        <p>完成后会记录在这里。</p>
-      </li>
-    </ol>
-  </section>
+  <h2 class="sec">时间线</h2>
+  <ol class="timeline">
 
-  <section>
-    <h2>交付物</h2>
-    <div class="docs">
-      <a class="doc" href="../VHealth/plan-90-day.html"><b>90天行动计划</b><span>2026-11-12 至 2027-02-10，每周任务、预算、数据看板、保留或砍掉的规则</span><i>打开 →</i></a>
-      <a class="doc" href="../VHealth/okr-6-month.html"><b>6个月 OKR</b><span>M1–M6，每个月的目标、关键结果、衡量方法和负责人</span><i>打开 →</i></a>
-    </div>
-  </section>
+    <!-- Event 1 -->
+    <li class="ev" data-n="1">
+      <div class="top"><h3>Grill Me 诊断</h3><span class="date">2026-11-12</span></div>
+      <div class="blk"><span class="lbl">大概描述</span>
+        <p>和老板做了4轮、32个问题的追问式访谈，并调研了官网、预约网站、目录和竞争对手。发现诊所不缺治疗师，也不缺口碑（260条5星评价）。真正的问题有两个：上午和周一、周二空着，而这些时段来的老人没有保险；网站给非华人"不是为我开的"的印象。目标是到2027年5月，每月预约从300次增长到600次。</p>
+      </div>
+      <div class="blk"><span class="lbl">交付物</span>
+        <div class="docs">
+          <a href="../VHealth/interview-qa-zh.html">访谈详情</a>
+          <a href="../VHealth/priority-analysis.html">问题优先级分析</a>
+          <a href="../VHealth/plan-90-day.html">90天行动计划</a>
+          <a href="../VHealth/okr-6-month.html">6个月 OKR</a>
+        </div>
+      </div>
+      <div class="blk"><span class="lbl">下一步行动</span>
+        <ul class="acts">
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">继续 grill，深入了解更多细节</span></label><span class="tags"><span class="owner o-fde">FDE</span><span class="st st-todo">待办</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">去 Google 评价很多的诊所体验一次，看他们为什么能有这么多评价</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">待办</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">到周边社区和超市张贴海报</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">待办</span></span></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Event 2 -->
+    <li class="ev" data-n="2">
+      <div class="top"><h3>Poster Design</h3><span class="date">2026-11-12</span></div>
+      <div class="blk"><span class="lbl">大概描述</span>
+        <p>为超市社区公告板设计 A4 海报，主打可以直接走保险、保险福利12月31日清零、按摩 · 整骨 · 针灸三项服务。先做10个不同角度，再围绕"年底福利过期"做了6种排版和9种本地配色。最终选定 <b>A2：Classic 版，白色 + 青绿</b>。二维码带追踪标签，可以统计每张海报带来的预约。</p>
+      </div>
+      <div class="blk"><span class="lbl">交付物</span>
+        <div class="docs">
+          <a href="../VHealth/deliverables/vhealth-posters.html">10个角度初稿</a>
+          <a href="../VHealth/deliverables/vhealth-poster-v1.html">V1 · 6种排版</a>
+          <a href="../VHealth/deliverables/vhealth-poster-v1-colours.html">V1 · 9种配色</a>
+          <a href="../VHealth/deliverables/V-Health-Poster-A2-A4.pdf">最终版 A2<small>PDF</small></a>
+        </div>
+      </div>
+      <div class="blk"><span class="lbl">下一步行动</span>
+        <ul class="acts">
+          <li><label><input type="checkbox" checked aria-label="已完成" tabindex="-1"><span class="txt">选定最终版本：A2（Classic，白色 + 青绿）</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-done">已完成</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">打印 A4 海报</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">待办</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">周末去社区和超市张贴</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">本周末</span></span></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- Next -->
+    <li class="ev next">
+      <div class="top"><h3>下一个事件</h3><span class="date">待定</span></div>
+      <p style="margin:0;color:var(--muted)">海报张贴和第1周执行完成后，会记录在这里。</p>
+    </li>
+  </ol>
 </main>
 </body>
 </html>
