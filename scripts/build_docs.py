@@ -151,6 +151,48 @@ def unregistered(folder, data):
     return [p for p in found if p not in known]
 
 
+GATE_RE = re.compile(r'<!-- PIN-GATE:START -->.*?<!-- PIN-GATE:END -->\n?', re.S)
+
+
+def gate_block(data):
+    """PIN gate for clients with client.pin_sha256 = sha256("<slug>:<PIN>"). Empty string if public."""
+    cl = data['client']
+    if not cl.get('pin_sha256'):
+        return ''
+    return ('<!-- PIN-GATE:START -->\n<meta name="robots" content="noindex">\n'
+            f'<script src="/fde/assets/pin-gate.js" data-client="{cl["slug"]}" data-hash="{cl["pin_sha256"]}"></script>\n'
+            '<!-- PIN-GATE:END -->\n')
+
+
+def apply_gate(text, block, is_md=False):
+    """Remove any old gate, then insert the current one (HTML: after <meta charset>; MD: after front matter)."""
+    text = GATE_RE.sub('', text)
+    if not block:
+        return text
+    fm = re.match(r'---\n.*?\n---\n', text, re.S)
+    if is_md:
+        i = fm.end() if fm else 0
+        return text[:i] + block + '\n' + text[i:].lstrip('\n')
+    m = re.search(r'<meta charset[^>]*>\n?', text, re.I) or re.search(r'<head[^>]*>\n?', text, re.I)
+    i = m.end() if m else (fm.end() if fm else 0)
+    if m and not text[m.end() - 1:m.end()] == '\n':
+        block = '\n' + block
+    return text[:i] + block + text[i:]
+
+
+def gated_files(folder):
+    """Every page of the client that must carry the gate (besides index/docs, which are built)."""
+    out = []
+    for f in sorted(folder.rglob('*')):
+        if not f.is_file() or f.name.startswith('.') or f.parent.name == 'assets':
+            continue
+        if f.suffix == '.html' and f.name not in ('index.html', 'docs.html'):
+            out.append(f)
+        elif f.suffix == '.md' and f.name.lower() != 'readme.md':
+            out.append(f)
+    return out
+
+
 def mmdd(date):
     return date[5:].replace('-', '/')
 
@@ -256,9 +298,19 @@ def run(folder, check):
     errs += [f'not in docs.json: {folder.name}/{p}  (add it to "docs", or to "ignore" with a reason)' for p in loose]
     if errs:
         return errs
-    outputs = {folder / 'index.html': build_index(folder, data, cats),
-               folder / 'docs.html': build_docs_page(folder, data, cats)}
+    gate = gate_block(data)
+    outputs = {folder / 'index.html': apply_gate(build_index(folder, data, cats), gate),
+               folder / 'docs.html': apply_gate(build_docs_page(folder, data, cats), gate)}
+    for f in gated_files(folder):
+        outputs[f] = apply_gate(f.read_text(encoding='utf-8'), gate, is_md=f.suffix == '.md')
     problems = []
+    if gate:  # PDFs can't run the gate script
+        ok = {d['path'] for d in data['docs'] if d.get('unprotected_ok')}
+        for f in sorted(folder.rglob('*.pdf')):
+            rel = str(f.relative_to(folder))
+            if rel not in ok:
+                problems.append(f'{folder.name}/{rel}: PDFs can\'t be PIN-protected. Publish it as an HTML page instead, '
+                                f'or set "unprotected_ok": true on its docs.json entry if the user agreed it can be public.')
     for path, text in outputs.items():
         current = path.read_text(encoding='utf-8') if path.exists() else ''
         if current != text:

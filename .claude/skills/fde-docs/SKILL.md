@@ -14,7 +14,7 @@ Each client is one top-level folder with its own `docs.json`. List them with `ls
 | Folder | Slug (URL) | Client |
 |---|---|---|
 | `VHealth/` | `/fde/vhealth/` | V-Health Rehab Clinic, Calgary NW |
-| `KidsMap/` | `/fde/kidsmap/` | Kids Map, kids' places map for Canadian parents (product repo: `~/TEMP/kids-map`) |
+| `KidsMap/` | `/fde/kidsmap/` | Kids Map, kids' places map for Canadian parents (product repo: `~/TEMP/kids-map`). **PIN-protected** |
 
 (Read `client.slug` / `client.name` in each `docs.json` for the current list; add a row here when you add a client.)
 
@@ -23,6 +23,20 @@ Each client is one top-level folder with its own `docs.json`. List them with `ls
 3. Categories are per client (`categories` in that client's `docs.json`). Don't copy another client's categories just because they exist.
 4. One commit per client when a session touched several.
 5. Public site: no personal data of the client's customers (names, phones, filled-in forms, health info). Business-level facts the owner shared are fine.
+
+## PIN-protected clients
+
+A client whose `docs.json` has `client.pin_sha256` (= sha256 of `"<slug>:<PIN>"`) gets a 4-digit PIN screen on every page.
+`build_docs.py` injects the gate (`/fde/assets/pin-gate.js`, between `PIN-GATE` markers) into `index.html`, `docs.html`,
+every `.html` and every `.md` in the client folder. Just run the build; never add or remove the gate by hand.
+
+- **Never write the PIN itself** anywhere in the repo, commit messages, or Pages content. Only the hash goes in `docs.json`.
+- **PDFs can't be gated.** For a PIN client, publish an HTML page instead (print-ready CSS), or set `"unprotected_ok": true`
+  on the entry only if the user agreed that file can be public. The build/check fails otherwise.
+- It is a privacy screen, not security: the repo is public and the files can be fetched directly. Don't put anything in a
+  PIN client that must stay secret (keys, passwords, revenue the user hasn't cleared, customer data). Say so if asked.
+- Change PIN: `python3 -c "import hashlib;print(hashlib.sha256(b'<slug>:<PIN>').hexdigest())"` → `pin_sha256`, rebuild, push.
+  Remove PIN: delete `pin_sha256`, rebuild (the gate is stripped everywhere), push.
 
 ## Per-client files
 
@@ -63,8 +77,8 @@ Shared: `scripts/build_docs.py` (build / `--check`), `scripts/new_client.py` (sc
 
 ## Steps: new client
 
-1. Confirm with the user: display name, folder name (CamelCase, e.g. `AcmeDental`), slug (lowercase, e.g. `acme`), one-line subtitle, logo (file or URL; download into the scratchpad first).
-2. `python3 scripts/new_client.py --folder <Folder> --slug <slug> --name "<Name>" --subtitle "<line>" [--logo <path>]`
+1. Confirm with the user: display name, folder name (CamelCase, e.g. `AcmeDental`), slug (lowercase, e.g. `acme`), one-line subtitle, logo (file or URL; download into the scratchpad first), and whether it needs a PIN.
+2. `python3 scripts/new_client.py --folder <Folder> --slug <slug> --name "<Name>" --subtitle "<line>" [--logo <path>] [--pin 1234]`
    It creates `<Folder>/docs.json`, `<Folder>/index.html` (empty timeline + doc strip), the logo, and a card on the root page, then builds.
 3. Adjust `categories` in the new `docs.json` to fit this business; add the client to the table above.
 4. Commit, push, verify `/fde/<slug>/` and `/fde/<slug>/docs/` → 200.

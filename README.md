@@ -5,7 +5,7 @@
 | 客户 | 文件夹 | 网址 |
 |---|---|---|
 | V-Health Rehab Clinic | `VHealth/` | https://lego651.github.io/fde/vhealth/ |
-| Kids Map | `KidsMap/` | https://lego651.github.io/fde/kidsmap/ |
+| Kids Map | `KidsMap/` | https://lego651.github.io/fde/kidsmap/ 🔒 需要 PIN |
 
 ## 怎么用（给 Jason）
 
@@ -19,7 +19,11 @@
 | 在已有文档里补充内容 | "把这些发现放到转介绍那份文档里" |
 | 先看几个方案再决定 | "先给我看3个方案"：只做预览，不发布；选定后再发布 |
 | 暂时不要发布 | 直接说"先别 push" |
+| 给客户加 / 改 / 去掉 PIN | "给 <客户> 加 PIN：1234" / "改 PIN" / "去掉 PIN" |
 | **添加新客户** | "新客户：<名字>，<一句话介绍>，logo 是 <链接或文件>"。Claude 会确认文件夹名和网址，再运行 `scripts/new_client.py` |
+
+**PIN 锁（🔒）**：打开项目页、全部文档页和每份文档前要先输 4 位 PIN，同一台设备输对一次之后就会记住。仓库里只存 PIN 的哈希值，不存 PIN 本身。
+注意这只是**挡普通访客的门帘，不是真正的加密**：仓库是公开的，懂技术的人可以直接在 GitHub 上看到文件；4 位数字也能很快被试出来。真正保密的东西（密钥、密码、顾客资料、没打算公开的收入数字）不要放进来。PIN 客户的 PDF 也锁不住，所以改用网页版。
 
 **每次都提到客户名字。** 有多个客户以后，Claude 要先确定文档属于哪个客户；不确定时会问你。
 
@@ -55,6 +59,7 @@ ln -sfn ~/TEMP/fde/.claude/skills/fde-docs ~/.claude/skills/fde-docs
   deliverables/            HTML / PDF 交付物
   *.md                     Markdown 文档（Jekyll 渲染成 .html）
   assets/                  logo 等
+assets/pin-gate.js         PIN 锁（所有 PIN 客户共用）
 scripts/
   build_docs.py            python3 scripts/build_docs.py <Client> | --all --check
   new_client.py            新建客户（文件夹、页面、首页卡片）

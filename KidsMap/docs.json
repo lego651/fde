@@ -3,7 +3,8 @@
     "slug": "kidsmap",
     "name": "Kids Map",
     "logo": "assets/logo.svg",
-    "logo_alt": "Kids Map logo"
+    "logo_alt": "Kids Map logo",
+    "pin_sha256": "86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"
   },
   "categories": [
     {

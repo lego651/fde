@@ -2,7 +2,7 @@
 """Scaffold a new FDE client.
 
   python3 scripts/new_client.py --folder Acme --slug acme --name "Acme" \
-      --subtitle "Acme Dental · Calgary SW" [--logo /path/to/logo.png]
+      --subtitle "Acme Dental · Calgary SW" [--logo /path/to/logo.png] [--pin 1234]
 
 Creates:
   <Folder>/docs.json        empty registry with default categories
@@ -11,7 +11,7 @@ Creates:
   a card in the root index.html (above <!-- CLIENT-CARDS:END -->)
 Then runs build_docs.py for the new folder.
 """
-import argparse, html, json, re, shutil, subprocess, sys
+import argparse, hashlib, html, json, re, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,8 +33,11 @@ def main():
     ap.add_argument('--name', required=True, help='Display name')
     ap.add_argument('--subtitle', default='', help='One line under the title')
     ap.add_argument('--logo', help='Path to a logo image')
+    ap.add_argument('--pin', help='4-digit PIN; pages show a PIN screen first (privacy screen, not real security)')
     a = ap.parse_args()
 
+    if a.pin and not re.fullmatch(r'\d{4}', a.pin):
+        sys.exit('--pin must be 4 digits')
     if not re.fullmatch(r'[A-Za-z0-9-]+', a.folder) or not re.fullmatch(r'[a-z0-9-]+', a.slug):
         sys.exit('folder: letters/digits/-; slug: lowercase letters/digits/-')
     folder = ROOT / a.folder
@@ -53,8 +56,11 @@ def main():
         logo_rel = f'assets/logo{src.suffix.lower()}'
         shutil.copy(src, folder / logo_rel)
 
+    client = {'slug': a.slug, 'name': a.name, 'logo': logo_rel, 'logo_alt': f'{a.name} logo'}
+    if a.pin:  # only the hash is stored; the PIN itself never goes in the repo
+        client['pin_sha256'] = hashlib.sha256(f'{a.slug}:{a.pin}'.encode()).hexdigest()
     (folder / 'docs.json').write_text(json.dumps({
-        'client': {'slug': a.slug, 'name': a.name, 'logo': logo_rel, 'logo_alt': f'{a.name} logo'},
+        'client': client,
         'categories': DEFAULT_CATS, 'docs': [], 'ignore': {},
     }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
