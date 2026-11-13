@@ -77,6 +77,38 @@ h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
   .tags { grid-column: 2; justify-content: flex-start; }
   .ev { padding: 18px; }
 }
+
+/* Now card (to do / in progress) */
+.now { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.now .ntop { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 18px 20px; background: linear-gradient(90deg, #fbf1e4, #fff); border-bottom: 1px solid var(--line); }
+.now .ntop h2 { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
+.now .ntop p { margin: 2px 0 0; color: var(--muted); font-size: .9rem; }
+.now .prog { display: grid; gap: 6px; justify-items: end; min-width: 180px; }
+.now .prog b { font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.now .bar { width: 180px; height: 8px; border-radius: 999px; background: #f1e7d8; overflow: hidden; display: flex; }
+.now .bar i { display: block; height: 100%; }
+.now .small { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.now .grp { padding: 14px 20px 6px; display: grid; gap: 8px; }
+.now .grp + .grp { border-top: 1px dashed var(--line); }
+.now .gh { display: flex; align-items: center; gap: 10px; }
+.now .av { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: .7rem; color: #fff; }
+.now .av.vh { background: #10715f; }
+.now .av.fde { background: #4b3fb5; }
+.now .gh b { font-size: 1rem; }
+.now .gh .cnt { color: var(--muted); font-size: .85rem; }
+.now ul { list-style: none; margin: 0 0 8px; padding: 0 0 0 40px; display: grid; gap: 2px; }
+.now li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; padding: 8px 0; }
+.now .r { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.now .src { font-size: .8rem; color: var(--muted); text-decoration: none; border-bottom: 1px dotted #b9ad99; }
+.now .src:hover { color: var(--accent-ink); }
+.box { flex: none; width: 20px; height: 20px; border: 2px solid #b9ad99; border-radius: 5px; background: #fff; margin-top: 2px; display: grid; place-items: center; }
+.box.on { background: var(--accent); border-color: var(--accent); }
+.box.on::after { content: ""; width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
+.st-prog { background: #e3eefb; color: #1d5fa8; }
+@media (max-width: 600px) {
+  .now .ntop { grid-template-columns: 1fr; } .now .prog { justify-items: start; }
+  .now li { grid-template-columns: auto 1fr; } .now .r { grid-column: 2; justify-content: flex-start; } .now ul { padding-left: 0; }
+}
 </style>
 </head>
 <body>
@@ -91,11 +123,35 @@ h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
     </div>
   </header>
 
+  <section class="now" aria-labelledby="now-h">
+    <div class="ntop">
+      <div><h2 id="now-h">现在要做的事</h2><p>更新于 2026-11-13 · 汇总时间线里所有没完成的行动</p></div>
+      <div class="prog"><b>1 / 5 完成</b>
+        <div class="bar" role="img" aria-label="1项已完成，2项进行中，2项待办"><i style="width:20%;background:#1f7a3a"></i><i style="width:40%;background:#7fb0e6"></i></div>
+        <span class="small">已完成 1 · 进行中 2 · 待办 2</span>
+      </div>
+    </div>
+    <div class="grp">
+      <div class="gh"><span class="av vh">VH</span><b>VHealth</b><span class="cnt">3项</span></div>
+      <ul>
+        <li><span class="box" role="img" aria-label="未完成"></span><span>打印 A4 海报（A2 白色 + 青绿）</span><span class="r"><span class="st st-prog">进行中</span><span class="small">11/14</span><a class="src" href="#e2">#2</a></span></li>
+        <li><span class="box" role="img" aria-label="未完成"></span><span>周末到周边社区和超市张贴海报</span><span class="r"><span class="st st-prog">进行中</span><span class="small">11/14–15</span><a class="src" href="#e1">#1</a><a class="src" href="#e2">#2</a></span></li>
+        <li><span class="box" role="img" aria-label="未完成"></span><span>去 Google 评价很多的诊所体验一次，看他们为什么能有这么多评价</span><span class="r"><span class="st st-todo">待办</span><a class="src" href="#e1">#1</a></span></li>
+      </ul>
+    </div>
+    <div class="grp">
+      <div class="gh"><span class="av fde">FDE</span><b>FDE</b><span class="cnt">1项</span></div>
+      <ul>
+        <li><span class="box" role="img" aria-label="未完成"></span><span>继续 grill，深入了解更多细节</span><span class="r"><span class="st st-todo">待办</span><a class="src" href="#e1">#1</a></span></li>
+      </ul>
+    </div>
+  </section>
+
   <h2 class="sec">时间线</h2>
   <ol class="timeline">
 
     <!-- Event 1 -->
-    <li class="ev" data-n="1">
+    <li class="ev" id="e1" data-n="1">
       <div class="top"><h3>Grill Me 诊断</h3><span class="date">2026-11-12</span></div>
       <div class="blk"><span class="lbl">大概描述</span>
         <p>和老板做了4轮、32个问题的追问式访谈，并调研了官网、预约网站、目录和竞争对手。发现诊所不缺治疗师，也不缺口碑（260条5星评价）。真正的问题有两个：上午和周一、周二空着，而这些时段来的老人没有保险；网站给非华人"不是为我开的"的印象。目标是到2027年5月，每月预约从300次增长到600次。</p>
@@ -112,13 +168,13 @@ h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
         <ul class="acts">
           <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">继续 grill，深入了解更多细节</span></label><span class="tags"><span class="owner o-fde">FDE</span><span class="st st-todo">待办</span></span></li>
           <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">去 Google 评价很多的诊所体验一次，看他们为什么能有这么多评价</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">待办</span></span></li>
-          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">到周边社区和超市张贴海报</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">待办</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">到周边社区和超市张贴海报</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-prog">进行中</span></span></li>
         </ul>
       </div>
     </li>
 
     <!-- Event 2 -->
-    <li class="ev" data-n="2">
+    <li class="ev" id="e2" data-n="2">
       <div class="top"><h3>Poster Design</h3><span class="date">2026-11-12</span></div>
       <div class="blk"><span class="lbl">大概描述</span>
         <p>为超市社区公告板设计 A4 海报，主打可以直接走保险、保险福利12月31日清零、按摩 · 整骨 · 针灸三项服务。先做10个不同角度，再围绕"年底福利过期"做了6种排版和9种本地配色。最终选定 <b>A2：Classic 版，白色 + 青绿</b>。二维码带追踪标签，可以统计每张海报带来的预约。</p>
@@ -134,8 +190,8 @@ h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
       <div class="blk"><span class="lbl">下一步行动</span>
         <ul class="acts">
           <li><label><input type="checkbox" checked aria-label="已完成" tabindex="-1"><span class="txt">选定最终版本：A2（Classic，白色 + 青绿）</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-done">已完成</span></span></li>
-          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">打印 A4 海报</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">待办</span></span></li>
-          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">周末去社区和超市张贴</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-todo">本周末</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">打印 A4 海报</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-prog">进行中</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">周末去社区和超市张贴</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-prog">进行中</span></span></li>
         </ul>
       </div>
     </li>
