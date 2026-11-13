@@ -1,6 +1,6 @@
 ---
 name: fde-docs
-description: Publish every FDE client deliverable (analysis, plan, report, poster, form, research write-up, comparison, approved design) to that client's doc center on GitHub Pages (https://lego651.github.io/fde/<slug>/), and set up new FDE clients. Use whenever you create or change a document for any FDE client (currently VHealth / V-Health Rehab Clinic; more will be added), when the user says 放到 pages / 文档中心 / doc center / push 上去 / 更新文档 / 新客户 / add a client, when a doc's status changes (分析中 → 已完成), and before replying "done" on any FDE client task that produced a file.
+description: Publish every FDE client deliverable (analysis, plan, report, poster, form, research write-up, comparison, approved design) to that client's doc center on GitHub Pages (https://lego651.github.io/fde/<slug>/), and set up new FDE clients. Use whenever you create or change a document for any FDE client (currently VHealth / V-Health Rehab Clinic and Kids Map; more will be added), when the user says 放到 pages / 文档中心 / doc center / push 上去 / 更新文档 / 新客户 / add a client, when a doc's status changes (分析中 → 已完成), and before replying "done" on any FDE client task that produced a file.
 ---
 
 # FDE doc center
@@ -14,6 +14,7 @@ Each client is one top-level folder with its own `docs.json`. List them with `ls
 | Folder | Slug (URL) | Client |
 |---|---|---|
 | `VHealth/` | `/fde/vhealth/` | V-Health Rehab Clinic, Calgary NW |
+| `KidsMap/` | `/fde/kidsmap/` | Kids Map, kids' places map for Canadian parents (product repo: `~/TEMP/kids-map`) |
 
 (Read `client.slug` / `client.name` in each `docs.json` for the current list; add a row here when you add a client.)
 

@@ -5,6 +5,7 @@
 | 客户 | 文件夹 | 网址 |
 |---|---|---|
 | V-Health Rehab Clinic | `VHealth/` | https://lego651.github.io/fde/vhealth/ |
+| Kids Map | `KidsMap/` | https://lego651.github.io/fde/kidsmap/ |
 
 ## 怎么用（给 Jason）
 

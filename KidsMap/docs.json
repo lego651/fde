@@ -1,0 +1,37 @@
+{
+  "client": {
+    "slug": "kidsmap",
+    "name": "Kids Map",
+    "logo": "assets/logo.svg",
+    "logo_alt": "Kids Map logo"
+  },
+  "categories": [
+    {
+      "key": "diag",
+      "name": "诊断 & 访谈",
+      "color": "#c9772e"
+    },
+    {
+      "key": "plan",
+      "name": "计划 & OKR",
+      "color": "#10715f"
+    },
+    {
+      "key": "grow",
+      "name": "增长分析",
+      "color": "#4b3fb5"
+    },
+    {
+      "key": "ops",
+      "name": "运营工具",
+      "color": "#1d5fa8"
+    },
+    {
+      "key": "design",
+      "name": "设计物料",
+      "color": "#b84a62"
+    }
+  ],
+  "docs": [],
+  "ignore": {}
+}

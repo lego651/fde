@@ -106,7 +106,7 @@ permalink: /{a.slug}/
     if marker not in s:
         sys.exit('root index.html has no CLIENT-CARDS:END marker')
     logo_card = (f'<div class="logo"><img src="{a.folder}/{logo_rel}" alt="{e(a.name)} logo"></div>'
-                 if logo_rel else f'<div class="logo" style="min-height:90px;font-weight:800;font-size:1.4rem;color:#17262b">{e(a.name)}</div>')
+                 if logo_rel else f'<div class="logo" style="font-weight:800;font-size:1.4rem;color:#17262b">{e(a.name)}</div>')
     card = f'''    <a class="client" href="{a.slug}/">
       {logo_card}
       <div>
