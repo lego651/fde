@@ -126,16 +126,17 @@ h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
   <section class="now" aria-labelledby="now-h">
     <div class="ntop">
       <div><h2 id="now-h">现在要做的事</h2><p>更新于 2026-11-13 · 汇总时间线里所有没完成的行动</p></div>
-      <div class="prog"><b>1 / 5 完成</b>
-        <div class="bar" role="img" aria-label="1项已完成，2项进行中，2项待办"><i style="width:20%;background:#1f7a3a"></i><i style="width:40%;background:#7fb0e6"></i></div>
-        <span class="small">已完成 1 · 进行中 2 · 待办 2</span>
+      <div class="prog"><b>2 / 7 完成</b>
+        <div class="bar" role="img" aria-label="2项已完成，3项进行中，2项待办"><i style="width:28.6%;background:#1f7a3a"></i><i style="width:42.9%;background:#7fb0e6"></i></div>
+        <span class="small">已完成 2 · 进行中 3 · 待办 2</span>
       </div>
     </div>
     <div class="grp">
-      <div class="gh"><span class="av vh">VH</span><b>VHealth</b><span class="cnt">3项</span></div>
+      <div class="gh"><span class="av vh">VH</span><b>VHealth</b><span class="cnt">4项</span></div>
       <ul>
         <li><span class="box" role="img" aria-label="未完成"></span><span>打印 A4 海报（A2 白色 + 青绿）</span><span class="r"><span class="st st-prog">进行中</span><span class="small">11/14</span><a class="src" href="#e2">#2</a></span></li>
         <li><span class="box" role="img" aria-label="未完成"></span><span>周末到周边社区和超市张贴海报</span><span class="r"><span class="st st-prog">进行中</span><span class="small">11/14–15</span><a class="src" href="#e1">#1</a><a class="src" href="#e2">#2</a></span></li>
+        <li><span class="box" role="img" aria-label="未完成"></span><span>前台记录每位新客户的来源（每日登记表）</span><span class="r"><span class="st st-prog">进行中</span><span class="small">每天</span><a class="src" href="#e3">#3</a></span></li>
         <li><span class="box" role="img" aria-label="未完成"></span><span>去 Google 评价很多的诊所体验一次，看他们为什么能有这么多评价</span><span class="r"><span class="st st-todo">待办</span><a class="src" href="#e1">#1</a></span></li>
       </ul>
     </div>
@@ -196,10 +197,30 @@ h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
       </div>
     </li>
 
+    <!-- Event 3 -->
+    <li class="ev" id="e3" data-n="3">
+      <div class="top"><h3>客户来源记录</h3><span class="date">2026-11-13</span></div>
+      <div class="blk"><span class="lbl">大概描述</span>
+        <p>要证明哪个渠道有效，必须知道每位新客户是怎么来的。比较了3个方案：系统必填、客户在同意书里自己填、纸质每日登记表。决定<b>先用纸质登记表</b>，明天就能开始。前台每来一位新客户（网上预约、电话或 walk-in）就写一行：时间、姓名、怎么知道我们的、细节（谁介绍的、哪家店）、语言（EN / 中 / 广东 / Other）。下班前核对当天新客户人数，再录入系统。以后再由 AI 工程师把"来源"做成系统必填项。</p>
+      </div>
+      <div class="blk"><span class="lbl">交付物</span>
+        <div class="docs">
+          <a href="../VHealth/deliverables/front-desk-source-tracking.html">3个记录方案对比</a>
+          <a href="../VHealth/deliverables/VHealth-New-Client-Source-Log.pdf" download>下载每日登记表<small>A4 PDF</small></a>
+        </div>
+      </div>
+      <div class="blk"><span class="lbl">下一步行动</span>
+        <ul class="acts">
+          <li><label><input type="checkbox" checked aria-label="已完成" tabindex="-1"><span class="txt">选定方案3：纸质每日登记表（一页 A4，20行）</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-done">已完成</span></span></li>
+          <li><label><input type="checkbox" aria-label="未完成" tabindex="-1"><span class="txt">前台每天用登记表记录每位新客户的来源，下班前核对人数</span></label><span class="tags"><span class="owner o-vh">VHealth</span><span class="st st-prog">进行中</span></span></li>
+        </ul>
+      </div>
+    </li>
+
     <!-- Next -->
     <li class="ev next">
       <div class="top"><h3>下一个事件</h3><span class="date">待定</span></div>
-      <p style="margin:0;color:var(--muted)">海报张贴和第1周执行完成后，会记录在这里。</p>
+      <p style="margin:0;color:var(--muted)">海报张贴、第一周来源数据出来后，会记录在这里。</p>
     </li>
   </ol>
 </main>

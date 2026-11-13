@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>前台如何记录客户来源</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one reading column; answer first, then 3 options each with a mockup + steps, then comparison, categories, rules. Paper palette. */
+  --paper: #fbf8f2; --card: #ffffff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --bad: #b3261e; --bad-soft: #fdeceb;
+  --vh: #10715f; --vh-soft: #e2f3ee;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.65 var(--font); }
+main { max-width: 960px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.45rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.15rem; }
+p { margin: 0; max-width: 70ch; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 18px; }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+
+.answer { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.answer b { color: var(--accent-ink); }
+
+.flow { display: grid; grid-template-columns: repeat(3, 1fr) auto 1.2fr; gap: 10px; align-items: center; }
+.flow .in { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; text-align: center; display: grid; gap: 2px; }
+.flow .in b { font-size: 1rem; }
+.flow .in span { font-size: .82rem; color: var(--muted); }
+.flow .arrow { font-size: 1.6rem; color: var(--accent); text-align: center; }
+.flow .out { background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.flow .out b { color: var(--accent-ink); }
+.flow .out span { font-size: .85rem; }
+@media (max-width: 720px) { .flow { grid-template-columns: 1fr; } .flow .arrow { transform: rotate(90deg); } }
+
+.opt { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.opt-h { display: flex; gap: 14px; align-items: center; padding: 18px 22px; background: #f7f1e6; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.opt-h .n { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; flex: none; }
+.opt-h h3 { font-size: 1.3rem; }
+.opt-h .tag { margin-left: auto; font-size: .8rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--good-soft); color: var(--good); }
+.opt-b { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.opt-b > div { padding: 20px 22px; display: grid; gap: 12px; align-content: start; }
+.opt-b > div + div { border-left: 1px solid var(--line); }
+.lbl { font-size: .78rem; font-weight: 800; letter-spacing: .1em; color: #8c7f6a; }
+.pc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pc div { border-radius: 10px; padding: 10px 12px; font-size: .9rem; }
+.pc .pro { background: var(--good-soft); }
+.pc .con { background: var(--bad-soft); }
+.pc b { display: block; font-size: .78rem; margin-bottom: 4px; }
+.pc .pro b { color: var(--good); }
+.pc .con b { color: var(--bad); }
+@media (max-width: 760px) { .opt-b { grid-template-columns: 1fr; } .opt-b > div + div { border-left: 0; border-top: 1px solid var(--line); } }
+
+/* mock: booking system form */
+.mock { border: 1px solid #d7dde3; border-radius: 12px; overflow: hidden; background: #f6f8fa; font-family: "Archivo", system-ui, sans-serif; color: #1c2733; }
+.mock .bar { background: #1c2733; color: #fff; padding: 8px 12px; font-size: .8rem; display: flex; gap: 6px; align-items: center; }
+.mock .bar i { width: 9px; height: 9px; border-radius: 50%; background: #ff6b5f; display: inline-block; }
+.mock .bar i + i { background: #ffbe2f; } .mock .bar i + i + i { background: #2ac940; }
+.mock .body { padding: 14px; display: grid; gap: 10px; font-size: .88rem; }
+.mock .f { display: grid; gap: 4px; }
+.mock .f label { font-weight: 700; font-size: .8rem; }
+.mock .f label em { color: #d0342c; font-style: normal; }
+.mock .inp { background: #fff; border: 1px solid #c9d1d9; border-radius: 6px; padding: 6px 10px; color: #57606a; }
+.mock .inp.err { border: 2px solid #d0342c; background: #fff7f7; }
+.mock .msg { color: #d0342c; font-size: .78rem; font-weight: 600; }
+.mock .seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.mock .seg span { border: 1px solid #c9d1d9; background: #fff; border-radius: 6px; padding: 4px 10px; font-size: .8rem; }
+.mock .seg span.on { background: #1c2733; color: #fff; border-color: #1c2733; }
+.mock .btn { justify-self: start; background: #9aa5b1; color: #fff; border-radius: 6px; padding: 6px 14px; font-weight: 700; font-size: .85rem; }
+.mock .note { font-size: .75rem; color: #57606a; }
+
+/* mock: phone intake */
+.phone { width: 260px; justify-self: center; border: 10px solid #1c1c1c; border-radius: 34px; background: #fff; overflow: hidden; font-family: "Archivo", system-ui, sans-serif; color: #1c2733; }
+.phone .scr { padding: 18px 14px 20px; display: grid; gap: 10px; font-size: .85rem; }
+.phone .ttl { font-weight: 800; font-size: 1rem; }
+.phone .q { font-weight: 700; }
+.phone .opts { display: grid; gap: 6px; }
+.phone .opts span { border: 1px solid #d0d7de; border-radius: 8px; padding: 6px 10px; display: flex; gap: 8px; align-items: center; }
+.phone .opts span::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #8c959f; flex: none; }
+.phone .opts span.on { border-color: #10715f; background: #e2f3ee; }
+.phone .opts span.on::before { border-color: #10715f; background: #10715f; box-shadow: inset 0 0 0 2px #fff; }
+.phone .sub { background: #10715f; color: #fff; border-radius: 8px; padding: 8px; text-align: center; font-weight: 700; }
+
+/* mock: paper sheet */
+.sheet { background: #fff; border: 1px solid #cfc6b6; box-shadow: 0 6px 0 #e8dfcf; padding: 14px 14px 18px; font-family: "Archivo", system-ui, sans-serif; color: #111; overflow-x: auto; }
+.sheet .sh { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; border-bottom: 2px solid #111; padding-bottom: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+.sheet .sh b { font-size: 1rem; letter-spacing: .02em; }
+.sheet .sh span { font-size: .75rem; }
+.sheet table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .72rem; }
+.sheet th, .sheet td { border: 1px solid #555; padding: 4px 5px; text-align: left; vertical-align: top; }
+.sheet th { background: #f0ece4; font-weight: 700; }
+.sheet td.hw { font-family: "Comic Sans MS", "Bradley Hand", cursive; color: #1d3f8f; font-size: .78rem; }
+.sheet .key { margin-top: 8px; font-size: .68rem; line-height: 1.5; columns: 2; }
+.sheet .tot { margin-top: 8px; display: flex; gap: 14px; font-size: .72rem; font-weight: 700; flex-wrap: wrap; }
+
+table.cmp { border-collapse: collapse; width: 100%; font-size: .93rem; background: var(--card); }
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+table.cmp th, table.cmp td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+table.cmp th { background: #f7f1e6; font-size: .8rem; letter-spacing: .05em; color: #8c7f6a; }
+table.cmp tr:last-child td { border-bottom: 0; }
+.stars { color: var(--accent); letter-spacing: 2px; white-space: nowrap; }
+
+.cats { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+.cat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; display: grid; gap: 2px; }
+.cat b { font-size: .98rem; }
+.cat .code { font-family: ui-monospace, Menlo, monospace; font-size: .78rem; color: var(--accent-ink); }
+.cat span { font-size: .85rem; color: var(--muted); }
+
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.rule { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; }
+.rule .big { font-family: var(--serif); font-size: 1.05rem; }
+.script { background: #fff; border: 1px dashed var(--accent); border-radius: 12px; padding: 14px 18px; display: grid; gap: 8px; }
+.script p { max-width: none; }
+.script .who { font-weight: 800; color: var(--accent-ink); margin-right: 6px; }
+.rec { background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 14px; padding: 18px 22px; display: grid; gap: 10px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.steps div { background: #fff; border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+.steps b { color: var(--accent-ink); }
+@media (max-width: 720px) { .steps { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>前台如何确保每位新客户的来源都被记录</h1>
+  <p class="meta">V-Health Rehab Clinic · 给诊所老板和前台 · 2026-11-13</p>
+</header>
+
+<section>
+  <div class="answer">
+    <p><b>简短回答：</b>最可靠的办法是让<b>系统强制填写</b>，不靠前台记得。在预约系统里，新客户的"来源"设为必填项，不填就无法保存。预约系统是你们自己的，AI 工程师大约1天就能做好。</p>
+    <p>在系统改好之前，<b>从明天开始用一张纸</b>：每天一张"新客户来源登记表"，下班前花5分钟录入 Google Sheet。不需要复杂的 Excel。</p>
+    <p><b>只问新客户，并且只问一次</b>：在第一次接触时问（网上预约、电话预约或 walk-in）。老客户的来源已经记过了，不用再问。</p>
+  </div>
+  <div class="flow" aria-label="所有新客户的来源最终都汇总到同一个地方">
+    <div class="in"><b>网上预约</b><span>客户自己选来源</span></div>
+    <div class="in"><b>电话预约</b><span>前台在电话里问</span></div>
+    <div class="in"><b>Walk-in</b><span>前台当面问</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="out"><b>同一个地方：预约系统</b><span>纸质表只是过渡期的临时记录，最终都进入系统 → 每周数据看板自动统计</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>3个方案，以及各自怎么运作</h2>
+
+  <!-- Option 1 -->
+  <article class="opt">
+    <div class="opt-h"><span class="n">1</span><h3>系统必填：没填来源就不能保存新客户</h3><span class="tag">最推荐 · 长期方案</span></div>
+    <div class="opt-b">
+      <div>
+        <span class="lbl">怎么运作</span>
+        <ol class="plain">
+          <li><b>网上预约</b>：新客户预约时，"How did you hear about us?"是必选项，不选就无法完成预约。</li>
+          <li><b>电话预约和 walk-in</b>：前台在系统里新建客户时，"来源"也是必填项，不选就保存不了，也就无法排预约。</li>
+          <li>如果选了"朋友介绍""海报""单位"，系统会继续问细节：哪位朋友、哪家超市（或海报代码）、哪家单位。</li>
+          <li>同时记录"预约方式"（网上 / 电话 / walk-in）和"首选语言"。</li>
+          <li>数据自动进入每周数据看板，不用手工统计。</li>
+        </ol>
+        <div class="pc">
+          <div class="pro"><b>优点</b>不会漏记；数据直接可以分析；前台没有额外的抄写工作</div>
+          <div class="con"><b>缺点</b>需要 AI 工程师花约1天开发；前台可能随手选"Other"，需要每周抽查</div>
+        </div>
+      </div>
+      <div>
+        <span class="lbl">前台新建客户时看到的画面（示意）</span>
+        <div class="mock" aria-label="预约系统新建客户界面示意">
+          <div class="bar"><i></i><i></i><i></i>&nbsp; app.vhealth.ca · New client</div>
+          <div class="body">
+            <div class="f"><label>Name <em>*</em></label><div class="inp">Sarah Thompson</div></div>
+            <div class="f"><label>Booked by <em>*</em></label><div class="seg"><span>Online</span><span>Phone</span><span class="on">Walk-in</span></div></div>
+            <div class="f"><label>How did you hear about us? <em>*</em></label><div class="inp err">— Select one —</div><span class="msg">Required. Ask the client before saving.</span></div>
+            <div class="f"><label>Preferred language <em>*</em></label><div class="seg"><span class="on">English</span><span>中文</span><span>Other</span></div></div>
+            <span class="btn">Save client</span>
+            <span class="note">The Save button stays disabled until a source is chosen.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Option 2 -->
+  <article class="opt">
+    <div class="opt-h"><span class="n">2</span><h3>客户自己填：加进首诊同意书</h3><span class="tag" style="background:#e3eefb;color:#1d5fa8">和方案1搭配</span></div>
+    <div class="opt-b">
+      <div>
+        <span class="lbl">怎么运作</span>
+        <ol class="plain">
+          <li>你们的预约网站已经有一个在线签名的同意书。在里面<b>加2个问题</b>：怎么知道我们的，以及首选语言。</li>
+          <li><b>Walk-in 和电话客户</b>：到店后，前台请他们用平板，或扫柜台上的二维码，填同意书（反正都要签）。</li>
+          <li><b>规则：没签同意书就不开始治疗</b>。这样来源问题自然也一定会被回答。</li>
+          <li>客户自己选的来源往往比前台猜的更准确，比如"在 Safeway 看到海报"。</li>
+        </ol>
+        <div class="pc">
+          <div class="pro"><b>优点</b>不占前台时间；客户自己选更准确；可以借用现有的同意书流程</div>
+          <div class="con"><b>缺点</b>客户有时会随便点一个；电话预约的客户要等到店才能填，中间有延迟</div>
+        </div>
+      </div>
+      <div>
+        <span class="lbl">客户在平板或手机上看到的（示意）</span>
+        <div class="phone" aria-label="首诊同意书问题示意">
+          <div class="scr">
+            <span class="ttl">Welcome to V-Health</span>
+            <span class="q">How did you hear about us?</span>
+            <div class="opts">
+              <span>Google search / Maps</span>
+              <span>Friend or family</span>
+              <span class="on">Poster in a store</span>
+              <span>My workplace</span>
+              <span>Walked or drove by</span>
+              <span>Other</span>
+            </div>
+            <span class="q">Which store?</span>
+            <div class="opts"><span class="on">Safeway Crowchild</span></div>
+            <span class="sub">Continue to consent form</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Option 3 -->
+  <article class="opt">
+    <div class="opt-h"><span class="n">3</span><h3>纸质每日登记表，下班前录入 Google Sheet</h3><span class="tag" style="background:#fff1d6;color:#8a5a00">明天就能开始 · 过渡方案</span></div>
+    <div class="opt-b">
+      <div>
+        <span class="lbl">怎么运作</span>
+        <ol class="plain">
+          <li><b>每天一张 A4</b>，放在前台电脑旁边。纸是英文的，因为前台是英语母语者。</li>
+          <li>每来一位<b>新客户</b>（不管是网上预约、电话还是 walk-in），写一行。勾选来源，大多是打勾，10秒就能完成。</li>
+          <li><b>下班前</b>：前台数一下当天新客户有几位，和纸上的行数对一下，然后用5分钟把这一页录进 Google Sheet。也可以拍照，交给 AI 工程师录入。</li>
+          <li>纸张按日期收好，保留一个月，方便核对。</li>
+        </ol>
+        <p><b>需要 Excel 吗？</b>不需要复杂的 Excel。一个 Google Sheet 就够了，列和纸上的一样，每一行代表一位新客户。每周它会自动统计各个来源的数量。</p>
+        <div class="pc">
+          <div class="pro"><b>优点</b>明天就能用；零成本；walk-in 也很方便</div>
+          <div class="con"><b>缺点</b>最容易漏记；需要每天录入；字迹可能看不清</div>
+        </div>
+      </div>
+      <div>
+        <span class="lbl">每日登记表（示意，A4 横放）</span>
+        <div class="sheet" aria-label="每日新客户来源登记表示意">
+          <div class="sh"><b>NEW CLIENT SOURCE LOG</b><span>Date: <u>Nov 14, 2026</u> · Front desk: <u>Amy</u> · One row per NEW client</span></div>
+          <table>
+            <thead><tr><th>Time</th><th>Name</th><th>Booked by<br>O / P / W</th><th>Source code</th><th>Detail (who / which store / which code)</th><th>Lang<br>EN / 中 / Other</th></tr></thead>
+            <tbody>
+              <tr><td class="hw">9:40</td><td class="hw">Sarah T.</td><td class="hw">W</td><td class="hw">POS</td><td class="hw">Safeway Crowchild · P-V1A2</td><td class="hw">EN</td></tr>
+              <tr><td class="hw">11:15</td><td class="hw">Kevin L.</td><td class="hw">P</td><td class="hw">REF</td><td class="hw">friend: Linda Wang</td><td class="hw">中</td></tr>
+              <tr><td class="hw">2:05</td><td class="hw">Priya S.</td><td class="hw">O</td><td class="hw">GGL</td><td class="hw">Google Maps</td><td class="hw">EN</td></tr>
+              <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+          <div class="key">
+            <b>Source codes:</b><br>
+            GGL = Google search / Maps<br>
+            REF = Friend / family / client<br>
+            POS = Poster (which store)<br>
+            WRK = Workplace (which one)<br>
+            NEWS = Community newsletter<br>
+            WALK = Walked / drove by<br>
+            SOC = Instagram / Facebook<br>
+            LAW = Lawyer / car accident<br>
+            DIR = Medimap / insurer list<br>
+            BEN = Benefits text / email<br>
+            OTH = Other (write it)
+          </div>
+          <div class="tot"><span>New clients today: <u>&nbsp;3&nbsp;</u></span><span>Matches system? ☑</span><span>Entered in sheet? ☐</span></div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section>
+  <h2>3个方案对比</h2>
+  <div class="wrap"><table class="cmp">
+    <thead><tr><th>方案</th><th>可靠程度</th><th>前台工作量</th><th>成本</th><th>能开始的时间</th><th>适合</th></tr></thead>
+    <tbody>
+      <tr><td><b>1 · 系统必填</b></td><td class="stars">★★★★★</td><td>很少，选一下就行</td><td>工程师约1天</td><td>约1周内</td><td>长期主力方案</td></tr>
+      <tr><td><b>2 · 客户在同意书里自己填</b></td><td class="stars">★★★★☆</td><td>几乎为零</td><td>工程师约半天</td><td>约1周内</td><td>和方案1搭配，用来核对</td></tr>
+      <tr><td><b>3 · 纸质每日表 + Google Sheet</b></td><td class="stars">★★★☆☆</td><td>每天约5分钟录入</td><td>$0</td><td>明天</td><td>过渡期，系统改好之前</td></tr>
+    </tbody>
+  </table></div>
+  <div class="rec">
+    <h3>我的建议：三个方案按时间先后组合使用</h3>
+    <div class="steps">
+      <div><b>明天起</b>用方案3：打印纸质表，从第一位新客户开始记录</div>
+      <div><b>1周内</b>AI 工程师上线方案1和方案2：系统必填，同意书里加2个问题</div>
+      <div><b>之后</b>停用纸质表；每周一对比两组数据：前台选的来源和客户自己填的来源</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>记录哪些类别（固定11类，不要自由填写）</h2>
+  <p>类别必须固定，不能让前台自由写，否则"google""Google地图""网上搜的"会被统计成3种来源。纸质表用代码，系统用下拉框，两边的类别一一对应。</p>
+  <div class="cats">
+    <div class="cat"><b>Google 搜索 / 地图</b><span class="code">GGL</span><span>以后有广告时，再细分"Ads"和"自然搜索"</span></div>
+    <div class="cat"><b>朋友 / 家人 / 老客户介绍</b><span class="code">REF</span><span>一定要问是谁，用来感谢介绍人，也方便发推荐奖励</span></div>
+    <div class="cat"><b>超市或社区海报</b><span class="code">POS</span><span>问是哪家店，或者海报上的代码（如 V1A2）</span></div>
+    <div class="cat"><b>工作单位</b><span class="code">WRK</span><span>哪家单位：Foothills、U of C 等</span></div>
+    <div class="cat"><b>社区通讯</b><span class="code">NEWS</span><span>哪个社区协会</span></div>
+    <div class="cat"><b>路过看到</b><span class="code">WALK</span><span>看到门口的招牌</span></div>
+    <div class="cat"><b>Instagram / Facebook</b><span class="code">SOC</span><span>用来验证社交媒体到底有没有带来客户</span></div>
+    <div class="cat"><b>律师 / 车祸</b><span class="code">LAW</span><span>哪家律所</span></div>
+    <div class="cat"><b>目录 / 保险公司名单</b><span class="code">DIR</span><span>Medimap、保险公司的服务商名单</span></div>
+    <div class="cat"><b>短信或邮件活动</b><span class="code">BEN</span><span>比如"年底前用掉保险福利"的提醒</span></div>
+    <div class="cat"><b>其他</b><span class="code">OTH</span><span>必须写明具体是什么。如果一周超过10%选"其他"，就说明类别需要调整</span></div>
+  </div>
+  <p><b>每行另外记录2项：</b>预约方式（网上 Online / 电话 Phone / Walk-in）和首选语言（English / 中文 / Other）。用它们衡量 walk-in 的比例和客户多元化的进展。</p>
+</section>
+
+<section>
+  <h2>怎么确保前台"一定会"记录</h2>
+  <div class="rules">
+    <div class="rule"><span class="big">没有来源，就不能开始治疗</span><span>系统不填就不能保存；纸质表阶段，没写这一行就不能收款。把记录来源变成一道必经的门槛，而不是靠前台记得。</span></div>
+    <div class="rule"><span class="big">每天下班前对一次数</span><span>"今天新客户人数"必须等于"有来源的行数"。前台在表底部勾"对上了"再下班，只需要30秒。</span></div>
+    <div class="rule"><span class="big">每周一由老板查看覆盖率</span><span>覆盖率 = 有来源的新客户 ÷ 全部新客户，目标是100%。低于90%就当面问清楚原因，每周只追这一个数字。</span></div>
+    <div class="rule"><span class="big">"其他"不能超过10%</span><span>"其他"太多，说明前台在偷懒，或者类别不够用。每周抽查3条"其他"，看具体写了什么。</span></div>
+    <div class="rule"><span class="big">给前台一个理由</span><span>告诉前台：这些数据决定广告预算往哪里花。也可以设一个小奖励，比如月度覆盖率100%就请喝咖啡或发一张礼品卡。</span></div>
+    <div class="rule"><span class="big">一句固定的问法</span><span>每位前台都用同一句话问，答案才可比。不要念整个选项列表，让客户先自己说，前台再归类。</span></div>
+  </div>
+  <div class="script">
+    <span class="lbl">前台问法（英文，打印贴在前台）</span>
+    <p><span class="who">Front desk:</span>"Welcome! Is this your first time with us?"</p>
+    <p><span class="who">Client:</span>"Yes."</p>
+    <p><span class="who">Front desk:</span>"Great! Just so we know, how did you hear about us?"</p>
+    <p><span class="who">If "a friend":</span>"Oh nice! Who referred you? We'd love to thank them." → 记下名字，方便发 $15 推荐奖励</p>
+    <p><span class="who">If "a poster":</span>"Which store did you see it at?" → 记下店名或海报代码</p>
+    <p><span class="who">If "Google":</span>"Was that Google search or Google Maps?" → GGL</p>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
