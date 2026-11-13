@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-Health 6个月 OKR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 布局：单栏阅读；顶部目标 + 折线图，中部 6 张月卡，底部仪表盘/复盘/预算 */
+  --bg: #f6f8f8;
+  --surface: #ffffff;
+  --ink: #18282e;
+  --muted: #5a6b71;
+  --line: #d9e1e3;
+  --accent: #0e6b66;
+  --accent-soft: #e2f0ee;
+  --chart: #00907f;
+  --warn: #9a5b00;
+  --warn-soft: #fbefdc;
+  --font-display: "IBM Plex Sans Condensed", "Noto Sans SC", "PingFang SC", system-ui, sans-serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111a1d; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3; --line: #2a393e;
+    --accent: #4fc2b8; --accent-soft: #163634; --chart: #1fa699; --warn: #e5a948; --warn-soft: #33281a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111a1d; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3; --line: #2a393e;
+  --accent: #4fc2b8; --accent-soft: #163634; --chart: #1fa699; --warn: #e5a948; --warn-soft: #33281a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 15.5px/1.65 var(--font-body); }
+main { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: 2.2rem; font-weight: 700; }
+h2 { font-size: 1.5rem; font-weight: 700; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; max-width: 70ch; }
+.meta { color: var(--muted); font-size: .92rem; }
+section { display: grid; gap: 16px; }
+.objective { background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 8px; padding: 18px 20px; display: grid; gap: 10px; }
+.objective .big { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; display: grid; gap: 2px; }
+.tile .k { font-size: .82rem; color: var(--muted); }
+.tile .v { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tile .s { font-size: .85rem; color: var(--muted); }
+.wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+th { font-weight: 600; color: var(--muted); font-size: .8rem; background: var(--bg); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num, .num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 10px; position: relative; }
+.chart-card svg { width: 100%; height: auto; display: block; overflow: visible; }
+.chart-card .grid line { stroke: var(--line); stroke-width: 1; }
+.chart-card .axis text { fill: var(--muted); font-size: 12px; font-family: var(--font-body); font-variant-numeric: tabular-nums; }
+.chart-card .lbl { fill: var(--ink); font-size: 12.5px; font-weight: 600; font-family: var(--font-body); }
+.chart-card .series { fill: none; stroke: var(--chart); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.chart-card .area { fill: var(--chart); opacity: .1; }
+.chart-card .pt { fill: var(--chart); stroke: var(--surface); stroke-width: 2; }
+.chart-card .pt.hot { r: 6; }
+.chart-card .hit { fill: transparent; cursor: pointer; }
+.chart-card .cross { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); font-size: .82rem; padding: 6px 10px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -115%); display: none; }
+.tip b { font-variant-numeric: tabular-nums; }
+.months { display: grid; gap: 22px; }
+.month { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; }
+.month-head { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; justify-content: space-between; padding: 14px 18px; background: var(--accent-soft); border-bottom: 1px solid var(--line); }
+.month-head .tag { font-family: var(--font-display); font-weight: 700; color: var(--accent); font-size: .95rem; }
+.month-head .target { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.month-body { padding: 16px 18px 18px; display: grid; gap: 14px; }
+.obj { font-weight: 700; }
+.obj span { color: var(--accent); margin-right: 6px; }
+.kr { font-weight: 600; white-space: nowrap; color: var(--accent); }
+.two { display: grid; grid-template-columns: 1.3fr 1fr; gap: 14px; }
+@media (max-width: 720px) { .two { grid-template-columns: 1fr; } }
+.box { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 6px; }
+.box h4 { margin: 0; font-size: .85rem; color: var(--muted); font-weight: 600; }
+.box ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: .9rem; }
+.box.rule { background: var(--warn-soft); border-color: transparent; border-left: 4px solid var(--warn); border-radius: 0 8px 8px 0; }
+.box.rule h4 { color: var(--warn); }
+.pill { display: inline-block; font-size: .74rem; font-weight: 600; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.p-eng { background: var(--accent-soft); color: var(--accent); }
+.p-you { background: var(--warn-soft); color: var(--warn); }
+.p-ven { background: var(--line); color: var(--ink); }
+.tbd { color: var(--warn); font-weight: 600; }
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; counter-reset: s; }
+.flow div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-size: .9rem; display: grid; gap: 4px; }
+.flow b { font-family: var(--font-display); }
+code { font-size: .85em; background: var(--bg); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--line); }
+@media (max-width: 420px) { h1 { font-size: 1.75rem; } main { padding: 24px 16px 60px; } }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>V-Health 6个月 OKR</h1>
+  <p class="meta">V-Health Rehab Clinic · Calgary NW · 2026年11月12日 – 2027年5月31日 · 配套文件：90天行动计划（英文版）</p>
+</header>
+
+<section>
+  <div class="objective">
+    <div class="meta">6个月总目标 Objective</div>
+    <div class="big">每月预约从约 300 次翻倍到 600 次，并让更多讲英语的本地客户成为常客</div>
+    <p>每个数字都必须来自系统数据，不靠感觉。每个月的 KR 达到 0.7 分及以上算合格；某个渠道新客成本高于 $60，就停掉或调整。</p>
+  </div>
+  <div class="tiles">
+    <div class="tile"><span class="k">现在</span><span class="v">~300/月</span><span class="s">约每天 10 次</span></div>
+    <div class="tile"><span class="k">5月底目标</span><span class="v">600/月</span><span class="s">检查点：2月 400 · 4月 500</span></div>
+    <div class="tile"><span class="k">空余产能</span><span class="v">~24 小时/天</span><span class="s">4 间房 × 6 小时，集中在上午和周一、周二</span></div>
+    <div class="tile"><span class="k">一个新客的价值</span><span class="v">~$175</span><span class="s">诊所分成约 $44/次 × 约 4 次</span></div>
+    <div class="tile"><span class="k">新客成本上限</span><span class="v">$60</span><span class="s">任何渠道超过就暂停</span></div>
+    <div class="tile"><span class="k">营销预算</span><span class="v">≤ $1,000/月</span><span class="s">含 SEO $600</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>预约目标走势</h2>
+  <div class="chart-card" id="chart">
+    <div class="meta">每月预约次数目标（11月为现状基准）</div>
+    <svg viewBox="0 0 760 300" role="img" aria-label="每月预约目标：11月300，12月330，1月360，2月400，3月450，4月500，5月600">
+      <g class="grid" id="grid"></g>
+      <g class="axis" id="axis"></g>
+      <path class="area" id="area"></path>
+      <path class="series" id="line"></path>
+      <line class="cross" id="cross" y1="20" y2="260" style="display:none"></line>
+      <g id="pts"></g>
+      <g id="labels"></g>
+      <g id="hits"></g>
+    </svg>
+    <div class="tip" id="tip"></div>
+    <div class="wrap"><table>
+      <thead><tr><th>月份</th><th>11月</th><th>12月</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th></tr></thead>
+      <tbody><tr><td>预约目标</td><td class="num">300</td><td class="num">330</td><td class="num">360</td><td class="num">400</td><td class="num">450</td><td class="num">500</td><td class="num">600</td></tr></tbody>
+    </table></div>
+  </div>
+  <p class="meta">前两个月增长慢，因为11–12月主要在装追踪、修网站和列表。渠道开始起效后，从3月开始加速。</p>
+</section>
+
+<section>
+  <h2>怎么测量：数据从哪里来</h2>
+  <div class="flow">
+    <div><b>① 预约系统数据库</b><span>总预约、新客/老客、60天回头率、按时段和房间的使用率</span></div>
+    <div><b>② 预约表必填项</b><span>"How did you hear about us?" 和 "Preferred language: English / 中文"</span></div>
+    <div><b>③ 专属代码</b><span>每个推荐人、单位、社区通讯、律师各一个代码，用了就记一次</span></div>
+    <div><b>④ GA4 + Tag Manager</b><span>网站流量、<code>booking_completed</code> 事件、Google Ads 转化</span></div>
+    <div><b>⑤ Google Business Profile</b><span>电话、导航次数、评论数，以及新增评论的语言</span></div>
+  </div>
+  <p>计算公式：<b>新客成本</b> = 渠道花费 ÷ 该渠道带来的新客；<b>评论率</b> = 新增评论 ÷ 新客数；<b>房间使用率</b> = 已约小时 ÷（房间数 × 营业小时）；<b>英语客户比例</b> = 选 English 的新客 ÷ 全部新客。</p>
+</section>
+
+<section>
+  <h2>每月 OKR</h2>
+  <p class="meta"><span class="pill p-eng">AI工程师</span> <span class="pill p-you">Jason</span> <span class="pill p-ven">SEO供应商</span>　<span class="tbd">基准</span> = 第1周从预约系统导出的过去6个月数据</p>
+
+  <div class="months">
+
+  <!-- M1 -->
+  <article class="month">
+    <div class="month-head"><span class="tag">M1 · 11月12日 – 12月31日</span><span class="target">目标 330 次/月</span></div>
+    <div class="month-body">
+      <div class="obj"><span>O</span>拿回控制权，做到每一个预约都能追溯来源</div>
+      <div class="wrap"><table>
+        <thead><tr><th>KR</th><th>结果</th><th>测量方法</th><th>负责人</th></tr></thead>
+        <tbody>
+          <tr><td class="kr">KR1</td><td>Google Business Profile、Search Console、GA4、域名、Wix <b>100% 由诊所拥有</b></td><td>逐个登录，确认角色是 Owner；截图存档</td><td><span class="pill p-you">Jason</span></td></tr>
+          <tr><td class="kr">KR2</td><td>追踪上线：<b>100%</b> 新预约都有来源和语言字段</td><td>数据库：有来源的预约 ÷ 全部新预约；GA4 能看到 <code>booking_completed</code></td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR3</td><td>年底福利提醒活动带来 <b>≥ 75 次</b>预约</td><td>带 <code>?src=benefits</code> 链接的预约数（11–12月）</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR4</td><td>首页改版、显示价格、预约分类 8 → 4、所有列表信息统一</td><td>上线前后的预约转化率（访问 → 完成预约）；各列表修改前后截图</td><td><span class="pill p-eng">AI工程师</span> <span class="pill p-ven">供应商</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div class="box"><h4>本月关键行动</h4><ul>
+          <li>书面要求供应商移交账号；发 11 点修改清单，1月11日截止</li>
+          <li>安装 GA4 + Tag Manager；预约表加两个必填项；导出6个月基准数据</li>
+          <li>福利提醒：第1次（本周）+ 第2次（12月1日左右）</li>
+          <li>去掉按摩师的 "Dr." 称呼；修好评论按钮；删掉联系页上的 Physiotherapy</li>
+          <li>第2次就诊后自动发短信请客户留评；上线推荐代码（$15 + $15）</li>
+          <li>Instagram 改名为 @vhealthcalgary 之类；上线 Google Ads $300/月；做车祸专页</li>
+          <li>联系 ≥ 5 个单位（Foothills/AHS、Children's、U of C 等）；预订社区通讯广告</li>
+        </ul></div>
+        <div class="box rule"><h4>没达标怎么办</h4><ul>
+          <li>账号 12月15日前还没移交：暂停付款，直到移交</li>
+          <li>追踪覆盖率低于 90%：先修追踪，不加任何新渠道</li>
+          <li>福利活动少于 40 次：1月份换文案和发送时间</li>
+        </ul></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- M2 -->
+  <article class="month">
+    <div class="month-head"><span class="tag">M2 · 2027年1月</span><span class="target">目标 360 次/月</span></div>
+    <div class="month-body">
+      <div class="obj"><span>O</span>打开增长渠道，用数据判断哪个值得投入</div>
+      <div class="wrap"><table>
+        <thead><tr><th>KR</th><th>结果</th><th>测量方法</th><th>负责人</th></tr></thead>
+        <tbody>
+          <tr><td class="kr">KR1</td><td>Google Ads 新客成本 <b>≤ $60</b></td><td>Ads 花费 ÷（GA4 转化中的新客 + 预约表选 "Google" 且来自广告的新客）</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR2</td><td>1月"福利已更新"短信带来 <b>≥ 40 次</b>预约</td><td>带 <code>?src=jan-renew</code> 链接的预约数</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR3</td><td>联系 <b>≥ 5 个单位</b>，完成 <b>1 场</b>午餐讲座</td><td>联系记录表；该单位专属代码带来的新客</td><td><span class="pill p-you">Jason</span></td></tr>
+          <tr><td class="kr">KR4</td><td>评论率 10% → <b>15%</b>；签下按提成合作的 physio</td><td>新增 Google 评论 ÷ 本月新客；physio 合同已签</td><td><span class="pill p-eng">AI工程师</span> <span class="pill p-you">Jason</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div class="box"><h4>本月关键行动</h4><ul>
+          <li>1月2–5日给所有客户发"你的保险福利已更新"</li>
+          <li><b>1月11日：SEO 供应商 60 天检查</b>，看清单第 1–4 项是否完成</li>
+          <li>第一场单位讲座（"办公族的肩颈腰背"，30 分钟）</li>
+          <li>把律师推荐代码发给合作的人身伤害律师</li>
+          <li>聊天机器人运行中（12月中上线），记录对话数和下班后对话比例</li>
+          <li>1月底：所有渠道按新客成本排名</li>
+        </ul></div>
+        <div class="box rule"><h4>没达标怎么办</h4><ul>
+          <li>供应商第 1–4 项没完成：终止合同，AI工程师接手网站</li>
+          <li>Ads 新客成本高于 $60：暂停，优化落地页，再测一次</li>
+          <li>单位讲座约不到：换下一家，不降低要求</li>
+        </ul></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- M3 -->
+  <article class="month">
+    <div class="month-head"><span class="tag">M3 · 2027年2月</span><span class="target">检查点 400 次/月</span></div>
+    <div class="month-body">
+      <div class="obj"><span>O</span>达到第一个检查点，把预算集中到效果最好的渠道</div>
+      <div class="wrap"><table>
+        <thead><tr><th>KR</th><th>结果</th><th>测量方法</th><th>负责人</th></tr></thead>
+        <tbody>
+          <tr><td class="kr">KR1</td><td>每月预约 <b>≥ 400</b>；新客数 = <span class="tbd">基准</span> × 1.5</td><td>数据库：2月总预约、首次就诊客户数</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR2</td><td>上午和周一、周二的房间使用率 <span class="tbd">基准</span> <b>+15 个百分点</b></td><td>该时段已约小时 ÷ 该时段房间小时</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR3</td><td>Physio 开始接诊，本月 <b>≥ 20 次</b></td><td>数据库：physio 预约数和其中新客的比例</td><td><span class="pill p-you">Jason</span></td></tr>
+          <tr><td class="kr">KR4</td><td>聊天机器人 60 天决定：每月 <b>≥ 8 次</b>可追踪预约才保留</td><td>从聊天窗口发起的 <code>booking_completed</code></td><td><span class="pill p-eng">AI工程师</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div class="box"><h4>本月关键行动</h4><ul>
+          <li><b>2月10日：90 天总复盘</b>，按"保留/砍掉"规则逐项决定</li>
+          <li>把表现最差渠道的预算转给最好的</li>
+          <li>Physio 加进预约系统和车祸专页</li>
+          <li>第二场单位讲座</li>
+        </ul></div>
+        <div class="box rule"><h4>没达标怎么办</h4><ul>
+          <li>预约低于 320（比目标低 20% 以上）：调整渠道组合，不改目标</li>
+          <li>上午使用率涨不到 5 个百分点：重点转向值班族和单位渠道，并在 Ads 中强调"上午有空位"</li>
+        </ul></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- M4 -->
+  <article class="month">
+    <div class="month-head"><span class="tag">M4 · 2027年3月</span><span class="target">目标 450 次/月</span></div>
+    <div class="month-body">
+      <div class="obj"><span>O</span>放大有效渠道，打开车祸客户和英语客户这两条线</div>
+      <div class="wrap"><table>
+        <thead><tr><th>KR</th><th>结果</th><th>测量方法</th><th>负责人</th></tr></thead>
+        <tbody>
+          <tr><td class="kr">KR1</td><td>最好的渠道新客数比 2月 <b>+30%</b>，新客成本仍 ≤ $60</td><td>来源字段 + 专属代码，按渠道统计</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR2</td><td>车祸客户 <b>≥ 8 个新客/月</b></td><td>律师代码 + 来源选 "lawyer" + 车祸专页的转化</td><td><span class="pill p-you">Jason</span></td></tr>
+          <tr><td class="kr">KR3</td><td>选 English 的新客比例 <span class="tbd">基准</span> <b>+10 个百分点</b></td><td>"Preferred language" 字段</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR4</td><td>决定是否测试老年人非高峰价</td><td>只有上午使用率仍低于 50% 才测，用专属代码计数</td><td><span class="pill p-you">Jason</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div class="box"><h4>本月关键行动</h4><ul>
+          <li>给最好的渠道加预算（总额仍在 $1,000 内）</li>
+          <li>拜访 2 家新的人身伤害律所</li>
+          <li>优先请讲英语的满意客户留评</li>
+          <li>SEO（供应商或 AI工程师）每月 2 篇不重复的博客</li>
+        </ul></div>
+        <div class="box rule"><h4>没达标怎么办</h4><ul>
+          <li>英语客户比例不涨：检查首页图片和文案、Ads 关键词，并看评论里有没有英语客户的真实故事</li>
+          <li>车祸客户少于 4 个：重新给律所做介绍，并问 physio 有没有现有的转介关系</li>
+        </ul></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- M5 -->
+  <article class="month">
+    <div class="month-head"><span class="tag">M5 · 2027年4月</span><span class="target">检查点 500 次/月</span></div>
+    <div class="month-body">
+      <div class="obj"><span>O</span>留住客户：让新客变成常客</div>
+      <div class="wrap"><table>
+        <thead><tr><th>KR</th><th>结果</th><th>测量方法</th><th>负责人</th></tr></thead>
+        <tbody>
+          <tr><td class="kr">KR1</td><td>每月预约 <b>≥ 500</b></td><td>数据库总预约</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR2</td><td>新客 60 天回头率 <span class="tbd">基准</span> <b>+10 个百分点</b></td><td>首次就诊后 60 天内再约的新客 ÷ 全部新客</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR3</td><td>评论率 <b>20%</b>，每月 <b>≥ 25 条</b>新评论</td><td>Google Business Profile 评论数 ÷ 新客</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR4</td><td>第 2 个单位建立长期合作</td><td>该单位代码每月 ≥ 5 个新客</td><td><span class="pill p-you">Jason</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div class="box"><h4>本月关键行动</h4><ul>
+          <li>疗程结束前由治疗师推荐下次时间，前台当场约好</li>
+          <li>30 天没来的客户自动收到提醒短信</li>
+          <li>把单位讲座变成固定合作（每季度一次）</li>
+        </ul></div>
+        <div class="box rule"><h4>没达标怎么办</h4><ul>
+          <li>预约低于 400：回到渠道排名，砍掉最差的 1 个</li>
+          <li>回头率不涨：按治疗师分别看回头率，找出差距，做内部培训</li>
+        </ul></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- M6 -->
+  <article class="month">
+    <div class="month-head"><span class="tag">M6 · 2027年5月</span><span class="target">目标 600 次/月</span></div>
+    <div class="month-body">
+      <div class="obj"><span>O</span>达到翻倍，形成可以持续的增长系统</div>
+      <div class="wrap"><table>
+        <thead><tr><th>KR</th><th>结果</th><th>测量方法</th><th>负责人</th></tr></thead>
+        <tbody>
+          <tr><td class="kr">KR1</td><td>每月预约 <b>600</b></td><td>数据库总预约</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR2</td><td>选 English 的新客比例 <span class="tbd">基准</span> <b>+20 个百分点</b></td><td>"Preferred language" 字段</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR3</td><td>每个保留的渠道新客成本都 <b>≤ $60</b></td><td>花费 ÷ 新客，按渠道</td><td><span class="pill p-eng">AI工程师</span></td></tr>
+          <tr><td class="kr">KR4</td><td>写好下一个 6 个月的 OKR</td><td>基于 6 个月真实数据的计划文件</td><td><span class="pill p-you">Jason</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div class="box"><h4>本月关键行动</h4><ul>
+          <li>6 个月总复盘：每个渠道带来的新客、成本和回头率</li>
+          <li>决定下一步：再招治疗师？延长营业时间？加新服务？</li>
+          <li>重新评估 Sun Life：如果能接，可能是下一个增长点</li>
+        </ul></div>
+        <div class="box rule"><h4>没达标怎么办</h4><ul>
+          <li>低于 480：把 600 顺延到 8 月，保留最好的 2 个渠道，加大投入</li>
+          <li>超过 600 且房间满了：下一个 OKR 改成"加人或加时间"</li>
+        </ul></div>
+      </div>
+    </div>
+  </article>
+
+  </div>
+</section>
+
+<section>
+  <h2>每周仪表盘（8 个数字）</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>#</th><th>指标</th><th>数据来源</th><th>5月底目标</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>每月总预约</td><td>预约数据库</td><td class="num">600</td></tr>
+      <tr><td>2</td><td>每月新客</td><td>数据库（首次就诊）</td><td><span class="tbd">基准</span> × 2</td></tr>
+      <tr><td>3</td><td>新客 60 天回头率</td><td>数据库</td><td><span class="tbd">基准</span> + 10 个百分点</td></tr>
+      <tr><td>4</td><td>上午和周一、周二的房间使用率</td><td>数据库</td><td><span class="tbd">基准</span> + 25 个百分点</td></tr>
+      <tr><td>5</td><td>新客来源分布</td><td>必填来源字段 + 专属代码</td><td>100% 有来源</td></tr>
+      <tr><td>6</td><td>选 English 的新客比例</td><td>必填语言字段</td><td><span class="tbd">基准</span> + 20 个百分点</td></tr>
+      <tr><td>7</td><td>新增 Google 评论 / 评论率</td><td>Google Business Profile</td><td class="num">≥ 25/月 · 20%</td></tr>
+      <tr><td>8</td><td>各渠道新客成本</td><td>花费 ÷ #5</td><td class="num">≤ $60</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>复盘节奏</h2>
+  <div class="flow">
+    <div><b>每周一 · 30 分钟</b><span>看 8 个数字，比上周涨了还是跌了，只决定本周改一件事</span></div>
+    <div><b>每月最后一天</b><span>给每个 KR 打 0–1.0 分（0.7 = 合格），写下原因</span></div>
+    <div><b>每 60 天</b><span>渠道按新客成本排名，预算从最差的转给最好的</span></div>
+    <div><b>固定日期</b><span>1月11日 SEO 检查 · 2月10日 90 天复盘 · 5月31日 6 个月复盘</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>每月预算（上限 $1,000）</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>项目</th><th>$/月</th><th>保留的条件</th></tr></thead>
+    <tbody>
+      <tr><td>SEO 供应商</td><td class="num">$600</td><td>Google 带来的新客 × $175 ≥ $600；1月11日前完成清单第 1–4 项</td></tr>
+      <tr><td>Google Ads（诊所周围约 8 km，英文）</td><td class="num">$300</td><td>新客成本 ≤ $60</td></tr>
+      <tr><td>社区协会通讯广告</td><td class="num">$50–100</td><td>每次投放 ≥ 1 个新客</td></tr>
+      <tr><td>网站聊天机器人（中英双语）</td><td class="num">$0–50</td><td>每月 ≥ 8 次可追踪预约</td></tr>
+      <tr><td>Instagram / Facebook / TikTok 广告</td><td class="num">$0</td><td>只发免费帖子，每周 1 条</td></tr>
+      <tr><td>推荐奖励（$15 + $15）</td><td class="num">成功才付</td><td>每个推荐新客约 $30</td></tr>
+    </tbody>
+  </table></div>
+  <p class="meta">如果 SEO 合同在 1月11日终止，省下的 $600 先投给新客成本最低的渠道。</p>
+</section>
+
+</main>
+<script>
+(function () {
+  var data = [["11月",300,"基准"],["12月",330,""],["1月",360,""],["2月",400,"检查点"],["3月",450,""],["4月",500,"检查点"],["5月",600,"目标"]];
+  var W = 760, L = 48, R = 724, T = 20, B = 260, max = 700;
+  var ns = "http://www.w3.org/2000/svg";
+  function x(i) { return L + (R - L) * i / (data.length - 1); }
+  function y(v) { return B - (B - T) * v / max; }
+  function el(tag, attrs, parent, text) { var e = document.createElementNS(ns, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text != null) e.textContent = text; parent.appendChild(e); return e; }
+  var grid = document.getElementById("grid"), axis = document.getElementById("axis");
+  [0, 200, 400, 600].forEach(function (v) {
+    el("line", { x1: L, x2: R, y1: y(v), y2: y(v) }, grid);
+    el("text", { x: L - 8, y: y(v) + 4, "text-anchor": "end" }, axis, v);
+  });
+  data.forEach(function (d, i) { el("text", { x: x(i), y: B + 22, "text-anchor": "middle" }, axis, d[0]); });
+  var line = data.map(function (d, i) { return (i ? "L" : "M") + x(i) + " " + y(d[1]); }).join(" ");
+  document.getElementById("line").setAttribute("d", line);
+  document.getElementById("area").setAttribute("d", line + " L" + x(data.length - 1) + " " + B + " L" + x(0) + " " + B + " Z");
+  var pts = document.getElementById("pts"), labels = document.getElementById("labels"), hits = document.getElementById("hits");
+  var cross = document.getElementById("cross"), tip = document.getElementById("tip"), card = document.getElementById("chart");
+  var svg = card.querySelector("svg");
+  var dots = data.map(function (d, i) { return el("circle", { cx: x(i), cy: y(d[1]), r: 4.5, "class": "pt" }, pts); });
+  [0, 3, 6].forEach(function (i) {
+    el("text", { x: x(i) + (i === 6 ? -6 : 0), y: y(data[i][1]) - 12, "text-anchor": i === 6 ? "end" : "middle", "class": "lbl" }, labels, data[i][1] + " · " + data[i][2]);
+  });
+  data.forEach(function (d, i) {
+    var w = (R - L) / (data.length - 1);
+    var h = el("rect", { x: x(i) - w / 2, y: T, width: w, height: B - T, "class": "hit", tabindex: 0, "aria-label": d[0] + " " + d[1] + " 次" }, hits);
+    function show() {
+      dots.forEach(function (c) { c.setAttribute("r", 4.5); });
+      dots[i].setAttribute("r", 6.5);
+      cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.style.display = "";
+      var sr = svg.getBoundingClientRect(), cr = card.getBoundingClientRect(), s = sr.width / W;
+      tip.innerHTML = d[0] + "　目标 <b>" + d[1] + "</b> 次" + (i ? "（比上月 +" + (d[1] - data[i - 1][1]) + "）" : "（现状）");
+      tip.style.left = (sr.left - cr.left + x(i) * s) + "px";
+      tip.style.top = (sr.top - cr.top + y(d[1]) * s) + "px";
+      tip.style.display = "block";
+    }
+    function hide() { tip.style.display = "none"; cross.style.display = "none"; dots[i].setAttribute("r", 4.5); }
+    h.addEventListener("mouseenter", show); h.addEventListener("focus", show);
+    h.addEventListener("mouseleave", hide); h.addEventListener("blur", hide);
+  });
+})();
+</script>
+</body>
+</html>

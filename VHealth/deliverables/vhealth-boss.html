@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-Health 增长计划（老板版）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 布局：单栏，大数字格 → 5 张图 → 红绿灯 → 本周 4 件事 */
+  --bg: #f7f5f1;
+  --surface: #ffffff;
+  --ink: #1f2a2e;
+  --muted: #5f6b6e;
+  --line: #dcd8d0;
+  --accent: #0d6e68;
+  --accent-soft: #dff0ed;
+  --sun: #b4620a;
+  --sun-soft: #fbeedd;
+  --good: #2c7a3c; --good-soft: #e1f2e3;
+  --bad: #b03a2e; --bad-soft: #f8e2df;
+  --font-display: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a1b; --surface: #1c2426; --ink: #e8eeee; --muted: #a0adb0; --line: #313c3f;
+    --accent: #55c4b9; --accent-soft: #173734; --sun: #eaa856; --sun-soft: #352a1b;
+    --good: #6fcf80; --good-soft: #1b3321; --bad: #f08d81; --bad-soft: #3a201d; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a1b; --surface: #1c2426; --ink: #e8eeee; --muted: #a0adb0; --line: #313c3f;
+  --accent: #55c4b9; --accent-soft: #173734; --sun: #eaa856; --sun-soft: #352a1b;
+  --good: #6fcf80; --good-soft: #1b3321; --bad: #f08d81; --bad-soft: #3a201d; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 17px/1.7 var(--font-body); }
+main { max-width: 960px; margin: 0 auto; padding: 36px 18px 80px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.3; text-wrap: balance; }
+h1 { font-size: 2.2rem; font-weight: 900; }
+h2 { font-size: 1.5rem; font-weight: 700; display: flex; gap: 10px; align-items: baseline; }
+h2 .n { color: var(--accent); font-weight: 900; }
+p { margin: 0; max-width: 62ch; }
+.muted { color: var(--muted); }
+section { display: grid; gap: 16px; }
+.big { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.box { background: var(--surface); border: 2px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 6px; }
+.box .num { font-size: 2.6rem; font-weight: 900; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.box .lab { font-weight: 700; font-size: 1.05rem; }
+.box .kid { color: var(--muted); font-size: .95rem; }
+.box.hl { border-color: var(--accent); background: var(--accent-soft); }
+.term { background: var(--sun-soft); border-left: 5px solid var(--sun); border-radius: 0 10px 10px 0; padding: 10px 14px; font-size: .95rem; }
+.term b { color: var(--sun); }
+/* funnel */
+.funnel { display: grid; gap: 8px; }
+.step { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 12px; align-items: stretch; }
+.bar { background: var(--accent); color: #fff; border-radius: 10px; padding: 12px 16px; font-weight: 700; margin: 0 auto; width: 100%; }
+.fix { background: var(--surface); border: 2px dashed var(--accent); border-radius: 10px; padding: 10px 14px; font-size: .95rem; }
+.arrow-down { text-align: center; color: var(--muted); font-size: 1.2rem; line-height: 1; }
+/* bucket */
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+.panel { border-radius: 14px; padding: 18px; display: grid; gap: 10px; border: 2px solid; }
+.panel.bad { background: var(--bad-soft); border-color: var(--bad); }
+.panel.good { background: var(--good-soft); border-color: var(--good); }
+.panel h3 { font-size: 1.2rem; }
+.panel.bad h3 { color: var(--bad); }
+.panel.good h3 { color: var(--good); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: .9rem; }
+/* money */
+.stack { display: flex; height: 64px; border-radius: 12px; overflow: hidden; border: 2px solid var(--line); }
+.seg { display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: .9rem; text-align: center; padding: 0 4px; }
+.legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.legend div { display: flex; gap: 8px; align-items: flex-start; font-size: .95rem; }
+.sw { width: 16px; height: 16px; border-radius: 4px; flex: none; margin-top: 5px; }
+.scale { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; }
+.scale .box { text-align: center; }
+.vs { font-size: 1.6rem; font-weight: 900; color: var(--muted); }
+/* timetable */
+.tt-wrap { overflow-x: auto; }
+.tt { display: grid; grid-template-columns: 74px repeat(7, minmax(52px, 1fr)); gap: 4px; min-width: 520px; font-size: .85rem; }
+.tt div { border-radius: 6px; padding: 8px 4px; text-align: center; }
+.tt .h { font-weight: 700; color: var(--muted); background: transparent; }
+.tt .e { background: var(--sun); color: #fff; font-weight: 700; }
+.tt .f { background: var(--accent-soft); color: var(--muted); }
+.who { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.who .box { padding: 14px; }
+.who .lab { font-size: 1rem; }
+/* road */
+.road { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; align-items: end; }
+.mo { display: grid; gap: 6px; text-align: center; }
+.col { background: var(--accent); border-radius: 8px 8px 0 0; color: #fff; font-weight: 900; display: flex; align-items: flex-start; justify-content: center; padding-top: 6px; font-variant-numeric: tabular-nums; }
+.col.goal { background: var(--sun); }
+.mo .m { font-weight: 700; font-size: .9rem; }
+.mo .t { font-size: .8rem; color: var(--muted); line-height: 1.4; }
+.base { border-top: 3px solid var(--ink); }
+/* lights */
+.lights { display: grid; gap: 10px; }
+.light { display: grid; grid-template-columns: 150px 1fr 1fr; gap: 10px; align-items: stretch; }
+.light > div { border-radius: 10px; padding: 10px 14px; font-size: .95rem; }
+.light .name { background: var(--surface); border: 2px solid var(--line); font-weight: 700; }
+.light .g { background: var(--good-soft); border: 2px solid var(--good); }
+.light .r { background: var(--bad-soft); border: 2px solid var(--bad); }
+.dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+/* todo */
+.todo { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.todo .box .num { font-size: 2rem; }
+@media (max-width: 560px) {
+  h1 { font-size: 1.7rem; }
+  .step { grid-template-columns: 1fr; }
+  .light { grid-template-columns: 1fr; }
+  .scale { grid-template-columns: 1fr; }
+  .vs { text-align: center; }
+  .road { gap: 4px; }
+  .mo .t { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) { .box { transition: transform .15s; } }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>V-Health 增长计划（老板版）</h1>
+  <p class="muted">一句话：房间空着就是在亏钱。我们要用很少的钱，把空房间填满，而且每一步都用数字证明有没有用。</p>
+  <p class="muted">时间：2026年11月 → 2027年5月 · 地点：Calgary NW, 5403 Crowchild Trail</p>
+</header>
+
+<section>
+  <h2><span class="n">①</span>六个大数字</h2>
+  <div class="big">
+    <div class="box hl"><span class="num">300 → 600</span><span class="lab">每月预约次数</span><span class="kid">现在每天约 10 个，目标翻一倍。</span></div>
+    <div class="box"><span class="num">24 小时</span><span class="lab">每天空着的房间时间</span><span class="kid">4 个房间 × 每间空 6 小时。不缺治疗师，缺客人。</span></div>
+    <div class="box"><span class="num">95%</span><span class="lab">客人用公司保险付钱</span><span class="kid">所以要找"有公司保险、上午有空"的人。</span></div>
+    <div class="box"><span class="num">$175</span><span class="lab">一个新客人值多少钱</span><span class="kid">每次诊所留 $44（$110 的 40%），平均来 4 次。</span></div>
+    <div class="box"><span class="num">≤ $60</span><span class="lab">最多花多少钱换一个新客人</span><span class="kid">花 $60 赚回 $175，划算。超过 $60 就停。</span></div>
+    <div class="box"><span class="num">$1,000</span><span class="lab">每月营销总预算</span><span class="kid">包括现在给 SEO 公司的 $600。越省越好。</span></div>
+  </div>
+  <div class="term"><b>获客成本（cost per new client）</b>：花掉的广告钱 ÷ 带来的新客人数。像"买一个客人要多少钱"。</div>
+</section>
+
+<section>
+  <h2><span class="n">②</span>客人是怎么来的（漏斗）</h2>
+  <p class="muted">左边是客人走的每一步，右边是我们在这一步做的事。哪一步漏人，就补哪一步。</p>
+  <div class="funnel">
+    <div class="step"><div class="bar" style="width:100%">1 看到你：Google / 朋友 / 公司 / 社区报纸</div><div class="fix">Google 广告、修好 Google 地图资料、公司午餐讲座、社区报纸广告</div></div>
+    <div class="arrow-down">▼</div>
+    <div class="step"><div class="bar" style="width:90%">2 打开网站</div><div class="fix">首页写清楚：按摩·整骨·针灸，直接报保险，晚上周末都开</div></div>
+    <div class="arrow-down">▼</div>
+    <div class="step"><div class="bar" style="width:78%">3 预约</div><div class="fix">显示价格和时长，预约类别从 8 个减到 4 个，加聊天机器人</div></div>
+    <div class="arrow-down">▼</div>
+    <div class="step"><div class="bar" style="width:66%">4 再来</div><div class="fix">提醒"保险年底清零，快用掉"，1 月"保险重新开始"</div></div>
+    <div class="arrow-down">▼</div>
+    <div class="step"><div class="bar" style="width:54%">5 写好评</div><div class="fix">第 2 次来之后自动发短信，附 Google 好评链接（10% → 20%）</div></div>
+    <div class="arrow-down">▼</div>
+    <div class="step"><div class="bar" style="width:44%">6 介绍朋友</div><div class="fix">推荐码：老客人和朋友各减 $15</div></div>
+  </div>
+  <div class="term"><b>漏斗（funnel）</b>：从"看到"到"付钱"，每一步都会少一些人，像漏斗越来越窄。</div>
+</section>
+
+<section>
+  <h2><span class="n">③</span>漏水的桶：现在看不见钱花在哪</h2>
+  <div class="compare">
+    <div class="panel bad">
+      <h3>现在：蒙着眼睛</h3>
+      <p>网站和预约系统都<b>没有追踪</b>。SEO 公司说有效果，但谁也证明不了。</p>
+      <div class="chips"><span class="chip">客人从哪来？不知道</span><span class="chip">$600 值不值？不知道</span><span class="chip">账号在 SEO 公司手里</span></div>
+    </div>
+    <div class="panel good">
+      <h3>以后：每个客人都有来源</h3>
+      <p>装上追踪 + 预约表加两个必填项："你怎么知道我们的？"和"语言：English / 中文"。</p>
+      <div class="chips"><span class="chip">每个渠道带来几个人</span><span class="chip">每个人花了多少钱</span><span class="chip">英语客人比例</span></div>
+    </div>
+  </div>
+  <div class="term"><b>GA4（Google Analytics）</b>：网站的"监控摄像头"，记录谁来了、从哪来、有没有预约。</div>
+  <div class="term"><b>SEO</b>：让你在 Google 免费搜索结果里排得更靠前。<b>Google Ads</b>：付钱让你出现在搜索结果最上面，按点击收费。</div>
+</section>
+
+<section>
+  <h2><span class="n">④</span>$1,000 怎么花</h2>
+  <div class="stack" role="img" aria-label="预算分配：SEO 600，Google 广告 300，社区报纸 100，聊天机器人 0 到 50">
+    <div class="seg" style="flex:600;background:#5d6f74">SEO $600</div>
+    <div class="seg" style="flex:300;background:var(--accent)">广告 $300</div>
+    <div class="seg" style="flex:100;background:var(--sun)">报纸 $100</div>
+  </div>
+  <div class="legend">
+    <div><span class="sw" style="background:#5d6f74"></span><span><b>SEO $600</b>：给 60 天考察期，做不到就换掉。</span></div>
+    <div><span class="sw" style="background:var(--accent)"></span><span><b>Google 广告 $300</b>：只投诊所周围 8 公里。</span></div>
+    <div><span class="sw" style="background:var(--sun)"></span><span><b>社区报纸 $50–100</b>：Brentwood、Varsity 等社区报纸。</span></div>
+    <div><span class="sw" style="background:var(--line)"></span><span><b>聊天机器人 $0–50</b>，Instagram 广告 $0，推荐码有人用了才花钱。</span></div>
+  </div>
+  <div class="scale">
+    <div class="box hl"><span class="num">$175</span><span class="lab">一个新客人带来的钱</span></div>
+    <div class="vs">&gt;</div>
+    <div class="box"><span class="num">$60</span><span class="lab">最多愿意花的钱</span></div>
+  </div>
+  <div class="term"><b>CTR（点击率）</b>：看到广告的人里有多少点进来。点得多说明广告写得对。</div>
+</section>
+
+<section>
+  <h2><span class="n">⑤</span>空房间在什么时候？找谁来填？</h2>
+  <div class="tt-wrap">
+    <div class="tt" role="img" aria-label="空档主要在上午和周一周二">
+      <div class="h"></div><div class="h">周一</div><div class="h">周二</div><div class="h">周三</div><div class="h">周四</div><div class="h">周五</div><div class="h">周六</div><div class="h">周日</div>
+      <div class="h">上午</div><div class="e">空</div><div class="e">空</div><div class="e">空</div><div class="e">空</div><div class="e">空</div><div class="f">还行</div><div class="f">还行</div>
+      <div class="h">下午</div><div class="e">空</div><div class="e">空</div><div class="f">还行</div><div class="f">还行</div><div class="f">还行</div><div class="f">还行</div><div class="f">还行</div>
+      <div class="h">晚上</div><div class="e">空</div><div class="e">空</div><div class="f">还行</div><div class="f">还行</div><div class="f">还行</div><div class="f">还行</div><div class="f">—</div>
+    </div>
+  </div>
+  <p class="muted">橙色 = 空档（大概情况，第一周用预约数据确认）。</p>
+  <div class="who">
+    <div class="box"><span class="lab">医院轮班员工</span><span class="kid">Foothills、儿童医院就在附近，上夜班的人白天有空，保险好。</span></div>
+    <div class="box"><span class="lab">在家上班的人</span><span class="kid">上午能抽一小时，用公司保险。</span></div>
+    <div class="box"><span class="lab">U of C 员工和研究生</span><span class="kid">很近，时间灵活。</span></div>
+    <div class="box"><span class="lab">休产假的父母</span><span class="kid">白天有空，通常还有保险。</span></div>
+  </div>
+  <p class="muted">没有保险的老人暂时不是重点。如果 3 月上午还是很空，再试"老人上午特价"。</p>
+</section>
+
+<section>
+  <h2><span class="n">⑥</span>六个月的路</h2>
+  <div class="road" role="img" aria-label="每月预约目标：12月330，1月360，2月400，3月450，4月500，5月600">
+    <div class="mo"><div class="col" style="height:110px">330</div><div class="m">12 月</div><div class="t">保险年底提醒</div></div>
+    <div class="mo"><div class="col" style="height:120px">360</div><div class="m">1 月</div><div class="t">保险重新开始提醒，SEO 考核</div></div>
+    <div class="mo"><div class="col" style="height:133px">400</div><div class="m">2 月</div><div class="t">物理治疗师上班，90 天复盘</div></div>
+    <div class="mo"><div class="col" style="height:150px">450</div><div class="m">3 月</div><div class="t">钱挪给最好的渠道</div></div>
+    <div class="mo"><div class="col" style="height:167px">500</div><div class="m">4 月</div><div class="t">更多公司讲座</div></div>
+    <div class="mo"><div class="col goal" style="height:200px">600</div><div class="m">5 月</div><div class="t">目标达成</div></div>
+  </div>
+  <div class="base"></div>
+  <div class="term"><b>OKR</b>：O = 想达到什么（目标），KR = 用什么数字证明做到了（关键结果）。每月一个，月底对数字。</div>
+</section>
+
+<section>
+  <h2><span class="n">⑦</span>红绿灯：什么时候继续，什么时候停</h2>
+  <div class="lights">
+    <div class="light"><div class="name">SEO 公司</div><div class="g"><span class="dot" style="background:var(--good)"></span>1月11日前修好前 4 项，而且 Google 带来的客人 × $175 ≥ $600</div><div class="r"><span class="dot" style="background:var(--bad)"></span>做不到 → 解约，自己的工程师接手</div></div>
+    <div class="light"><div class="name">Google 广告</div><div class="g"><span class="dot" style="background:var(--good)"></span>每个新客人 ≤ $60</div><div class="r"><span class="dot" style="background:var(--bad)"></span>超过 → 暂停，改网页再试一次</div></div>
+    <div class="light"><div class="name">聊天机器人</div><div class="g"><span class="dot" style="background:var(--good)"></span>每月带来 ≥ 8 个预约</div><div class="r"><span class="dot" style="background:var(--bad)"></span>做不到 → 拿掉</div></div>
+    <div class="light"><div class="name">社区报纸</div><div class="g"><span class="dot" style="background:var(--good)"></span>每登一次至少来 1 个新客人</div><div class="r"><span class="dot" style="background:var(--bad)"></span>连续 2 次没人 → 不再登</div></div>
+    <div class="light"><div class="name">公司讲座</div><div class="g"><span class="dot" style="background:var(--good)"></span>每家公司 60 天内 ≥ 5 个新客人</div><div class="r"><span class="dot" style="background:var(--bad)"></span>做不到 → 换下一家</div></div>
+    <div class="light"><div class="name">物理治疗师</div><div class="g"><span class="dot" style="background:var(--good)"></span>第 2 个月 ≥ 40 次，一半是新客人</div><div class="r"><span class="dot" style="background:var(--bad)"></span>做不到 → 结束合作（只拿提成，没有底薪）</div></div>
+    <div class="light"><div class="name">Instagram</div><div class="g"><span class="dot" style="background:var(--good)"></span>有人说"从 Instagram 知道的"</div><div class="r"><span class="dot" style="background:var(--bad)"></span>没人 → 每月只发 2 次，留着当"门面"</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">⑧</span>这周就做的 4 件事</h2>
+  <div class="todo">
+    <div class="box hl"><span class="num">1</span><span class="lab">拿回账号</span><span class="kid">让 SEO 公司把 Google 商家资料、Search Console、GA4 的"所有者"权限给你。260 条好评都在里面。</span></div>
+    <div class="box"><span class="num">2</span><span class="lab">装追踪 + 两个必填项</span><span class="kid">AI 工程师做。从此每个客人都知道是从哪来的。</span></div>
+    <div class="box"><span class="num">3</span><span class="lab">发"保险快清零"提醒</span><span class="kid">给老客人发短信或邮件。目标：11–12 月带来 ≥ 75 个预约。</span></div>
+    <div class="box"><span class="num">4</span><span class="lab">给 SEO 公司发 11 条修改清单</span><span class="kid">1 月 11 日前要修好，这是决定续不续约的依据。</span></div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

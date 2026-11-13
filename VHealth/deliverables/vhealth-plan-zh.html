@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-Health 90天增长计划</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: single reading column; summary tiles, then week-by-week tables, then rules. */
+  --bg: #f6f8f8;
+  --surface: #ffffff;
+  --ink: #18282e;
+  --muted: #5a6b71;
+  --line: #d9e1e3;
+  --accent: #0e6b66;
+  --accent-soft: #e2f0ee;
+  --warn: #9a5b00;
+  --warn-soft: #fbefdc;
+  --bad: #a3322a;
+  --font-display: "IBM Plex Sans Condensed", "Noto Sans SC", "PingFang SC", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Noto Sans SC", "PingFang SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111a1d; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3;
+    --line: #2a393e; --accent: #4fc2b8; --accent-soft: #163634;
+    --warn: #e5a948; --warn-soft: #33281a; --bad: #ef8a80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111a1d; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3;
+  --line: #2a393e; --accent: #4fc2b8; --accent-soft: #163634;
+  --warn: #e5a948; --warn-soft: #33281a; --bad: #ef8a80; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--font-body); }
+main { max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 40px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: 2.3rem; font-weight: 700; }
+h2 { font-size: 1.55rem; font-weight: 600; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.meta { color: var(--muted); font-size: .95rem; }
+section { display: grid; gap: 16px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; gap: 4px; }
+.tile .k { font-size: .82rem; color: var(--muted); letter-spacing: .04em; }
+.tile .v { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tile .s { font-size: .9rem; color: var(--muted); }
+.wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+th { font-weight: 600; color: var(--muted); font-size: .8rem; letter-spacing: .04em; background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.p-eng { background: var(--accent-soft); color: var(--accent); }
+.p-you { background: var(--warn-soft); color: var(--warn); }
+.p-ven { background: var(--line); color: var(--ink); }
+.week { display: grid; gap: 10px; }
+.week h3 span { color: var(--muted); font-weight: 500; font-size: .95rem; margin-left: 8px; }
+.note { background: var(--warn-soft); border-left: 4px solid var(--warn); padding: 12px 16px; border-radius: 0 8px 8px 0; }
+.note p { max-width: none; }
+ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.kill { color: var(--bad); font-weight: 500; }
+.tbd { color: var(--warn); font-weight: 600; }
+@media (max-width: 420px) { h1 { font-size: 1.8rem; } main { padding: 24px 16px 60px; } }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>V-Health 90天增长计划</h1>
+  <p class="meta">V-Health Rehab Clinic · #110, 5403 Crowchild Trail NW, Calgary · 计划期：2026年11月12日 – 2027年2月10日，检查点延续到2027年5月</p>
+  <p>目标：到2027年5月底，预约从每月约300次翻倍到<strong>每月600次</strong>，同时让说英语的本地新客户占比持续上升。每一项行动都有要达到的数字，也有停止的规则。不靠感觉判断。</p>
+</header>
+
+<section>
+  <h2>现状与目标</h2>
+  <div class="tiles">
+    <div class="tile"><span class="k">目前预约</span><span class="v">约300次/月</span><span class="s">每天约10次</span></div>
+    <div class="tile"><span class="k">目标</span><span class="v">600次/月</span><span class="s">2月28日前400 · 4月30日前500 · 5月31日前600</span></div>
+    <div class="tile"><span class="k">空闲产能</span><span class="v">约24小时/天</span><span class="s">4间房 × 6小时，主要在上午和周一、周二</span></div>
+    <div class="tile"><span class="k">诊所每次分成</span><span class="v">约$44</span><span class="s">约$110（60分钟）的40%</span></div>
+    <div class="tile"><span class="k">一个新客户的价值</span><span class="v">约$175</span><span class="s">按来4次计算。客户平均来几次，以基线报告为准</span></div>
+    <div class="tile"><span class="k">获取一个新客户的成本上限</span><span class="v">$60</span><span class="s">超过的渠道就暂停</span></div>
+  </div>
+  <p>目标人群：<strong>95%的客户用公司保险付费</strong>，所以上午和周一、周二的空档，要留给有保险、那个时间又有空的人：医院倒班人员（Foothills、Children's）、远程和混合办公的人、U of C 的员工和研究生、休产假的父母。没有保险的老年人暂时不作为目标。</p>
+</section>
+
+<section>
+  <h2>每月预算（上限 $1,000）</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>项目</th><th>$/月</th><th>考核标准</th></tr></thead>
+    <tbody>
+      <tr><td>SEO 外包（60天考察期）</td><td class="num">$600</td><td>从 Google 找到你的客户数 × $175 ≥ $600</td></tr>
+      <tr><td>Google 广告，诊所周围约8公里</td><td class="num">$300</td><td>每个新客户成本 ≤ $60</td></tr>
+      <tr><td>社区协会通讯（newsletter）广告</td><td class="num">$50–100</td><td>每次投放 ≥ 1 个新客户</td></tr>
+      <tr><td>网站聊天机器人（英文 + 中文）</td><td class="num">$0–50</td><td>每月 ≥ 8 次可追踪的预约</td></tr>
+      <tr><td>Instagram / Facebook / TikTok 广告</td><td class="num">$0</td><td>只做免费发帖，每周1条</td></tr>
+      <tr><td>推荐奖励（$15 + $15）</td><td class="num">成功才付</td><td>每个推荐来的客户成本约 $30</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>每周数据看板（AI 工程师搭建，每周一查看）</h2>
+  <p>数据来源：预约系统数据库、GA4、Google 商家资料（Google Business Profile）。第1周建立基线。下表是90天结束时的目标。</p>
+  <div class="wrap"><table>
+    <thead><tr><th>#</th><th>指标</th><th>来源</th><th>90天目标</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>每月总预约数</td><td>预约数据库</td><td class="num">≥ 400（2月）</td></tr>
+      <tr><td>2</td><td>每月新客户数</td><td>预约数据库（首次来访）</td><td><span class="tbd">基线</span> × 1.5</td></tr>
+      <tr><td>3</td><td>新客户60天内再次预约的比例</td><td>预约数据库</td><td><span class="tbd">基线</span> + 10个百分点</td></tr>
+      <tr><td>4</td><td>房间使用率：上午和周一、周二</td><td>预约数据库（已预约小时 / 房间小时）</td><td><span class="tbd">基线</span> + 15个百分点</td></tr>
+      <tr><td>5</td><td>按来源统计的新客户数</td><td>必填项"您是怎么知道我们的？"+ 各类代码</td><td>每个渠道都能量化</td></tr>
+      <tr><td>6</td><td>选择英语的新客户比例</td><td>必填项"首选语言"</td><td><span class="tbd">基线</span> + 10个百分点（5月前 +20）</td></tr>
+      <tr><td>7</td><td>新增 Google 评价数（及留评率）</td><td>Google 商家资料</td><td class="num">每月 +25 · 10% → 20%</td></tr>
+      <tr><td>8</td><td>各渠道每个新客户的成本</td><td>花费 ÷ 第5项</td><td class="num">每个渠道 ≤ $60</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>每周安排</h2>
+  <p class="meta">
+    <span class="pill p-eng">AI 工程师</span>
+    <span class="pill p-you">你</span>
+    <span class="pill p-ven">SEO 外包</span>
+  </p>
+
+  <div class="week">
+    <h3>第1周<span>11月12–18日 · 拿回控制权，建立基线</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>负责人</th><th>行动</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-you">你</span></td><td>书面要求外包把 Google 商家资料、Search Console 和 GA4 的<strong>所有者</strong>权限交给你。确认 vhealth.ca 域名和 Wix 账号登记在你名下。</td><td>你能以所有者身份登录全部账号</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>把11项整改清单（见下文）发给外包，期限60天。</td><td>外包书面确认</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>在 vhealth.ca 和 app.vhealth.ca 安装 GA4 和 Google Tag Manager。在预约确认这一步触发 <code>booking_completed</code> 事件。</td><td>测试预约能在 GA4 里看到</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>在预约表单加<strong>必填</strong>项："您是怎么知道我们的？"（Google 搜索、Google 地图、亲友、推荐码、工作单位、社区通讯、Instagram/Facebook、律师、路过、其他）和"首选语言：English / 中文"。邮编选填。</td><td>每个新预约都有这两项</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>按月拉取过去6个月的基线报告：总预约、新客与回头客、60天内再预约的比例、各服务预约数、按时段和星期统计的预约、每位客户平均来访次数。</td><td>本页的<span class="tbd">基线</span>格子都填上数字</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td><strong>保险福利活动，第1条消息：</strong>给老客户发短信或邮件："您2026年的保险福利12月31日清零，我们可以直接向保险公司收费（direct billing）。"使用带标签的预约链接（<code>?src=benefits</code>）。</td><td>已发送。统计该链接带来的预约</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>去掉 RMT 名字前的"Dr."。把"Read Our Google Reviews"按钮链接到你的 Google 评价页面。删除联系页面上的"Physiotherapy"。</td><td>网站已更新</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>第2周<span>11月19–25日 · 修好门面</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>负责人</th><th>行动</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>改写首页标题："Massage · Osteopathy · Acupuncture in Calgary NW — Direct billing — Open evenings &amp; weekends — Weekday morning appointments available"。加一句副标题"We also speak Mandarin &amp; Cantonese"。展示几条 Google 评价。</td><td>已上线，并记录改版前后的预约转化率</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>每个服务页面和预约流程都显示价格和时长（30分钟 $55 · 45分钟 $85 · 60分钟 $110）。把 Sun Life 提示条换成"Direct billing: Canada Life, Manulife, Blue Cross, GreenShield…"，Sun Life 的说明移到保险 FAQ 里。</td><td>已上线</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>简化预约分类（8个重叠分类 → 约4个：Massage、Acupuncture、Osteopathy、Specialty）。</td><td>已上线，追踪"开始预约 → 完成预约"的比例</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>第2次来访后自动发短信请客户留评价，附 Google 评价直达链接。</td><td>已运行，每周统计留评率</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>推荐计划：每位客户一个专属推荐码，推荐人和朋友各减 $15。</td><td>推荐码已启用，使用次数显示在看板上</td></tr>
+        <tr><td><span class="pill p-ven">外包</span></td><td>统一所有平台上的名称、地址和电话：Google 商家资料、Medimap（电话、邮编、营业时间、Sun Life 的错误信息、安省重复页面）、Facebook，以及结构化数据（schema）里的邮编（T3A 2G8 → T3B 4Z1）。</td><td>每个平台都有修改前后截图</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>把 Instagram @vhealth_2025 改名，比如 @vhealthcalgary。之后每周发1条。</td><td>已改名</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>第3–4周<span>11月26日 – 12月9日 · 启动付费和本地渠道</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>负责人</th><th>行动</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-eng">工程师</span></td><td><strong>保险福利活动，第2条消息</strong>（12月1日左右）。</td><td>已发送。目标：11–12月通过链接带来 <strong>≥ 75次预约</strong></td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>上线 Google 广告，每月 $300，半径约8公里，英文。关键词："massage therapy near me"、"RMT direct billing Calgary NW"、"osteopath Calgary"、"acupuncture near me"，另设一个车祸广告组。用 GA4 的预约事件统计转化。</td><td>已上线，转化数据正常记录</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>做一个车祸页面："Car accident? We handle the insurance paperwork."，作为车祸广告的落地页。</td><td>已上线</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>联系工作单位：Foothills/AHS、Alberta Children's、U of C 以及附近2家公司的员工健康或福利委员会。提供休息室宣传单和免费30分钟"肩颈腰背"午餐讲座。每个单位一个专属代码。</td><td>联系 ≥ 5家单位，约到 ≥ 1场讲座</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>在社区协会通讯上投放广告（Brentwood、Varsity、Dalhousie、Charleswood、Collingwood），每个一个专属代码。</td><td>约好 ≥ 2次投放</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>给每位合作的人身伤害律师一个推荐码。</td><td>推荐码已发出</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>第5–8周<span>12月10日 – 1月6日 · 测试聊天机器人，招聘物理治疗师</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>负责人</th><th>行动</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>上线聊天机器人（英文 + 中文）。根据 FAQ 和价格回答问题，并链接到预约。记录对话数、非营业时间的占比，以及从聊天开始的预约。</td><td>已上线，60天测试约到2月8日</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>招一位<strong>纯提成</strong>的物理治疗师（physio），使用空闲房间，最好有车祸和 WCB 经验。计划2月入职。</td><td>已签约</td></tr>
+        <tr><td><span class="pill p-eng">工程师</span></td><td>1月2–5日：给所有客户发"您的保险福利已经更新"（带标签链接）。以后每年1月都发。</td><td>已发送，统计预约</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>举办第一场工作单位午餐讲座，之后争取每月1场。</td><td>按该单位代码统计新客户</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>第9–13周<span>1月7日 – 2月10日 · 复盘和调整预算</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>负责人</th><th>行动</th><th>完成标准</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-you">你</span></td><td><strong>1月11日：外包60天考核。</strong>清单第1–4项完成了吗？没完成就终止合同。</td><td>已做决定</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td><strong>1月下旬：渠道复盘。</strong>按每个新客户的成本给渠道排名，把预算从最差的渠道移到最好的。</td><td>2月的新预算分配</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td>物理治疗师2月入职，加入预约系统和车祸页面。</td><td>有了第一批物理治疗预约</td></tr>
+        <tr><td><span class="pill p-you">你</span></td><td><strong>2月10日：90天复盘。</strong>对照看板，按下面的规则决定每一项保留还是砍掉。</td><td>写好下一个90天计划</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section>
+  <h2>保留或砍掉的规则</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>项目</th><th>保留条件</th><th>否则</th></tr></thead>
+    <tbody>
+      <tr><td>SEO 外包</td><td>1月11日前完成第1–4项，<em>并且</em>到2月10日，从 Google（搜索 + 地图）来的客户数 × $175 ≥ $600/月</td><td class="kill">取消。网站交给 AI 工程师，Google 商家资料自己管理</td></tr>
+      <tr><td>Google 广告</td><td>运行30天以上，每个新客户成本 ≤ $60</td><td class="kill">暂停，改进落地页后再测一次</td></tr>
+      <tr><td>聊天机器人</td><td>每月 ≥ 8次可追踪预约，或重复的电话咨询明显减少</td><td class="kill">撤掉</td></tr>
+      <tr><td>社区通讯广告</td><td>连续2期，每期 ≥ 1个新客户</td><td class="kill">停掉该通讯</td></tr>
+      <tr><td>工作单位推广</td><td>每家单位60天内带来 ≥ 5个新客户</td><td class="kill">放弃该单位，换下一家</td></tr>
+      <tr><td>保险福利活动</td><td>11–12月 ≥ 75次预约</td><td>1月那次换一种文案和发送时间</td></tr>
+      <tr><td>物理治疗师</td><td>第2个月起每月 ≥ 40次就诊，且 ≥ 50% 是诊所的新客户</td><td class="kill">结束提成合作</td></tr>
+      <tr><td>Instagram</td><td>"您是怎么知道我们的"里有人选它</td><td>减到每月2条。保留它，是为了证明诊所真实存在</td></tr>
+      <tr><td>非高峰老年人优惠（暂未启动）</td><td colspan="2">只有到3月时，上午和周一、周二的房间使用率仍低于50%，才测试</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>给 SEO 外包的11项清单（期限1月11日）</h2>
+  <ol class="plain">
+    <li>把 Google 商家资料、Search Console 和 GA4 的所有者权限转给诊所，外包保留管理员权限。</li>
+    <li>在 vhealth.ca 安装 GA4 和 Tag Manager，在 app.vhealth.ca 加预约事件（也可以交给我们的工程师做）。</li>
+    <li>改正 schema 里的邮编（T3A 2G8 → T3B 4Z1），加上带营业时间和地图坐标的 MedicalClinic schema。</li>
+    <li>改正 Medimap（电话、邮编、营业时间、Sun Life 的错误信息、安省重复页面），让所有平台的信息和网站一致。</li>
+    <li>"Read Our Google Reviews"按钮链接到 Google 评价页面。</li>
+    <li>每个页面一个 H1 标题，写明服务和"Calgary NW"。</li>
+    <li>把 /services 改成真正的服务总览页，不要和按摩页面重复。</li>
+    <li>补齐 FAQ 里空着的部分：保险、预约、停车、首次来访、价格。</li>
+    <li>物理治疗师入职前，删掉联系页面上的"Physiotherapy"。</li>
+    <li>恢复博客：每月2篇有用的文章，题目不重复。</li>
+    <li>月度报告包括：Search Console 点击量、Google 商家资料的电话和导航次数、10个关键词在地图结果中的排名，以及可追踪的预约数。</li>
+  </ol>
+</section>
+
+<section>
+  <div class="note">
+    <p><strong>还需要确认：</strong>（1）向 RMT 和针灸监管机构确认，员工是否可以使用"Dr."称呼；（2）诊所为什么不接受 Sun Life。它是加拿大最大的保险公司之一，如果能解决，本身就是一个增长点；（3）Medimap 上的电话 825-882-8825 是不是你们的，如果不是，就删掉。</p>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

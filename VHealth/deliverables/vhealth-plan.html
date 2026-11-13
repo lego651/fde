@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-Health 90-Day Growth Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: single reading column; summary tiles, then week-by-week tables, then rules. */
+  --bg: #f6f8f8;
+  --surface: #ffffff;
+  --ink: #18282e;
+  --muted: #5a6b71;
+  --line: #d9e1e3;
+  --accent: #0e6b66;
+  --accent-soft: #e2f0ee;
+  --warn: #9a5b00;
+  --warn-soft: #fbefdc;
+  --bad: #a3322a;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111a1d; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3;
+    --line: #2a393e; --accent: #4fc2b8; --accent-soft: #163634;
+    --warn: #e5a948; --warn-soft: #33281a; --bad: #ef8a80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111a1d; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3;
+  --line: #2a393e; --accent: #4fc2b8; --accent-soft: #163634;
+  --warn: #e5a948; --warn-soft: #33281a; --bad: #ef8a80; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--font-body); }
+main { max-width: 980px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 40px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: 2.3rem; font-weight: 700; }
+h2 { font-size: 1.55rem; font-weight: 600; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0; max-width: 68ch; }
+.meta { color: var(--muted); font-size: .95rem; }
+section { display: grid; gap: 16px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: grid; gap: 4px; }
+.tile .k { font-size: .82rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.tile .v { font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tile .s { font-size: .9rem; color: var(--muted); }
+.wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+th { font-weight: 600; color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.p-eng { background: var(--accent-soft); color: var(--accent); }
+.p-you { background: var(--warn-soft); color: var(--warn); }
+.p-ven { background: var(--line); color: var(--ink); }
+.week { display: grid; gap: 10px; }
+.week h3 span { color: var(--muted); font-weight: 500; font-size: .95rem; margin-left: 8px; }
+.note { background: var(--warn-soft); border-left: 4px solid var(--warn); padding: 12px 16px; border-radius: 0 8px 8px 0; }
+.note p { max-width: none; }
+ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.kill { color: var(--bad); font-weight: 500; }
+.tbd { color: var(--warn); font-weight: 600; }
+@media (max-width: 420px) { h1 { font-size: 1.8rem; } main { padding: 24px 16px 60px; } }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>V-Health 90-Day Growth Plan</h1>
+  <p class="meta">V-Health Rehab Clinic · #110, 5403 Crowchild Trail NW, Calgary · Plan runs Nov 12, 2026 – Feb 10, 2027, with checkpoints through May 2027</p>
+  <p>Goal: double bookings from about 300 to <strong>600 a month</strong> by end of May 2027, with a growing share of new clients from English-speaking locals. Every action has a number to hit and a rule for stopping it. Nothing is judged on opinion.</p>
+</header>
+
+<section>
+  <h2>Where you are and the target</h2>
+  <div class="tiles">
+    <div class="tile"><span class="k">Bookings now</span><span class="v">~300/mo</span><span class="s">about 10 a day</span></div>
+    <div class="tile"><span class="k">Target</span><span class="v">600/mo</span><span class="s">400 by Feb 28 · 500 by Apr 30 · 600 by May 31</span></div>
+    <div class="tile"><span class="k">Empty capacity</span><span class="v">~24 hr/day</span><span class="s">4 rooms × 6 h, mostly mornings and Mon/Tue</span></div>
+    <div class="tile"><span class="k">Clinic share per visit</span><span class="v">~$44</span><span class="s">40% of ~$110 (60 min)</span></div>
+    <div class="tile"><span class="k">One new client is worth</span><span class="v">~$175</span><span class="s">at 4 visits. Confirm visits per client in the baseline report</span></div>
+    <div class="tile"><span class="k">Max cost per new client</span><span class="v">$60</span><span class="s">a channel above this is paused</span></div>
+  </div>
+  <p>Who to target: <strong>95% of clients pay with workplace insurance</strong>, so the empty mornings and Mon/Tue slots go to insured people who are free then: hospital shift workers (Foothills, Children's), remote and hybrid workers, U of C staff and grad students, and parents on leave. Seniors without coverage are not the target for now.</p>
+</section>
+
+<section>
+  <h2>Monthly budget (max $1,000)</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>Item</th><th>$/month</th><th>Judged by</th></tr></thead>
+    <tbody>
+      <tr><td>SEO vendor (60-day review)</td><td class="num">$600</td><td>Clients who found you on Google × $175 ≥ $600</td></tr>
+      <tr><td>Google Ads, about 8 km around the clinic</td><td class="num">$300</td><td>Cost per new client ≤ $60</td></tr>
+      <tr><td>Community association newsletter ads</td><td class="num">$50–100</td><td>≥ 1 new client per placement</td></tr>
+      <tr><td>Website chatbot (English + 中文)</td><td class="num">$0–50</td><td>≥ 8 tracked bookings a month</td></tr>
+      <tr><td>Instagram / Facebook / TikTok ads</td><td class="num">$0</td><td>Organic posting only, 1 post a week</td></tr>
+      <tr><td>Referral credits ($15 + $15)</td><td class="num">only on success</td><td>Cost per referred client ≈ $30</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Weekly dashboard (built by the AI engineer, reviewed Mondays)</h2>
+  <p>Data sources: booking database, GA4, Google Business Profile. Week 1 sets the baseline. The targets below are for the end of the 90 days.</p>
+  <div class="wrap"><table>
+    <thead><tr><th>#</th><th>Metric</th><th>Source</th><th>90-day target</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Total bookings per month</td><td>Booking DB</td><td class="num">≥ 400 (Feb)</td></tr>
+      <tr><td>2</td><td>New clients per month</td><td>Booking DB (first visit)</td><td><span class="tbd">baseline</span> × 1.5</td></tr>
+      <tr><td>3</td><td>Share of new clients who rebook within 60 days</td><td>Booking DB</td><td><span class="tbd">baseline</span> + 10 pts</td></tr>
+      <tr><td>4</td><td>Room use: mornings and Mon/Tue</td><td>Booking DB (hours booked / room-hours)</td><td><span class="tbd">baseline</span> + 15 pts</td></tr>
+      <tr><td>5</td><td>New clients by source</td><td>Required "How did you hear about us?" field + codes</td><td>Every channel measured</td></tr>
+      <tr><td>6</td><td>Share of new clients who chose English</td><td>Required "Preferred language" field</td><td><span class="tbd">baseline</span> + 10 pts (+20 by May)</td></tr>
+      <tr><td>7</td><td>New Google reviews (and review rate)</td><td>Google Business Profile</td><td class="num">+25/mo · 10% → 20%</td></tr>
+      <tr><td>8</td><td>Cost per new client, by channel</td><td>Spend ÷ #5</td><td class="num">≤ $60 each</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Week by week</h2>
+  <p class="meta">
+    <span class="pill p-eng">AI engineer</span>
+    <span class="pill p-you">You</span>
+    <span class="pill p-ven">SEO vendor</span>
+  </p>
+
+  <div class="week">
+    <h3>Week 1<span>Nov 12–18 · get control and set the baseline</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>Who</th><th>Action</th><th>Done when</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-you">You</span></td><td>Ask the vendor in writing for <strong>owner</strong> access to Google Business Profile, Search Console and GA4. Confirm the vhealth.ca domain and the Wix account are registered to you.</td><td>You can log in as owner to all of them</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Send the vendor the 11-point list (below) with a 60-day deadline.</td><td>Vendor confirms in writing</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Install GA4 + Google Tag Manager on vhealth.ca and app.vhealth.ca. Fire a <code>booking_completed</code> event on the booking confirmation step.</td><td>A test booking shows in GA4</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Add <strong>required</strong> fields to the booking form: "How did you hear about us?" (Google search, Google Maps, friend/family, referral code, workplace, community newsletter, Instagram/Facebook, lawyer, walk-by, other) and "Preferred language: English / 中文". Postal code optional.</td><td>Every new booking has both fields</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Pull a 6-month baseline report by month: total bookings, new vs returning, share who rebook within 60 days, bookings by service, bookings by hour and weekday, average visits per client.</td><td>The <span class="tbd">baseline</span> cells on this page are filled in</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td><strong>Benefits campaign, message 1:</strong> text or email past clients: "Your 2026 benefits reset Dec 31 — we direct bill." Use a tagged booking link (<code>?src=benefits</code>).</td><td>Message sent. Count bookings from the link</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Remove "Dr." from RMT titles. Point "Read Our Google Reviews" to your Google reviews page. Remove "Physiotherapy" from the contact page.</td><td>Live on the site</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>Week 2<span>Nov 19–25 · fix the shop window</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>Who</th><th>Action</th><th>Done when</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Rewrite the homepage headline: "Massage · Osteopathy · Acupuncture in Calgary NW — Direct billing — Open evenings &amp; weekends — Weekday morning appointments available". Add "We also speak Mandarin &amp; Cantonese" as a secondary line. Show a few Google review quotes.</td><td>Live. Before/after booking conversion rate is recorded</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Show price and duration on every service page and in booking (30 min $55 · 45 min $85 · 60 min $110). Replace the Sun Life banner with "Direct billing: Canada Life, Manulife, Blue Cross, GreenShield…" and move Sun Life into the insurance FAQ.</td><td>Live</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Simplify the booking categories (8 overlapping → about 4: Massage, Acupuncture, Osteopathy, Specialty).</td><td>Live. Track booking-start → booking-completed rate</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Automatic review request by text after the 2nd visit, with the direct Google review link.</td><td>Running. Review rate tracked weekly</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Referral program: each client gets a personal code, $15 off for them and $15 off for the friend.</td><td>Codes live. Redemptions on the dashboard</td></tr>
+        <tr><td><span class="pill p-ven">Vendor</span></td><td>Fix name, address and phone everywhere: Google Business Profile, Medimap (phone, postal code, hours, the Sun Life claim, the duplicate Ontario listing), Facebook, and the schema code (T3A 2G8 → T3B 4Z1).</td><td>Before/after screenshots of each listing</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Rename Instagram @vhealth_2025 to something like @vhealthcalgary. Post 1 a week from then on.</td><td>Renamed</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>Weeks 3–4<span>Nov 26 – Dec 9 · turn on paid and local channels</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>Who</th><th>Action</th><th>Done when</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-eng">Eng</span></td><td><strong>Benefits campaign, message 2</strong> (around Dec 1).</td><td>Sent. Target: <strong>≥ 75 bookings</strong> from the link, Nov–Dec</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Launch Google Ads at $300/mo, about 8 km radius, English. Keywords: "massage therapy near me", "RMT direct billing Calgary NW", "osteopath Calgary", "acupuncture near me", plus a separate car-accident ad group. Count conversions from the GA4 booking event.</td><td>Live with conversions recording</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Build a car-accident page: "Car accident? We handle the insurance paperwork." It is the landing page for the car-accident ads.</td><td>Live</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Workplace outreach: contact staff wellness or social committees at Foothills/AHS, Alberta Children's, U of C and 2 nearby offices. Offer a flyer for break rooms and a free 30-min "desk neck &amp; back" lunch talk. Each workplace gets its own code.</td><td>≥ 5 workplaces contacted, ≥ 1 talk booked</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Book ads in community association newsletters (Brentwood, Varsity, Dalhousie, Charleswood, Collingwood). Each gets its own code.</td><td>≥ 2 placements booked</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Give each personal-injury lawyer you work with a referral code.</td><td>Codes sent</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>Weeks 5–8<span>Dec 10 – Jan 6 · test the chatbot and recruit the physio</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>Who</th><th>Action</th><th>Done when</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Launch the chatbot (English + 中文). It answers from the FAQ and prices and links to booking. Log conversations, after-hours share and bookings started from chat.</td><td>Live. 60-day test ends around Feb 8</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Recruit a <strong>commission-only</strong> physio using an empty room, with car-accident and WCB experience. Plan for a February start.</td><td>Physio signed</td></tr>
+        <tr><td><span class="pill p-eng">Eng</span></td><td>Jan 2–5: "Your benefits just renewed" message to all clients (tagged link). Do this every January.</td><td>Sent. Count bookings</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Give the first workplace lunch talk, then aim for 1 a month.</td><td>New clients counted from that workplace's code</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="week">
+    <h3>Weeks 9–13<span>Jan 7 – Feb 10 · review and reallocate</span></h3>
+    <div class="wrap"><table>
+      <thead><tr><th>Who</th><th>Action</th><th>Done when</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill p-you">You</span></td><td><strong>Jan 11: 60-day vendor review.</strong> Are vendor items 1–4 done? If not, end the contract.</td><td>Decision made</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td><strong>Late Jan: channel review.</strong> Rank channels by cost per new client. Move budget from the worst channel to the best.</td><td>New budget split for Feb</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td>Physio starts in February and is added to the booking app and the car-accident page.</td><td>First physio bookings</td></tr>
+        <tr><td><span class="pill p-you">You</span></td><td><strong>Feb 10: 90-day review</strong> against the dashboard. Decide keep or cut for each item using the rules below.</td><td>Plan for the next 90 days written</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<section>
+  <h2>Keep or cut rules</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>Item</th><th>Keep if</th><th>Otherwise</th></tr></thead>
+    <tbody>
+      <tr><td>SEO vendor</td><td>Items 1–4 done by Jan 11, <em>and</em> by Feb 10, clients who found you on Google (Search + Maps) × $175 ≥ $600/mo</td><td class="kill">Cancel. The AI engineer takes over the site; Google Business Profile is managed in-house</td></tr>
+      <tr><td>Google Ads</td><td>Cost per new client ≤ $60 after 30+ days</td><td class="kill">Pause, fix the landing page, retest once</td></tr>
+      <tr><td>Chatbot</td><td>≥ 8 tracked bookings a month, or measurably fewer repeat phone questions</td><td class="kill">Remove</td></tr>
+      <tr><td>Community newsletter ads</td><td>≥ 1 new client per placement over 2 issues</td><td class="kill">Drop that newsletter</td></tr>
+      <tr><td>Workplace outreach</td><td>≥ 5 new clients per workplace within 60 days</td><td class="kill">Drop that workplace and try the next</td></tr>
+      <tr><td>Benefits campaign</td><td>≥ 75 bookings Nov–Dec</td><td>Change the message and timing for the January send</td></tr>
+      <tr><td>Physio</td><td>≥ 40 visits a month by month 2, with ≥ 50% new to the clinic</td><td class="kill">End the commission arrangement</td></tr>
+      <tr><td>Instagram</td><td>Any clients from it in the "How did you hear" field</td><td>Cut to 2 posts a month. It stays as proof the clinic is real</td></tr>
+      <tr><td>Off-peak senior rate (not started)</td><td colspan="2">Test only if morning and Mon/Tue room use is still under 50% in March</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>The 11-point list for the SEO vendor (deadline Jan 11)</h2>
+  <ol class="plain">
+    <li>Transfer owner access of Google Business Profile, Search Console and GA4 to the clinic. The vendor stays on as manager.</li>
+    <li>Install GA4 + Tag Manager on vhealth.ca and the booking event on app.vhealth.ca (or let our engineer do it).</li>
+    <li>Fix the schema postal code (T3A 2G8 → T3B 4Z1). Add MedicalClinic schema with hours and map coordinates.</li>
+    <li>Fix Medimap (phone, postal code, hours, the Sun Life claim, the duplicate Ontario listing). Make every listing match the website.</li>
+    <li>Point "Read Our Google Reviews" to the Google reviews page.</li>
+    <li>One H1 per page naming the service and "Calgary NW".</li>
+    <li>Make /services a real overview page, not a copy of the massage page.</li>
+    <li>Fill in the empty FAQ tabs: insurance, appointments, parking, first visit, prices.</li>
+    <li>Remove "Physiotherapy" from the contact page until the physio starts.</li>
+    <li>Restart the blog: 2 useful posts a month, no repeated topics.</li>
+    <li>Monthly report showing Search Console clicks, Google profile calls and direction requests, map-pack rank for 10 keywords, and tracked bookings.</li>
+  </ol>
+</section>
+
+<section>
+  <div class="note">
+    <p><strong>Still to check:</strong> (1) with the RMT and acupuncture regulators, whether any staff may use "Dr."; (2) why the clinic doesn't accept Sun Life, since it is one of Canada's largest insurers and fixing it could be a growth lever by itself; (3) whether 825-882-8825 (listed on Medimap) is yours, and if not, remove it.</p>
+  </div>
+</section>
+
+</main>
+</body>
+</html>

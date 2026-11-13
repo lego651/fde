@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-Health Supermarket Posters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800&family=DM+Serif+Display&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: report column with notes, then a grid of A4 posters shown at half size; print = one poster per A4 page. */
+  --bg: #eef1f1;
+  --surface: #ffffff;
+  --ink: #17262b;
+  --muted: #5b6c71;
+  --line: #d6dfe1;
+  --accent: #0e6b66;
+  --warn-soft: #fbefdc;
+  --warn: #8a5200;
+  --font-display: "Archivo Black", "Arial Black", system-ui, sans-serif;
+  --font-body: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #10181b; --surface: #172227; --ink: #e2ebed; --muted: #9bb0b5; --line: #2a3a3f; --accent: #4fc2b8; --warn-soft: #33281a; --warn: #e5a948; color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #10181b; --surface: #172227; --ink: #e2ebed; --muted: #9bb0b5; --line: #2a3a3f; --accent: #4fc2b8; --warn-soft: #33281a; --warn: #e5a948; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--font-body); }
+.report { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 36px; }
+.report h1 { font-family: var(--font-display); font-size: 2.2rem; margin: 0; line-height: 1.1; text-wrap: balance; }
+.report h2 { font-family: var(--font-display); font-size: 1.35rem; margin: 0; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+.report p { margin: 0; max-width: 70ch; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 14px; }
+.wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+th { background: var(--bg); color: var(--muted); font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
+tr:last-child td { border-bottom: 0; }
+.note { background: var(--warn-soft); border-left: 4px solid var(--warn); padding: 12px 16px; border-radius: 0 8px 8px 0; display: grid; gap: 6px; }
+ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+
+/* Gallery: A4 at 96dpi = 794 x 1123 px, previewed at 50% */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(397px, 1fr)); gap: 28px 20px; justify-items: center; }
+.card { display: grid; gap: 8px; width: 397px; max-width: 100%; }
+.card .cap { display: grid; gap: 2px; }
+.card .cap b { font-size: 1rem; }
+.card .cap span { color: var(--muted); font-size: .88rem; }
+.frame { width: 397px; height: 561.5px; overflow: hidden; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,.18); background: #fff; }
+.frame > .poster { transform: scale(.5); transform-origin: 0 0; }
+
+/* ---------- Poster base ---------- */
+.poster { width: 794px; height: 1123px; position: relative; overflow: hidden; font-family: "Archivo", "Noto Sans SC", sans-serif; color: #111; background: #fff; display: flex; flex-direction: column; color-scheme: light; }
+.poster .body { flex: 1; min-height: 0; padding: 52px 56px 0; display: flex; flex-direction: column; gap: 18px; }
+.poster .foot { padding: 20px 56px 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
+.poster .contact { display: grid; gap: 6px; font-size: 19px; line-height: 1.35; }
+.poster .phone { font-family: "Archivo Black", sans-serif; font-size: 42px; line-height: 1; letter-spacing: -.01em; }
+.poster .web { font-weight: 700; font-size: 24px; }
+.poster .zh { font-family: "Noto Sans SC", sans-serif; font-weight: 700; font-size: 18px; }
+.poster .qrbox { display: grid; gap: 6px; justify-items: center; text-align: center; font-size: 15px; font-weight: 700; }
+.poster .qr { width: 148px; height: 148px; background: #fff; padding: 10px; border-radius: 6px; }
+.poster .qr img, .poster .qr canvas { width: 128px !important; height: 128px !important; display: block; }
+.poster .code { font-size: 14px; font-weight: 600; opacity: .85; }
+.poster .fine { font-size: 13px; line-height: 1.4; opacity: .8; padding: 0 56px 18px; }
+.poster .brand { font-family: "Archivo Black", sans-serif; font-size: 26px; letter-spacing: .02em; }
+.poster .brand small { font-family: "Archivo", sans-serif; font-weight: 600; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; display: block; opacity: .75; }
+.poster h2 { margin: 0; }
+
+/* P1 benefits expire */
+.p1 { background: #13233f; color: #fff; }
+.p1 .eyebrow { color: #ffd23f; font-weight: 800; font-size: 24px; letter-spacing: .12em; text-transform: uppercase; }
+.p1 h2 { font-family: "Archivo Black", sans-serif; font-size: 74px; line-height: .95; letter-spacing: -.02em; }
+.p1 .cal { flex: none; align-self: flex-start; width: 230px; border-radius: 18px; overflow: hidden; background: #fff; color: #13233f; text-align: center; box-shadow: 0 10px 0 #0b1629; }
+.p1 .cal .m { background: #e5484d; color: #fff; font-family: "Archivo Black"; font-size: 34px; padding: 8px 0; letter-spacing: .1em; }
+.p1 .cal .d { font-family: "Archivo Black"; font-size: 116px; line-height: 1.05; }
+.p1 .row { display: flex; gap: 36px; align-items: center; }
+.p1 .lead { font-size: 25px; line-height: 1.3; font-weight: 600; }
+.p1 .lead b { color: #ffd23f; }
+.p1 .svc { font-size: 23px; font-weight: 700; border-top: 2px solid rgba(255,255,255,.25); padding-top: 22px; }
+.p1 .foot { background: #0b1629; }
+
+/* P2 direct billing */
+.p2 { background: #ffffff; color: #0d2a2e; }
+.p2 .topbar { height: 26px; background: #0e7c74; }
+.p2 h2 { font-family: "Archivo Black"; font-size: 64px; line-height: 1; letter-spacing: -.02em; color: #0e7c74; }
+.p2 h2 span { color: #0d2a2e; display: block; }
+.p2 .lead { font-size: 25px; line-height: 1.35; font-weight: 500; }
+.p2 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.p2 .step { background: #e4f3f1; border-radius: 14px; padding: 18px; display: grid; gap: 6px; }
+.p2 .step b { font-family: "Archivo Black"; font-size: 38px; color: #0e7c74; line-height: 1; }
+.p2 .step span { font-size: 19px; font-weight: 600; line-height: 1.25; }
+.p2 .ins { display: flex; flex-wrap: wrap; gap: 10px; }
+.p2 .ins span { border: 2px solid #0d2a2e; border-radius: 999px; padding: 5px 14px; font-weight: 700; font-size: 16px; }
+.p2 .svc { font-size: 21px; font-weight: 700; }
+.p2 .foot { border-top: 3px solid #0d2a2e; margin: 0 56px; padding: 18px 0 28px; }
+
+/* P3 local neighbour */
+.p3 { background: #f3efe2; color: #23331f; }
+.p3 .hello { font-family: "DM Serif Display", Georgia, serif; font-size: 96px; line-height: .9; color: #2f6b3a; }
+.p3 h2 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.05; }
+.p3 .map { position: relative; flex: none; height: 240px; border-radius: 20px; background: #dfe8cf; overflow: hidden; }
+.p3 .map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.p3 .lead { font-size: 23px; line-height: 1.35; font-weight: 500; }
+.p3 .tags { display: flex; gap: 12px; flex-wrap: wrap; }
+.p3 .tags span { background: #2f6b3a; color: #fff; border-radius: 999px; padding: 8px 18px; font-weight: 700; font-size: 20px; }
+.p3 .foot { background: #2f6b3a; color: #fff; }
+
+/* P4 offer coupon */
+.p4 { background: #ff6b4a; color: #1b0d08; }
+.p4 h2 { font-family: "Archivo Black"; font-size: 52px; line-height: 1; color: #fff; }
+.p4 .coupon { background: #fff8ef; border: 5px dashed #1b0d08; border-radius: 24px; padding: 24px 36px; display: grid; gap: 6px; text-align: center; }
+.p4 .coupon .big { font-family: "Archivo Black"; font-size: 150px; line-height: .9; letter-spacing: -.04em; color: #ff6b4a; }
+.p4 .coupon .off { font-family: "Archivo Black"; font-size: 44px; line-height: 1; }
+.p4 .coupon .sub { font-size: 26px; font-weight: 600; }
+.p4 .coupon .cc { margin-top: 10px; justify-self: center; background: #1b0d08; color: #fff; font-family: "Archivo Black"; font-size: 32px; padding: 8px 26px; border-radius: 10px; letter-spacing: .1em; }
+.p4 .lead { font-size: 23px; font-weight: 700; color: #1b0d08; }
+.p4 .foot { background: #1b0d08; color: #fff; }
+.p4 .fine { color: #1b0d08; }
+
+/* P5 relief */
+.p5 { background: #f6f7fb; color: #1d2340; }
+.p5 h2 { font-family: "Archivo Black"; font-size: 62px; line-height: 1; color: #3b4cca; }
+.p5 .list { display: grid; gap: 8px; }
+.p5 .item { display: flex; gap: 18px; align-items: center; font-size: 29px; font-weight: 800; }
+.p5 .box { width: 38px; height: 38px; border: 5px solid #1d2340; border-radius: 8px; flex: none; position: relative; }
+.p5 .box::after { content: ""; position: absolute; left: 8px; top: -5px; width: 12px; height: 24px; border: solid #3b4cca; border-width: 0 7px 7px 0; transform: rotate(40deg); }
+.p5 .lead { font-size: 23px; line-height: 1.35; font-weight: 500; }
+.p5 .svc { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.p5 .svc div { background: #3b4cca; color: #fff; border-radius: 14px; padding: 12px; font-weight: 800; font-size: 20px; text-align: center; }
+.p5 .foot { background: #1d2340; color: #fff; }
+
+/* P6 team */
+.p6 { background: #0f1f1c; color: #f2efe6; }
+.p6 .num { font-family: "DM Serif Display", Georgia, serif; font-size: 190px; line-height: .8; color: #c9a45c; }
+.p6 h2 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.05; }
+.p6 .creds { display: grid; gap: 0; border-top: 1px solid rgba(242,239,230,.3); }
+.p6 .creds div { display: flex; justify-content: space-between; gap: 20px; padding: 11px 0; border-bottom: 1px solid rgba(242,239,230,.3); font-size: 20px; }
+.p6 .creds b { color: #c9a45c; font-weight: 700; }
+.p6 .lead { font-size: 22px; line-height: 1.4; }
+.p6 .foot { border-top: 2px solid #c9a45c; margin: 0 56px; padding: 18px 0 28px; }
+
+/* P7 menu */
+.p7 { background: #fffdf8; color: #2a1f14; }
+.p7 h2 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; font-size: 60px; line-height: 1; text-align: center; }
+.p7 .rule { height: 3px; background: #2a1f14; }
+.p7 .menu { display: grid; gap: 14px; }
+.p7 .dish { display: grid; gap: 4px; }
+.p7 .dish .t { display: flex; align-items: baseline; gap: 12px; font-family: "Archivo Black"; font-size: 30px; }
+.p7 .dish .t i { flex: 1; border-bottom: 4px dotted #2a1f14; transform: translateY(-8px); }
+.p7 .dish .d { font-size: 19px; line-height: 1.35; color: #5a4a38; }
+.p7 .price { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; text-align: center; }
+.p7 .price div { border: 3px solid #2a1f14; border-radius: 12px; padding: 8px; font-weight: 700; font-size: 18px; }
+.p7 .price b { display: block; font-family: "Archivo Black"; font-size: 34px; }
+.p7 .bill { text-align: center; font-size: 21px; font-weight: 800; background: #2a1f14; color: #fffdf8; padding: 12px; border-radius: 10px; }
+
+/* P8 tear-off */
+.p8 { background: #ffffff; color: #111; }
+.p8 .body { padding-bottom: 20px; }
+.p8 .tape { position: absolute; top: 20px; left: 50%; width: 180px; height: 44px; margin-left: -90px; background: rgba(255,214,90,.75); transform: rotate(-3deg); }
+.p8 h2 { font-family: "Archivo Black"; font-size: 64px; line-height: 1; }
+.p8 h2 u { text-decoration-color: #ffbf1f; text-decoration-thickness: 14px; text-underline-offset: 4px; }
+.p8 .lead { font-size: 25px; line-height: 1.35; font-weight: 500; }
+.p8 .bul { font-size: 25px; font-weight: 800; display: grid; gap: 8px; }
+.p8 .bul span::before { content: "→ "; color: #e0a100; }
+.p8 .mid { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
+.p8 .tabs { display: grid; grid-template-columns: repeat(8, 1fr); border-top: 3px dashed #111; height: 220px; flex: none; }
+.p8 .tab { border-right: 3px dashed #111; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 800; font-size: 19px; line-height: 1.1; padding: 8px 0; text-align: center; }
+.p8 .tab:first-child { border-right: 0; }
+.p8 .tab b { font-family: "Archivo Black"; font-size: 22px; }
+
+/* P9 mornings */
+.p9 { background: linear-gradient(#ffe7a8 0 46%, #ffffff 46%); color: #3a2400; }
+.p9 .sun { position: absolute; right: -80px; top: -80px; width: 380px; height: 380px; border-radius: 50%; background: #ffb21a; }
+.p9 .eyebrow { font-weight: 800; font-size: 24px; letter-spacing: .12em; text-transform: uppercase; position: relative; }
+.p9 h2 { font-family: "Archivo Black"; font-size: 70px; line-height: .98; position: relative; letter-spacing: -.02em; }
+.p9 .who { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.p9 .who div { background: #3a2400; color: #fff; border-radius: 14px; padding: 12px 16px; font-weight: 700; font-size: 20px; }
+.p9 .hours { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.p9 .hours div { border: 3px solid #3a2400; border-radius: 14px; padding: 10px 16px; font-size: 19px; font-weight: 600; }
+.p9 .hours b { display: block; font-family: "Archivo Black"; font-size: 25px; }
+.p9 .lead { font-size: 22px; font-weight: 600; }
+.p9 .foot { background: #3a2400; color: #fff; }
+
+/* P10 car accident */
+.p10 { background: #111; color: #fff; }
+.p10 .stripe { height: 46px; background: repeating-linear-gradient(-45deg, #ffd000 0 34px, #111 34px 68px); }
+.p10 h2 { font-family: "Archivo Black"; font-size: 96px; line-height: .92; color: #ffd000; letter-spacing: -.02em; }
+.p10 .lead { font-size: 29px; line-height: 1.3; font-weight: 700; }
+.p10 .checks { display: grid; gap: 14px; }
+.p10 .checks div { display: flex; gap: 16px; align-items: center; font-size: 26px; font-weight: 700; }
+.p10 .checks div::before { content: ""; width: 34px; height: 34px; border-radius: 50%; background: #ffd000; flex: none; }
+.p10 .svc { font-size: 24px; font-weight: 600; opacity: .9; }
+.p10 .foot { border-top: 3px solid #ffd000; margin: 0 56px; padding: 18px 0 28px; }
+
+/* Print: real A4, one poster per page */
+@page { size: A4; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .report > *:not(.gallery) { display: none !important; }
+  .report { padding: 0; max-width: none; display: block; }
+  .gallery { display: block; }
+  .card { width: auto; display: block; break-after: page; }
+  .card .cap { display: none; }
+  .frame { width: 210mm; height: 297mm; box-shadow: none; border-radius: 0; }
+  .frame > .poster { transform: none; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (max-width: 440px) {
+  .card, .frame { width: 330px; }
+  .frame { height: 467px; }
+  .frame > .poster { transform: scale(.4156); }
+}
+</style>
+</head>
+<body>
+<div class="report">
+
+<header style="display:grid;gap:10px">
+  <h1>V-Health Supermarket Posters</h1>
+  <p class="meta">10 A4 designs for supermarket community boards · Prepared Nov 12, 2026</p>
+  <p>Each poster leads with a different reason to visit. All of them repeat the same core facts: direct billing, benefits that reset Dec 31, massage, osteopathy and acupuncture, and an experienced team. Every poster has <strong>its own QR code and tracking code</strong>. The booking data will show which one works, so you don't have to guess.</p>
+</header>
+
+<section>
+  <h2>How to tell which poster works</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>Step</th><th>What to do</th></tr></thead>
+    <tbody>
+      <tr><td>1. Choose 3</td><td>Start with <b>V1 (benefits expire)</b>, <b>V2 (direct billing)</b> and <b>V4 (first-visit offer)</b>. They fit the December deadline best.</td></tr>
+      <tr><td>2. One per store</td><td>Put up a different version at each supermarket (e.g. V1 at store A, V2 at store B, V4 at store C). Write down the store and the date it went up.</td></tr>
+      <tr><td>3. Swap after 2 weeks</td><td>Rotate the versions between stores, so a busy store doesn't make one poster look better than it is.</td></tr>
+      <tr><td>4. Count</td><td>Each QR code opens the booking page with <code>utm_campaign=poster-vN</code> (shows up in GA4). Phone callers are asked "How did you hear about us?" and given the code on the poster (P1–P10). The AI engineer adds a <b>"Poster"</b> option to the booking-form dropdown.</td></tr>
+      <tr><td>5. Decide</td><td>After 4 weeks, keep the poster with the most new clients per store-week. Replace the rest with new versions. If posters bring fewer than 2 new clients a month in total, stop printing.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Before printing</h2>
+  <div class="note">
+    <ul class="plain">
+      <li><b>Ask the store first.</b> Most supermarket boards allow community notices up to letter or A4 size. Some ask for a date stamp. Some don't allow businesses at all.</li>
+      <li><b>Discount (V4):</b> if a client uses insurance, bill the insurer the discounted price, not the full price. Billing the full amount while giving a discount can break insurer rules.</li>
+      <li><b>Health claims:</b> the wording says "may help" and makes no promises. RMT and acupuncture regulators have advertising standards. Check V5 and V6 against them before printing.</li>
+      <li><b>No "Dr." on any poster.</b> V6 says "medically trained" and lists registered titles only.</li>
+      <li><b>Before printing, confirm:</b> the insurer list, the hours (Mon–Fri 9:30–8:30, Sat–Sun 9:30–6) and the prices (30 min $55 · 45 min $85 · 60 min $110).</li>
+      <li><b>How to print:</b> open the local file <code>/Users/jason/TEMP/vhealth-posters.html</code> in Chrome → Print → Paper A4, Margins <i>None</i>, turn on <i>Background graphics</i>. You get one poster per page. Scan each QR code with your phone before putting it up.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>The 10 designs</h2>
+  <div class="gallery">
+
+    <!-- V1 -->
+    <div class="card">
+      <div class="cap"><b>V1 · Use it or lose it</b><span>Angle: year-end urgency. Your best poster for November–December.</span></div>
+      <div class="frame"><div class="poster p1">
+        <div class="body">
+          <div class="brand">V-HEALTH<small>Rehab Clinic · Calgary NW</small></div>
+          <div class="eyebrow">Benefits reminder</div>
+          <h2>Your massage benefits expire soon.</h2>
+          <div class="row">
+            <div class="cal"><div class="m">DEC</div><div class="d">31</div></div>
+            <p class="lead" style="margin:0">Most workplace plans <b>reset on January 1</b>. Unused coverage doesn't roll over.<br><br>Book now. <b>We bill your insurer directly.</b></p>
+          </div>
+          <div class="svc">Massage Therapy · Osteopathy · Acupuncture</div>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW</span><span>Open 7 days · weekdays until 8:30 pm</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="1"></div><span>Scan to book</span><span class="code">Code P1</span></div>
+        </div>
+        <div class="fine" style="background:#0b1629;color:#fff;padding-top:0">Coverage depends on your plan. Check your plan's reset date.</div>
+      </div></div>
+    </div>
+
+    <!-- V2 -->
+    <div class="card">
+      <div class="cap"><b>V2 · We bill your insurance</b><span>Angle: no paperwork. Shows the three steps and the insurers.</span></div>
+      <div class="frame"><div class="poster p2">
+        <div class="topbar"></div>
+        <div class="body">
+          <div class="brand" style="color:#0e7c74">V-HEALTH<small style="color:#0d2a2e">Rehab Clinic · Calgary NW</small></div>
+          <h2>We bill your insurance.<span>You just show up.</span></h2>
+          <p class="lead">Direct billing for massage, acupuncture and osteopathy. No claim forms, no waiting for a refund.</p>
+          <div class="steps">
+            <div class="step"><b>1</b><span>Book online or call</span></div>
+            <div class="step"><b>2</b><span>Bring your insurance card</span></div>
+            <div class="step"><b>3</b><span>We bill your insurer directly</span></div>
+          </div>
+          <div class="ins"><span>Canada Life</span><span>Manulife</span><span>Alberta Blue Cross</span><span>GreenShield</span><span>Desjardins</span><span>iA</span><span>TELUS Health</span><span>Co-operators</span><span>Maximum Benefit</span></div>
+          <div class="svc">2026 benefits reset Dec 31. Use them before they're gone.</div>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW · Open 7 days</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="2"></div><span>Scan to book</span><span class="code">Code P2</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- V3 -->
+    <div class="card">
+      <div class="cap"><b>V3 · Hi, neighbour</b><span>Angle: local and friendly. The clinic close to home.</span></div>
+      <div class="frame"><div class="poster p3">
+        <div class="body">
+          <div class="hello">Hi, neighbour.</div>
+          <h2>Your clinic in Calgary NW, right on Crowchild Trail.</h2>
+          <div class="map">
+            <svg viewBox="0 0 666 300" aria-hidden="true">
+              <path d="M-20 210 C 140 170, 260 250, 420 190 S 640 120, 700 140" stroke="#fff" stroke-width="34" fill="none"/>
+              <path d="M-20 210 C 140 170, 260 250, 420 190 S 640 120, 700 140" stroke="#f3c64d" stroke-width="6" fill="none" stroke-dasharray="18 14"/>
+              <path d="M180 -20 L 240 320" stroke="#fff" stroke-width="20"/>
+              <path d="M500 -20 L 470 320" stroke="#fff" stroke-width="20"/>
+              <path d="M-20 70 L 700 40" stroke="#fff" stroke-width="16"/>
+              <text x="560" y="128" font-family="Archivo" font-weight="800" font-size="20" fill="#5c6b4e">Crowchild Tr NW</text>
+              <circle cx="345" cy="148" r="64" fill="#2f6b3a" opacity=".15"/>
+              <path d="M345 70 c-34 0 -58 26 -58 58 c0 44 58 98 58 98 s58 -54 58 -98 c0 -32 -24 -58 -58 -58z" fill="#2f6b3a"/>
+              <circle cx="345" cy="128" r="22" fill="#f3efe2"/>
+              <text x="420" y="250" font-family="Archivo" font-weight="800" font-size="24" fill="#23331f">V-Health · #110</text>
+            </svg>
+          </div>
+          <p class="lead" style="margin:0">Massage, osteopathy and acupuncture close to home. Direct billing to most insurers. Open evenings and weekends.</p>
+          <div class="tags"><span>Massage</span><span>Osteopathy</span><span>Acupuncture</span><span>Direct billing</span></div>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="3"></div><span>Scan to book</span><span class="code">Code P3</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- V4 -->
+    <div class="card">
+      <div class="cap"><b>V4 · First-visit offer</b><span>Angle: discount. A coupon look grabs attention at a supermarket.</span></div>
+      <div class="frame"><div class="poster p4">
+        <div class="body">
+          <div class="brand" style="color:#fff">V-HEALTH<small style="color:#1b0d08">Rehab Clinic · Calgary NW</small></div>
+          <h2>New to V-Health? Save on your first visit.</h2>
+          <div class="coupon">
+            <div class="big">$15</div>
+            <div class="off">OFF YOUR FIRST VISIT</div>
+            <div class="sub">Massage · Osteopathy · Acupuncture</div>
+            <div class="cc">CODE P4</div>
+          </div>
+          <p class="lead" style="margin:0">Plus we bill your insurer directly, and your 2026 benefits reset Dec 31.</p>
+        </div>
+        <div class="fine">New clients only, one per person. Mention code P4 when booking. The discount comes off the visit price; insurance is billed for the discounted amount. Valid until Dec 31, 2026.</div>
+        <div class="foot">
+          <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW · Open 7 days</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="4"></div><span>Scan to book</span><span class="code">Code P4</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- V5 -->
+    <div class="card">
+      <div class="cap"><b>V5 · Feel better</b><span>Angle: treatment results. Opens with the pain people already have.</span></div>
+      <div class="frame"><div class="poster p5">
+        <div class="body">
+          <div class="brand" style="color:#3b4cca">V-HEALTH<small style="color:#1d2340">Rehab Clinic · Calgary NW</small></div>
+          <h2>Sound familiar?</h2>
+          <div class="list">
+            <div class="item"><span class="box"></span>Stiff neck from the desk</div>
+            <div class="item"><span class="box"></span>Lower back pain</div>
+            <div class="item"><span class="box"></span>Tension headaches</div>
+            <div class="item"><span class="box"></span>Sore shoulder or knee</div>
+            <div class="item"><span class="box"></span>Poor sleep from stress</div>
+          </div>
+          <p class="lead" style="margin:0">Hands-on treatment that may help ease pain, loosen tight muscles and get you moving again. Each visit starts with an assessment and a plan made for you.</p>
+          <div class="svc"><div>Massage</div><div>Osteopathy</div><div>Acupuncture</div></div>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca · Direct billing</span><span>#110, 5403 Crowchild Trail NW</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="5"></div><span>Scan to book</span><span class="code">Code P5</span></div>
+        </div>
+        <div class="fine" style="background:#1d2340;color:#fff;padding-top:0">Results vary. Not a replacement for medical care. See your doctor for new or severe symptoms.</div>
+      </div></div>
+    </div>
+
+    <!-- V6 -->
+    <div class="card">
+      <div class="cap"><b>V6 · Experienced team</b><span>Angle: trust and credentials. Medical training without using the "Dr." title.</span></div>
+      <div class="frame"><div class="poster p6">
+        <div class="body">
+          <div class="brand" style="color:#c9a45c">V-HEALTH<small style="color:#f2efe6">Rehab Clinic · Calgary NW</small></div>
+          <div class="num">12</div>
+          <h2>experienced practitioners, one medically trained team.</h2>
+          <div class="creds">
+            <div><span>Osteopathic manual therapy</span><b>Medical-degree background</b></div>
+            <div><span>Acupuncture</span><b>Registered Acupuncturists</b></div>
+            <div><span>Massage therapy</span><b>Registered Massage Therapists</b></div>
+          </div>
+          <p class="lead" style="margin:0">A broad clinical background in one team. You get an assessment, a clear plan and the right practitioner for your problem. Direct billing to most insurers.</p>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone" style="color:#c9a45c">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW · Open 7 days</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="6"></div><span>Scan to book</span><span class="code">Code P6</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- V7 -->
+    <div class="card">
+      <div class="cap"><b>V7 · The menu</b><span>Angle: clear and transparent. Explains each service and shows prices.</span></div>
+      <div class="frame"><div class="poster p7">
+        <div class="body">
+          <div class="brand" style="text-align:center">V-HEALTH<small>Rehab Clinic · Calgary NW</small></div>
+          <h2>What we do</h2>
+          <div class="rule"></div>
+          <div class="menu">
+            <div class="dish"><div class="t">Massage Therapy<i></i></div><div class="d">Deep tissue, relaxation, lymphatic drainage, cupping. For tight muscles, stress and recovery.</div></div>
+            <div class="dish"><div class="t">Osteopathy<i></i></div><div class="d">Gentle hands-on therapy for joints, posture and long-term aches.</div></div>
+            <div class="dish"><div class="t">Acupuncture<i></i></div><div class="d">Fine needles to help with pain, tension and stress.</div></div>
+          </div>
+          <div class="price"><div><b>$55</b>30 min</div><div><b>$85</b>45 min</div><div><b>$110</b>60 min</div></div>
+          <div class="bill">Direct billing · Benefits reset Dec 31</div>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW · Open 7 days</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="7"></div><span>Scan to book</span><span class="code">Code P7</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- V8 -->
+    <div class="card">
+      <div class="cap"><b>V8 · Tear-off tabs</b><span>Angle: classic community-board style. People tear off a tab with the phone number.</span></div>
+      <div class="frame"><div class="poster p8">
+        <div class="tape"></div>
+        <div class="body">
+          <div class="brand">V-HEALTH<small>Rehab Clinic · Calgary NW</small></div>
+          <h2>Got <u>benefits</u>? Get a massage.</h2>
+          <p class="lead" style="margin:0">Your workplace plan probably covers it, and 2026 coverage resets Dec 31.</p>
+          <div class="bul"><span>Direct billing, no claim forms</span><span>Massage · Osteopathy · Acupuncture</span><span>Open 7 days, evenings too</span></div>
+          <div class="mid">
+            <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca</span><span class="zh">我们也讲中文</span></div>
+            <div class="qrbox"><div class="qr" data-v="8"></div><span class="code">Code P8</span></div>
+          </div>
+        </div>
+        <div class="tabs">
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+          <div class="tab"><b>403-966-6386</b>V-Health · P8</div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- V9 -->
+    <div class="card">
+      <div class="cap"><b>V9 · Free mornings</b><span>Angle: fill the empty mornings and Mon/Tue slots. For shift workers and remote workers.</span></div>
+      <div class="frame"><div class="poster p9">
+        <div class="sun"></div>
+        <div class="body">
+          <div class="brand" style="position:relative">V-HEALTH<small>Rehab Clinic · Calgary NW</small></div>
+          <div class="eyebrow">Weekday mornings</div>
+          <h2>Free in the morning? So are we.</h2>
+          <div class="who">
+            <div>Nurses &amp; shift workers</div>
+            <div>Remote &amp; hybrid workers</div>
+            <div>Parents on leave</div>
+            <div>University staff &amp; students</div>
+          </div>
+          <p class="lead" style="margin:0">Same-week morning appointments, often same-day on Mondays and Tuesdays. Direct billing to most workplace plans.</p>
+          <div class="hours"><div><b>Mon–Fri</b>9:30 am – 8:30 pm</div><div><b>Sat–Sun</b>9:30 am – 6:00 pm</div></div>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="9"></div><span>Scan to book</span><span class="code">Code P9</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- V10 -->
+    <div class="card">
+      <div class="cap"><b>V10 · Car accident</b><span>Angle: MVA recovery. High value, because each client comes for many visits.</span></div>
+      <div class="frame"><div class="poster p10">
+        <div class="stripe"></div>
+        <div class="body">
+          <div class="brand" style="color:#ffd000">V-HEALTH<small style="color:#fff">Rehab Clinic · Calgary NW</small></div>
+          <h2>Car accident?</h2>
+          <p class="lead" style="margin:0">Treatment for sprains, whiplash and back pain is often covered by auto insurance. We help with the paperwork.</p>
+          <div class="checks">
+            <div>Appointments often this week</div>
+            <div>We work with your auto insurer</div>
+            <div>Evening &amp; weekend appointments</div>
+          </div>
+          <div class="svc">Massage Therapy · Osteopathy · Acupuncture</div>
+        </div>
+        <div class="foot">
+          <div class="contact"><span class="phone" style="color:#ffd000">403-966-6386</span><span class="web">vhealth.ca</span><span>#110, 5403 Crowchild Trail NW · Open 7 days</span><span class="zh">我们也讲中文</span></div>
+          <div class="qrbox"><div class="qr" data-v="10"></div><span>Scan to book</span><span class="code">Code P10</span></div>
+        </div>
+        <div class="fine" style="padding-top:0">Coverage depends on your claim and insurer.</div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Quick comparison</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>Version</th><th>Main angle</th><th>Best for</th><th>Use when</th></tr></thead>
+    <tbody>
+      <tr><td>V1</td><td>Benefits expire Dec 31</td><td>Anyone with a workplace plan</td><td>Now – Dec 31</td></tr>
+      <tr><td>V2</td><td>Direct billing</td><td>People put off by claim paperwork</td><td>All year</td></tr>
+      <tr><td>V3</td><td>Local neighbour</td><td>Nearby residents</td><td>All year</td></tr>
+      <tr><td>V4</td><td>$15 first-visit offer</td><td>Price-sensitive first-timers</td><td>Now – Dec 31, then test again</td></tr>
+      <tr><td>V5</td><td>Treatment results</td><td>People already in pain</td><td>All year</td></tr>
+      <tr><td>V6</td><td>Experienced team</td><td>Careful, comparison shoppers</td><td>All year</td></tr>
+      <tr><td>V7</td><td>Services + prices</td><td>People who want the facts</td><td>All year</td></tr>
+      <tr><td>V8</td><td>Tear-off tabs</td><td>Community boards</td><td>All year</td></tr>
+      <tr><td>V9</td><td>Weekday mornings</td><td>Shift and remote workers (fills empty slots)</td><td>All year, best Jan–Mar</td></tr>
+      <tr><td>V10</td><td>Car accident</td><td>Recent MVA</td><td>All year, winter driving season</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function () {
+  var boxes = document.querySelectorAll('.qr[data-v]');
+  for (var i = 0; i < boxes.length; i++) {
+    var v = boxes[i].getAttribute('data-v');
+    var url = 'https://app.vhealth.ca/booking?utm_source=poster&utm_medium=print&utm_campaign=poster-v' + v;
+    try {
+      new QRCode(boxes[i], { text: url, width: 128, height: 128, colorDark: '#000000', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+    } catch (e) {
+      boxes[i].textContent = 'QR: app.vhealth.ca/booking';
+      boxes[i].style.cssText += 'font-size:14px;color:#000;display:flex;align-items:center;text-align:center';
+    }
+  }
+})();
+</script>
+</body>
+</html>
