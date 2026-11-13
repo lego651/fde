@@ -1,0 +1,33 @@
+{
+  "client": { "slug": "vhealth", "name": "VHealth", "logo": "assets/logo.jpg", "logo_alt": "V-Health Rehab Clinic logo" },
+  "categories": [
+    { "key": "grow", "name": "增长分析", "color": "#4b3fb5" },
+    { "key": "desk", "name": "前台运营", "color": "#1d5fa8" },
+    { "key": "post", "name": "海报", "color": "#b84a62" },
+    { "key": "diag", "name": "诊断 & 访谈", "color": "#c9772e" },
+    { "key": "plan", "name": "计划 & OKR", "color": "#10715f" }
+  ],
+  "docs": [
+    { "cat": "grow", "title": "转介绍计划分析 + Top 3", "type": "HTML", "date": "2026-11-13", "status": "wip", "path": "deliverables/referral-plan-analysis.html", "featured": true },
+    { "cat": "grow", "title": "集章卡 / 积分分析 + Top 3", "type": "HTML", "date": "2026-11-13", "status": "wip", "path": "deliverables/loyalty-analysis.html", "featured": true },
+    { "cat": "desk", "title": "每日新客户来源登记表", "type": "PDF", "date": "2026-11-13", "status": "use", "path": "deliverables/VHealth-New-Client-Source-Log.pdf", "featured": true },
+    { "cat": "desk", "title": "客户来源记录 · 3个方案", "type": "HTML", "date": "2026-11-13", "status": "done", "path": "deliverables/front-desk-source-tracking.html", "featured": true },
+    { "cat": "post", "title": "最终海报 A2 · A4 打印版", "type": "PDF", "date": "2026-11-12", "status": "done", "path": "deliverables/V-Health-Poster-A2-A4.pdf", "featured": true },
+    { "cat": "post", "title": "海报 V1 · 9种配色", "type": "HTML", "date": "2026-11-12", "status": "done", "path": "deliverables/vhealth-poster-v1-colours.html" },
+    { "cat": "post", "title": "海报 V1 · 6种排版", "type": "HTML", "date": "2026-11-12", "status": "done", "path": "deliverables/vhealth-poster-v1.html" },
+    { "cat": "post", "title": "海报 · 10个角度初稿", "type": "HTML", "date": "2026-11-12", "status": "done", "path": "deliverables/vhealth-posters.html" },
+    { "cat": "diag", "title": "访谈详情 Q1–Q32", "type": "MD", "date": "2026-11-12", "status": "done", "path": "interview-qa-zh.html" },
+    { "cat": "diag", "title": "问题优先级分析", "type": "MD", "date": "2026-11-12", "status": "done", "path": "priority-analysis.html" },
+    { "cat": "diag", "title": "客户档案 · VHealth", "type": "MD", "date": "2026-11-12", "status": "done", "path": "client-profile-vhealth.html" },
+    { "cat": "plan", "title": "90天行动计划", "type": "MD", "date": "2026-11-12", "status": "done", "path": "plan-90-day.html" },
+    { "cat": "plan", "title": "6个月 OKR", "type": "MD", "date": "2026-11-12", "status": "done", "path": "okr-6-month.html" },
+    { "cat": "plan", "title": "90天计划 · 中文版", "type": "HTML", "date": "2026-11-12", "status": "done", "path": "deliverables/vhealth-plan-zh.html" },
+    { "cat": "plan", "title": "90天计划 · English", "type": "HTML", "date": "2026-11-12", "status": "done", "path": "deliverables/vhealth-plan.html" },
+    { "cat": "plan", "title": "给老板看的版本（大图）", "type": "HTML", "date": "2026-11-12", "status": "done", "path": "deliverables/vhealth-boss.html" },
+    { "cat": "plan", "title": "6个月 OKR · 图表版", "type": "HTML", "date": "2026-11-12", "status": "done", "path": "deliverables/vhealth-okr.html" }
+  ],
+  "ignore": {
+    "deliverables/new-client-source-log.html": "PDF 登记表的 HTML 源文件",
+    "deliverables/vhealth-poster-A2.html": "最终海报 PDF 的 HTML 源文件"
+  }
+}

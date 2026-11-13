@@ -5,3 +5,6 @@ exclude:
   - research
   - marketing
   - README.md
+  - CLAUDE.md
+  - scripts
+  - "*-preview.html"
