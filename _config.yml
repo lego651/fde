@@ -1,0 +1,7 @@
+title: FDE
+description: Client work
+exclude:
+  - strategy
+  - research
+  - marketing
+  - README.md

@@ -1,0 +1,106 @@
+---
+layout: null
+permalink: /vhealth/
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VHealth 项目时间线</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: header with logo, a vertical timeline, then a deliverables list. */
+  --bg: #f4f7f6; --surface: #ffffff; --ink: #17262b; --muted: #5b6c71; --line: #d9e3e1; --accent: #1a8f7c; --accent-soft: #e2f2ef;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #10181b; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3; --line: #2a393e; --accent: #4fc2b8; --accent-soft: #163634; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--font); }
+main { max-width: 760px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 40px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.back { font-size: .92rem; text-decoration: none; }
+.head { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.head .logo { background: #fff; border-radius: 12px; padding: 10px 14px; border: 1px solid var(--line); }
+.head .logo img { height: 64px; width: auto; display: block; }
+h1 { margin: 0; font-size: 1.9rem; font-weight: 800; line-height: 1.15; }
+h2 { margin: 0; font-size: 1.25rem; font-weight: 800; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+.sub { color: var(--muted); margin: 4px 0 0; }
+section { display: grid; gap: 18px; }
+
+.timeline { list-style: none; margin: 0; padding: 0 0 0 28px; position: relative; display: grid; gap: 24px; }
+.timeline::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+.event { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 10px; }
+.event::before { content: ""; position: absolute; left: -27px; top: 22px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--bg); }
+.event .date { font-size: .85rem; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+.event h3 { margin: 0; font-size: 1.2rem; font-weight: 800; }
+.event p { margin: 0; }
+.event ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.event .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+.btn { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; font-size: .92rem; }
+.btn.ghost { background: var(--accent-soft); color: var(--accent); }
+.event.next { border-style: dashed; background: transparent; }
+.event.next::before { background: var(--bg); border: 2px solid var(--accent); box-shadow: none; }
+
+.docs { display: grid; gap: 12px; }
+a.doc { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: inherit; }
+a.doc:hover { border-color: var(--accent); }
+a.doc b { font-size: 1.05rem; }
+a.doc span { color: var(--muted); font-size: .92rem; grid-column: 1; }
+a.doc i { font-style: normal; color: var(--accent); font-weight: 600; grid-row: 1 / span 2; grid-column: 2; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← 所有客户</a>
+
+  <header class="head">
+    <div class="logo"><img src="../VHealth/assets/logo.jpg" alt="V-Health Rehab Clinic logo"></div>
+    <div>
+      <h1>VHealth</h1>
+      <p class="sub">V-Health Rehab Clinic · Calgary NW · 4间治疗室 · 8位治疗师 · 每天约10位客户</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>时间线</h2>
+    <ol class="timeline">
+      <li class="event">
+        <span class="date">2026-11-12</span>
+        <h3>Grill Me 诊断</h3>
+        <p>和诊所老板做了4轮、共32个问题的追问式访谈，同时调研了官网、预约网站、各类目录和周边竞争对手。</p>
+        <ul>
+          <li><b>目标</b>：每月预约 300 → 600 次（2027年5月底前），并增加说英语的本地客户</li>
+          <li><b>关键发现</b>：不缺治疗师，也不缺口碑（260条5星评价）。真正的问题是上午和周一、周二空着，而这些时段来的老人没有保险；同时网站给非华人"不是为我开的"的印象</li>
+          <li><b>最高优先级</b>：拿回 SEO 外包手里的账号、装好追踪、抓住12月31日保险福利清零前的时间窗口</li>
+        </ul>
+        <div class="links">
+          <a class="btn" href="../VHealth/interview-qa-zh.html">查看访谈详情 →</a>
+          <a class="btn ghost" href="../VHealth/priority-analysis.html">问题优先级分析</a>
+        </div>
+      </li>
+      <li class="event next">
+        <span class="date">下一步</span>
+        <h3>第1周执行：拿回账号 + 装好追踪 + 发出年底福利提醒</h3>
+        <p>完成后会记录在这里。</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>交付物</h2>
+    <div class="docs">
+      <a class="doc" href="../VHealth/plan-90-day.html"><b>90天行动计划</b><span>2026-11-12 至 2027-02-10，每周任务、预算、数据看板、保留或砍掉的规则</span><i>打开 →</i></a>
+      <a class="doc" href="../VHealth/okr-6-month.html"><b>6个月 OKR</b><span>M1–M6，每个月的目标、关键结果、衡量方法和负责人</span><i>打开 →</i></a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

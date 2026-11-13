@@ -1,0 +1,58 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FDE Clients</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one centred column; a single client card. */
+  --bg: #f4f7f6; --surface: #ffffff; --ink: #17262b; --muted: #5b6c71; --line: #d9e3e1; --accent: #1a8f7c;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #10181b; --surface: #182327; --ink: #e3ecee; --muted: #9aaeb3; --line: #2a393e; --accent: #4fc2b8; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.55 var(--font); }
+main { max-width: 720px; margin: 0 auto; padding: 64px 20px; display: grid; gap: 28px; }
+h1 { margin: 0; font-size: 2rem; font-weight: 800; }
+p { margin: 0; color: var(--muted); }
+.clients { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+a.client { display: grid; gap: 14px; padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; color: inherit; text-decoration: none; transition: border-color .15s, transform .15s; }
+a.client:hover, a.client:focus-visible { border-color: var(--accent); transform: translateY(-2px); outline: none; }
+a.client:focus-visible { box-shadow: 0 0 0 3px var(--accent); }
+.logo { background: #fff; border-radius: 10px; padding: 10px; display: grid; place-items: center; }
+.logo img { width: 100%; max-width: 220px; height: auto; display: block; }
+.name { font-weight: 800; font-size: 1.15rem; }
+.meta { font-size: .9rem; color: var(--muted); }
+.go { color: var(--accent); font-weight: 600; font-size: .95rem; }
+@media (prefers-reduced-motion: reduce) { a.client { transition: none; } a.client:hover { transform: none; } }
+</style>
+</head>
+<body>
+<main>
+  <header style="display:grid;gap:6px">
+    <h1>FDE 客户</h1>
+    <p>本地中小企业的增长项目记录</p>
+  </header>
+  <div class="clients">
+    <a class="client" href="vhealth/">
+      <div class="logo"><img src="VHealth/assets/logo.jpg" alt="V-Health Rehab Clinic logo"></div>
+      <div>
+        <div class="name">VHealth</div>
+        <div class="meta">V-Health Rehab Clinic · Calgary NW</div>
+      </div>
+      <span class="go">查看项目 →</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>
