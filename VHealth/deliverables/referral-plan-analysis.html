@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VHealth 转介绍计划分析</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one reading column. Verdict first, then the 5 questions, comparisons, top 3, measurement, sources. Paper palette shared with the VHealth timeline. */
+  --paper: #fbf8f2; --card: #ffffff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --warn: #8a5a00; --warn-soft: #fff1d6; --bad: #b3261e; --bad-soft: #fdeceb;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); }
+main { max-width: 940px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.45rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.12rem; }
+p { margin: 0; max-width: 70ch; }
+a { color: var(--accent-ink); }
+.meta { color: var(--muted); }
+section { display: grid; gap: 18px; }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+
+.verdict { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.alert { background: var(--bad-soft); border: 1px solid #f3c9c5; border-radius: 14px; padding: 16px 20px; display: grid; gap: 8px; }
+.alert h3 { color: var(--bad); }
+.alert p { max-width: none; }
+
+.qa { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.qa .qh { display: flex; gap: 12px; align-items: center; padding: 14px 20px; background: #f7f1e6; border-bottom: 1px solid var(--line); }
+.qa .qh .n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; flex: none; font-size: .9rem; }
+.qa .qh h3 { font-size: 1.08rem; }
+.qa .qb { padding: 16px 20px 18px; display: grid; gap: 12px; }
+.qa .short { font-weight: 700; color: var(--accent-ink); }
+
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: #f7f1e6; font-size: .8rem; letter-spacing: .05em; color: #8c7f6a; }
+tr:last-child td { border-bottom: 0; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.ok { background: var(--good-soft); color: var(--good); }
+.mid { background: var(--warn-soft); color: var(--warn); }
+.no { background: var(--bad-soft); color: var(--bad); }
+
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.flow div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 4px; align-content: start; font-size: .9rem; }
+.flow b { color: var(--accent-ink); font-size: .95rem; }
+@media (max-width: 760px) { .flow { grid-template-columns: 1fr; } }
+
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+@media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+.rcard { background: #fff; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,.08); aspect-ratio: 3.5 / 2; display: grid; grid-template-columns: 1fr auto; overflow: hidden; border: 1px solid #e7e1d6; }
+.rcard .l { padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.rcard .k { font-size: .7rem; letter-spacing: .14em; color: #10715f; font-weight: 800; }
+.rcard .t { font-family: var(--serif); font-size: 1.1rem; line-height: 1.2; }
+.rcard .s { font-size: .74rem; color: var(--muted); }
+.rcard .by { margin-top: 6px; font-size: .78rem; }
+.rcard .by u { display: inline-block; width: 110px; border-bottom: 1px solid #2a2620; text-decoration: none; }
+.rcard .r { background: #10715f; color: #fff; padding: 12px; display: grid; place-items: center; text-align: center; font-size: .7rem; gap: 6px; }
+.rcard .qr { width: 64px; height: 64px; background: repeating-conic-gradient(#fff 0 25%, #10715f 0 50%) 0 0 / 12px 12px; border: 4px solid #fff; border-radius: 4px; }
+.sms { background: #fff; border-radius: 18px; border: 1px solid #e7e1d6; padding: 14px; display: grid; gap: 8px; max-width: 360px; justify-self: center; width: 100%; }
+.sms .bub { background: #e9e9eb; border-radius: 16px 16px 16px 4px; padding: 10px 12px; font-size: .86rem; line-height: 1.45; }
+.sms .from { font-size: .72rem; color: var(--muted); }
+
+.picks { display: grid; gap: 16px; }
+.pick { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.pick .ph { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: var(--accent-soft); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.pick .rank { font-family: var(--serif); font-size: 2rem; line-height: 1; color: var(--accent); }
+.pick .ph h3 { font-size: 1.2rem; }
+.pick .ph .when { margin-left: auto; }
+.pick .pb { display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; }
+.pick .pb > div { padding: 16px 20px; display: grid; gap: 10px; align-content: start; }
+.pick .pb > div + div { border-left: 1px solid var(--line); }
+.lbl { font-size: .78rem; font-weight: 800; letter-spacing: .1em; color: #8c7f6a; }
+@media (max-width: 760px) { .pick .pb { grid-template-columns: 1fr; } .pick .pb > div + div { border-left: 0; border-top: 1px solid var(--line); } }
+
+.sources { font-size: .85rem; color: var(--muted); }
+.sources li { word-break: break-word; }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>VHealth 转介绍（Referral）计划：怎么做最有效</h1>
+  <p class="meta">V-Health Rehab Clinic · 给诊所老板 · 2026-11-13</p>
+</header>
+
+<section>
+  <div class="verdict">
+    <p><b>结论：</b>不要做 App，也不要靠客户记推荐码。最有效的做法是：<b>在客户最满意的时候请他推荐，给他一样能直接递给朋友的东西（推荐卡或个人链接），再由新客户在到店时说出"是谁介绍的"</b>。来源由你们这边记录，推荐人什么都不用记。</p>
+    <p>奖励要非常谨慎。下面红框里说的风险，比"给 $10 还是 $15"重要得多。</p>
+  </div>
+  <div class="alert">
+    <h3>先看这一点：在阿尔伯塔，给医疗服务"推荐奖励"可能违反监管规定</h3>
+    <p>阿尔伯塔的医疗专业人员受 <i>Health Professions Act</i> 和各自的 College 管理。以物理治疗师的 College（CPTA）为例，它的广告标准<b>明确禁止用 incentives / inducements 推广服务</b>，包括和价目表不同的折扣、折扣券和礼品卡；抽奖、赠品也被点名禁止。阿尔伯塔假牙技师的 College 对"inducement"的定义同样很宽：奖励、礼物、现金、奖品、优惠券、积分、可以兑换奖励的忠诚计划都算。BC 的辅助医疗 College 也把"转介绍奖金"列为 inducement 的例子。</p>
+    <p><b>我没有找到按摩治疗师 College（CMTA）和针灸 College（CAAB）关于这一点的具体条文</b>，所以不能确定 V-Health 的 RMT 和针灸师是否同样被禁止。但方向很清楚，<b>以后入职的物理治疗师一定受 CPTA 的规定约束</b>。所以，在做任何"给钱、给折扣、给礼品卡"的推荐奖励之前，请先书面询问 CMTA 和 CAAB。</p>
+    <p><b>这也影响之前的计划：</b>90天计划和 OKR 里写的"推荐人和朋友各减 $15"，在确认合规之前要先暂停。下面推荐的前两个方案不涉及奖励，现在就可以做。</p>
+  </div>
+</section>
+
+<section>
+  <h2>回答你的5个问题</h2>
+
+  <div class="qa"><div class="qh"><span class="n">1</span><h3>别人怎么做？怎么给每个人一个推荐码？推荐人还会记得吗？</h3></div>
+    <div class="qb">
+      <p class="short">不会记得，所以不要依赖推荐码。</p>
+      <p>大公司用推荐码，是因为整个流程都在 App 或网站里，代码会自动带过去，比如 Dropbox、Uber、Tangerine 银行的推荐链接。诊所的客户一个月来一次，没有人会记住自己的代码，更不会记得发给朋友。</p>
+      <p>对诊所来说，更可靠的做法是<b>反过来记录</b>：新客户到店时，前台问"Who referred you?"，写下推荐人的名字。新客户一定记得是谁介绍的，这一栏你们的每日登记表已经有了。推荐人什么都不用记。</p>
+      <p>想让过程更顺，可以给推荐人一样"能递出去的东西"：</p>
+      <ul class="plain">
+        <li><b>纸质推荐卡</b>：上面写着推荐人的名字，朋友拿着卡来，或者扫卡上的二维码预约</li>
+        <li><b>个人链接</b>：通过短信发给推荐人，链接里带着他的编号。朋友点开就能预约，系统自动记下推荐人</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa"><div class="qh"><span class="n">2</span><h3>做个 App 有意义吗？</h3></div>
+    <div class="qb">
+      <p class="short">没有意义，成本高，也没人下载。</p>
+      <ul class="plain">
+        <li>客户一个月来1–2次，不会为一家诊所下载 App。下载率低，推荐人就看不到自己的代码，App 的作用也就没了。</li>
+        <li>做 App 并上架 App Store 和 Google Play，需要几周开发，之后还要一直维护。</li>
+        <li><b>App 能做的，短信加网页都能做</b>：你们的预约网站是自己开发的，AI 工程师可以在里面加一个"我的推荐链接"页面，再用短信发给客户。客户不用下载任何东西。</li>
+        <li>如果以后真想让客户"随时看到自己的链接"，可以做一个 Apple Wallet / Google Wallet 卡片，比 App 便宜得多。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa"><div class="qh"><span class="n">3</span><h3>每人 $10 credit 合理吗？要不要给新人 credit、老客户直接返现？</h3></div>
+    <div class="qb">
+      <p class="short">从数字上看，$10–15 完全付得起。但真正的问题是合规，其次是"保险客户感觉不到优惠"。</p>
+      <ul class="plain">
+        <li><b>经济上</b>：一位新客户对诊所约值 $175，获客成本上限是 $60。$10–15 的奖励远低于上限。</li>
+        <li><b>保险客户的问题</b>：95%的客户用保险付费。$10 的抵扣用在保险项目上，客户自己几乎感觉不到。而且按规定，打折后要按折后价向保险公司收费，不能按原价收，这会让账单变复杂。</li>
+        <li><b>不建议返现给老客户</b>：现金最像 inducement，合规风险最大；还要记账，也会让推荐变得像交易，影响信任。</li>
+        <li><b>如果 College 确认可以给奖励</b>，比较安全的选择是不涉及服务价格的方式，比如"每介绍一位朋友，诊所以你的名义向 Calgary Food Bank 捐 $10"。但这也要先问清楚。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="qa"><div class="qh"><span class="n">4</span><h3>同行和其他行业怎么做？</h3></div>
+    <div class="qb">
+      <div class="wrap"><table>
+        <thead><tr><th>谁</th><th>怎么做</th><th>适合 V-Health 吗</th></tr></thead>
+        <tbody>
+          <tr><td>阿尔伯塔物理治疗诊所</td><td>College 明确禁止折扣券、礼品卡、抽奖、赠品。常见做法是推荐卡、感谢信，以及做好服务让客户愿意说</td><td><span class="pill ok">这就是你们的规则环境</span></td></tr>
+          <tr><td>其他国家的按摩和物理治疗诊所（英国、澳大利亚）</td><td>推荐人获得下次治疗的折扣或 $30 抵扣，通常在朋友完成首次付费治疗后才生效</td><td><span class="pill mid">规则不同，不能照搬</span></td></tr>
+          <tr><td>银行（Tangerine、EQ Bank）</td><td>推荐码或链接，双方各拿现金奖励</td><td><span class="pill no">医疗服务不适用</span></td></tr>
+          <tr><td>科技公司（Dropbox、Uber）</td><td>App 内自动生成链接，双方各拿额度，比如免费存储空间或车费</td><td><span class="pill no">要有 App，客户使用频率也要高</span></td></tr>
+          <tr><td>美发店、牙医（部分地区）</td><td>推荐卡上写推荐人名字，前台记录；手写感谢卡</td><td><span class="pill ok">可以借鉴</span></td></tr>
+        </tbody>
+      </table></div>
+      <p><b>研究结论</b>：一项追踪约1万名银行客户近3年的研究（Schmitt、Skiera、Van den Bulte，<i>Journal of Marketing</i>，2011）发现，经推荐来的客户价值至少高 16%，留存率也更高。所以推荐值得认真做，即使没有奖励。</p>
+    </div>
+  </div>
+
+  <div class="qa"><div class="qh"><span class="n">5</span><h3>有的咖啡店用纸质卡，管用吗？</h3></div>
+    <div class="qb">
+      <p class="short">咖啡店的纸质卡大多是集章卡，用来让老客户多来，不是用来拉新客户的。</p>
+      <ul class="plain">
+        <li><b>集章卡</b>（买9送1）属于忠诚计划。对医疗服务来说，这正是监管机构会认定为 inducement 的做法，<b>不要做</b>。</li>
+        <li>但纸质卡有一个值得借鉴的地方：它是<b>实物，可以直接递给别人</b>。所以对诊所来说，最好的"纸"是<b>推荐卡</b>：一张名片大小的卡，背面写推荐人的名字，朋友拿着它来。</li>
+        <li>成本：500张名片约 $30–50。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>推荐流程怎么运作（不用 App，不用记代码）</h2>
+  <div class="flow">
+    <div><b>1 · 时机</b>第2–3次治疗结束，客户说"感觉好多了"的时候</div>
+    <div><b>2 · 开口</b>治疗师说："如果有朋友也有类似问题，可以把这张卡给他。"</div>
+    <div><b>3 · 递出去</b>推荐卡上写着推荐人的名字和二维码，或者用短信发个人链接</div>
+    <div><b>4 · 记录</b>新客户到店时，前台问"Who referred you?"，登记表上写下推荐人</div>
+    <div><b>5 · 感谢</b>推荐人收到一张手写感谢卡或一条短信。不给钱，但让他知道你记得</div>
+  </div>
+  <div class="cards">
+    <div class="rcard" aria-label="推荐卡示意">
+      <div class="l">
+        <span class="k">V-HEALTH · CALGARY NW</span>
+        <span class="t">A friend thought you'd feel better here.</span>
+        <span class="s">Massage · Osteopathy · Acupuncture · Direct billing · Open 7 days</span>
+        <span class="by">Referred by: <u></u></span>
+        <span class="s">403-966-6386 · vhealth.ca</span>
+      </div>
+      <div class="r"><span class="qr" aria-hidden="true"></span>Scan to book</div>
+    </div>
+    <div class="sms" aria-label="个人推荐链接短信示意">
+      <span class="from">V-Health · 短信</span>
+      <div class="bub">Hi Sarah, thanks for visiting V-Health! If a friend or coworker has neck or back pain, here's your personal link to share. We'll know they came from you:<br><b>vhealth.ca/r/sarah-t</b></div>
+      <div class="bub">Thank you, Sarah! Your friend Priya booked her first visit. We really appreciate you thinking of us. 🙏</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>我推荐的 Top 3</h2>
+  <div class="picks">
+
+    <article class="pick">
+      <div class="ph"><span class="rank">1</span><h3>"Who referred you?" + 感谢卡（不给奖励）</h3><span class="pill ok when">明天就能开始 · $0 · 没有合规风险</span></div>
+      <div class="pb">
+        <div><span class="lbl">怎么做</span>
+          <ul class="plain">
+            <li>前台在每日登记表上记下每位"Friend"来源的<b>推荐人名字</b>（已经在做了）</li>
+            <li>每周把推荐人整理出来，由老板或治疗师<b>写一张感谢卡</b>，下次来时亲手交给他，或者发一条短信</li>
+            <li>治疗师在客户第2–3次来、明显满意时，<b>开口请他推荐</b>（和请他写 Google 评价同一个时机）</li>
+          </ul>
+        </div>
+        <div><span class="lbl">为什么排第一</span>
+          <p>成本为零，明天就能做，完全不涉及奖励，所以没有合规问题。被感谢的人更愿意再推荐，而这个计划的核心就是"让推荐人觉得被记住"。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="pick">
+      <div class="ph"><span class="rank">2</span><h3>纸质推荐卡（写上推荐人名字）</h3><span class="pill ok when">约1周 · 约 $40 · 没有合规风险</span></div>
+      <div class="pb">
+        <div><span class="lbl">怎么做</span>
+          <ul class="plain">
+            <li>印500张名片大小的卡：正面是诊所介绍和预约二维码，背面写"Referred by ____"</li>
+            <li>在请客户推荐时，给他2–3张，写上他的名字</li>
+            <li>卡上的二维码带 <code>?src=refcard</code> 标签，GA4 可以看到扫码预约的次数；前台收回卡片或在登记表上记下推荐人</li>
+          </ul>
+        </div>
+        <div><span class="lbl">为什么排第二</span>
+          <p>和咖啡店纸质卡同样的道理：实物可以直接递出去，比"口头说说"有效得多。朋友拿着卡就知道要说谁介绍的，前台也就不会漏记。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="pick">
+      <div class="ph"><span class="rank">3</span><h3>短信个人推荐链接（不是 App）</h3><span class="pill mid when">约2–3天开发 · 方案1、2跑起来之后再做</span></div>
+      <div class="pb">
+        <div><span class="lbl">怎么做</span>
+          <ul class="plain">
+            <li>AI 工程师在预约网站加上<b>个人推荐链接</b>，比如 vhealth.ca/r/sarah-t。朋友点开预约时，"推荐人"会自动填好</li>
+            <li>第2次就诊后自动发短信，附上个人链接（可以和请写评价的短信合并）</li>
+            <li>朋友完成首诊后，自动给推荐人发感谢短信</li>
+            <li>奖励部分先不做。CMTA 和 CAAB 书面确认可以之后，再考虑"以推荐人名义捐款"这类方式</li>
+          </ul>
+        </div>
+        <div><span class="lbl">为什么排第三</span>
+          <p>能做到"推荐人随时有自己的链接，诊所自动记录来源"，App 的好处它都有，却不需要客户下载。但它需要开发，所以先用方案1、2验证客户愿不愿意推荐，再投入开发。</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+  <div class="wrap"><table>
+    <thead><tr><th>不推荐的做法</th><th>原因</th></tr></thead>
+    <tbody>
+      <tr><td>开发 App</td><td>客户不会下载；开发和维护成本高；短信加网页就能做同样的事</td></tr>
+      <tr><td>现金返现、礼品卡、抽奖、集章卡或积分</td><td>在阿尔伯塔医疗行业，这些很可能被认定为 inducement</td></tr>
+      <tr><td>保险项目上的 $ 抵扣</td><td>保险客户感觉不到；要按折后价向保险公司收费；也有合规风险</td></tr>
+      <tr><td>只靠口头说"欢迎推荐"</td><td>没有实物、没有时机，也没有记录，确实没什么效果</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>怎么衡量效果</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>指标</th><th>计算方法</th><th>数据来源</th><th>目标</th></tr></thead>
+    <tbody>
+      <tr><td>推荐来的新客户占比</td><td>来源为 Friend 的新客户 ÷ 全部新客户</td><td>每日登记表</td><td>先建立基线，3个月内 +10个百分点</td></tr>
+      <tr><td>推荐卡带来的新客户</td><td>扫码预约（<code>?src=refcard</code>）+ 拿着卡来的客户</td><td>GA4 + 登记表</td><td>每月 ≥ 5人</td></tr>
+      <tr><td>活跃推荐人数</td><td>本月至少推荐过1位朋友的老客户人数</td><td>登记表的推荐人名字</td><td>每月增长</td></tr>
+      <tr><td>推荐来的客户回头率</td><td>推荐来的新客户在60天内再约的比例，和其他新客户比较</td><td>预约系统</td><td>高于非推荐客户</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>资料来源</h2>
+  <ul class="plain sources">
+    <li>College of Physiotherapists of Alberta，广告和营销标准：<a href="https://cpta.ab.ca/docs/62/Advertising_and_Marketing.pdf">cpta.ab.ca/docs/62/Advertising_and_Marketing.pdf</a></li>
+    <li>CPTA，广告合规常见问题（不允许任何形式的 inducement，包括赠品和抽奖）：<a href="https://cpta.ab.ca/news-and-updates/news/advertising-compliance-verification-tool-common-issues">cpta.ab.ca … common-issues</a></li>
+    <li>CPTA，不专业广告的10个例子：<a href="https://www.cpta.ab.ca/news-and-updates/news/good-practice-10-examples-of-unprofessional-advertising/">cpta.ab.ca … 10-examples-of-unprofessional-advertising</a></li>
+    <li>Alberta Denturist 广告指引（inducement 的定义）：<a href="https://www.abdenturists.ca/wp-content/uploads/2025/10/GP-21-Advertising-Sept-2025.pdf">abdenturists.ca … GP-21-Advertising</a></li>
+    <li>BC College of Complementary Health Professionals，广告常见问题（推荐奖金属于 inducement）：<a href="https://cchpbc.ca/wp-content/uploads/2026/05/FAQAdverting.Marketing.V3.FINAL_.pdf">cchpbc.ca … FAQAdverting</a></li>
+    <li>Schmitt, Skiera &amp; Van den Bulte (2011), Referral Programs and Customer Value, <i>Journal of Marketing</i>：<a href="https://faculty.wharton.upenn.edu/wp-content/uploads/2012/04/Schmitt-Skiera-vandenBulte-2011-Referral-Programs-Customer-Value.pdf">wharton.upenn.edu … Referral-Programs-Customer-Value.pdf</a></li>
+    <li>其他国家诊所的推荐计划示例：<a href="https://sportandspinalphysio.com.au/?p=4693">Sport &amp; Spinal Physio（澳大利亚）</a>、<a href="https://bodytonicclinic.co.uk/friend/">Bodytonic Clinic（英国）</a></li>
+    <li>未找到：CMTA（按摩）和 CAAB（针灸）关于推荐奖励的具体条文，需要直接询问这两个 College。</li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
