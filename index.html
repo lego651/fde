@@ -11,7 +11,7 @@ layout: null
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Layout: one centred column; a single client card. */
+  /* Layout: one centred column; one card per client. */
   --bg: #f4f7f6; --surface: #ffffff; --ink: #17262b; --muted: #5b6c71; --line: #d9e3e1; --accent: #1a8f7c;
   --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
@@ -52,6 +52,7 @@ a.client:focus-visible { box-shadow: 0 0 0 3px var(--accent); }
       </div>
       <span class="go">查看项目 →</span>
     </a>
+    <!-- CLIENT-CARDS:END  scripts/new_client.py inserts new cards above this line -->
   </div>
 </main>
 </body>

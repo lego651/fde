@@ -117,6 +117,8 @@ def load(folder):
         if not re.fullmatch(r'\d{4}-\d{2}-\d{2}', d.get('date', '')):
             errs.append(f'{where}: date must be YYYY-MM-DD')
         p = d.get('path', '')
+        if p.startswith(('/', '..')) or '://' in p:
+            errs.append(f'{where}: path must be inside {folder.name}/ (no "/", "..", or URLs): {p}')
         if p in seen:
             errs.append(f'{where}: path listed twice: {p}')
         seen.add(p)
@@ -174,7 +176,7 @@ def build_strip(folder, data, cats):
             f'  <section class="dc" aria-labelledby="dc-h">\n'
             f'    <div class="dc-h"><h2 id="dc-h">正在分析的文档</h2><a href="docs/">See all {len(docs)} →</a></div>\n'
             f'    <div class="dc-strip" tabindex="0" aria-label="文档，可左右滚动">\n'
-            + '\n'.join(cards) +
+            + ('\n'.join(cards) or '      <p class="dc-empty" style="margin:0;color:var(--muted)">还没有文档</p>') +
             f'\n    </div>\n  </section>\n  <!-- DOCSTRIP:END -->')
 
 
@@ -194,7 +196,7 @@ def build_docs_page(folder, data, cats):
     cl = data['client']
     docs = data['docs']
     n, nw = len(docs), sum(d['status'] == 'wip' for d in docs)
-    updated = max(d['date'] for d in docs)
+    updated = max((d['date'] for d in docs), default='—')
     up = '../../' + folder.name + '/'
     chips = [f'<button type="button" class="chip" data-f="all" aria-pressed="true">全部 {n}</button>',
              f'<button type="button" class="chip" data-f="wip" aria-pressed="false">分析中 {nw}</button>']
