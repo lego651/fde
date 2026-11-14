@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WTHN research: what V-Health can learn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #fbf8f2; --card: #ffffff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --warn: #8a5a00; --warn-soft: #fff1d6; --bad: #b3261e; --bad-soft: #fdeceb;
+  --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.65 var(--font); }
+main { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.25; text-wrap: balance; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.45rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.12rem; }
+p { margin: 0; }
+a { color: var(--accent-ink); }
+sup { line-height: 0; font-size: .7em; }
+sup a { text-decoration: none; font-weight: 700; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 18px; }
+.tldr { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.tldr .big { font-family: var(--serif); font-size: 1.2rem; color: var(--accent-ink); }
+.tldr ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.note { font-size: .9rem; color: var(--muted); background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+/* timeline */
+.tl { list-style: none; margin: 0; padding: 0 0 0 26px; position: relative; display: grid; gap: 14px; }
+.tl::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+.tl li { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.tl li::before { content: ""; position: absolute; left: -24px; top: 16px; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 3px solid var(--accent); }
+.tl li.key::before { background: var(--accent); }
+.tl .d { font-weight: 800; font-size: .85rem; letter-spacing: .03em; color: var(--accent-ink); }
+.tl .c { font-size: .75rem; margin-left: 8px; }
+/* tables */
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: #f7f1e6; font-size: .78rem; letter-spacing: .05em; text-transform: uppercase; color: #8c7f6a; }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; }
+.pill { display: inline-block; font-size: .72rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.ok { background: var(--good-soft); color: var(--good); }
+.mid { background: var(--warn-soft); color: var(--warn); }
+.no { background: var(--bad-soft); color: var(--bad); }
+/* cards */
+.group { display: grid; gap: 12px; }
+.group h3 { display: flex; align-items: center; gap: 10px; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; font-size: .92rem; }
+.card.ok-b { border-top: 4px solid var(--good); }
+.card.mid-b { border-top: 4px solid #d9a441; }
+.card.no-b { border-top: 4px solid var(--bad); }
+.card b.t { font-size: 1rem; }
+.card .lbl { font-size: .72rem; font-weight: 800; letter-spacing: .08em; color: #8c7f6a; text-transform: uppercase; }
+.card .rule { font-size: .85rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 6px; }
+@media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+.disc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.disc div { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: .86rem; }
+.disc b { display: block; font-family: var(--serif); }
+@media (max-width: 720px) { .disc { grid-template-columns: 1fr 1fr; } }
+ol.actions { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
+ol.actions li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+ol.actions .cost { font-size: .8rem; font-weight: 700; color: var(--accent-ink); }
+ul.gaps { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.sources ol { margin: 0; padding-left: 26px; font-size: .84rem; color: var(--muted); display: grid; gap: 3px; }
+.sources li { word-break: break-word; }
+.sources li:target { background: var(--accent-soft); }
+footer { font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  main { max-width: none; padding: 0; gap: 22px; }
+  .tl li, .card, .wrap, ol.actions li, .tldr { break-inside: avoid; box-shadow: none; }
+  h2 { break-after: avoid; }
+  a { color: var(--ink); }
+  .sources a::after { content: ""; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>WTHN research: what V-Health can learn</h1>
+  <p class="meta">V-Health Rehab Clinic · 2026-11-13 · Every fact links to a numbered source. V-Health facts come from the owner interview (2026-11-12) and internal analysis files, marked <i>(V-Health interview)</i>.</p>
+</header>
+
+<section>
+  <div class="tldr">
+    <span class="big">TL;DR: copy WTHN's "front door", not its discounts.</span>
+    <ul>
+      <li><b>How WTHN grew:</b> it opened one design-led, cash-pay acupuncture studio in NYC in 2018–19<sup><a href="#s1">[1]</a><a href="#s2">[2]</a></sup> and raised a celebrity-backed $2.5M seed round<sup><a href="#s2">[2]</a></sup>. After a $5M Series A in Jan 2024 it went from 1 to 5 studios in about 2.5 years<sup><a href="#s2">[2]</a><a href="#s5">[5]</a></sup>. It also sells at-home products through 200+ retailers<sup><a href="#s1">[1]</a></sup>.</li>
+      <li><b>Key difference:</b> WTHN does not bill insurers. Patients pay and claim it back themselves<sup><a href="#s18">[18]</a></sup>. About 95% of V-Health visits are direct-billed <i>(V-Health interview)</i>. For a direct-billing clinic, Alberta rules and insurer terms make price incentives a billing-accuracy and delisting risk<sup><a href="#s23">[23]</a><a href="#s29">[29]</a><a href="#s33">[33]</a><a href="#s35">[35]</a></sup>.</li>
+      <li><b>Copy (≈$0):</b> condition pages, first-visit guides, published prices, specialty bios, benefit-reset reminders, employer talks, and a referral link with no reward attached.</li>
+      <li><b>Don't copy:</b> memberships, discounted packs, free add-ons, gift-card promotions, ClassPass, Truemed, or "No Tox" style facial claims.</li>
+      <li><b>$15 referral idea:</b> stays on hold. The acupuncture code bars "anything of value for the referral of patients"<sup><a href="#s23">[23]</a></sup>, there is no massage college to ask yet<sup><a href="#s24">[24]</a><a href="#s26">[26]</a></sup>, and physio bans inducements<sup><a href="#s29">[29]</a></sup>.</li>
+    </ul>
+    <p class="note">Caveat: WTHN publishes no revenue, retention or acquisition-cost data<sup><a href="#s3">[3]</a></sup>. The timeline shows <i>what</i> WTHN did and when. No source proves <i>which</i> tactic caused its growth.</p>
+  </div>
+</section>
+
+<section>
+  <h2>1 · How WTHN grew, step by step</h2>
+  <p>Michelle Larivee, a former investment banker, found relief for chronic neck pain from a ski accident through acupuncture<sup><a href="#s6">[6]</a><a href="#s44">[44]</a></sup>. She co-founded WTHN with Dr. Shari Auth, an acupuncturist and herbalist with 20+ years in NYC practice<sup><a href="#s45">[45]</a></sup>. The thesis: make acupuncture "accessible in every sense of the word"<sup><a href="#s6">[6]</a></sup>.</p>
+  <ol class="tl">
+    <li><span class="d">2016</span><span class="pill mid c">snippet only</span><br>Founders introduced by one of Auth's clients and team up<sup><a href="#s15">[15]</a></sup>.</li>
+    <li class="key"><span class="d">Nov 2018 (some sources: 2019)</span><span class="pill mid c">conflicting</span><br><b>Studio #1, Flatiron</b> (20 W 22nd St): 2,200 sq ft, heated tables, three 45-min treatments (Prevent, Heal, Glow)<sup><a href="#s1">[1]</a><a href="#s6">[6]</a><a href="#s7">[7]</a></sup>. BeautyMatter says "launched in 2019"<sup><a href="#s2">[2]</a></sup>.</li>
+    <li><span class="d">2018–2019</span><br>Press frames it as the <b>"Drybar of acupuncture"</b><sup><a href="#s7">[7]</a><a href="#s8">[8]</a></sup>. In its first year it gave "over 5k people their first ever acu-treatment" (founder claim)<sup><a href="#s9">[9]</a></sup>.</li>
+    <li class="key"><span class="d">2019</span><span class="pill mid c">amount conflicts</span><br><b>$2.5M seed</b> led by Red Sea Ventures. Angels include Gwyneth Paltrow, the SoulCycle founders and Sweetgreen's Nic Jammet<sup><a href="#s2">[2]</a></sup>. CB Insights says $2M<sup><a href="#s14">[14]</a></sup>.</li>
+    <li><span class="d">Mid-Mar → Jun 15, 2020</span><br><b>COVID closure.</b> WTHN ran virtual sessions, grew e-commerce and kept all acupuncturists on staff, then reopened with a waitlist<sup><a href="#s4">[4]</a></sup>. Ear seeds and the acupressure mat were created then "to offer healing at-home"<sup><a href="#s9">[9]</a></sup>.</li>
+    <li><span class="d">Jul 2020</span><br>Planned 2 more NYC studios by end of 2020 and LA/SF within ~18 months. <b>This did not happen on schedule</b><sup><a href="#s4">[4]</a></sup>.</li>
+    <li class="key"><span class="d">Jan 8, 2024</span><br><b>$5M Series A</b> led by L Catterton. <b>Studio #2, Williamsburg.</b> Products in "nearly 200 retailers"<sup><a href="#s2">[2]</a></sup>.</li>
+    <li><span class="d">Feb 6, 2024</span><br>30,000+ first-time acupuncture clients; 3x growth forecast for 2024; acupressure mat "sold out five times"<sup><a href="#s3">[3]</a></sup>.</li>
+    <li class="key"><span class="d">May → Sep 2024</span><br><b>Studio #3, Upper West Side</b> (former Drybar space)<sup><a href="#s10">[10]</a><a href="#s11">[11]</a></sup>. 50,000+ first-time clients. Founding membership 30% off for the first 100 members (sponsored post)<sup><a href="#s11">[11]</a></sup>.</li>
+    <li class="key"><span class="d">Jun 27–28, 2025 (year inferred)</span><span class="pill mid c">inferred</span><br><b>Studio #4, NoHo</b> grand opening<sup><a href="#s12">[12]</a></sup>. Listed as open by Nov 2025<sup><a href="#s1">[1]</a></sup>.</li>
+    <li><span class="d">Nov 17, 2025</span><br>4 studios, 45 licensed practitioners, 200+ retailers. 50% of patients had never tried acupuncture<sup><a href="#s1">[1]</a></sup>.</li>
+    <li><span class="d">By Feb 2, 2026</span><br>Ulta Beauty launch; Canyon Ranch partnership<sup><a href="#s13">[13]</a></sup>.</li>
+    <li class="key"><span class="d">Jun 26, 2026</span><br><b>Studio #5, Upper East Side</b>. Founding memberships from $85/month<sup><a href="#s5">[5]</a></sup>.</li>
+    <li><span class="d">Jun → Nov 2026</span><span class="pill mid c">absence of evidence</span><br>No further openings, funding, closures or leadership changes found.</li>
+  </ol>
+  <div class="cards">
+    <div class="card"><b class="t">Engine 1 · Built for newcomers</b><span>Spa feel with licensed practitioners: a 15-min private assessment, heated beds, and the client leaves with a plan<sup><a href="#s19">[19]</a></sup>. Half of patients were new to acupuncture<sup><a href="#s1">[1]</a></sup>.</span></div>
+    <div class="card"><b class="t">Engine 2 · Pricing ladder into membership</b><span>$96 first visit or $90/visit in a 3-pack, against $120 drop-in. This leads to $100–$350/month memberships with rollover and freezes<sup><a href="#s17">[17]</a><a href="#s18">[18]</a></sup>.</span></div>
+    <div class="card"><b class="t">Engine 3 · Retail reach</b><span>Ear seeds, face cupping and mats at Goop, Erewhon, Ulta and 200+ other retailers<sup><a href="#s1">[1]</a><a href="#s2">[2]</a><a href="#s13">[13]</a></sup>.</span></div>
+    <div class="card"><b class="t">Around them</b><span>Condition and neighbourhood SEO pages<sup><a href="#s16">[16]</a><a href="#s47">[47]</a></sup>, a $50 refer-a-friend offer<sup><a href="#s20">[20]</a></sup>, ClassPass<sup><a href="#s22">[22]</a></sup>, corporate wellness<sup><a href="#s21">[21]</a></sup>.</span></div>
+  </div>
+  <p class="note">Inference: four of five studios opened only after the Series A, despite the 2020 plan<sup><a href="#s2">[2]</a><a href="#s4">[4]</a></sup>. That points to capital, not demand, as the limit on new studios. No source states this. WTHN raised about $7.5M in total<sup><a href="#s14">[14]</a></sup>.</p>
+</section>
+
+<section>
+  <h2>2 · WTHN vs V-Health, side by side</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>Dimension</th><th>WTHN (New York)</th><th>V-Health (Calgary NW)</th></tr></thead>
+    <tbody>
+      <tr><td>Who pays</td><td>Patient pays. WTHN provides superbills for the patient to claim; FSA/HSA via Truemed (US only)<sup><a href="#s17">[17]</a><a href="#s18">[18]</a></sup></td><td><b>~95% direct-billed</b> group insurance; Sun Life not accepted <i>(V-Health interview)</i></td></tr>
+      <tr><td>Price, 60 min</td><td>US$120 drop-in · $100 member · $96 first visit<sup><a href="#s17">[17]</a></sup></td><td>C$110 · also $55/30 min and $85/45 min <i>(V-Health interview)</i></td></tr>
+      <tr><td>Disciplines</td><td>Acupuncture, cupping, facial acupuncture; all licensed acupuncturists<sup><a href="#s18">[18]</a></sup></td><td>RMT massage, osteopathic manual therapy, acupuncture incl. facial; physio being considered <i>(V-Health interview)</i></td></tr>
+      <tr><td>Positioning</td><td>"Acupuncture for Modern Life": spa, women's health, beauty<sup><a href="#s16">[16]</a></sup></td><td>Rehab clinic; website currently reads as a Chinese-medicine clinic <i>(priority analysis)</i></td></tr>
+      <tr><td>Customers</td><td>No published demographics. Inferred: affluent urban women ~25–45</td><td>Mostly Chinese-Canadian neighbours and referrals. Goal: more English-speaking locals <i>(V-Health interview)</i></td></tr>
+      <tr><td>Scale</td><td>5 studios, 45 practitioners<sup><a href="#s1">[1]</a><a href="#s5">[5]</a></sup></td><td>4 rooms, 8 therapists per the owner (website lists ~12, unconfirmed), ~300 bookings/month <i>(V-Health interview)</i></td></tr>
+      <tr><td>Spare capacity</td><td>Not disclosed</td><td>~24 room-hours/day empty, mostly mornings and Mon/Tue <i>(V-Health interview)</i></td></tr>
+      <tr><td>Money</td><td>~$7.5M raised<sup><a href="#s14">[14]</a></sup>; ad spend not public</td><td>$1,000/month total, $600 of it to the SEO agency; in-house AI engineer <i>(V-Health interview)</i></td></tr>
+      <tr><td>Social proof</td><td>ClassPass 4.9 (1,000+ ratings, Flatiron); Yelp ~4.0<sup><a href="#s22">[22]</a><a href="#s46">[46]</a></sup></td><td>~260 Google reviews, all 5★; Instagram ~88 followers <i>(V-Health interview)</i></td></tr>
+      <tr><td>Booking</td><td>Boulevard; referral link in the client account<sup><a href="#s20">[20]</a></sup></td><td>Self-built booking site the clinic can modify <i>(V-Health interview)</i></td></tr>
+      <tr><td>Regulator</td><td>New York State</td><td>CAA (acupuncture) · massage: no college yet · OMT unregulated · CPTA if a PT joins<sup><a href="#s24">[24]</a><a href="#s26">[26]</a></sup></td></tr>
+    </tbody>
+  </table></div>
+  <p>The first row decides most of the answer. WTHN's promotions change a cash price. Every V-Health promotion changes a number on a claim submitted directly to an insurer. V-Health also has something WTHN lacks: insured patients pay nothing up front, so <b>"we bill your insurer directly"</b> is its strongest headline.</p>
+</section>
+
+<section>
+  <h2>3 · What V-Health can copy, adapt, or must skip</h2>
+  <p>The rules differ by discipline, and the insurance rules apply on top of all of them:</p>
+  <div class="disc">
+    <div><b>Acupuncture</b>CAA Code: no ads that "may create unreasonable expectations" (8.3); no insurance-dependent fees (7.2); nothing of value for referrals (6.2)<sup><a href="#s23">[23]</a></sup>. "Dr. Ac." allowed<sup><a href="#s25">[25]</a></sup>.</div>
+    <div><b>RMT massage</b>No college proclaimed; the HPA has no massage schedule<sup><a href="#s24">[24]</a><a href="#s26">[26]</a><a href="#s27">[27]</a></sup>. Association rules apply: MTAA bars unsupported claims and referral incentives that benefit the therapist<sup><a href="#s28">[28]</a></sup>.</div>
+    <div><b>OMT</b>Unregulated, but "osteopath", "osteopathic practitioner" and "D.O." are reserved for physicians. No "Dr." in a health service (HPA s.128(7))<sup><a href="#s24">[24]</a></sup>.</div>
+    <div><b>Physio (future)</b>Strictest. Bans off-schedule discounts, coupons, gift certificates, time-limited pricing, prizes, advertised free assessments and superlatives<sup><a href="#s29">[29]</a><a href="#s31">[31]</a></sup>.</div>
+  </div>
+  <p class="note"><b>Insurance and federal law, on top of all four:</b> claims must be an "accurate account of … the charges billed". Plan members may not be charged more than non-members (Alberta Blue Cross chiropractic agreement, used as the closest analog)<sup><a href="#s33">[33]</a></sup>. CLHIA flags co-pay-cutting rebates, gift cards, free goods and "items not shown on receipts"<sup><a href="#s35">[35]</a><a href="#s36">[36]</a></sup>. Alberta Blue Cross delisting cannot be appealed (snippet)<sup><a href="#s34">[34]</a></sup>. Efficacy claims need an "adequate and proper test"; testimonials need written permission<sup><a href="#s38">[38]</a></sup>. Google bans incentivized or gated reviews<sup><a href="#s40">[40]</a></sup>.</p>
+
+  <div class="group">
+    <h3><span class="pill ok">Can copy</span> Low cost, no billing risk</h3>
+    <div class="cards">
+      <div class="card ok-b"><b class="t">Condition and neighbourhood pages</b><span><span class="lbl">WTHN</span> pages for pain, sleep and similar conditions, plus neighbourhood pages<sup><a href="#s16">[16]</a><a href="#s47">[47]</a></sup></span><span><span class="lbl">V-Health</span> English-first pages per complaint (neck/back, headaches, desk posture, sports) and discipline, plus a "direct billing in NW Calgary" insurer list. <b>$0</b> (AI engineer or existing SEO agency scope).</span><span class="rule">Claims must be verifiable: CAA 8.3(b),(d)<sup><a href="#s23">[23]</a></sup>; MTAA<sup><a href="#s28">[28]</a></sup>; Competition Act s.74.01(1)(b)<sup><a href="#s38">[38]</a></sup></span></div>
+      <div class="card ok-b"><b class="t">First-visit guide</b><span><span class="lbl">WTHN</span> new-client page; "the first treatment is all about getting used to" it<sup><a href="#s18">[18]</a><a href="#s19">[19]</a></sup></span><span><span class="lbl">V-Health</span> "Your first visit" page per discipline: length, what happens, how direct billing works, what is not covered. <b>$0</b>.</span><span class="rule">No rule restricts it; CPTA allows free education<sup><a href="#s29">[29]</a></sup></span></div>
+      <div class="card ok-b"><b class="t">Published prices</b><span><span class="lbl">WTHN</span> full public price list<sup><a href="#s17">[17]</a></sup></span><span><span class="lbl">V-Health</span> show $55/$85/$110 and durations on the site and in booking. <b>$0</b>.</span><span class="rule">One price for all fits CAA 7.2<sup><a href="#s23">[23]</a></sup>; CPTA requires a fee schedule<sup><a href="#s30">[30]</a></sup></span></div>
+      <div class="card ok-b"><b class="t">Benefit-reset reminders</b><span><span class="lbl">WTHN</span> "FSA dollars expire at the end of the year"<sup><a href="#s18">[18]</a></sup></span><span><span class="lbl">V-Health</span> Nov–Dec "your plan may reset Jan 1" and June "check your balance" SMS/email. <b>$0</b>.</span><span class="rule">Frame it as finishing a treatment plan; CAA 7.3 bars unnecessary services<sup><a href="#s23">[23]</a></sup></span></div>
+      <div class="card ok-b"><b class="t">Specialty bios with correct titles</b><span><span class="lbl">WTHN</span> practitioners listed by specialty, with bios<sup><a href="#s18">[18]</a><a href="#s48">[48]</a></sup></span><span><span class="lbl">V-Health</span> bios with discipline, languages and focus areas. Remove "Dr." from RMTs. OMT staff are "osteopathic manual practitioner", not "osteopath". <b>$0</b>.</span><span class="rule">HPA s.128(7), Sched. 21<sup><a href="#s24">[24]</a></sup>; "Dr. Ac." only for CAA general register<sup><a href="#s25">[25]</a></sup></span></div>
+      <div class="card ok-b"><b class="t">Leave with a plan</b><span><span class="lbl">WTHN</span> client leaves with a treatment plan<sup><a href="#s19">[19]</a></sup></span><span><span class="lbl">V-Health</span> state a clinically justified plan and book the next visit before the patient leaves. <b>$0</b>.</span><span class="rule">Must be clinically needed: CAA 7.3<sup><a href="#s23">[23]</a></sup>; CPTA "unnecessary use"<sup><a href="#s29">[29]</a></sup></span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h3><span class="pill mid">Copy with changes</span> Keep the mechanism, strip the money</h3>
+    <div class="cards">
+      <div class="card mid-b"><b class="t">Refer-a-friend → link + card, no reward</b><span><span class="lbl">WTHN</span> "Give $50" through a personal booking-account link<sup><a href="#s20">[20]</a></sup></span><span><span class="lbl">V-Health</span> personal link on the self-built booking site, "Referred by" cards and a thank-you note. <b>~$40 for 500 cards; 2–3 dev days</b>.</span><span class="rule"><b>Acu:</b> CAA 6.2<sup><a href="#s23">[23]</a></sup> · <b>RMT:</b> MTAA referral-incentive rule<sup><a href="#s28">[28]</a></sup> · <b>Physio:</b> banned<sup><a href="#s29">[29]</a></sup> · <b>OMT:</b> no rule found · <b>Insured visits:</b> a credit resembles a CLHIA post-claim rebate<sup><a href="#s35">[35]</a></sup></span></div>
+      <div class="card mid-b"><b class="t">Corporate wellness → morning employer talks</b><span><span class="lbl">WTHN</span> onsite sessions, corporate codes and memberships<sup><a href="#s21">[21]</a></sup></span><span><span class="lbl">V-Health</span> free 20-min "use your benefits for desk/shift-work pain" talks for hospital units, university departments and remote workers, steering them to morning and Mon/Tue slots. No coupon codes. <b>~$0–50</b>.</span><span class="rule">CPTA free-education carve-out<sup><a href="#s29">[29]</a></sup>; CAA 8.3<sup><a href="#s23">[23]</a></sup>. Never bill employer-paid onsite work to an employee's plan<sup><a href="#s33">[33]</a></sup></span></div>
+      <div class="card mid-b"><b class="t">First-visit discount</b><span><span class="lbl">WTHN</span> WELCOME20, 20% off<sup><a href="#s17">[17]</a></sup></span><span><span class="lbl">V-Health</span> only if the same for every new client and <b>receipted and billed at the discounted amount</b>. Low priority: for insured patients most of the saving goes to the insurer.</span><span class="rule">CAA 7.2, 6.1(g), 7.4<sup><a href="#s23">[23]</a></sup>; Alberta Blue Cross 5.4 analog<sup><a href="#s33">[33]</a></sup>; <b>physio:</b> banned if off-schedule or time-limited<sup><a href="#s29">[29]</a><a href="#s31">[31]</a></sup></span></div>
+      <div class="card mid-b"><b class="t">Testimonials and reviews</b><span><span class="lbl">WTHN</span> heavy use of ratings and press quotes<sup><a href="#s16">[16]</a><a href="#s22">[22]</a></sup></span><span><span class="lbl">V-Health</span> quote reviews only with written permission. Ask everyone at the same moment, with no reward and no filtering. Staff never review. <b>$0</b>.</span><span class="rule">Competition Act s.74.02<sup><a href="#s38">[38]</a></sup>; Google policy<sup><a href="#s40">[40]</a></sup>; Competition Bureau 2024<sup><a href="#s39">[39]</a></sup>; physio: no superlatives<sup><a href="#s32">[32]</a></sup></span></div>
+      <div class="card mid-b"><b class="t">Facial acupuncture, neutral wording</b><span><span class="lbl">WTHN</span> "No Tox, All Lift"<sup><a href="#s16">[16]</a></sup></span><span><span class="lbl">V-Health</span> cash-pay service described plainly. No lift or anti-wrinkle promises, no before/after photos.</span><span class="rule">CAA 8.3(b),(d) and 7.5 (no billing cosmetic work as therapeutic)<sup><a href="#s23">[23]</a></sup>; Competition Act s.74.01(1)(b)<sup><a href="#s38">[38]</a></sup></span></div>
+      <div class="card mid-b"><b class="t">Late-cancel fee (optional)</b><span><span class="lbl">WTHN</span> $50 within 24h; full charge for no-shows<sup><a href="#s18">[18]</a></sup></span><span><span class="lbl">V-Health</span> published fee charged to the patient directly, never on an insurance claim.</span><span class="rule">Claims reflect services rendered: CAA 7.1<sup><a href="#s23">[23]</a></sup>; TELUS eClaims (snippet; confirm with insurers)<sup><a href="#s42">[42]</a></sup></span></div>
+    </div>
+  </div>
+
+  <div class="group">
+    <h3><span class="pill no">Can't copy</span> Collides with direct billing, rules, or scale</h3>
+    <div class="cards">
+      <div class="card no-b"><b class="t">Monthly memberships</b><span>A monthly fee for visits not yet given can't be direct-billed. Insurers pay per service rendered.</span><span class="rule">CPTA: single-visit option, refunds, receipts after delivery<sup><a href="#s30">[30]</a></sup>; CAA 6.1(f)<sup><a href="#s23">[23]</a></sup>; TELUS<sup><a href="#s42">[42]</a></sup></span></div>
+      <div class="card no-b"><b class="t">Discounted packs and "founding member" deals</b><span>The per-visit price differs from the fee schedule, and time-limited pricing is banned for physio.</span><span class="rule">CPTA<sup><a href="#s29">[29]</a><a href="#s31">[31]</a></sup>; Alberta Blue Cross 5.4 analog<sup><a href="#s33">[33]</a></sup></span></div>
+      <div class="card no-b"><b class="t">Free add-ons as perks</b><span>Free services not shown on the receipt are a CLHIA red flag; physio bans advertised free treatment.</span><span class="rule">CLHIA<sup><a href="#s36">[36]</a></sup>; CPTA<sup><a href="#s29">[29]</a></sup></span></div>
+      <div class="card no-b"><b class="t">Gift cards as promotion</b><span>Banned for physio. For other disciplines, giving cards away as a reward is a CLHIA red flag.</span><span class="rule">CPTA "Gift certificates"<sup><a href="#s29">[29]</a></sup>; CLHIA<sup><a href="#s35">[35]</a></sup></span></div>
+      <div class="card no-b"><b class="t">Truemed HSA/FSA checkout</b><span>"Truemed is currently only available in the United States." Direct billing already does more for V-Health's patients.</span><span class="rule"><sup><a href="#s18">[18]</a></sup></span></div>
+      <div class="card no-b"><b class="t">ClassPass marketplace</b><span>A cheaper marketplace rate for some cash buyers conflicts with charging insured patients full fee. Not tested against any insurer's terms.</span><span class="rule">Alberta Blue Cross 5.4 analog<sup><a href="#s33">[33]</a></sup>; CAA 7.2<sup><a href="#s23">[23]</a></sup>; CPTA<sup><a href="#s29">[29]</a></sup></span></div>
+      <div class="card no-b"><b class="t">National retail of herbs and ear seeds</b><span>Needs capital and inventory; herbal products need a Health Canada NPN. Irrelevant to the 600-booking goal.</span><span class="rule">Health Canada<sup><a href="#s41">[41]</a></sup>; MTAA product rule<sup><a href="#s28">[28]</a></sup>; CAA Art. 10<sup><a href="#s23">[23]</a></sup></span></div>
+      <div class="card no-b"><b class="t">Celebrity investors and multi-studio rollout</b><span>WTHN raised ~$7.5M; V-Health's budget is $1,000/month. That is a different business, not a tactic.</span><span class="rule"><sup><a href="#s2">[2]</a><a href="#s14">[14]</a></sup></span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The $15 referral idea: still on hold, now for clearer reasons</h2>
+  <ul class="gaps">
+    <li><b>Acupuncture:</b> CAA Code 6.2 bars "any compensation or anything of value for the referral of patients"<sup><a href="#s23">[23]</a></sup>. Treat a $15 acupuncture referral credit as <b>not permitted</b> unless CAA says otherwise in writing. The college's acronym is CAA, not "CAAB".</li>
+    <li><b>Massage:</b> there is no "CMTA" to write to yet<sup><a href="#s24">[24]</a><a href="#s26">[26]</a></sup>. Ask each RMT's own association (MTAA, CRMTA, NHPC or CMMOTA). MTAA already restricts referral incentives that benefit the therapist<sup><a href="#s28">[28]</a></sup>.</li>
+    <li><b>Physio:</b> the answer is already no<sup><a href="#s29">[29]</a></sup>.</li>
+    <li><b>Correction to the referral analysis:</b> it suggested a first-visit offer aimed at uninsured clients. A price that varies "solely" with insurance status breaches CAA 7.2<sup><a href="#s23">[23]</a></sup> and mirrors the Alberta Blue Cross members-vs-non-members rule<sup><a href="#s33">[33]</a></sup>. Any intro price must apply to every new client and be billed at the discounted amount.</li>
+    <li><b>Correction to the loyalty analysis:</b> it said low-value thank-you gifts are "generally fine" per a CLHIA PDF. That PDF no longer resolves, and the CLHIA pages retrieved now give no list of acceptable incentives<sup><a href="#s37">[37]</a></sup>. A handwritten card with no monetary value remains the safe option.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Prioritized actions for V-Health</h2>
+  <ol class="actions">
+    <li><b>Fix titles this week.</b> No "Dr." for RMT or OMT staff, no "osteopath" or "D.O."; acupuncturists use "Dr. Ac." only if on the CAA general register<sup><a href="#s24">[24]</a><a href="#s25">[25]</a></sup>. <span class="cost">$0</span></li>
+    <li><b>Lead the English site with "We bill your insurer directly"</b> plus the insurer list, published prices and first-visit pages. <span class="cost">$0 · AI engineer</span></li>
+    <li><b>Condition landing pages for English-speaking local searchers.</b> Hold the $600 SEO agency to these pages within its 60-day trial, and tag links with <code>?src=</code>. <span class="cost">$0 extra</span></li>
+    <li><b>Benefit reminders</b> in Nov–Dec and June, framed around the treatment plan<sup><a href="#s23">[23]</a></sup>. <span class="cost">$0</span></li>
+    <li><b>Weekday-morning employer talks</b> (hospital units, university departments, remote workers). Record each one in the paper new-client source log as "Employer talk". <span class="cost">~$0–50</span></li>
+    <li><b>Referral link + "Referred by" cards + thank-you note, no reward.</b> <span class="cost">~$40</span></li>
+    <li><b>Send written questions:</b> CAA on Art. 6.2 and intro pricing; each RMT's association on referral thanks; top insurers on cancellation fees. <span class="cost">$0</span></li>
+    <li><b>Before hiring a physiotherapist:</b> audit every clinic-wide ad. The PT must approve any agency ads covering physio<sup><a href="#s29">[29]</a></sup>. <span class="cost">$0</span></li>
+  </ol>
+  <p class="note">Total new spend ≈ $100–150 one-time, inside the ~$400/month left after SEO. No source predicts how many bookings each action adds. Track progress against the 300 → 600 target monthly with the source log and GA4.</p>
+</section>
+
+<section>
+  <h2>Evidence gaps / not verified</h2>
+  <ul class="gaps">
+    <li><b>WTHN's results:</b> no revenue, members, retention, CAC or utilisation data are public. The first-time-client counts are company claims<sup><a href="#s3">[3]</a><a href="#s11">[11]</a></sup>.</li>
+    <li><b>WTHN's dates and figures conflict:</b> founding Nov 2018<sup><a href="#s1">[1]</a></sup> vs 2019<sup><a href="#s2">[2]</a></sup>; seed $2.5M<sup><a href="#s2">[2]</a></sup> vs $2M<sup><a href="#s14">[14]</a></sup>. The NoHo year (2025) is inferred<sup><a href="#s12">[12]</a></sup>. The UES was said to open "in 2025"<sup><a href="#s1">[1]</a></sup> but opened Jun 26, 2026<sup><a href="#s5">[5]</a></sup>.</li>
+    <li><b>Unverified WTHN claims:</b> PrivCo's "$120M M&amp;A" entry is uncorroborated<sup><a href="#s43">[43]</a></sup>. The referrer reward in "Give $50" is not public<sup><a href="#s20">[20]</a></sup>. The "first acupuncture membership" claim is self-reported<sup><a href="#s11">[11]</a></sup>. Dr. Auth's current role is undocumented. <b>"Group pods" are not supported by any source</b>; sources describe private assessment rooms only<sup><a href="#s19">[19]</a></sup>.</li>
+    <li><b>Alberta rules still to confirm:</b> how CAA reads Art. 6.2; whether CAA has rules on testimonials, gift cards or intro discounts (none found); the CRMTA, NHPC and CMMOTA codes (not retrieved); whether the massage college has been proclaimed since the last status found<sup><a href="#s26">[26]</a><a href="#s27">[27]</a></sup>.</li>
+    <li><b>Insurer terms:</b> direct-billing terms of Canada Life, Manulife, GreenShield, Desjardins, iA and TELUS are behind provider portals. Alberta Blue Cross agreements for massage, physio and acupuncture were not found; the chiropractic agreement is used as an analog<sup><a href="#s33">[33]</a></sup>.</li>
+    <li><b>V-Health:</b> therapist count is 8 per the owner vs ~12 on the website, still to be confirmed <i>(V-Health interview)</i>.</li>
+  </ul>
+</section>
+
+<section class="sources">
+  <h2>Sources</h2>
+  <ol>
+    <li id="s1">TAITRA U.S. Market News, WTHN (Nov 17, 2025) · <a href="https://taiwan-usa.taiwantrade.com/mknewsMain@41dd874f-6814-4bee-9548-01f09829b40b">https://taiwan-usa.taiwantrade.com/mknewsMain@41dd874f-6814-4bee-9548-01f09829b40b</a></li>
+    <li id="s2">BeautyMatter, WTHN raises $5M led by L Catterton (Jan 8, 2024) · <a href="https://beautymatter.com/articles/wthn-raises-5-million-led-by-l-catterton">https://beautymatter.com/articles/wthn-raises-5-million-led-by-l-catterton</a></li>
+    <li id="s3">BeautyMatter, WTHN taps Series A for omnichannel expansion (Feb 6, 2024) · <a href="https://beautymatter.com/articles/wthn-taps-series-a-funding-for-omnichannel-expansion">https://beautymatter.com/articles/wthn-taps-series-a-funding-for-omnichannel-expansion</a></li>
+    <li id="s4">Beauty Independent, WTHN reopening (Jul 12, 2020) · <a href="https://www.beautyindependent.com/reopen-new-york-city-wellness-business-wthn-pandemic/">https://www.beautyindependent.com/reopen-new-york-city-wellness-business-wthn-pandemic/</a></li>
+    <li id="s5">Eastside Feed, UES business openings (Jun 14, 2026) · <a href="https://eastsidefeed.com/odds-and-ends/business-openings-yoga-on-lex-the-sleep-loft-wthn-the-formula-x-meredith-emmabelles/">https://eastsidefeed.com/odds-and-ends/business-openings-yoga-on-lex-the-sleep-loft-wthn-the-formula-x-meredith-emmabelles/</a></li>
+    <li id="s6">Flatiron NoMad Partnership, Michelle Larivee profile (Sep 25, 2019) · <a href="https://www.flatironnomad.nyc/movers-shakers/michelle-larivee-cofounder-and-ceo-of-wthn/">https://www.flatironnomad.nyc/movers-shakers/michelle-larivee-cofounder-and-ceo-of-wthn/</a></li>
+    <li id="s7">Domino, The Drybar of Acupuncture Just Opened (updated Jul 24, 2019) · <a href="https://www.domino.com/content/new-work-acupuncture-easy-cheap-wthn/">https://www.domino.com/content/new-work-acupuncture-easy-cheap-wthn/</a></li>
+    <li id="s8">Fast Company, This &#x27;Drybar of acupuncture&#x27; wants to de-stress America (headline only; page blocked) · <a href="https://www.fastcompany.com/90264072/this-drybar-of-acupuncture-wants-to-destress-america">https://www.fastcompany.com/90264072/this-drybar-of-acupuncture-wants-to-destress-america</a></li>
+    <li id="s9">Goody founder series, Michelle Larivee · <a href="https://www.ongoody.com/blog/goody-founder-series-wthn-co-founder-ceo-michelle-larivee">https://www.ongoody.com/blog/goody-founder-series-wthn-co-founder-ceo-michelle-larivee</a></li>
+    <li id="s10">Patch, Acupuncture chain expands to Upper West Side (May 13, 2024) · <a href="https://patch.com/new-york/upper-west-side-nyc/popular-acupuncture-chain-expands-upper-west-side">https://patch.com/new-york/upper-west-side-nyc/popular-acupuncture-chain-expands-upper-west-side</a></li>
+    <li id="s11">I Love the Upper West Side, WTHN now open (Sep 12, 2024; sponsored) · <a href="https://www.ilovetheupperwestside.com/?p=147508">https://www.ilovetheupperwestside.com/?p=147508</a></li>
+    <li id="s12">NYC for Free, WTHN NoHo grand opening (snippet) · <a href="https://www.nycforfree.co/events/wthn-noho-grand-opening">https://www.nycforfree.co/events/wthn-noho-grand-opening</a></li>
+    <li id="s13">Fitt Insider #324, Michelle Larivee (Feb 2, 2026) · <a href="https://insider.fitt.co/324-michelle-larivee-founder-ceo-of-wthn/">https://insider.fitt.co/324-michelle-larivee-founder-ceo-of-wthn/</a></li>
+    <li id="s14">CB Insights, WTHN funding (snippet) · <a href="https://www.cbinsights.com/company/wthn/financials">https://www.cbinsights.com/company/wthn/financials</a></li>
+    <li id="s15">YesPress, WTHN company profile (snippet) · <a href="https://yespress.io/wthn.md">https://yespress.io/wthn.md</a></li>
+    <li id="s16">wthn.com homepage (observed Nov 13, 2026) · <a href="https://wthn.com/">https://wthn.com/</a></li>
+    <li id="s17">wthn.com pricing (observed Nov 13, 2026) · <a href="https://wthn.com/pages/pricing">https://wthn.com/pages/pricing</a></li>
+    <li id="s18">wthn.com FAQ (observed Nov 13, 2026) · <a href="https://wthn.com/pages/faq">https://wthn.com/pages/faq</a></li>
+    <li id="s19">wthn.com new client page · <a href="https://wthn.com/pages/new-client">https://wthn.com/pages/new-client</a></li>
+    <li id="s20">wthn.com Give $50 referral page · <a href="https://wthn.com/pages/give-50">https://wthn.com/pages/give-50</a></li>
+    <li id="s21">wthn.com corporate wellness · <a href="https://wthn.com/pages/corporate-wellness">https://wthn.com/pages/corporate-wellness</a></li>
+    <li id="s22">ClassPass, WTHN NoHo · <a href="https://classpass.com/studios/wthn--noho-new-york">https://classpass.com/studios/wthn--noho-new-york</a></li>
+    <li id="s23">College of Acupuncturists of Alberta, Code of Professional Conduct (eff. May 1, 2014) · <a href="https://acupuncturealberta.ca/wp-content/uploads/2021/11/code-of-professional-conduct-new-logo.pdf">https://acupuncturealberta.ca/wp-content/uploads/2021/11/code-of-professional-conduct-new-logo.pdf</a></li>
+    <li id="s24">Alberta Health Professions Act (current as of Jul 31, 2026) · <a href="https://kings-printer.alberta.ca/documents/Acts/H07.pdf">https://kings-printer.alberta.ca/documents/Acts/H07.pdf</a></li>
+    <li id="s25">Acupuncturists Profession Regulation, AR 255/2020 · <a href="https://kings-printer.alberta.ca/documents/Regs/2020_255.pdf">https://kings-printer.alberta.ca/documents/Regs/2020_255.pdf</a></li>
+    <li id="s26">CRMTA, FAQ from the Working Group for the Regulation of Massage Therapy · <a href="https://crmta.com/frequently-asked-questions-from-the-working-group-for-the-regulation-of-massage-therapy/">https://crmta.com/frequently-asked-questions-from-the-working-group-for-the-regulation-of-massage-therapy/</a></li>
+    <li id="s27">NHPC, Current status of massage therapy regulation, Alberta · <a href="https://www.nhpcanada.org/massage-therapy-regulation/alberta">https://www.nhpcanada.org/massage-therapy-regulation/alberta</a></li>
+    <li id="s28">MTAA Standards of Practice (amended Jan 1, 2026) · <a href="https://mtaalberta.com/wp-content/uploads/2026/02/Standards-of-Practice-Updated-2026.pdf">https://mtaalberta.com/wp-content/uploads/2026/02/Standards-of-Practice-Updated-2026.pdf</a></li>
+    <li id="s29">CPTA, Advertising and Marketing Standard (Jan 2025) · <a href="https://cpta.ab.ca/docs/62/Advertising_and_Marketing.pdf">https://cpta.ab.ca/docs/62/Advertising_and_Marketing.pdf</a></li>
+    <li id="s30">CPTA, Funding, Fees and Billing Standard · <a href="https://www.cpta.ab.ca/docs/138/Funding_Fees_and_Billing.pdf">https://www.cpta.ab.ca/docs/138/Funding_Fees_and_Billing.pdf</a></li>
+    <li id="s31">CPTA, Good Practice: Ethical Advertising · <a href="https://cpta.ab.ca/news-and-updates/news/good-practice-ethical-advertising">https://cpta.ab.ca/news-and-updates/news/good-practice-ethical-advertising</a></li>
+    <li id="s32">CPTA, 10 examples of unprofessional advertising (snippet) · <a href="https://www.cpta.ab.ca/news-and-updates/news/good-practice-10-examples-of-unprofessional-advertising/">https://www.cpta.ab.ca/news-and-updates/news/good-practice-10-examples-of-unprofessional-advertising/</a></li>
+    <li id="s33">Alberta Blue Cross, Chiropractic Online Services Billing Agreement (analog) · <a href="https://www.ab.bluecross.ca/pdfs/chiro_provider_policy.pdf">https://www.ab.bluecross.ca/pdfs/chiro_provider_policy.pdf</a></li>
+    <li id="s34">Alberta Blue Cross, Delisted providers (snippet; page blocked) · <a href="https://www.ab.bluecross.ca/resources/benefits-fraud/delisted-providers.php">https://www.ab.bluecross.ca/resources/benefits-fraud/delisted-providers.php</a></li>
+    <li id="s35">CLHIA, Incentives Explained for Medical Suppliers · <a href="https://www.clhia.ca/Industry/Resources-for-HealthCare-Providers/Incentives-Explained-for--Medical-Suppliers">https://www.clhia.ca/Industry/Resources-for-HealthCare-Providers/Incentives-Explained-for--Medical-Suppliers</a></li>
+    <li id="s36">CLHIA, Incentives Explained for Optical Providers · <a href="https://www.clhia.ca/Industry/Resources-for-HealthCare-Providers/Incentives-Explained-for--Optical-Providers">https://www.clhia.ca/Industry/Resources-for-HealthCare-Providers/Incentives-Explained-for--Optical-Providers</a></li>
+    <li id="s37">CLHIA, Exploring the practice of offering incentives · <a href="https://www.clhia.ca/Consumers/Fraud-and-Abuse/Exploring-the-practice-of-offering-incentives">https://www.clhia.ca/Consumers/Fraud-and-Abuse/Exploring-the-practice-of-offering-incentives</a></li>
+    <li id="s38">Competition Act ss.74.01–74.02 (Justice Laws) · <a href="https://laws-lois.justice.gc.ca/eng/acts/c-34/page-11.html">https://laws-lois.justice.gc.ca/eng/acts/c-34/page-11.html</a></li>
+    <li id="s39">Competition Bureau, Online reviews posted by employees (Jan 2024) · <a href="https://www.canada.ca/en/competition-bureau/news/2024/01/online-reviews-posted-by-employees-businesses-could-be-liable.html">https://www.canada.ca/en/competition-bureau/news/2024/01/online-reviews-posted-by-employees-businesses-could-be-liable.html</a></li>
+    <li id="s40">Google Maps, Prohibited and restricted content · <a href="https://support.google.com/contributionpolicy/answer/7400114">https://support.google.com/contributionpolicy/answer/7400114</a></li>
+    <li id="s41">Health Canada, Natural health product licensing · <a href="https://www.canada.ca/en/health-canada/services/drugs-health-products/natural-non-prescription/applications-submissions/product-licensing.html">https://www.canada.ca/en/health-canada/services/drugs-health-products/natural-non-prescription/applications-submissions/product-licensing.html</a></li>
+    <li id="s42">TELUS Health eClaims FAQ (terms partly snippet-level) · <a href="https://www.telus.com/en/health/health-professionals/allied-healthcare-professionals/eclaims/faq">https://www.telus.com/en/health/health-professionals/allied-healthcare-professionals/eclaims/faq</a></li>
+    <li id="s43">PrivCo, WTHN (unreliable entry) · <a href="https://system.privco.com/company/wthn">https://system.privco.com/company/wthn</a></li>
+    <li id="s44">Wharton Magazine, Michelle Larivee tag (2026) · <a href="https://magazine.wharton.upenn.edu/tag/michelle-larivee/">https://magazine.wharton.upenn.edu/tag/michelle-larivee/</a></li>
+    <li id="s45">Pacific College, Shari Auth (snippet) · <a href="https://www.pacificcollege.edu/?p=18765">https://www.pacificcollege.edu/?p=18765</a></li>
+    <li id="s46">MapQuest listing, WTHN Flatiron (Yelp aggregate) · <a href="https://www.mapquest.com/us/new-york/wthn-420695075">https://www.mapquest.com/us/new-york/wthn-420695075</a></li>
+    <li id="s47">wthn.com, Acupuncture Brooklyn landing page · <a href="https://wthn.com/pages/acupuncture-brooklyn">https://wthn.com/pages/acupuncture-brooklyn</a></li>
+    <li id="s48">wthn.com, healer bio example · <a href="https://wthn.com/blogs/our-healers/olivia-choi-dacchm-lac-mph-msbbb-bpharm">https://wthn.com/blogs/our-healers/olivia-choi-dacchm-lac-mph-msbbb-bpharm</a></li>
+  </ol>
+  <p class="meta" style="font-size:.84rem">Internal (not linked): V-Health owner interview, 2026-11-12 (client-profile-vhealth.md); priority-analysis.md; referral-plan-analysis.html; loyalty-analysis.html.</p>
+</section>
+
+<footer>Research current to 2026-11-13. Rule quotations are from the linked primary documents unless marked "snippet". This page is not legal advice; confirm with the relevant college and insurers before launching any offer.</footer>
+</main>
+</body>
+</html>

@@ -8,6 +8,7 @@
     { "key": "plan", "name": "计划 & OKR", "color": "#10715f" }
   ],
   "docs": [
+    { "cat": "grow", "title": "WTHN 研究：V-Health 能学什么（English）", "type": "HTML", "date": "2026-11-13", "status": "wip", "path": "deliverables/wthn-research.html", "featured": true },
     { "cat": "grow", "title": "转介绍计划分析 + Top 3", "type": "HTML", "date": "2026-11-13", "status": "wip", "path": "deliverables/referral-plan-analysis.html", "featured": true },
     { "cat": "grow", "title": "集章卡 / 积分分析 + Top 3", "type": "HTML", "date": "2026-11-13", "status": "wip", "path": "deliverables/loyalty-analysis.html", "featured": true },
     { "cat": "desk", "title": "每日新客户来源登记表", "type": "PDF", "date": "2026-11-13", "status": "use", "path": "deliverables/VHealth-New-Client-Source-Log.pdf", "featured": true },
