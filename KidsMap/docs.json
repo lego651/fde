@@ -36,6 +36,24 @@
   "docs": [
     {
       "cat": "grow",
+      "title": "分析：新人群（邻里、学生、上班族）",
+      "type": "HTML",
+      "date": "2026-11-14",
+      "status": "wip",
+      "path": "deliverables/new-audiences-analysis.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
+      "title": "新人群：邻里、学生、上班族每周都会用的功能（原文）",
+      "type": "HTML",
+      "date": "2026-11-11",
+      "status": "wip",
+      "path": "deliverables/new-audiences.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
       "title": "让用户每周、甚至每天都打开：14 个功能（Kids Map 7 + Roam 7）",
       "type": "HTML",
       "date": "2026-11-11",

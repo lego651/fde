@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分析：新人群（邻里、学生、上班族）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one reading column. Verdict, what works, 5 problems, revised test, sources. Paper palette shared with the FDE site. */
+  --paper: #fbf8f2; --card: #fff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --warn: #8a5a00; --warn-soft: #fff1d6; --bad: #b3261e; --bad-soft: #fde8e6;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); }
+main { max-width: 860px; margin: 0 auto; padding: 40px 20px 90px; display: grid; gap: 38px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.3; }
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.08rem; }
+p { margin: 0; max-width: 70ch; }
+a { color: var(--accent-ink); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 16px; }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 2px 9px; border-radius: 999px; background: #e3eefb; color: #1d5fa8; }
+.verdict { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.score { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.score div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.score b { font-size: 1.35rem; font-family: var(--serif); }
+.score span { font-size: .82rem; color: var(--muted); }
+@media (max-width: 680px) { .score { grid-template-columns: 1fr 1fr; } }
+.good { background: var(--good-soft); border: 1px solid #c4e5cc; border-radius: 14px; padding: 16px 20px; display: grid; gap: 8px; }
+.prob { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.prob .ph { display: flex; gap: 12px; align-items: center; padding: 14px 20px; background: #f7f1e6; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.prob .n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; flex: none; font-size: .9rem; }
+.prob .ph h3 { flex: 1; min-width: 200px; }
+.prob .pb { padding: 16px 20px 18px; display: grid; gap: 10px; }
+.prob .fix { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.hi { background: var(--bad-soft); color: var(--bad); }
+.mid { background: var(--warn-soft); color: var(--warn); }
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: #f7f1e6; font-size: .8rem; letter-spacing: .05em; color: #8c7f6a; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sources { font-size: .85rem; color: var(--muted); }
+.sources li { word-break: break-word; }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>分析：新人群（邻里、学生、上班族）</h1>
+  <p class="meta">Kids Map · 分析原文 <a href="new-audiences.html">《新人群：邻里、学生、上班族每周都会用的功能》（2026-11-11）</a> · 2026-11-14 · <span class="tag">分析中</span></p>
+</header>
+
+<section>
+  <div class="verdict">
+    <p><b>结论：方向对，但一次打开3个新人群太多。现在最该做的只有一件：邻里里的"冰场状态"，而且要在12月前上线。</b>它当季、属于 Calgary、用的是已有的实时报告，用户本来就是 Kids Map 的家庭。</p>
+    <p>原文的"每群先做2个"一共6个功能，横跨两个 app。学生和上班族都要等下一个时间点：学生是1月开学，上班族的饭局已经有 Timeleft 在 Calgary 做了。建议先放进"以后"。</p>
+    <p>另外有3件事要改：<b>① Snow Angels 配对会把独居老人的地址放上地图</b>，设计必须改；<b>② Roam 每天的推送会太多</b>，跟上一份《14 个功能》定的"每天最多1条"冲突；<b>③ 两个数字过时或缺来源</b>。</p>
+  </div>
+  <div class="score" role="list">
+    <div role="listitem"><b>对</b><span>"固定时间点"的思路</span></div>
+    <div role="listitem"><b>太多</b><span>3群 × 2 = 6个同时做</span></div>
+    <div role="listitem"><b>要改</b><span>老人地址上地图</span></div>
+    <div role="listitem"><b>冲突</b><span>推送次数</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>写得好的地方</h2>
+  <div class="good">
+    <ul class="plain">
+      <li><b>找对了抓手。</b>每个人群都找到一个固定、重复发生的时间点：下雪、周六、每天找地方学习、11点午饭、4点下班。这比"给他们做个功能"具体得多。</li>
+      <li><b>没有为每个人群新做一个 app。</b>邻里放 Kids Map，学生和上班族放 Roam，复用现有的实时报告、Coins、Deals 和 Dinners。</li>
+      <li><b>吸取了 Nextdoor 的教训。</b>"只做有地点、有时间、有一个动作的东西，不做闲聊信息流"，这条原则很好，应该写进产品规则。核实：Nextdoor 2025年周活 2,100 万（−5%），亏损 5,400 万美元，和原文一致<a href="#r5">[5]</a>。</li>
+      <li><b>证据和判断分开。</b>自习地图、+15 散步路线都写了"没找到直接的数据，这是我的判断"。</li>
+      <li><b>冰场和 Snow Angels 的事实核对过，是对的</b>：市里有65个以上由志愿者维护的冰场<a href="#r1">[1]</a>；市里不保存 Snow Angels 名单，没法帮人配对<a href="#r2">[2]</a>。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5 个问题，以及怎么改</h2>
+
+  <div class="prob">
+    <div class="ph"><span class="n">1</span><h3>一次开3个新人群、6个功能，横跨两个 app</h3><span class="pill hi">先只做1个</span></div>
+    <div class="pb">
+      <p>每个新功能都要先有人用，才会有用：冰场状态要附近有人更新，自习地图要学生报告"现在人多不多"，午饭小组要同一栋楼有好几个用户。<b>功能分散到3个人群，每个地方的人都不够多</b>，实时报告就会是空的，空的报告比没有更伤口碑。</p>
+      <p>时机也不一样：</p>
+      <div class="wrap"><table>
+        <tr><th>人群</th><th>下一个好时机</th><th>判断</th></tr>
+        <tr><td>邻里（冰场、铲雪）</td><td><b>现在到3月</b>，今天是11月14日</td><td>只有这个是当季的。Kids Map 的家庭本来就会去冰场</td></tr>
+        <tr><td>学生</td><td>1月开学，下一个大的是9月</td><td>需要学校邮箱验证、找校园合作，准备时间长</td></tr>
+        <tr><td>上班族</td><td>随时</td><td>饭局已经有对手（见第4点），午饭推送和 Roam 现有的"今晚 deals"重叠</td></tr>
+      </table></div>
+      <p class="fix"><b>改：</b>这个冬天只做<b>冰场状态</b>，在两三个 Kids Map 用户最多的社区先试。用这一季的数据回答一个问题：附近的家长愿不愿意按一下"冰面好不好"？愿意，再加铲雪和社区免费送；不愿意，其他靠实时报告的功能也要重新想。</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">2</span><h3>Snow Angels 配对：独居老人的地址不能放在地图上</h3><span class="pill hi">风险高</span></div>
+    <div class="pb">
+      <p>原文的做法是老人发一个"我家门口"，附近志愿者在地图上认领。问题是：这张地图实际上就是<b>"哪些家里住着需要帮忙的老人或行动不便的人"</b>，任何下载 app 的人都能看到。这是最不该公开的信息。</p>
+      <p>另外：</p>
+      <ul class="plain">
+        <li><b>空白比原文说的还大</b>：市里给低收入老人安排铲雪的 Home Services for Seniors 项目，<b>2026年9月30日已经结束</b>，之前就不收新人了<a href="#r3">[3]</a>。这让需求更真实，也更说明不能做砸。</li>
+        <li><b>已经有人在做</b>：一些社区协会有自己的铲雪志愿者项目，比如 Marlborough，要求志愿者12岁以上、有家长同意、整个冬天都能参加<a href="#r4">[4]</a>。</li>
+        <li>"Snow Angels"是市政府活动的名字，我们直接用会让人以为是市里做的。</li>
+        <li>Kids Map 的用户里有孩子。孩子去陌生老人家门口铲雪，要有家长同意，也要想清楚受伤和摔倒的责任。</li>
+      </ul>
+      <p class="fix"><b>改：</b>①地图上只显示"这个社区有 3 户需要帮忙"，<b>不显示地址</b>；志愿者认领后，才把地址发给这一个人，而且只发给实名、年满18岁（或有家长账号一起认领）的用户。②先和1–2个社区协会合作，由他们核实需要帮忙的人，我们只做配对和记录工具。③换个名字，比如"Shovel Buddies"，写明"支持市里的 Snow Angels 活动"。④Coins 和排名只给家庭，不公开显示谁帮了哪一户。</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">3</span><h3>推送太多：和《14 个功能》的规则冲突</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>上一份<a href="habit-features.html">《让用户每周、甚至每天都打开：14 个功能》</a>定了一条规则："每天最多1条推送，周末可以2条"。这一份给 Roam 加了：</p>
+      <ul class="plain">
+        <li>11点"今天的午饭"</li>
+        <li>4点"happy hour 现在哪里有"，<b>和上一份的4点"今晚 deals"是同一个时间、同一类内容</b></li>
+        <li>学生每天下午的"学生 deals"和"今天的免费活动"</li>
+      </ul>
+      <p>Kids Map 这边，"走失宠物提醒"会推给2公里内的所有人，一个社区一周丢几只宠物，就是几条额外推送。</p>
+      <p class="fix"><b>改：</b>①"happy hour"并进"今晚 deals"，一条推送。②用户在设置里选自己是"上班族 / 学生 / 都不是"，每人每天只收<b>一条</b>最相关的。③走失宠物默认只在 app 里显示，用户主动打开"附近走失宠物提醒"才推送。</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">4</span><h3>饭局和午饭配对：Timeleft 已经在 Calgary 做了</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>原文把 Timeleft 当作"可以学的模式"，但它<b>2024年6月就进入了 Calgary</b>，每周三晚上把陌生人配成一桌，收门票<a href="#r6">[6]</a>。原文的"学生饭局"和"午饭随机配对"都是在和它正面竞争。</p>
+      <p>还有两点：Lunchclub 这类"陌生人配对"产品很依赖人数，同一个时间、同一个区域要有足够多的人报名，Roam 现在可能还做不到；学生里有18岁以下的新生，和陌生人吃饭要有年龄限制。</p>
+      <p class="fix"><b>改：</b>放到"以后"。真要做，就做 Timeleft 不做的：<b>同一栋楼或同一个 +15 区域的午饭</b>（不用开车，45分钟就回去），或者和学生会、国际学生办公室合作办新生饭局，而不是自己从零找人。</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">5</span><h3>两个数字要更新，几个说法要补来源</h3><span class="pill mid">小</span></div>
+    <div class="pb">
+      <ul class="plain">
+        <li><b>写字楼空置率 25.9% 过时了。</b>2026年第二季度 Calgary 市中心是 26.96%（Cresa）<a href="#r7">[7]</a>，其他机构的口径更高，接近29%。结论不变（空的多，商家想把人留下），但数字要换。</li>
+        <li><b>公务员回办公室：属实，但主要不在 Calgary。</b>2026年2月1日起，Alberta 公务员全职回办公室，涉及约12,600个原来混合办公的员工<a href="#r8">[9]</a>。省政府的办公室大多在 Edmonton，对 Calgary 市中心午饭的影响要打个折。</li>
+        <li><b>"冰场状态地图常常是 3 个月前"</b>：市里冰场页面的表格确实有"最后更新时间"<a href="#r1">[1]</a>，但"常常 3 个月前"只是某一天看到的情况，原文没写是哪天看的。建议截图存证，写上日期。</li>
+        <li><b>冰场的规则</b>：Adopt-a-Rink 冰场只能自由滑，不能打冰球<a href="#r1">[1]</a>。冰场卡片上要写，否则家长带着冰球杆去会失望。</li>
+        <li><b>只做人工冰场，不做湖面和河面。</b>"冰面好不好"一旦用在天然冰面上，就是安全问题。卡片上不能出现"可以上冰"这类判断。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>修改后的顺序</h2>
+  <div class="wrap"><table>
+    <tr><th>时间</th><th>做什么</th></tr>
+    <tr><td>现在 → 12月初</td><td><b>冰场状态</b>：先在2–3个社区试，每个冰场一张卡，附近家长一按就更新；写明"只能自由滑""只限人工冰场"。成功标准（建议）：每个试点冰场每周 ≥ 3 次更新</td></tr>
+    <tr><td>12月</td><td>如果冰场有人更新：和1个社区协会谈铲雪配对，<b>不公开地址</b>的版本</td></tr>
+    <tr><td>1–3月</td><td>Roam：只把"happy hour"并进"今晚 deals"，不新增推送。学生 deals 先找1所学校的学生会谈</td></tr>
+    <tr><td>以后</td><td>社区免费送、走失宠物（默认不推送）、自习地图、午饭配对、健身通票、+15 路线、公司团建</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>原文需要改的地方（汇总）</h2>
+  <ul class="plain">
+    <li>"每群先做2个"改成"这个冬天只做冰场状态"，其他的放进"以后"。</li>
+    <li>Snow Angels：改名，不公开地址，先和社区协会合作；加上"市里的老人铲雪项目已于2026年9月30日结束"。</li>
+    <li>happy hour 并进"今晚 deals"；加一句"遵守《14 个功能》里每天最多1条推送的规则"；走失宠物默认不推送。</li>
+    <li>饭局和午饭配对：写明 Timeleft 2024年起已在 Calgary。</li>
+    <li>空置率换成2026年第二季度的数字；公务员回办公室注明主要在 Edmonton；冰场"3 个月前"补截图和日期；加上"只能自由滑""只做人工冰场"。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>资料来源</h2>
+  <ol class="sources">
+    <li id="r1">City of Calgary，Outdoor skating rinks（状态表、最后更新时间）和 Adopt-a-Rink（65+ 冰场，只能自由滑）：<a href="https://www.calgary.ca/parks/activities/outdoor-skating-rinks.html">calgary.ca/rinks</a> · <a href="https://www.calgary.ca/volunteer/adopt-a-rink.html">calgary.ca/volunteer/adopt-a-rink</a></li>
+    <li id="r2">City of Calgary，Snow Angels（市里不保存名单，不配对）：<a href="https://calgary.ca/SnowAngels">calgary.ca/SnowAngels</a> · <a href="https://newsroom.calgary.ca/calgarians-invited-to-lend-a-hand-through-the-2025-snow-angels-campaign/">2025 活动新闻稿</a></li>
+    <li id="r3">Home Services for Seniors 项目结束（2026年9月30日）：<a href="https://shca.ca/news/2026-09-08-home-services-for-seniors-ending">shca.ca</a> · <a href="https://www.calgary.ca/content/dam/www/programs-services/social-programs-and-services/older-adult-and-age-friendly-resources/home-services-seniors-faq.pdf">City of Calgary FAQ</a></li>
+    <li id="r4">Calgary Marlborough 社区协会铲雪志愿者项目：<a href="https://calgarymarlborough.com/?p=5993">calgarymarlborough.com</a></li>
+    <li id="r5">Nextdoor 2025 年报（周活 2,100 万，−5%；亏损 5,400 万美元）：<a href="https://www.businesswire.com/news/home/20260218233855/en/nextdoor-reports-fourth-quarter-and-full-year-2025-results/">businesswire.com</a></li>
+    <li id="r6">CBC，Timeleft 2024年6月进入 Calgary：<a href="https://www.cbc.ca/1.7391333">cbc.ca</a> · <a href="https://curiocity.com/new-friends-calgary-timeleft/">curiocity.com</a></li>
+    <li id="r7">Cresa，Q2 2026 Calgary office market（市中心空置率 26.96%）：<a href="https://www.cresa.com/Locations/North-America/Alberta-Canada/Calgary-AB/Market-Research/q2-2026-calgary-office-market-report">cresa.com</a></li>
+    <li id="r8">HR Reporter / Castanet，Alberta 公务员2026年2月1日起全职回办公室（约12,600人原为混合办公）：<a href="https://www.hrreporter.com/focus-areas/culture-and-engagement/alberta-government-mandates-full-office-return-for-public-servants/393657">hrreporter.com</a> · <a href="https://www.castanetkamloops.net/news/Alberta/579906/Alberta-government-ending-hybrid-work-policy-for-public-servants-starting-in-February">castanet</a></li>
+  </ol>
+  <p class="sources">原文的其他数字（Buy Nothing、PawBoost、SPC、Fizz、Ritual、Let's Roam）是公司自己的说法或二手来源，这次没有逐一核对。</p>
+</section>
+
+</main>
+</body>
+</html>
