@@ -186,6 +186,24 @@
       "status": "wip",
       "path": "deliverables/costco97-fit-analysis.html",
       "featured": true
+    },
+    {
+      "cat": "design",
+      "title": "护照改版：贴纸册 + 点亮地图（A+B 定稿）",
+      "type": "HTML",
+      "date": "2026-11-13",
+      "status": "done",
+      "path": "deliverables/passport-sticker-map.html",
+      "featured": true
+    },
+    {
+      "cat": "design",
+      "title": "护照：到了以后怎么集贴纸（打卡流程）",
+      "type": "HTML",
+      "date": "2026-11-13",
+      "status": "done",
+      "path": "deliverables/passport-collect-flow.html",
+      "featured": true
     }
   ],
   "ignore": {}

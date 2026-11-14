@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>护照页 A+B 结合 · 4 种状态效果图</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#fbf8f2;--ink:#1d2433;--mute:#6a6457;--accent:#c9772e;--line:#e8e0cf;--green:#2f7a5a;--rust:#c0612b;--gold:#e0b84a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 -apple-system,"PingFang SC","Nunito",sans-serif}
+  .wrap{max-width:1340px;margin:0 auto;padding:40px 22px 80px}
+  h1,h2{font-family:"Noto Serif SC",serif;line-height:1.25}
+  h1{font-size:32px;margin:0 0 6px}
+  h2{font-size:24px;margin:46px 0 12px;padding-top:16px;border-top:2px solid var(--line)}
+  .sub{color:var(--mute)}
+  .tag{display:inline-block;background:#f3e6d3;color:var(--accent);font-weight:800;font-size:12px;padding:2px 9px;border-radius:99px;margin-right:6px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+  .how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:900px){.how{grid-template-columns:1fr 1fr}}
+  .how .card b{display:block;font-size:15px;margin-bottom:2px}
+  .how .card .e{font-size:28px}
+  ul{padding-left:20px;margin:6px 0} li{margin:3px 0}
+
+  .states{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin-top:10px;justify-items:center}
+  .state{width:310px}
+  .label{text-align:center;margin-bottom:8px}
+  .label b{display:inline-block;background:var(--ink);color:#fff;border-radius:99px;padding:2px 12px;font-size:14px}
+  .label div{font-size:13px;color:var(--mute);margin-top:3px}
+  .why{font-size:13.5px;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+  .why li{margin:2px 0}
+
+  /* phone */
+  .phone{width:310px;border:10px solid #1d2433;border-radius:36px;background:#fff;overflow:hidden;font-family:"Nunito",-apple-system,sans-serif;box-shadow:0 14px 34px rgba(0,0,0,.12)}
+  .scr{height:820px;overflow:hidden;padding:12px 12px 0;position:relative}
+  .top{display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-bottom:6px}
+  .top .km{color:var(--green)}
+  .small{font-size:11px;color:var(--mute)}
+  .btn{display:block;text-align:center;font-weight:900;border-radius:13px;padding:10px;font-size:13.5px}
+  .btn.green{background:var(--green);color:#fff}
+  .btn.gold{background:linear-gradient(135deg,#f6dd8f,#e0b84a);color:#3a2a06}
+  .chip{display:inline-flex;align-items:center;gap:3px;background:#fff1e3;color:var(--rust);font-weight:900;font-size:11px;border-radius:99px;padding:2px 8px}
+  .title{font-weight:900;font-size:18px;line-height:1.15}
+  .steps{display:flex;gap:5px;margin:8px 0}
+  .steps div{flex:1;background:#f6f1e6;border-radius:10px;padding:6px 3px;text-align:center;font-size:10px;font-weight:800;line-height:1.25}
+  .steps div i{display:block;font-style:normal;font-size:18px}
+
+  /* rank header */
+  .rankbox{border-radius:16px;padding:10px 12px;color:#fff;background:linear-gradient(135deg,#2f7a5a,#1e5a41);display:flex;gap:10px;align-items:center;margin-top:8px}
+  .rankbox.legend{background:linear-gradient(135deg,#3a2a06,#8a6514 60%,#e0b84a)}
+  .rankbox.rookie{background:linear-gradient(135deg,#59616e,#3a414d)}
+  .medal{width:46px;height:46px;flex:0 0 46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3c4,#e0b84a 55%,#a97a1c);display:grid;place-items:center;font-size:21px;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+  .medal.grey{background:radial-gradient(circle at 35% 30%,#f2f2f2,#b9bec6 60%,#7d838c)}
+  .rk small{display:block;font-size:9.5px;font-weight:800;opacity:.85;letter-spacing:.04em}
+  .rk b{font-size:15px}
+  .bar{height:8px;background:rgba(255,255,255,.25);border-radius:8px;overflow:hidden;margin-top:4px}
+  .bar i{display:block;height:100%;background:#f3d68a;border-radius:8px}
+  .rk .nx{font-size:10px;opacity:.9;margin-top:2px}
+
+  /* map */
+  .map{position:relative;height:230px;border-radius:16px;overflow:hidden;margin-top:9px;border:2px solid #e3dccb}
+  .map.goldframe{border:3px solid var(--gold);box-shadow:0 0 0 3px #fff3c9}
+  .map svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .pct{position:absolute;left:8px;top:8px;z-index:3;background:#1d2433;color:#fff;border-radius:11px;padding:4px 9px;font-weight:900;font-size:12.5px;line-height:1.15;z-index:2}
+  .pct small{display:block;font-size:9px;font-weight:700;opacity:.8}
+  .tog{position:absolute;right:8px;top:8px;background:#fff;border-radius:99px;padding:3px 9px;font-size:10px;font-weight:900;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .mpin{position:absolute;transform:translate(-50%,-50%);z-index:2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:14px;background:var(--c,#ffd9a8);border:2.5px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+  .mpin.holo{background:conic-gradient(#ffd6f5,#c9f0ff,#d8ffd0,#fff5c2,#ffd6f5)}
+  .mpin.q{background:#fff;color:#8b7fb0;font-weight:900;font-size:13px;border:2px dashed #8b7fb0;animation:bob 1.6s ease-in-out infinite}
+  .mpin.new{animation:pop 1.2s ease-out infinite alternate;box-shadow:0 0 0 5px rgba(243,214,138,.7),0 2px 4px rgba(0,0,0,.25)}
+  @keyframes bob{50%{transform:translate(-50%,-62%)}}
+  @keyframes pop{to{box-shadow:0 0 0 9px rgba(243,214,138,.25),0 2px 4px rgba(0,0,0,.25)}}
+  .flag{position:absolute;z-index:2;font-size:10px;font-weight:900;background:#fff;border-radius:7px;padding:1px 6px;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translate(-50%,-50%);white-space:nowrap}
+  .flag.gold{background:#fff3c9;border:1px solid var(--gold)}
+  .you{position:absolute;z-index:2;width:12px;height:12px;border-radius:50%;background:#2a7de1;border:2.5px solid #fff;box-shadow:0 0 0 6px rgba(42,125,225,.2);transform:translate(-50%,-50%)}
+
+  .comm{display:flex;gap:5px;margin-top:7px}
+  .comm div{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:3px 2px;font-size:9.5px;font-weight:800;text-align:center;background:#fff;line-height:1.2}
+  .comm div b{display:block;font-size:12.5px}
+  .comm .done{border-color:var(--gold);background:#fff8df}
+
+  /* album */
+  .pagecard{border:1px solid var(--line);border-radius:14px;padding:8px 9px 10px;margin-top:8px;background:#fffdf8}
+  .pagecard.lim{border:2px solid #7fb6e0;background:linear-gradient(135deg,#f2f9ff,#fff)}
+  .pagecard.full{border:2px solid var(--gold);background:linear-gradient(135deg,#fff8df,#fff)}
+  .pagecard h4{margin:0 0 7px;font-size:12px;display:flex;justify-content:space-between;gap:6px}
+  .pagecard h4 span:last-child{font-weight:800;color:var(--mute)}
+  .stickers{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+  .stk{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;position:relative;font-size:19px;
+       background:var(--c,#ffd9a8);border:2.5px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.08),0 3px 5px rgba(0,0,0,.14);transform:rotate(var(--r,-5deg))}
+  .stk small{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);background:#1d2433;color:#fff;font-size:6.5px;font-weight:900;white-space:nowrap;padding:1px 4px;border-radius:4px;max-width:120%;overflow:hidden;text-overflow:ellipsis}
+  .stk.mys{background:#ece6da;color:#b8ad98;font-size:17px;font-weight:900;box-shadow:inset 0 0 0 2px #d9cfbc;border:2.5px dashed #fff;transform:none}
+  .stk.holo{background:conic-gradient(#ffd6f5,#c9f0ff,#d8ffd0,#fff5c2,#ffd6f5)}
+  .stk.new{box-shadow:0 0 0 3px #f3d68a,0 3px 5px rgba(0,0,0,.14)}
+  .hint{margin-top:8px;background:#fff7e6;border:1px dashed #e7c98d;border-radius:10px;padding:6px 8px;font-size:11px}
+  .banner{border-radius:13px;padding:8px 10px;font-size:12px;font-weight:800;margin-top:8px;display:flex;gap:8px;align-items:center}
+  .banner.y{background:#fff3c9;border:1px solid #ecd27f}
+  .more{text-align:center;font-size:11px;font-weight:800;color:var(--mute);margin-top:8px}
+  .cert{margin-top:9px;border-radius:14px;border:2px solid var(--gold);background:#fffaf0;padding:10px;text-align:center}
+  .poster{border:6px solid #3b2d22;background:#fff;padding:5px;width:120px;margin:6px auto}
+  .poster .p{height:80px;background:linear-gradient(135deg,#cfe6d2,#e6f0d9);display:grid;place-items:center;font-size:9px;font-weight:900;color:#2f7a5a;text-align:center;line-height:1.2}
+
+  .pick{border:2px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center;font-size:24px;background:#fff}
+  .pick b{display:block;font-size:11px;margin-top:2px}
+  .pick.on{border-color:var(--green);background:#eaf6ef;box-shadow:inset 0 0 0 1px var(--green)}
+  .teaser{margin-top:9px;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.1)}
+  .teaser .ph{height:92px;background:linear-gradient(135deg,#bfe0bf,#f6e6b8);display:grid;place-items:center;font-size:40px;position:relative}
+  .teaser .ph span{position:absolute;right:8px;bottom:6px;font-size:9px;color:#6a6457}
+  .whygo{background:#fff7e6;border-radius:9px;padding:6px 8px;font-size:11.5px;margin-top:6px;line-height:1.35}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<span class="tag">Kids Map</span><span class="tag">护照页</span><span class="tag">A+B 结合 · 2026-11-13</span>
+<h1>A + B 结合：贴纸册 + 点亮地图</h1>
+<p class="sub">可以结合，而且合在一起比单做哪一个都好：<b>按一次 “I’m here!”，同时拿到两样东西</b>：一张贴纸贴进册子，地图上那一片的雾也散开。下面是 4 种状态的样子：一个都没解锁、解锁 1 个、解锁很多个、全部解锁。</p>
+
+
+<div class="card" style="border:2px solid var(--accent);margin-top:18px">
+  <h3 style="margin-top:0">定稿（11/13）：Jason 选了 A+B，已做成代码（kids-map PR #110）</h3>
+  <ul>
+    <li><b>雾会慢慢回来</b>：去过的地方 6 个月内完全透明，之后慢慢变模糊，1 年时到 65% 的雾就停住，<b>不会完全盖回去</b>（贴纸、旗子、等级永远保留，地图只是变朦胧，回去一次就重新变亮）。</li>
+    <li><b>雾有层次</b>：地点中心完全透明，外面一圈是半透明的薄雾，再往外才是浓雾。</li>
+    <li><b>新加的地方</b>：一片已经点亮的区域里，之后新加的地方（包括别人加的 gem）会重新盖上一小片雾，加一个 ✨NEW 图钉。只算最近 60 天加的、最多 6 个，免得一次批量导入把地图盖满。</li>
+    <li><b>“% 点亮”和 🚩 改成按约 3 公里的方块算</b>（大部分地点没有社区名字）：Calgary 64 块、Edmonton 56 块、温哥华 123 块，每块去过一个地方就插旗。</li>
+    <li><b>“?” 只推孩子喜欢的类型</b>：第一次进来问 “What does … love?”（存在这台设备上，每个孩子分开）。点开 “?” 能看到这是什么地方、多远、几岁、多少钱；贴纸到了现场才开。</li>
+  </ul>
+  <p class="sub" style="margin-bottom:0">打卡流程见同一组的另一份文档《护照：到了以后怎么集贴纸》。</p>
+</div>
+
+<h2>怎么合在一起</h2>
+<div class="how">
+  <div class="card"><div class="e">🗺️</div><b>上半屏是地图（B）</b>雾里每个贴纸都钉在它真实的位置上。“?” 是附近还没去过的地方，会轻轻跳动，勾着你去。</div>
+  <div class="card"><div class="e">📒</div><b>下半屏是贴纸册（A）</b>每张贴纸印着地名，按类型分页（游乐场、图书馆……），和现在的分页一样。</div>
+  <div class="card"><div class="e">🏅</div><b>两套进度，一个等级</b>贴纸越多，等级越高：Rookie → Trail Scout → Park Ranger → City Legend。点亮一个社区就插一面 🚩。</div>
+  <div class="card"><div class="e">🖼️</div><b>终点能印出来</b>点亮的地图加上所有贴纸，可以印成“Ethan 的 Calgary”海报，接 Map Shop。</div>
+</div>
+
+<h2>4 种状态</h2>
+<div class="states">
+
+  <!-- ===== 0 ===== -->
+  <div class="state">
+    <div class="label"><b>① 一个都没解锁</b><div>新用户第一次进来：先告诉他“这是什么、离你最近的在哪”</div></div>
+    <div class="phone"><div class="scr">
+      <div class="top"><span>← Explore</span><span class="km">KidsMap</span></div>
+      <div class="title">Collect Calgary 🗺️</div>
+      <div class="small">Go to real places. Get a sticker at each one.</div>
+      <div class="steps"><div><i>📍</i>Go to a place</div><div><i>👆</i>Tap “I’m here!”</div><div><i>🎁</i>Get its sticker</div></div>
+      <div class="map" data-lit="" data-fog=".97">
+        <div class="pct">0%<small>of Calgary lit</small></div>
+        <span class="you" style="left:44%;top:58%"></span>
+        <span class="mpin q" style="left:36%;top:46%">?</span>
+        <span class="mpin q" style="left:58%;top:66%">?</span>
+        <span class="mpin q" style="left:52%;top:38%">?</span>
+      </div>
+      <div class="small" style="text-align:center;margin-top:4px">3 mystery stickers within 3 km of you</div>
+      <a class="btn green" style="margin-top:7px">🎁 Closest sticker: Riley Park · 0.8 km →</a>
+      <div class="rankbox rookie">
+        <div class="medal grey">🥚</div>
+        <div class="rk" style="flex:1"><small>ETHAN · CALGARY</small><b>Rookie · 0 stickers</b>
+          <div class="bar"><i style="width:3%"></i></div><div class="nx">1 sticker → <b>Explorer</b> 🧭</div></div>
+      </div>
+      <div class="pagecard lim">
+        <h4><span>🌙 Long Nights · limited</span><span style="color:#1f5f99">0 / 5 · 121 days</span></h4>
+        <div class="stickers"><div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div></div>
+        <div class="hint">🔍 <b>Hint:</b> a big room full of books with a kids’ corner…</div>
+      </div>
+      <div class="more">+ 10 more pages to fill: 🛝 💦 🌲 📚 🔬 🧸 ⛸️ ⚽ 🎢 ☕</div>
+    </div></div>
+    <ul class="why">
+      <li>一句话 + 3 步，看一眼就懂。</li>
+      <li>地图上不是一片空白，而是 3 个<b>跳动的 “?”</b>，加上“你在这里”的蓝点。</li>
+      <li>只展开 1 页，其它页收成一行小图标，<b>不再一进来就是 41 个灰圈</b>。</li>
+      <li>🔥 连续周数还没开始，所以先不显示。</li>
+    </ul>
+  </div>
+
+  <!-- ===== 1 ===== -->
+  <div class="state">
+    <div class="label"><b>② 解锁 1 个</b><div>刚拿到第一张：庆祝一下，马上给出第二个目标</div></div>
+    <div class="phone"><div class="scr">
+      <div class="top"><span>← Explore</span><span class="km">KidsMap</span></div>
+      <div class="title">Collect Calgary 🗺️</div>
+      <div class="banner y">🎉 <span>First sticker! <b>Riley Park</b> is in Ethan’s album. 2 more are close by.</span></div>
+      <div class="map" data-lit="44,48,30" data-fog=".95">
+        <div class="pct">1%<small>of Calgary lit</small></div>
+        <span class="mpin new" style="left:40%;top:47%;--c:#ffd9a8">🛝</span>
+        <span class="mpin q" style="left:58%;top:66%">?</span>
+        <span class="mpin q" style="left:56%;top:33%">?</span>
+        <span class="you" style="left:47%;top:57%"></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span class="chip">🔥 1 week</span><span class="small">❄️ 2 rest weeks · how?</span></div>
+      <a class="btn green" style="margin-top:7px">Next sticker: Memorial Library · 1.1 km →</a>
+      <div class="rankbox">
+        <div class="medal">🧭</div>
+        <div class="rk" style="flex:1"><small>ETHAN · CALGARY</small><b>Explorer · 1 sticker</b>
+          <div class="bar"><i style="width:20%"></i></div><div class="nx">4 more → <b>Trail Scout</b> 🥾</div></div>
+      </div>
+      <div class="pagecard">
+        <h4><span>🛝 Playgrounds</span><span>1 / 8</span></h4>
+        <div class="stickers">
+          <div class="stk new" style="--c:#ffd9a8;--r:-6deg">🛝<small>Riley Park</small></div>
+          <div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div>
+        </div>
+      </div>
+      <div class="pagecard lim">
+        <h4><span>🌙 Long Nights · limited</span><span style="color:#1f5f99">0 / 5 · 121 days</span></h4>
+        <div class="stickers"><div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div><div class="stk mys">?</div></div>
+      </div>
+      <div class="more">+ 9 more pages ↓</div>
+    </div></div>
+    <ul class="why">
+      <li>第一张贴纸<b>立刻升到 Explorer</b>，第一步就有回报。</li>
+      <li>地图上亮起<b>第一个圆</b>，贴纸就钉在它真实的位置上。</li>
+      <li>🔥 这时候才出现，小小的，放在角落里。</li>
+      <li>马上给出下一个最近的目标，不让人停下来。</li>
+    </ul>
+  </div>
+
+  <!-- ===== many ===== -->
+  <div class="state">
+    <div class="label"><b>③ 解锁多个（12 张）</b><div>常态：地图亮了好几片，有旗子，有一页快集满了</div></div>
+    <div class="phone"><div class="scr">
+      <div class="top"><span>← Explore</span><span class="km">KidsMap</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><div class="title">Collect Calgary 🗺️</div><span class="chip">🔥 6 weeks</span></div>
+      <div class="map" data-lit="22,24,28 34,30,26 40,48,28 58,54,30 70,70,26 30,74,24 78,30,22" data-fog=".93">
+        <div class="pct">18%<small>of Calgary lit</small></div>
+        <span class="tog">📒 Album · 🗺️ Map</span>
+        <span class="flag gold" style="left:16%;top:40%">🚩 Varsity</span>
+        <span class="mpin" style="left:22%;top:26%;--c:#c8f1d7">🐉</span>
+        <span class="mpin" style="left:33%;top:31%;--c:#cfe3ff">📚</span>
+        <span class="mpin" style="left:41%;top:49%;--c:#ffd9a8">🛝</span>
+        <span class="mpin holo" style="left:58%;top:53%">✨</span>
+        <span class="mpin" style="left:70%;top:70%;--c:#ffe28a">🌲</span>
+        <span class="mpin" style="left:30%;top:74%;--c:#ffc8d6">🏰</span>
+        <span class="mpin" style="left:79%;top:30%;--c:#cfe3ff">⛸️</span>
+        <span class="mpin q" style="left:88%;top:52%">?</span>
+      </div>
+      <div class="comm">
+        <div class="done"><b>🚩</b>Varsity</div><div><b>3/5</b>Kensington</div><div><b>2/4</b>Inglewood</div><div><b>1/4</b>Mission</div><div><b>0/4</b>Bridgeland</div>
+      </div>
+      <div class="rankbox">
+        <div class="medal">🥾</div>
+        <div class="rk" style="flex:1"><small>ETHAN · CALGARY</small><b>Trail Scout · 12 stickers</b>
+          <div class="bar"><i style="width:60%"></i></div><div class="nx">3 more → <b>Park Ranger</b> 🏅</div></div>
+      </div>
+      <div class="pagecard">
+        <h4><span>🛝 Playgrounds</span><span style="color:var(--rust)">7 / 8 · 1 to go!</span></h4>
+        <div class="stickers">
+          <div class="stk" style="--c:#ffd9a8;--r:-6deg">🛝<small>Riley Park</small></div>
+          <div class="stk" style="--c:#c8f1d7;--r:4deg">🐉<small>Dragon Slide</small></div>
+          <div class="stk" style="--c:#ffe28a;--r:-3deg">🏰<small>Castle Park</small></div>
+          <div class="stk" style="--c:#ffc8d6;--r:6deg">🚀<small>Rocket Park</small></div>
+          <div class="stk" style="--c:#cfe3ff;--r:-4deg">🌊<small>Prince’s Is.</small></div>
+          <div class="stk" style="--c:#e5d4ff;--r:5deg">🦕<small>Dino Park</small></div>
+          <div class="stk" style="--c:#ffd9a8;--r:-2deg">🎡<small>Shaw Mill.</small></div>
+          <div class="stk mys">?</div>
+        </div>
+        <div class="hint">🔍 Last one: a playground shaped like a pirate ship · 2.1 km</div>
+      </div>
+      <div class="pagecard lim">
+        <h4><span>🌙 Long Nights · limited</span><span style="color:#1f5f99">3 / 5 · 98 days</span></h4>
+        <div class="stickers">
+          <div class="stk" style="--c:#cfe3ff;--r:-6deg">⛸️<small>Olympic Plaza</small></div>
+          <div class="stk holo" style="--r:4deg">📚<small>Central Library</small></div>
+          <div class="stk" style="--c:#ffe28a;--r:-3deg">🧸<small>Fun Zone</small></div>
+          <div class="stk mys">?</div><div class="stk mys">?</div>
+        </div>
+      </div>
+    </div></div>
+    <ul class="why">
+      <li>地图亮了好几片，<b>Varsity 已经插旗</b>，下面一排社区进度一眼能看到。</li>
+      <li>✨ 隐藏宝地是闪卡，在地图上也闪。</li>
+      <li>最接近集满的那一页排在最前面，写着 <b>“1 to go!”</b>，再给一句谜语提示最后那个地方。</li>
+      <li>右上角可以切到纯地图或者纯贴纸册。</li>
+    </ul>
+  </div>
+
+  <!-- ===== all ===== -->
+  <div class="state">
+    <div class="label"><b>④ 全部解锁</b><div>整个 Calgary 点亮：最高等级、证书、可以印海报</div></div>
+    <div class="phone"><div class="scr">
+      <div class="top"><span>← Explore</span><span class="km">KidsMap</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center"><div class="title">Calgary done! 👑</div><span class="chip">🔥 31</span></div>
+      <div class="map goldframe" data-lit="all" data-fog="0">
+        <div class="pct" style="background:linear-gradient(135deg,#8a6514,#e0b84a);color:#2a1d02">100%<small>Calgary lit up</small></div>
+        <span class="flag gold" style="left:22%;top:34%">🚩 Varsity</span>
+        <span class="flag gold" style="left:72%;top:22%">🚩 Bridgeland</span>
+        <span class="flag gold" style="left:45%;top:44%">🚩 Kensington</span>
+        <span class="flag gold" style="left:30%;top:70%">🚩 Mission</span>
+        <span class="flag gold" style="left:74%;top:66%">🚩 Inglewood</span>
+        <span class="mpin" style="left:14%;top:34%;--c:#c8f1d7">🐉</span><span class="mpin holo" style="left:58%;top:31%">✨</span>
+        <span class="mpin" style="left:86%;top:42%;--c:#cfe3ff">⛸️</span><span class="mpin" style="left:52%;top:84%;--c:#ffe28a">🌲</span>
+        <span class="mpin" style="left:16%;top:84%;--c:#ffc8d6">🏰</span><span class="mpin" style="left:88%;top:84%;--c:#e5d4ff">🔬</span>
+      </div>
+      <div class="rankbox legend">
+        <div class="medal" style="font-size:24px">👑</div>
+        <div class="rk" style="flex:1"><small>ETHAN · CALGARY</small><b>City Legend · 63 stickers</b>
+          <div class="nx">All 11 pages full · 5 / 5 communities · 4 holo</div></div>
+      </div>
+      <div class="pagecard full">
+        <h4><span>🛝 Playgrounds</span><span style="color:#8a6514">Full ✓ +3</span></h4>
+        <div class="stickers">
+          <div class="stk" style="--c:#ffd9a8;--r:-6deg">🛝<small>Riley Park</small></div>
+          <div class="stk" style="--c:#c8f1d7;--r:4deg">🐉<small>Dragon Slide</small></div>
+          <div class="stk" style="--c:#ffe28a;--r:-3deg">🏰<small>Castle Park</small></div>
+          <div class="stk" style="--c:#ffc8d6;--r:6deg">🚀<small>Rocket Park</small></div>
+          <div class="stk holo" style="--r:-4deg">🏴‍☠️<small>Pirate Ship</small></div>
+        </div>
+      </div>
+      <div class="more" style="margin-top:6px">🛝 💦 🌲 📚 🔬 🧸 ⛸️ ⚽ 🎢 ☕ ✨ <b style="color:#8a6514">all gold ✓</b></div>
+      <div class="cert">
+        <div style="font-weight:900;font-size:13px">🏆 Ethan explored all of Calgary</div>
+        <div class="poster"><div class="p">ETHAN’S CALGARY<br>63 places · 2026<br>🚩🚩🚩🚩🚩</div></div>
+        <a class="btn gold">🖼️ Frame Ethan’s Calgary · from $36</a>
+        <div class="small" style="margin-top:6px">Next adventure: 🔒 Banff &amp; Canmore passport →</div>
+      </div>
+    </div></div>
+    <ul class="why">
+      <li>整张地图没有雾了，加上<b>金色边框和 5 面旗子</b>。</li>
+      <li>最高等级 <b>City Legend 👑</b>，所有页都变成金色。</li>
+      <li>奖励是<b>一张印着自己名字的海报</b>（接 Map Shop），加上下一个城市的护照。</li>
+      <li>季节限定页每季都有新的，所以“全部解锁”以后还有东西可以集。</li>
+    </ul>
+  </div>
+
+</div>
+
+<h2>几个细节</h2>
+<div class="card">
+  <ul>
+    <li><b>“全部解锁”是什么意思</b>：上面画的是整个 Calgary 都集齐（所有页都满、5 个社区都点亮）。“一页集满”和“一个社区点亮”这种小一点的完成，也会有同样的金色样式和庆祝动画。</li>
+    <li><b>百分比怎么算</b>：Calgary 地方很多，按全部地点算的话百分比涨得太慢。建议按“5 个社区 × 每个社区 4–5 个代表地点 + 各页格子”来算，大约 60 个就能到 100%。</li>
+    <li><b>Family 和每个孩子</b>：和现在一样，每个孩子有自己的贴纸册和地图；Family 视图把全家的合在一起。</li>
+    <li><b>Roam（大人版）</b>：同一个页面，贴纸换成“明信片”的样子就能用。</li>
+    <li><b>工作量</b>：大约 <b>1.5–2 周</b>。可以分两步上：先做 A（贴纸册加上 ①② 状态的新手引导，约 4 天），再把地图那一块加上去。</li>
+  </ul>
+</div>
+
+<h2>补充（11/13）：全是雾的时候，凭什么要去那儿？</h2>
+<div class="card">
+  <p style="margin-top:0">你说得对，之前的图有一个大问题：<b>只放一个 “?”，等于让人去一个不知道是什么的地方。</b>比如那是个图书馆，孩子不爱看书，家长根本不会去。好奇心只能让人点开看看，不能让人周末开车过去。</p>
+  <p><b>改法：雾只盖住地图，不盖住“这地方是什么、好玩在哪”。要保密的只有那张贴纸长什么样。</b></p>
+  <ul>
+    <li><b>① 先问孩子喜欢什么</b>：第一次进来时问一个问题，可以多选。之后地图上冒出来的点<b>只挑他喜欢的类型</b>。不爱看书，就不会给他推图书馆。</li>
+    <li><b>② 每个点都直接写明“去了能干什么”</b>：照片 + 一句话理由 + 距离 + 适合几岁。用的是每个地方已经有的 <code>description</code> / <code>tip</code>，再加上当天的活动（比如“周六 10 点有 Lego 俱乐部”）。</li>
+    <li><b>③ 惊喜只放在贴纸上</b>：卡片上看得到贴纸的剪影和稀有度（普通 / ✨闪卡），但要到了现场才能“开出来”。</li>
+    <li><b>④ 不用每页都集</b>：“全部解锁”只算孩子自己选的那几类，加上社区旗子。图书馆那页没兴趣可以永远空着，不影响升级。</li>
+  </ul>
+</div>
+<div class="states" style="margin-top:18px">
+  <div class="state">
+    <div class="label"><b>新 ① 第一次进来：先问喜欢什么</b><div>用 10 秒换来以后每个推荐都对胃口</div></div>
+    <div class="phone"><div class="scr" style="height:620px">
+      <div class="top"><span>← Explore</span><span class="km">KidsMap</span></div>
+      <div class="title">What does Ethan love? 💛</div>
+      <div class="small" style="margin-bottom:10px">Pick any. We’ll find places he’ll actually want to go.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="pick on">🛝<b>Slides &amp; climbing</b></div>
+        <div class="pick on">🦕<b>Animals &amp; dinos</b></div>
+        <div class="pick">💦<b>Water &amp; splash</b></div>
+        <div class="pick on">⛸️<b>Snow &amp; ice</b></div>
+        <div class="pick">📚<b>Books &amp; stories</b></div>
+        <div class="pick">🔬<b>Science &amp; building</b></div>
+        <div class="pick">🚲<b>Bikes &amp; wheels</b></div>
+        <div class="pick">🎢<b>Big fun days</b></div>
+      </div>
+      <div class="small" style="margin-top:10px">Age: <b>6</b> · from Ethan’s profile</div>
+      <a class="btn green" style="margin-top:12px">Show me 3 places near me →</a>
+      <div class="small" style="text-align:center;margin-top:6px">You can change this anytime.</div>
+    </div></div>
+  </div>
+
+  <div class="state">
+    <div class="label"><b>新 ② 雾里的点，点开看到什么</b><div>地方是谁、好玩在哪全写明；只有贴纸保密</div></div>
+    <div class="phone"><div class="scr" style="height:620px">
+      <div class="top"><span>← Explore</span><span class="km">KidsMap</span></div>
+      <div class="title">Collect Calgary 🗺️</div>
+      <div class="map" data-lit="" data-fog=".97" style="height:170px">
+        <div class="pct">0%<small>of Calgary lit</small></div>
+        <span class="you" style="left:44%;top:58%"></span>
+        <span class="mpin" style="left:34%;top:42%;--c:#ffd9a8;box-shadow:0 0 0 4px #2f7a5a">🦕</span>
+        <span class="mpin" style="left:60%;top:68%;--c:#cfe3ff">⛸️</span>
+        <span class="mpin" style="left:55%;top:32%;--c:#ffe28a">🛝</span>
+      </div>
+      <div class="teaser">
+        <div class="ph">🦕🌲<span>photo</span></div>
+        <div style="padding:9px 10px">
+          <div style="font-weight:900;font-size:14px">Dino Park Playground</div>
+          <div class="small">🛝 Playground · 0.8 km · ages 3–10 · free</div>
+          <div class="whygo">👀 <b>Why go:</b> a giant T-rex you can climb inside, and a sandpit full of “fossils” to dig up.</div>
+          <div class="whygo" style="background:#eaf5ff">☀️ Today 4°C, sunny · busy after 3 pm</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+            <div class="stk mys" style="width:40px;height:40px;font-size:15px;flex:0 0 40px">🦕</div>
+            <div style="font-size:11px;line-height:1.3"><b>Sticker: hidden until you’re there</b><br><span class="small">1 in 10 is ✨ shiny · lights up Varsity</span></div>
+          </div>
+          <a class="btn green" style="margin-top:9px;padding:8px">Directions →</a>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="state">
+    <div class="label"><b>对比：之前 vs 现在</b><div>同一个点，用户看到的东西</div></div>
+    <div class="card" style="font-size:14px">
+      <p style="margin-top:0"><b style="color:var(--rust)">之前</b></p>
+      <div style="display:flex;gap:10px;align-items:center"><span class="mpin q" style="position:static;transform:none;animation:none;flex:0 0 26px">?</span><span>“A big room full of books with a kids’ corner…”</span></div>
+      <p class="small">→ 猜出来是图书馆。孩子不爱看书，没理由去。</p>
+      <p><b style="color:var(--green)">现在</b></p>
+      <ul style="margin:0">
+        <li>推荐的点只来自孩子选的类型（🦕 🛝 ⛸️）。</li>
+        <li>写明<b>去了能干什么</b>，还有距离、年龄、价格、今天天气。</li>
+        <li>惊喜还在：贴纸到了现场才开，可能是闪卡。</li>
+        <li>就算推的是图书馆，也写<b>那里对孩子好玩的东西</b>：“周六 10 点 Lego 俱乐部”“有一面攀岩墙”，而不是“有很多书”。</li>
+      </ul>
+      <p class="small" style="margin-bottom:0">要新加的数据只有一样：家庭资料里加一个“孩子喜欢什么”。“Why go” 这一句先用每个地方已有的 description / tip，没有的让 Dudu 先写好、我们审一遍。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+// Draws the fog map into every .map: a simple Calgary-ish base, then fog with holes at data-lit "x,y,r" (percent).
+document.querySelectorAll('.map').forEach((m, i) => {
+  const lit = m.dataset.lit, fog = +m.dataset.fog
+  const holes = lit === 'all' ? [] : lit.split(' ').filter(Boolean).map(s => s.split(',').map(Number))
+  const NS = 'http://www.w3.org/2000/svg'
+  const svg = document.createElementNS(NS, 'svg')
+  svg.setAttribute('viewBox', '0 0 300 230'); svg.setAttribute('preserveAspectRatio', 'none')
+  svg.innerHTML = `
+    <defs>
+      <mask id="m${i}"><rect width="300" height="230" fill="white"/>
+        ${holes.map(([x, y, r]) => `<circle cx="${x * 3}" cy="${y * 2.3}" r="${r * 1.25}" fill="black"/>`).join('')}
+      </mask>
+      <filter id="b${i}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+      <pattern id="p${i}" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.2" fill="#fff" opacity=".5"/><circle cx="10" cy="10" r="1" fill="#fff" opacity=".35"/></pattern>
+    </defs>
+    <rect width="300" height="230" fill="#e9efe0"/>
+    <rect x="20" y="40" width="60" height="40" rx="10" fill="#bfe0bf"/><rect x="190" y="150" width="70" height="50" rx="12" fill="#bfe0bf"/>
+    <rect x="120" y="20" width="40" height="30" rx="8" fill="#bfe0bf"/><rect x="40" y="150" width="50" height="40" rx="10" fill="#bfe0bf"/>
+    <path d="M-10 140 C50 120 100 160 150 125 S250 95 310 110" stroke="#8cc4ec" stroke-width="11" fill="none"/>
+    <path d="M200 -10 C190 60 230 100 210 240" stroke="#8cc4ec" stroke-width="7" fill="none"/>
+    <path d="M0 60 L300 70 M0 190 L300 180 M80 0 L95 230 M150 0 L150 230 M240 0 L250 230" stroke="#fff" stroke-width="4"/>
+    <path d="M0 105 L300 95 M40 0 L50 230 M190 0 L195 230" stroke="#fff" stroke-width="2"/>
+    ${fog > 0 ? `<g mask="url(#m${i})" filter="url(#b${i})" opacity="${fog}"><rect x="-20" y="-20" width="340" height="270" fill="#cfc6e3"/><rect x="-20" y="-20" width="340" height="270" fill="url(#p${i})"/></g>` : ''}`
+  m.prepend(svg)
+})
+</script>
+</body>
+</html>

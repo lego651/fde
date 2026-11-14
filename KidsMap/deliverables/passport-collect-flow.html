@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>护照 · 怎么集贴纸（打卡流程）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#fbf8f2;--ink:#1d2433;--mute:#6a6457;--accent:#c9772e;--line:#e8e0cf;--green:#2f7a5a;--rust:#c0612b;--gold:#e0b84a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 -apple-system,"PingFang SC","Nunito",sans-serif}
+  .wrap{max-width:1340px;margin:0 auto;padding:40px 22px 80px}
+  h1,h2{font-family:"Noto Serif SC",serif;line-height:1.25}
+  h1{font-size:32px;margin:0 0 6px}
+  h2{font-size:24px;margin:46px 0 12px;padding-top:16px;border-top:2px solid var(--line)}
+  .sub{color:var(--mute)}
+  .tag{display:inline-block;background:#f3e6d3;color:var(--accent);font-weight:800;font-size:12px;padding:2px 9px;border-radius:99px;margin-right:6px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+  .how{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:900px){.how{grid-template-columns:1fr 1fr}}
+  .how .card b{display:block;font-size:15px;margin-bottom:2px}
+  .how .card .e{font-size:28px}
+  ul{padding-left:20px;margin:6px 0} li{margin:3px 0}
+
+  .states{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin-top:10px;justify-items:center}
+  .state{width:310px}
+  .label{text-align:center;margin-bottom:8px}
+  .label b{display:inline-block;background:var(--ink);color:#fff;border-radius:99px;padding:2px 12px;font-size:14px}
+  .label div{font-size:13px;color:var(--mute);margin-top:3px}
+  .why{font-size:13.5px;margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+  .why li{margin:2px 0}
+
+  /* phone */
+  .phone{width:310px;border:10px solid #1d2433;border-radius:36px;background:#fff;overflow:hidden;font-family:"Nunito",-apple-system,sans-serif;box-shadow:0 14px 34px rgba(0,0,0,.12)}
+  .scr{height:820px;overflow:hidden;padding:12px 12px 0;position:relative}
+  .top{display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-bottom:6px}
+  .top .km{color:var(--green)}
+  .small{font-size:11px;color:var(--mute)}
+  .btn{display:block;text-align:center;font-weight:900;border-radius:13px;padding:10px;font-size:13.5px}
+  .btn.green{background:var(--green);color:#fff}
+  .btn.gold{background:linear-gradient(135deg,#f6dd8f,#e0b84a);color:#3a2a06}
+  .chip{display:inline-flex;align-items:center;gap:3px;background:#fff1e3;color:var(--rust);font-weight:900;font-size:11px;border-radius:99px;padding:2px 8px}
+  .title{font-weight:900;font-size:18px;line-height:1.15}
+  .steps{display:flex;gap:5px;margin:8px 0}
+  .steps div{flex:1;background:#f6f1e6;border-radius:10px;padding:6px 3px;text-align:center;font-size:10px;font-weight:800;line-height:1.25}
+  .steps div i{display:block;font-style:normal;font-size:18px}
+
+  /* rank header */
+  .rankbox{border-radius:16px;padding:10px 12px;color:#fff;background:linear-gradient(135deg,#2f7a5a,#1e5a41);display:flex;gap:10px;align-items:center;margin-top:8px}
+  .rankbox.legend{background:linear-gradient(135deg,#3a2a06,#8a6514 60%,#e0b84a)}
+  .rankbox.rookie{background:linear-gradient(135deg,#59616e,#3a414d)}
+  .medal{width:46px;height:46px;flex:0 0 46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3c4,#e0b84a 55%,#a97a1c);display:grid;place-items:center;font-size:21px;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+  .medal.grey{background:radial-gradient(circle at 35% 30%,#f2f2f2,#b9bec6 60%,#7d838c)}
+  .rk small{display:block;font-size:9.5px;font-weight:800;opacity:.85;letter-spacing:.04em}
+  .rk b{font-size:15px}
+  .bar{height:8px;background:rgba(255,255,255,.25);border-radius:8px;overflow:hidden;margin-top:4px}
+  .bar i{display:block;height:100%;background:#f3d68a;border-radius:8px}
+  .rk .nx{font-size:10px;opacity:.9;margin-top:2px}
+
+  /* map */
+  .map{position:relative;height:230px;border-radius:16px;overflow:hidden;margin-top:9px;border:2px solid #e3dccb}
+  .map.goldframe{border:3px solid var(--gold);box-shadow:0 0 0 3px #fff3c9}
+  .map svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .pct{position:absolute;left:8px;top:8px;z-index:3;background:#1d2433;color:#fff;border-radius:11px;padding:4px 9px;font-weight:900;font-size:12.5px;line-height:1.15;z-index:2}
+  .pct small{display:block;font-size:9px;font-weight:700;opacity:.8}
+  .tog{position:absolute;right:8px;top:8px;background:#fff;border-radius:99px;padding:3px 9px;font-size:10px;font-weight:900;z-index:2;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .mpin{position:absolute;transform:translate(-50%,-50%);z-index:2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:14px;background:var(--c,#ffd9a8);border:2.5px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+  .mpin.holo{background:conic-gradient(#ffd6f5,#c9f0ff,#d8ffd0,#fff5c2,#ffd6f5)}
+  .mpin.q{background:#fff;color:#8b7fb0;font-weight:900;font-size:13px;border:2px dashed #8b7fb0;animation:bob 1.6s ease-in-out infinite}
+  .mpin.new{animation:pop 1.2s ease-out infinite alternate;box-shadow:0 0 0 5px rgba(243,214,138,.7),0 2px 4px rgba(0,0,0,.25)}
+  @keyframes bob{50%{transform:translate(-50%,-62%)}}
+  @keyframes pop{to{box-shadow:0 0 0 9px rgba(243,214,138,.25),0 2px 4px rgba(0,0,0,.25)}}
+  .flag{position:absolute;z-index:2;font-size:10px;font-weight:900;background:#fff;border-radius:7px;padding:1px 6px;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translate(-50%,-50%);white-space:nowrap}
+  .flag.gold{background:#fff3c9;border:1px solid var(--gold)}
+  .you{position:absolute;z-index:2;width:12px;height:12px;border-radius:50%;background:#2a7de1;border:2.5px solid #fff;box-shadow:0 0 0 6px rgba(42,125,225,.2);transform:translate(-50%,-50%)}
+
+  .comm{display:flex;gap:5px;margin-top:7px}
+  .comm div{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:3px 2px;font-size:9.5px;font-weight:800;text-align:center;background:#fff;line-height:1.2}
+  .comm div b{display:block;font-size:12.5px}
+  .comm .done{border-color:var(--gold);background:#fff8df}
+
+  /* album */
+  .pagecard{border:1px solid var(--line);border-radius:14px;padding:8px 9px 10px;margin-top:8px;background:#fffdf8}
+  .pagecard.lim{border:2px solid #7fb6e0;background:linear-gradient(135deg,#f2f9ff,#fff)}
+  .pagecard.full{border:2px solid var(--gold);background:linear-gradient(135deg,#fff8df,#fff)}
+  .pagecard h4{margin:0 0 7px;font-size:12px;display:flex;justify-content:space-between;gap:6px}
+  .pagecard h4 span:last-child{font-weight:800;color:var(--mute)}
+  .stickers{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+  .stk{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;position:relative;font-size:19px;
+       background:var(--c,#ffd9a8);border:2.5px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.08),0 3px 5px rgba(0,0,0,.14);transform:rotate(var(--r,-5deg))}
+  .stk small{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);background:#1d2433;color:#fff;font-size:6.5px;font-weight:900;white-space:nowrap;padding:1px 4px;border-radius:4px;max-width:120%;overflow:hidden;text-overflow:ellipsis}
+  .stk.mys{background:#ece6da;color:#b8ad98;font-size:17px;font-weight:900;box-shadow:inset 0 0 0 2px #d9cfbc;border:2.5px dashed #fff;transform:none}
+  .stk.holo{background:conic-gradient(#ffd6f5,#c9f0ff,#d8ffd0,#fff5c2,#ffd6f5)}
+  .stk.new{box-shadow:0 0 0 3px #f3d68a,0 3px 5px rgba(0,0,0,.14)}
+  .hint{margin-top:8px;background:#fff7e6;border:1px dashed #e7c98d;border-radius:10px;padding:6px 8px;font-size:11px}
+  .banner{border-radius:13px;padding:8px 10px;font-size:12px;font-weight:800;margin-top:8px;display:flex;gap:8px;align-items:center}
+  .banner.y{background:#fff3c9;border:1px solid #ecd27f}
+  .more{text-align:center;font-size:11px;font-weight:800;color:var(--mute);margin-top:8px}
+  .cert{margin-top:9px;border-radius:14px;border:2px solid var(--gold);background:#fffaf0;padding:10px;text-align:center}
+  .poster{border:6px solid #3b2d22;background:#fff;padding:5px;width:120px;margin:6px auto}
+  .poster .p{height:80px;background:linear-gradient(135deg,#cfe6d2,#e6f0d9);display:grid;place-items:center;font-size:9px;font-weight:900;color:#2f7a5a;text-align:center;line-height:1.2}
+
+  .pick{border:2px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center;font-size:24px;background:#fff}
+  .pick b{display:block;font-size:11px;margin-top:2px}
+  .pick.on{border-color:var(--green);background:#eaf6ef;box-shadow:inset 0 0 0 1px var(--green)}
+  .teaser{margin-top:9px;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,.1)}
+  .teaser .ph{height:92px;background:linear-gradient(135deg,#bfe0bf,#f6e6b8);display:grid;place-items:center;font-size:40px;position:relative}
+  .teaser .ph span{position:absolute;right:8px;bottom:6px;font-size:9px;color:#6a6457}
+  .whygo{background:#fff7e6;border-radius:9px;padding:6px 8px;font-size:11.5px;margin-top:6px;line-height:1.35}
+
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 4px}
+  .flow span{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:6px 10px;font-weight:800;font-size:14px}
+  .flow i{font-style:normal;color:var(--mute);font-weight:900}
+  .flow .y{background:#fff3c9;border-color:#ecd27f}
+  .scr.s{height:640px}
+  .herebar{position:absolute;left:10px;right:10px;bottom:14px;background:#0b7a5e;color:#fff;border-radius:16px;padding:10px 12px;display:flex;gap:8px;align-items:center;box-shadow:0 8px 20px rgba(0,0,0,.25);z-index:4}
+  .herebar b{font-size:14px}
+  .yb{background:#ffd84d;color:#3d3100;border-radius:11px;padding:8px 11px;font-weight:900;font-size:13px;white-space:nowrap}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:12px 14px 16px;box-shadow:0 -8px 24px rgba(0,0,0,.18);z-index:4}
+  .grab{width:38px;height:5px;border-radius:5px;background:#d5d9df;margin:0 auto 10px}
+  .dim{position:absolute;inset:0;background:rgba(29,36,51,.45);z-index:3}
+  .kidc{display:inline-flex;gap:4px;align-items:center;border-radius:99px;padding:3px 9px;font-size:12px;font-weight:800;border:1.5px solid var(--ink);background:var(--ink);color:#fff;margin-right:4px}
+  .row{display:flex;gap:9px;align-items:center;border:1.5px solid var(--line);border-radius:13px;padding:7px 9px;margin-top:7px;font-size:12.5px}
+  .row.sel{border-color:var(--green);background:#eaf6ef;box-shadow:inset 0 0 0 1px var(--green)}
+  .row .stk{width:36px;height:36px;flex:0 0 36px;font-size:16px}
+  .row .r{margin-left:auto;text-align:right;font-size:11px;font-weight:800;white-space:nowrap}
+  .new{color:#a2401f}.got{color:var(--mute)}
+  .step{font-size:12.5px;font-weight:900;text-align:center;margin-bottom:6px}
+  .rv{position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,#3a4a6b,#1d2433 70%);z-index:3;color:#fff;text-align:center;padding:40px 18px 0}
+  .rays{position:absolute;left:50%;top:150px;width:260px;height:260px;transform:translate(-50%,-50%);background:repeating-conic-gradient(rgba(255,231,150,.18) 0 10deg,transparent 10deg 20deg);border-radius:50%}
+  .rv .stk{width:140px;height:140px;font-size:66px;margin:40px auto 18px;position:relative}
+  .rv .stk small{font-size:11px;bottom:-8px}
+  .plus{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .plus span{background:rgba(255,255,255,.12);border-radius:99px;padding:3px 10px;font-size:11.5px;font-weight:800}
+  .edge td:first-child{white-space:nowrap;font-weight:800}
+  table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14.5px}th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f6efe2}
+</style></head>
+<body><div class="wrap">
+<span class="tag">Kids Map</span><span class="tag">护照页</span><span class="tag">打卡流程 · 2026-11-13</span>
+<h1>到了以后，怎么集贴纸</h1>
+<p class="sub">接着 A+B（贴纸册 + 点亮地图）。这页讲到了现场以后按什么、看到什么；附近同时有好几个地方时怎么办；还有出错的情况。</p>
+
+
+<div class="card" style="border:2px solid var(--accent);margin-top:18px">
+  <h3 style="margin-top:0">定稿（11/13）：已做成代码（kids-map PR #110）</h3>
+  <ul>
+    <li><b>同一时间只能集一张</b>：刚在一个地方打卡后 20 分钟内，要离新地方比离上一个更近（也就是真的走过去了）才能集。</li>
+    <li><b>距离按类型</b>：一般地方 250 米，公园、滑雪坡和商场、博物馆这种大建筑 400 米，再加上 GPS 误差（最多 150 米）。</li>
+    <li><b>“Combo / Double Trip” 小徽章和“附近还有”小路线这次没做</b>，留到下一轮。</li>
+  </ul>
+</div>
+
+<h2>整个流程</h2>
+<div class="flow"><span>📍 到了，打开 App</span><i>→</i><span>底部自动弹出 “At Dino Park?”</span><i>→</i><span class="y">👆 I’m here!</span><i>→</i><span>附近只有 1 个：直接开贴纸</span><i>/</i><span>附近有好几个：先选是哪个</span><i>→</i><span>🎁 开贴纸</span><i>→</i><span>🗺️ 地图展开，雾散开</span><i>→</i><span>📣 现在怎么样？📸 拍张照</span></div>
+<p class="small" style="font-size:14px">现在的代码已经有前半段了：靠近一个地方时，手机底部会自动弹出 “📍 At …?” 的绿条（<code>HereBar</code>），按 I’m here 就打卡。这次要改的是<b>后半段</b>（开贴纸 + 地图展开），以及<b>附近有好几个地方</b>的情况。</p>
+
+<h2>情况 1：附近只有 1 个地方</h2>
+<div class="states">
+  <div class="state"><div class="step">① 到了：底部弹出绿条</div>
+    <div class="phone"><div class="scr s">
+      <div class="top"><span>Map · Calgary</span><span class="km">KidsMap</span></div>
+      <div class="map" data-lit="40,46,24" data-fog=".9" style="height:520px"><span class="you" style="left:47%;top:50%"></span><span class="mpin" style="left:44%;top:46%;--c:#ffd9a8;box-shadow:0 0 0 4px #ffd84d">🦕</span></div>
+      <div class="herebar"><div style="flex:1"><b>📍 At Dino Park Playground?</b><div style="font-size:11px;opacity:.85">🆕 New sticker here</div></div><span class="yb">I’m here!</span></div>
+    </div></div>
+    <ul class="why"><li>不用找按钮，App 自己知道你到了（已经有了）。</li><li>新加一行 <b>“🆕 New sticker here”</b>，告诉你这里有一张还没集的贴纸。</li></ul>
+  </div>
+
+  <div class="state"><div class="step">② 谁来了？（默认全家都选上）</div>
+    <div class="phone"><div class="scr s">
+      <div class="top"><span>Map · Calgary</span><span class="km">KidsMap</span></div>
+      <div class="map" data-lit="40,46,24" data-fog=".9" style="height:520px"></div>
+      <div class="dim"></div>
+      <div class="sheet"><div class="grab"></div>
+        <div style="font-weight:900;font-size:16px">Who’s here at Dino Park?</div>
+        <div style="margin:9px 0"><span class="kidc">🦁 Ethan</span><span class="kidc">🐰 Mia</span><span class="kidc" style="background:#fff;color:var(--ink)">+ 👤 friend</span></div>
+        <div class="small">Each kid gets their own sticker.</div>
+        <a class="btn" style="background:#ffd84d;color:#3d3100;margin-top:12px">🎁 Open our stickers</a>
+        <div class="small" style="text-align:center;margin-top:8px">Checking where you are… 📍</div>
+      </div>
+    </div></div>
+    <ul class="why"><li>和现在一样：默认所有孩子都选上，一下就搞定。</li><li>定位在后台同时检查，不用另外等。</li></ul>
+  </div>
+
+  <div class="state"><div class="step">③ 开贴纸（这一下是重点）</div>
+    <div class="phone"><div class="scr s">
+      <div class="rv"><div class="rays"></div>
+        <div style="font-size:12px;font-weight:900;color:#f3d68a;letter-spacing:.1em;position:relative">✨ NEW STICKER ✨</div>
+        <div class="stk holo" style="--r:-5deg">🦕<small>Dino Park Playground</small></div>
+        <div style="font-weight:900;font-size:21px;position:relative">Shiny! Only 1 in 10 ✨</div>
+        <div style="font-size:13px;opacity:.85;position:relative">🦁 Ethan · 🐰 Mia both got it</div>
+        <div class="plus"><span>🛝 Playgrounds 6 / 8</span><span>🔥 Week 4!</span></div>
+        <a class="btn" style="background:#ffd84d;color:#3d3100;margin-top:22px;position:relative">Stick it in →</a>
+      </div>
+    </div></div>
+    <ul class="why"><li>全屏、有光圈、贴纸转一下再落地，可以加一声“啵”。</li><li>闪卡单独庆祝，第一次打卡的那周 🔥 也一起显示。</li></ul>
+  </div>
+
+  <div class="state"><div class="step">④ 地图展开：雾散开、贴纸飞上去</div>
+    <div class="phone"><div class="scr s">
+      <div class="top"><span>Collect Calgary</span><span class="km">KidsMap</span></div>
+      <div class="map" data-lit="22,24,28 34,30,26 44,46,34 70,70,26" data-fog=".93" style="height:330px">
+        <div class="pct">19%<small>+1% just now</small></div>
+        <span class="mpin holo new" style="left:44%;top:46%">🦕</span>
+        <span class="mpin" style="left:22%;top:26%;--c:#c8f1d7">🐉</span><span class="mpin" style="left:33%;top:31%;--c:#cfe3ff">📚</span><span class="mpin" style="left:70%;top:70%;--c:#ffe28a">🌲</span>
+        <span class="flag" style="left:44%;top:30%">Varsity 4/5</span>
+      </div>
+      <div class="banner y">🗺️ <span>Varsity is <b>1 sticker away</b> from its 🚩 flag!</span></div>
+      <div class="rankbox"><div class="medal">🥾</div><div class="rk" style="flex:1"><small>ETHAN</small><b>Trail Scout · 13</b><div class="bar"><i style="width:66%"></i></div><div class="nx">2 more → Park Ranger 🏅</div></div></div>
+      <div style="display:flex;gap:6px;margin-top:9px"><a class="btn" style="flex:1;border:1.5px solid var(--line)">📸 Photo</a><a class="btn green" style="flex:1">📣 How is it?</a></div>
+    </div></div>
+    <ul class="why"><li>这就是你说的“点完展开地图”：镜头从贴纸拉到地图，雾一圈一圈散开，百分比往上跳。</li><li>顺便告诉他下一个目标（“差 1 张插旗”），最后才问“现在怎么样 / 拍张照”。</li></ul>
+  </div>
+</div>
+
+<h2>情况 2：附近有好几个地方（比如一个大公园里）</h2>
+<div class="card" style="font-size:15px">
+  <p style="margin-top:0">比如 Prince’s Island：一个公园里有游乐场、喷水池、咖啡馆，彼此只隔一两百米。现在的代码是<b>只弹出离你最近的那一个</b>，但服务器只检查“400 米以内”，所以站在一个地方其实能把附近几个全集了。</p>
+  <p style="margin-bottom:0"><b>规则建议：</b>按 I’m here 时，如果附近不止一个地方，<b>先让你选“你在哪一个”</b>（默认选最近的）。<b>同一时间只能集一张</b>；其它的要走过去、离它够近（小地方 150 米，公园这种大地方 400 米）才能集，<b>服务器也改成用这个距离</b>。这样不会站在一个地方把整片都集完，同时把“附近还有 2 张”变成一个顺路的小任务。</p>
+</div>
+<div class="states" style="margin-top:14px">
+  <div class="state"><div class="step">① 绿条写“附近有 3 个”</div>
+    <div class="phone"><div class="scr s">
+      <div class="top"><span>Map · Calgary</span><span class="km">KidsMap</span></div>
+      <div class="map" data-lit="" data-fog=".9" style="height:520px">
+        <span class="you" style="left:46%;top:52%"></span>
+        <span class="mpin" style="left:42%;top:47%;--c:#ffd9a8;box-shadow:0 0 0 4px #ffd84d">🛝</span>
+        <span class="mpin" style="left:60%;top:42%;--c:#cfe3ff">💦</span>
+        <span class="mpin" style="left:38%;top:66%;--c:#ffe28a">☕</span>
+      </div>
+      <div class="herebar"><div style="flex:1"><b>📍 At Prince’s Island Park?</b><div style="font-size:11px;opacity:.85">3 places right here · 2 new stickers</div></div><span class="yb">I’m here!</span></div>
+    </div></div>
+  </div>
+
+  <div class="state"><div class="step">② 选“你在哪一个”</div>
+    <div class="phone"><div class="scr s">
+      <div class="top"><span>Map · Calgary</span><span class="km">KidsMap</span></div>
+      <div class="map" data-lit="" data-fog=".9" style="height:520px"></div>
+      <div class="dim"></div>
+      <div class="sheet"><div class="grab"></div>
+        <div style="font-weight:900;font-size:16px">Which one are you at?</div>
+        <div class="small">Closest first. You can collect the others when you walk over.</div>
+        <div class="row sel"><div class="stk mys">🛝</div><div><b>Island Playground</b><div class="small">40 m · you’re here</div></div><div class="r new">🆕 new</div></div>
+        <div class="row"><div class="stk mys">💦</div><div><b>Splash Pad</b><div class="small">170 m · closed for winter</div></div><div class="r got">❄️ in June</div></div>
+        <div class="row"><div class="stk" style="--c:#ffe28a;--r:-4deg">☕</div><div><b>River Café</b><div class="small">210 m · walk 3 min</div></div><div class="r got">✓ have it<br><span style="font-weight:600">counts for 🔥</span></div></div>
+        <a class="btn" style="background:#ffd84d;color:#3d3100;margin-top:12px">🎁 Open Island Playground</a>
+      </div>
+    </div></div>
+    <ul class="why"><li>每行写清楚：多远、有没有新贴纸、能不能集（冬天关门的就标出来）。</li><li>已经有的那张也能选，只是不出新贴纸，算这周的 🔥。</li></ul>
+  </div>
+
+  <div class="state"><div class="step">③ 集完一张：“附近还有”</div>
+    <div class="phone"><div class="scr s">
+      <div class="top"><span>Collect Calgary</span><span class="km">KidsMap</span></div>
+      <div class="map" data-lit="44,48,26" data-fog=".9" style="height:300px">
+        <span class="mpin new" style="left:42%;top:47%;--c:#ffd9a8">🛝</span>
+        <span class="mpin q" style="left:66%;top:30%">?</span>
+        <span class="you" style="left:46%;top:52%"></span>
+        <svg viewBox="0 0 300 300" style="position:absolute;inset:0;z-index:2" preserveAspectRatio="none"><path d="M138 156 C160 130 180 110 198 90" stroke="#2f7a5a" stroke-width="3" stroke-dasharray="6 5" fill="none"/></svg>
+      </div>
+      <div class="banner y" style="display:block"><b>🧭 1 more sticker on this walk</b><div class="small" style="margin-top:2px">Bow River Lookout ✨ · 350 m · 5 min along the river</div></div>
+      <div class="card" style="padding:10px;margin-top:8px;font-size:12px"><b>Combo!</b> Collect 2 stickers in one outing → <b>🎖️ Double Trip</b> badge</div>
+      <a class="btn green" style="margin-top:9px">Walk there →</a>
+      <div class="small" style="text-align:center;margin-top:6px">走到了绿条会再弹出来，再按一次就好</div>
+    </div></div>
+    <ul class="why"><li>附近还有的地方变成一条<b>顺路的小路线</b>，让孩子多走一段。</li><li>“一次出门集 2 张”可以给一个小徽章，玩法更多。</li></ul>
+  </div>
+</div>
+
+<h2>出错和特殊情况</h2>
+<table class="edge">
+<tr><th>情况</th><th>现在</th><th>改成</th></tr>
+<tr><td>离得太远</td><td>“Not counted yet” + 一句错误</td><td>“还差 600 m 🚶 走过去就能开”，地图上画一条线</td></tr>
+<tr><td>定位没开</td><td>一句英文提示</td><td>一步一步教怎么打开（iPhone / Android 各一张图）</td></tr>
+<tr><td>GPS 不准 / 在车上</td><td>绿条不弹</td><td>不变（防止开车路过就集了）</td></tr>
+<tr><td>这周已经来过</td><td>“Already counted this week ✓”</td><td>不变，再加上“你的 🦕 贴纸是 Oct 3 集的”，可以点开看</td></tr>
+<tr><td>附近什么都没有</td><td>按钮在地点页上，找不到</td><td>护照页上的 I’m here 告诉你“最近的是 X，1.2 km”，加一个 “这里也该有？推荐给我们”</td></tr>
+<tr><td>隐藏宝地（书箱等）</td><td>绿条不弹（到处都是）</td><td>不变，只能在它自己的页面上按，距离要求更近（50 m）</td></tr>
+</table>
+
+<h2>要改的代码（大概）</h2>
+<div class="card"><ul>
+<li><code>here.ts</code>：新加 <code>placesAt()</code>，返回附近所有能集的地方，不再只返回最近的一个。</li>
+<li><code>passport-actions.ts</code>：服务器的 400 m 改成按类型来（小地方 150 m，大地方 400 m），跟 <code>hereRadius</code> 用同一个数。</li>
+<li><code>HereNow.tsx</code>：绿条显示“3 places · 2 new”；新加“你在哪一个”的选择面板；打卡结果换成全屏开贴纸，再接地图展开。</li>
+<li>新组件：开贴纸动画、地图散雾动画、“附近还有”小路线。</li>
+</ul></div>
+</div>
+<script>
+// Draws the fog map into every .map: a simple Calgary-ish base, then fog with holes at data-lit "x,y,r" (percent).
+document.querySelectorAll('.map').forEach((m, i) => {
+  const lit = m.dataset.lit, fog = +m.dataset.fog
+  const holes = lit === 'all' ? [] : lit.split(' ').filter(Boolean).map(s => s.split(',').map(Number))
+  const NS = 'http://www.w3.org/2000/svg'
+  const svg = document.createElementNS(NS, 'svg')
+  svg.setAttribute('viewBox', '0 0 300 230'); svg.setAttribute('preserveAspectRatio', 'none')
+  svg.innerHTML = `
+    <defs>
+      <mask id="m${i}"><rect width="300" height="230" fill="white"/>
+        ${holes.map(([x, y, r]) => `<circle cx="${x * 3}" cy="${y * 2.3}" r="${r * 1.25}" fill="black"/>`).join('')}
+      </mask>
+      <filter id="b${i}" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+      <pattern id="p${i}" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.2" fill="#fff" opacity=".5"/><circle cx="10" cy="10" r="1" fill="#fff" opacity=".35"/></pattern>
+    </defs>
+    <rect width="300" height="230" fill="#e9efe0"/>
+    <rect x="20" y="40" width="60" height="40" rx="10" fill="#bfe0bf"/><rect x="190" y="150" width="70" height="50" rx="12" fill="#bfe0bf"/>
+    <rect x="120" y="20" width="40" height="30" rx="8" fill="#bfe0bf"/><rect x="40" y="150" width="50" height="40" rx="10" fill="#bfe0bf"/>
+    <path d="M-10 140 C50 120 100 160 150 125 S250 95 310 110" stroke="#8cc4ec" stroke-width="11" fill="none"/>
+    <path d="M200 -10 C190 60 230 100 210 240" stroke="#8cc4ec" stroke-width="7" fill="none"/>
+    <path d="M0 60 L300 70 M0 190 L300 180 M80 0 L95 230 M150 0 L150 230 M240 0 L250 230" stroke="#fff" stroke-width="4"/>
+    <path d="M0 105 L300 95 M40 0 L50 230 M190 0 L195 230" stroke="#fff" stroke-width="2"/>
+    ${fog > 0 ? `<g mask="url(#m${i})" filter="url(#b${i})" opacity="${fog}"><rect x="-20" y="-20" width="340" height="270" fill="#cfc6e3"/><rect x="-20" y="-20" width="340" height="270" fill="url(#p${i})"/></g>` : ''}`
+  m.prepend(svg)
+})
+</script>
+</body></html>
