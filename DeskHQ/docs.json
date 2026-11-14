@@ -1,0 +1,38 @@
+{
+  "client": {
+    "slug": "deskhq",
+    "name": "DeskHQ",
+    "logo": "",
+    "logo_alt": "DeskHQ logo",
+    "pin_sha256": "a4f4a5deccac9ec165931ab604099cf79e79172b472a323902181778fe5b671c"
+  },
+  "categories": [
+    {
+      "key": "diag",
+      "name": "诊断 & 访谈",
+      "color": "#c9772e"
+    },
+    {
+      "key": "plan",
+      "name": "计划 & OKR",
+      "color": "#10715f"
+    },
+    {
+      "key": "grow",
+      "name": "增长分析",
+      "color": "#4b3fb5"
+    },
+    {
+      "key": "ops",
+      "name": "运营工具",
+      "color": "#1d5fa8"
+    },
+    {
+      "key": "design",
+      "name": "设计物料",
+      "color": "#b84a62"
+    }
+  ],
+  "docs": [],
+  "ignore": {}
+}

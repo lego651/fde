@@ -6,6 +6,7 @@
 |---|---|---|
 | V-Health Rehab Clinic | `VHealth/` | https://lego651.github.io/fde/vhealth/ |
 | Kids Map | `KidsMap/` | https://lego651.github.io/fde/kidsmap/ 🔒 需要 PIN |
+| DeskHQ | `DeskHQ/` | https://lego651.github.io/fde/deskhq/ 🔒 需要 PIN |
 
 ## 怎么用（给 Jason）
 

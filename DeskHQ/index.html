@@ -1,0 +1,166 @@
+---
+layout: null
+permalink: /deskhq/
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="deskhq" data-hash="a4f4a5deccac9ec165931ab604099cf79e79172b472a323902181778fe5b671c"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeskHQ 项目时间线</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: vertical timeline (structure A) in the warm paper palette (C). Each event: description, deliverables, actions. */
+  --paper: #fbf8f2;
+  --card: #ffffff;
+  --ink: #2a2620;
+  --muted: #6d6558;
+  --line: #ebe3d4;
+  --rail: #e3cfb6;
+  --accent: #c9772e;
+  --accent-ink: #a85f1f;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.65 var(--font); }
+main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; display: grid; gap: 32px; }
+a { color: var(--accent-ink); }
+a:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.back { font-size: .92rem; text-decoration: none; }
+
+.hd { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 2px solid var(--ink); }
+.logo-plate { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px 12px; }
+.logo-plate img { height: 56px; width: auto; display: block; }
+.hd h1 { margin: 0; font-family: var(--serif); font-size: 1.9rem; line-height: 1.2; }
+.hd p { margin: 2px 0 0; color: var(--muted); }
+
+h2.sec { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
+
+.timeline { list-style: none; margin: 0; padding: 0 0 0 38px; position: relative; display: grid; gap: 28px; }
+.timeline::before { content: ""; position: absolute; left: 13px; top: 10px; bottom: 10px; width: 2px; background: var(--rail); }
+.ev { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; display: grid; gap: 18px; }
+.ev::before { content: attr(data-n); position: absolute; left: -38px; top: 20px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font: 700 .85rem/28px var(--font); text-align: center; box-shadow: 0 0 0 4px var(--paper); }
+.ev.next { background: transparent; border-style: dashed; }
+.ev.next::before { content: ""; background: var(--paper); border: 2px dashed var(--accent); }
+.top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.top h3 { margin: 0; font-family: var(--serif); font-size: 1.45rem; line-height: 1.25; }
+.date { color: var(--accent-ink); font-weight: 700; font-size: .92rem; font-variant-numeric: tabular-nums; }
+.blk { display: grid; gap: 10px; }
+.lbl { font-size: .78rem; font-weight: 800; letter-spacing: .1em; color: #8c7f6a; }
+.blk p { margin: 0; max-width: 66ch; }
+
+.docs { display: flex; flex-wrap: wrap; gap: 8px; }
+.docs a { text-decoration: none; background: #fbf3e9; color: var(--accent-ink); border: 1px solid #efdcc4; border-radius: 10px; padding: 7px 12px; font-weight: 600; font-size: .93rem; }
+.docs a:hover { border-color: var(--accent); }
+.docs a small { font-weight: 700; font-size: .7rem; color: #8c7f6a; margin-left: 6px; }
+
+.acts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.acts li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 10px 14px; background: #fdfbf7; border: 1px solid var(--line); border-radius: 10px; }
+.acts label { display: contents; cursor: default; }
+.acts input[type="checkbox"] { appearance: none; -webkit-appearance: none; margin: 0; width: 20px; height: 20px; border: 2px solid #b9ad99; border-radius: 5px; background: #fff; display: grid; place-items: center; pointer-events: none; }
+.acts input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); }
+.acts input[type="checkbox"]:checked::after { content: ""; width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
+.acts .txt { min-width: 0; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.owner, .st { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.o-fde { background: #ece8fb; color: #4b3fb5; }
+.o-vh { background: #e2f3ee; color: #10715f; }
+.st-todo { background: #fff1d6; color: #8a5a00; }
+.st-done { background: #e3f4e6; color: #1f7a3a; }
+@media (max-width: 560px) {
+  .acts li { grid-template-columns: auto 1fr; }
+  .tags { grid-column: 2; justify-content: flex-start; }
+  .ev { padding: 18px; }
+}
+
+/* Now card (to do / in progress) */
+.now { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.now .ntop { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; padding: 18px 20px; background: linear-gradient(90deg, #fbf1e4, #fff); border-bottom: 1px solid var(--line); }
+.now .ntop h2 { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
+.now .ntop p { margin: 2px 0 0; color: var(--muted); font-size: .9rem; }
+.now .prog { display: grid; gap: 6px; justify-items: end; min-width: 180px; }
+.now .prog b { font-size: 1.4rem; font-variant-numeric: tabular-nums; }
+.now .bar { width: 180px; height: 8px; border-radius: 999px; background: #f1e7d8; overflow: hidden; display: flex; }
+.now .bar i { display: block; height: 100%; }
+.now .small { font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.now .grp { padding: 14px 20px 6px; display: grid; gap: 8px; }
+.now .grp + .grp { border-top: 1px dashed var(--line); }
+.now .gh { display: flex; align-items: center; gap: 10px; }
+.now .av { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: .7rem; color: #fff; }
+.now .av.vh { background: #10715f; }
+.now .av.fde { background: #4b3fb5; }
+.now .gh b { font-size: 1rem; }
+.now .gh .cnt { color: var(--muted); font-size: .85rem; }
+.now ul { list-style: none; margin: 0 0 8px; padding: 0 0 0 40px; display: grid; gap: 2px; }
+.now li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start; padding: 8px 0; }
+.now .r { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.now .src { font-size: .8rem; color: var(--muted); text-decoration: none; border-bottom: 1px dotted #b9ad99; }
+.now .src:hover { color: var(--accent-ink); }
+.box { flex: none; width: 20px; height: 20px; border: 2px solid #b9ad99; border-radius: 5px; background: #fff; margin-top: 2px; display: grid; place-items: center; }
+.box.on { background: var(--accent); border-color: var(--accent); }
+.box.on::after { content: ""; width: 5px; height: 10px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
+.st-prog { background: #e3eefb; color: #1d5fa8; }
+@media (max-width: 600px) {
+  .now .ntop { grid-template-columns: 1fr; } .now .prog { justify-items: start; }
+  .now li { grid-template-columns: auto 1fr; } .now .r { grid-column: 2; justify-content: flex-start; } .now ul { padding-left: 0; }
+}
+/* DOCSTRIP-CSS:START  Generated by scripts/build_docs.py. Doc strip: paper thumbnails, horizontal scroll */
+.dc { display: grid; gap: 12px; }
+.dc-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.dc-h h2 { margin: 0; font-family: var(--serif); font-size: 1.3rem; }
+.dc-h a { font-weight: 700; font-size: .92rem; text-decoration: none; }
+.dc-strip { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 4px 12px 2px; scrollbar-width: thin; }
+.dc-doc { flex: none; scroll-snap-align: start; width: 158px; text-decoration: none; color: inherit; display: grid; gap: 8px; }
+.dc-page { position: relative; height: 190px; background: #fff; border: 1px solid #ddd2bf; border-radius: 4px 18px 4px 4px; padding: 14px 12px; display: grid; align-content: start; gap: 6px; box-shadow: 3px 3px 0 #efe6d6; transition: transform .15s; }
+.dc-page::after { content: ""; position: absolute; top: -1px; right: -1px; width: 18px; height: 18px; background: linear-gradient(225deg, var(--paper) 50%, #e8dcc8 50%); border-radius: 0 0 0 4px; }
+.dc-page .ttl { font-family: var(--serif); font-weight: 700; font-size: .9rem; line-height: 1.3; color: var(--ink); }
+.dc-page .ln { height: 5px; background: #f0e9dc; border-radius: 3px; }
+.dc-page .ln.s { width: 60%; }
+.dc-page .typ { position: absolute; left: 10px; bottom: 10px; font-size: .64rem; font-weight: 800; letter-spacing: .08em; padding: 2px 6px; border-radius: 4px; color: #fff; }
+.dc-page .stamp { position: absolute; right: 8px; bottom: 32px; transform: rotate(-12deg); border: 2px solid #1d5fa8; color: #1d5fa8; font-weight: 800; font-size: .74rem; padding: 0 6px; border-radius: 4px; background: rgba(255,255,255,.88); }
+.dc-doc .under { font-size: .76rem; color: var(--muted); }
+.dc-doc:hover .dc-page { border-color: var(--accent); transform: translateY(-2px); }
+.dc-doc:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+/* DOCSTRIP-CSS:END */
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../">← 所有客户</a>
+
+  <header class="hd">
+    
+    <div>
+      <h1>DeskHQ 项目时间线</h1>
+      <p>独立交易员的虚拟交易大厅</p>
+    </div>
+  </header>
+
+  <!-- DOCSTRIP:START  Generated by scripts/build_docs.py from docs.json. Do not edit by hand. -->
+  <section class="dc" aria-labelledby="dc-h">
+    <div class="dc-h"><h2 id="dc-h">正在分析的文档</h2><a href="docs/">See all 0 →</a></div>
+    <div class="dc-strip" tabindex="0" aria-label="文档，可左右滚动">
+      <p class="dc-empty" style="margin:0;color:var(--muted)">还没有文档</p>
+    </div>
+  </section>
+  <!-- DOCSTRIP:END -->
+
+  <h2 class="sec">时间线</h2>
+  <ol class="timeline">
+    <li class="ev next">
+      <div class="top"><h3>第一个事件</h3><span class="date">待定</span></div>
+      <p style="margin:0;color:var(--muted)">诊断访谈之后在这里记录。</p>
+    </li>
+  </ol>
+</main>
+</body>
+</html>
