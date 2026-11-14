@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>用户端收费 v3：我们自己创造的产品</title><style>
+:root{--ink:#1d2433;--mute:#5b6577;--line:#e3e7ee;--bg:#f7f8fb;--card:#fff;--blue:#2563eb;--good:#15803d;--bad:#b91c1c;--warn:#b45309}
+*{box-sizing:border-box}body{margin:0;font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+.nav{display:flex;gap:6px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}.nav span{border:1px solid var(--line);background:#fff;border-radius:99px;padding:3px 10px;color:var(--mute)}.nav .on{background:var(--ink);color:#fff;border-color:var(--ink)}
+h1{font-size:26px;margin:0}h2{font-size:21px;margin:0 0 10px}h3{font-size:17px;margin:26px 0 8px}
+.sub{color:var(--mute);margin:4px 0 16px}.mute{color:var(--mute)}
+.note{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:12px;padding:12px 16px;margin:0 0 16px}.note li{margin:3px 0}
+.toggle{display:flex;gap:6px;align-items:center;margin:0 0 14px;font-size:14px}.toggle button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 14px;cursor:pointer}.toggle button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:760px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}.tile.dark{background:var(--ink);color:#fff}.tile.dark .tl,.tile.dark .th{color:#c9cfdb}
+.tl{margin:0;font-size:12px;font-weight:600;color:var(--mute)}.tv{margin:2px 0;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}.th{margin:0;font-size:12px;color:var(--mute)}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.box h3{margin:0;padding:12px 14px;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:14px;margin:8px 0}.box table{margin:0}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f1f3f8;font-size:12.5px}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.rng{font-size:11.5px;color:var(--mute);font-weight:400}
+tr.tot td{background:#f7f8fb}tr.net td{background:#eef4ff}.big{font-size:18px}
+a{color:var(--blue);text-decoration:none}.go{font-size:12.5px;font-weight:600;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:99px;padding:0 7px;vertical-align:1px}.real{background:#ecfdf3;color:var(--good)}.est{background:#fff7e6;color:var(--warn)}.rule{background:#eef2f6;color:#475467}
+.warn{background:#fff7e6;border:1px solid #fde3b3;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}.fix{background:#fdecec;border:1px solid #f7c9c9;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+.detail{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:22px 0}.crumb{font-size:12.5px;color:var(--mute);margin-bottom:6px}
+.bars{display:flex;gap:28px;align-items:flex-end;height:240px;padding:10px 20px 0;border-bottom:1px solid var(--line)}.bcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:110px;height:100%}
+.bar{width:46px;background:var(--blue);border-radius:4px 4px 0 0}.bval{font-size:12.5px;font-weight:700;margin-bottom:4px}.blab{font-size:12px;color:var(--mute);padding:4px 0}.bcol:hover .bar{opacity:.8}
+.sc{display:none}body.s-low .sc-low,body.s-base .sc-base,body.s-high .sc-high{display:inline}body.s-low .bars.sc-low,body.s-base .bars.sc-base,body.s-high .bars.sc-high{display:flex}
+code{font-size:12.5px;background:#f1f3f8;padding:1px 5px;border-radius:5px}
+.q li{margin:6px 0}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 6px;font-size:17px}.card p{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1px 9px;margin-right:4px}
+.p1{background:#dbeafe;color:#1d4ed8}.p2{background:#fef3c7;color:#b45309}.p3{background:#dcfce7;color:#15803d}
+.proof{background:#f7f8fb;border-radius:10px;padding:8px 12px;font-size:13.5px}
+.hero{background:linear-gradient(135deg,#1d2433,#2563eb);color:#fff;border-radius:18px;padding:22px 24px;margin:18px 0}
+.hero h2{color:#fff;font-size:26px;margin:0 0 6px}.hero .mute{color:#c9d6f5}.hero b{color:#fff}
+.hero table{background:transparent;color:#fff;font-size:14px}.hero th{background:rgba(255,255,255,.12);color:#fff}.hero td,.hero th{border-color:rgba(255,255,255,.2)}
+.hero a{color:#bfdbfe}
+.tier{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}@media(max-width:760px){.tier{grid-template-columns:1fr}}
+.tier div{background:rgba(255,255,255,.1);border-radius:12px;padding:12px}.tier .n{font-size:24px;font-weight:800}
+.door{margin:28px 0 4px;font-size:21px}
+</style></head>
+<body><div class="wrap" id="top"><h1>🚀 用户端收费 · 第 3 版：我们自己创造的产品</h1>
+<p class="sub">Nov 11, 2026 · 只看用户掏钱买的产品（数字、实体、体验、营地、SaaS）· 14 个 · 第一个就是「不得不测」的 · [n] = 来源 · 没有来源的数字是我的估计</p>
+
+<div class="note"><b>这一版只看一件事：用户掏钱买的产品。</b><ul>
+<li>不再想 App 里的功能。只想：<b>我们自己能创造、能卖给家长和大人的东西</b>：数字产品、实体盒子、要人带的体验、自己办的营地、软件。</li>
+<li>一共 14 个。最上面是我认为你<b>不得不第一个测</b>的那一个，以及为什么。</li>
+<li>圣诞窗口：<b>体验礼物卡</b>和<b>零食盒</b>要在 12 月 1 日前上，可以和落地包同时测（它们不冲突）。</li></ul></div>
+
+<div class="hero">
+<p class="mute" style="margin:0 0 4px">🏆 我认为你不得不第一个测的</p>
+<h2>🧳 新家庭落地包「Calgary 第一年」</h2>
+<p>给<b>刚搬来、或准备搬来 Calgary 的有孩子的家庭</b>：按你孩子的年龄、你住哪个社区、你搬来的月份，生成一份只属于你家的「第一年」：住哪区、托儿所和学校怎么排、冬天买什么、第一个月每个周末去哪、去哪交朋友。</p>
+<div class="tier">
+<div><p class="n">$49</p><b>数字版</b><p class="mute" style="margin:4px 0 0">个性化手册（App 里 + PDF）：托儿所/学校地图和排队计划、30 个按年龄挑好的周末、冬天清单、本地人才知道的事。Dudu 无限问 3 个月。</p></div>
+<div><p class="n">$199</p><b>+ 1 小时私人顾问</b><p class="mute" style="margin:4px 0 0">你（或一个本地家长）视频 1 小时：看房前帮选区、帮排托儿所、回答所有问题。可以用中文。</p></div>
+<div><p class="n">$129</p><b>+ 欢迎箱（寄到新家）</b><p class="mute" style="margin:4px 0 0">本地零食、孩子的实体护照本、冰场和雪橇地图、2 双防滑袜、3 张合作店优惠券。</p></div>
+</div>
+<table><tr><th>为什么是它</th><th>证据</th></tr>
+<tr><td><b>人一直在来，而且最缺信息</b></td><td>Alberta 连续 3 年全国净迁入第一<sup><a href="#s1">[1]</a></sup>；2024 年新永久居民 66,359 人，历史最高<sup><a href="#s2">[2]</a></sup>；Calgary 5 年人口 +19%<sup><a href="#s3">[3]</a></sup>。</td></tr>
+<tr><td><b>他们最头疼的，正好是我们有的数据</b></td><td>托儿所：一半孩子住在「托儿荒漠」<sup><a href="#s4">[4]</a></sup>，几百人排队、交申请费、等几年<sup><a href="#s5">[5]</a></sup>。市里给新移民的只是一份资源列表和 PDF<sup><a href="#s6">[6]</a></sup>。我们有 1,700+ 个地点、按年龄的推荐、冰场、活动、托儿地图（可以做）。</td></tr>
+<tr><td><b>搬家的人愿意花钱</b></td><td>一次搬家动辄几千到上万，$49 和 $199 是最小的一笔；而且是<b>一次性</b>买，不用说服他订阅。</td></tr>
+<tr><td><b>几乎零成本、能复制</b></td><td>数字版毛利 ~95%。Edmonton、Vancouver 已经在 App 里，换城市只是换数据。</td></tr>
+<tr><td><b>它带动后面所有东西</b></td><td>新家庭要买孩子房间（下面的「可购物儿童房」）、要找营地、要交朋友（遛娃搭子）、要招牌体验招待来探亲的父母。落地包是入口。</td></tr>
+<tr><td><b>你自己就能卖</b></td><td>你本身就是在 Calgary 带孩子的家长，懂中文社区；新移民群、微信群、Meetup 的新人群<sup><a href="#s6">[6]</a></sup>都是现成的渠道。</td></tr>
+</table>
+<p style="margin-top:14px"><b>2 周测试：</b>① 第 1 周：做一个落地页 + 一份样本（「一个 3 岁和 6 岁孩子、住 SW 的家庭」），用我们现有数据，Dudu 帮忙生成；② 第 2 周：发到 5 个新移民群和 r/Calgary 的搬家帖，只卖 $49 和 $199 两档，欢迎箱先放「预订」。</p>
+<p><b>算成功：</b>300 个访问里有 ≥ 10 个买 $49（3%+），或 ≥ 3 个买 $199。<b>算失败就停：</b>访问多但没人买 → 说明信息有价值但不值钱，改成免费拉新入口。</p>
+<p class="mute" style="margin:0">诚实的规模估计（我的估计）：Calgary 每年搬来几万人，其中有孩子的家庭几千到上万户。1% 买 = 一年几百单，$49–199 一单，一年 <b>$1–4 万</b>，再加上它带出来的营地、体验、儿童房。不是一夜暴富，但它是<b>最快能验证、最便宜、最能带动别的</b>的一个。</p>
+</div>
+<div class="box"><h3>为什么选它，不选别的（比较）</h3><table>
+<tr><th>产品</th><th>要很多用户吗</th><th>毛利</th><th>多快能测</th><th>能复制到每个城市</th><th>我们的独有优势</th></tr><tr><td><b>🧳 新家庭落地包</b></td><td>少</td><td>~95%</td><td>2 周</td><td>✅ 换数据就行</td><td>最强：数据就是产品</td></tr><tr><td><b>🎁 体验礼物卡（圣诞）</b></td><td>少</td><td>15–20% 佣金</td><td>3 周</td><td>✅ 每城 5 个</td><td>强：圣诞窗口</td></tr><tr><td><b>🎣 城市招牌体验</b></td><td>少</td><td>15–20%</td><td>4 周</td><td>✅</td><td>中：要谈向导</td></tr><tr><td><b>🍿 本地零食盒</b></td><td>少</td><td>~40%（估计）</td><td>4 周</td><td>✅ 每城一盒</td><td>中</td></tr><tr><td><b>🛏️ 可购物儿童房</b></td><td>中</td><td>9% 佣金 + $79</td><td>3 周</td><td>✅</td><td>中：内容要好看</td></tr><tr><td><b>🏕️ 探险夏令营</b></td><td>少</td><td>~30%（估计）</td><td>1–3 月就要开始报名</td><td>⚠️ 要请人</td><td>强：地点数据独有</td></tr><tr><td><b>💻 Dayhome 软件</b></td><td>少</td><td>~90%</td><td>2–3 个月</td><td>✅</td><td>中：要做软件，但我们会</td></tr></table></div>
+<h2 class="door">🎣 城市招牌体验（要人带的）</h2><div class="grid"><div class="card"><h3>每个城市 5 个「非做不可」的招牌体验</h3><span class="pill p1">第一批</span><span class="pill p2">$150–800/次，我们拿 15–20%</span><span style="color:#f59e0b">★★★★★</span><p>Calgary：Bow River 飞钓半天（孩子版）、Drumheller 自己挖恐龙化石、牧场骑马一天、Stampede 后台导览。Vancouver：三文鱼出海、原住民雪松木雕工作坊。每个都是我们挑好、谈好、有执照的向导，统一在 App 里卖，按「孩子能不能去」标清楚。</p><div class="proof"><b>证据：</b>Bow River 飞钓向导一天 $550–800/船<sup><a href="#s7">[7]</a></sup><sup><a href="#s8">[8]</a></sup>；Vancouver 三文鱼半天 $600–975/船<sup><a href="#s9">[9]</a></sup>；Dinosaur Provincial Park 挖恐龙 $450/人<sup><a href="#s10">[10]</a></sup>。都是高价、有需求、但很难找到「带孩子也行」的版本。</div></div><div class="card"><h3>🎁 体验礼物卡（圣诞马上就到）</h3><span class="pill p1">第一批</span><span class="pill p2">$99 / $199 / $399 三档</span><span style="color:#f59e0b">★★★★★</span><p>「送爸妈一次 Bow River 飞钓」「送孩子一次挖恐龙」。买的人拿到一张漂亮的卡，收的人自己选日期。12 月是最好的测试窗口。</p><div class="proof"><b>证据：</b>体验类礼物全球约 1,180 亿美元<sup><a href="#s11">[11]</a></sup>。没用掉的礼物卡（很常见）也是收入。</div></div><div class="card"><h3>🧑‍🦳 来探亲的父母：中文导游一日游</h3><span class="pill p2">第二批</span><span class="pill p2">$180/人（Banff 一日，小团）</span><span style="color:#f59e0b">★★★★☆</span><p>很多新移民家庭的父母夏天来住几个月（探亲签证），白天没人陪。中文小团：Banff、Lake Louise、Drumheller、Calgary 市内一日。和有执照的旅游公司合作，我们找人、卖票。</p><div class="proof"><b>证据：</b>没有找到直接数据，这是我的判断：这个需求在华人家庭里很普遍，大旅行社的团又太长太累。</div></div></div><h2 class="door">📦 实体产品（我们自己设计）</h2><div class="grid"><div class="card"><h3>🍿 「Taste of Calgary」本地零食盒</h3><span class="pill p1">第一批</span><span class="pill p2">$45/盒 · 公司礼盒 $65</span><span style="color:#f59e0b">★★★★☆</span><p>每季一盒 6–8 样 Calgary 本地小品牌的零食（巧克力、牛肉干、烘焙、咖啡豆），附一张「它们在哪」地图（就是 Roam 的地点）。卖给：游客、送外地朋友、公司客户礼盒、新家庭欢迎箱。每个城市一个版本。</p><div class="proof"><b>证据：</b>Universal Yums 只卖「世界零食盒」就有 10 万+ 订阅、卖出 1,000 万盒<sup><a href="#s12">[12]</a></sup>；Bokksu 日本零食盒 $39.99/月<sup><a href="#s13">[13]</a></sup>。本地版没人做，而且小店愿意低价供货换曝光。</div></div><div class="card"><h3>🚗 公路旅行零食包（Banff 一日游）</h3><span class="pill p2">第二批</span><span class="pill p2">$29/包，出发前在城里取</span><span style="color:#f59e0b">★★★☆☆</span><p>Roam 的 Banff / Kananaskis 路线页上：「出发前带上：零食 + 热饮券 + 路线卡 + 熊喷雾租用」。周五在 Calgary 一个合作咖啡店取。</p><div class="proof"><b>证据：</b>和零食盒共用货源；装备部分见上一版的季节装备。</div></div><div class="card"><h3>🧒 每个孩子的「季节盒」</h3><span class="pill p2">第二批</span><span class="pill p2">$39/季</span><span style="color:#f59e0b">★★★☆☆</span><p>按孩子年龄寄一盒这一季的户外装备和玩法：冬天（暖手贴、雪地玩具、冰场地图、热可可），夏天（水枪、昆虫观察盒、水公园地图）。</p><div class="proof"><b>证据：</b>Lovevery 按年龄寄玩具盒，22 万订阅家庭<sup><a href="#s20">[20]</a></sup>。我们按「季节 + 城市」寄，别人做不了。</div></div></div><h2 class="door">🛏️ 可购物的儿童房（Kids room 版 desk setup）</h2><div class="grid"><div class="card"><h3>「Shop the room」儿童房设计板</h3><span class="pill p1">第一批</span><span class="pill p2">免费看，买东西我们拿佣金；定制 $79</span><span style="color:#f59e0b">★★★★☆</span><p>像网上的「我的办公桌 setup」：一张张真实的儿童房照片（按年龄、按预算 $500 / $1,500 / $3,000、按风格：Montessori、小空间、两个孩子一间），每样东西点了就能买（IKEA、Amazon、本地小店）。付 $79：上传房间照片和尺寸，我们给一套设计 + 购物清单。</p><div class="proof"><b>证据：</b>Havenly 设计一间房 $159<sup><a href="#s14">[14]</a></sup>；Amazon.ca 家具和家居类佣金 9%<sup><a href="#s15">[15]</a></sup>。新家庭（上面的落地包）第一件事就是布置孩子房间。</div></div><div class="card"><h3>🎂 「孩子长大一岁」房间升级包</h3><span class="pill p2">第二批</span><span class="pill p2">佣金 + $49 升级清单</span><span style="color:#f59e0b">★★★☆☆</span><p>孩子 3 岁、6 岁、10 岁是房间要换的时候（床、书桌、收纳）。按生日月份提醒，给一份「这个年纪要换的 8 样东西」。</p><div class="proof"><b>证据：</b>和设计板共用内容；靠生日提醒，每年都能卖一次。</div></div></div><h2 class="door">🏕️ 我们自己办的（有自己的品牌）</h2><div class="grid"><div class="card"><h3>Kids Map 探险夏令营（每天去一个新地方）</h3><span class="pill p1">第一批</span><span class="pill p2">$329/周</span><span style="color:#f59e0b">★★★★☆</span><p>每天一个 Kids Map 上的地方：周一 Fish Creek 找化石、周二图书馆 + 攀岩、周三农场、周四科学馆、周五水公园。我们有最全的地点数据和按年龄的路线，这是我们独有的营地。</p><div class="proof"><b>证据：</b>Calgary 夏令营一周 Zoo $335、Telus Spark $372、Heritage Park $315<sup><a href="#s17">[17]</a></sup>。20 个孩子 × 8 周 × $329 ≈ $52,640 收入（要请营地老师、包车、买保险）。</div></div><div class="card"><h3>学校放假日的一日营（PD day / 春假）</h3><span class="pill p2">第二批</span><span class="pill p2">$69/天</span><span style="color:#f59e0b">★★★★☆</span><p>学校的 PD day 和春假，上班的家长最头疼。办一日营：一天一个主题，在合作场地办（体操馆、科学馆）。</p><div class="proof"><b>证据：</b>没有找到直接数据，这是我的判断：比整周营地容易办得多，可以先用它测「Kids Map 营地」这个牌子。</div></div></div><h2 class="door">💻 SaaS（软件收费）</h2><div class="grid"><div class="card"><h3>Dayhome 管理软件（给小型家庭托儿所）</h3><span class="pill p1">第一批</span><span class="pill p2">$29–49/月/家</span><span style="color:#f59e0b">★★★★☆</span><p>Calgary 很多小型 dayhome 还在用 Excel 和微信：签到、收费、给家长发照片、排队名单。我们做一个很简单的：家长在 Kids Map 里就能看到孩子今天的照片和吃了什么。顺便把「托儿所空位」接到地图上（落地包和排队管家都需要）。</p><div class="proof"><b>证据：</b>Brightwheel 做托儿所管理软件，2021 年估值 6 亿美元，靠托儿所按月订阅<sup><a href="#s18">[18]</a></sup>。小 dayhome 用不起大系统，正好是空白。</div></div><div class="card"><h3>家庭行程 AI（报名截止日、营地、课程一个日历）</h3><span class="pill p2">第二批</span><span class="pill p2">$4.99/月 或 $39/年</span><span style="color:#f59e0b">★★★☆☆</span><p>拍一张学校通知、营地确认邮件，自动进全家日历；报名开始前提醒；两个家长共用。</p><div class="proof"><b>证据：</b>Cozi 的 AI 档 Max ~$79/年<sup><a href="#s19">[19]</a></sup>。和上一版的抢位提醒放在一起卖。</div></div><div class="card"><h3>社区协会小工具（冰场志愿者排班、场地预订）</h3><span class="pill p3">以后</span><span class="pill p2">$19/月/社区协会</span><span style="color:#f59e0b">★★☆☆☆</span><p>冰场浇冰排班、社区中心场地预订、活动报名，一个简单网页。</p><div class="proof"><b>证据：</b>Calgary 65+ 个户外冰场靠志愿者维护<sup><a href="#s21">[21]</a></sup>，排班多半靠群聊。钱不多，但每个社区都会因此用 Kids Map。</div></div></div>
+<div class="box"><h3>建议的顺序</h3><table>
+<tr><th>时间</th><th>做什么</th></tr>
+<tr><td>11 月下旬</td><td>🧳 落地包上线测 2 周 + 🎁 体验礼物卡（3 个 Calgary 体验）+ 🍿 圣诞零食盒预订（先收 30 个订单再进货）</td></tr>
+<tr><td>12 月</td><td>看数字：哪个卖得动就加码。落地包卖得动 → 加 Edmonton、Vancouver 版</td></tr>
+<tr><td>1–2 月</td><td>🏕️ 夏令营要在 1–3 月开报名，所以 1 月决定办不办；🛏️ 儿童房设计板（给落地包的买家用）</td></tr>
+<tr><td>3 月以后</td><td>💻 Dayhome 软件（先找 5 个 dayhome 免费试用）</td></tr>
+</table></div>
+<div class="warn"><b>要注意：</b>①体验和导游一定只卖有执照、有保险的向导，我们做中介；②营地要查 Alberta 的规定（白天的娱乐营地一般不算托儿，但要确认）和买保险；③零食盒涉及食品，只卖有包装、有标签的成品；④落地包里的学校、托儿所信息要写清楚「以官方为准」。</div>
+<p class="mute" style="font-size:13px">前两版仍然有效：v1（App 内付费功能）<code>research/consumer-paid-ideas-2026-11-11.html</code>，v2（卖东西、办活动、做服务）<code>research/consumer-paid-ideas-v2-2026-11-11.html</code>。</p>
+<h2 style="margin-top:30px">来源</h2><ol style="font-size:12.5px;color:var(--mute)"><li id="s1"><a href="https://www.cbc.ca/lite/story/1.7642490">CBC：Alberta 连续第 3 年全国净迁入第一</a></li><li id="s2"><a href="https://dailyhive.com/calgary/alberta-population-record-growth-statistics-canada">Daily Hive：2024 年 Alberta 增加近 17 万人；新永久居民 66,359 人，历史最高</a></li><li id="s3"><a href="https://dailyhive.com/calgary/alberta-population-rise-city">Daily Hive：Calgary 都会区 5 年人口 +19%（153 万 → 184 万）</a></li><li id="s4"><a href="https://www.policyalternatives.ca/?p=88328">CCPA 2025：Calgary 一半孩子住在「托儿荒漠」</a></li><li id="s5"><a href="https://childcarecanada.org/node/17367">Calgary Herald（经 Child Care Canada）：托儿所几百人排队，家长交几百元申请费、等几年</a></li><li id="s6"><a href="https://www.calgary.ca/communities/newcomers.html">City of Calgary 新移民页：市里只给资源列表和多语言 PDF 指南</a></li><li id="s7"><a href="https://www.calgarysflyshop.com/pages/full-day-lower-bow-float-trip">Bow River 飞钓向导一天：$550–800/船（1–2 人）</a></li><li id="s8"><a href="https://fishtalesflyshop.com/pages/guiding">Fishtales：Bow River 向导 $800/天 + GST</a></li><li id="s9"><a href="https://www.boardandkayak.com/charter/built-for-speed-fishing-charters-7696">Vancouver 三文鱼半天出海：CA $600–975/船</a></li><li id="s10"><a href="https://www.albertaparks.ca/media/3856222/dinosaur-interpretive-brochure.pdf">Dinosaur Provincial Park「Dig & Discover」挖恐龙：$450/人</a></li><li id="s11"><a href="https://www.barchart.com/story/news/30630913/experience-gifting-market-to-skyrocket-more-than-17152-bn-revenue-by-2029-arizton">体验类礼物全球市场约 1,180 亿美元（2023，Arizton）</a></li><li id="s12"><a href="https://woocommerce.com/posts/universal-yums-subscriptions-woocommerce/">Universal Yums：10 万+ 订阅、卖出 1,000 万盒（WooCommerce 案例）</a></li><li id="s13"><a href="https://www.particl.com/company/Bokksu">Bokksu：日本零食盒 $39.99/月，订阅是主要收入（Particl 估计）</a></li><li id="s14"><a href="https://havenly.com/learn/how-much-does-a-nursery-cost">Havenly：线上设计一间房 $159</a></li><li id="s15"><a href="https://associates.amazon.ca/help/node/topic/GRXPHT8U84RAYDXZ">Amazon.ca Associates：家具和家居类佣金 9%（官方页面）</a></li><li id="s16"><a href="https://thatch.co/blog/seller-resources/turn-your-travel-expertise-into-income-with-thatch-in-2025">Thatch：旅行攻略一般卖 $8–25；Airheart 至少 $29、创作者拿 80%</a></li><li id="s17"><a href="https://www.sparkscience.ca/summer-camps">Calgary 夏令营一周：Zoo $335、Telus Spark $372、Heritage Park $315</a></li><li id="s18"><a href="https://www.pymnts.com/news/investment-tracker/2021/brightwheel-early-education-platform-raises-55m/">Brightwheel（托儿所管理软件）：2021 年估值 6 亿美元，托儿所按月订阅</a></li><li id="s19"><a href="https://heynori.com/blog/best-shared-family-calendar-apps/cozi-vs-google-calendar-for-families">Cozi：家庭日历 Gold ~$39/年、AI 版 Max ~$79/年</a></li><li id="s20"><a href="https://www.retaildive.com/news/childrens-company-lovevery-raises-100m-launches-mobile-app/609220">Lovevery：22 万订阅家庭，年订阅收入超过 1 亿美元（2021）</a></li><li id="s21"><a href="https://www.calgary.ca/parks/activities/outdoor-skating-rinks.html">Calgary 户外冰场 65+ 个靠志愿者维护（Adopt-a-Rink）</a></li></ol>
+</div></body></html>

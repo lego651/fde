@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分析：用户端收费 v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one reading column. Verdict, what works, 5 problems, revised test, sources. Paper palette shared with the FDE site. */
+  --paper: #fbf8f2; --card: #fff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --warn: #8a5a00; --warn-soft: #fff1d6; --bad: #b3261e; --bad-soft: #fde8e6;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); }
+main { max-width: 860px; margin: 0 auto; padding: 40px 20px 90px; display: grid; gap: 38px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.3; }
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.08rem; }
+p { margin: 0; max-width: 70ch; }
+a { color: var(--accent-ink); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 16px; }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 2px 9px; border-radius: 999px; background: #e3eefb; color: #1d5fa8; }
+.verdict { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.score { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.score div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.score b { font-size: 1.35rem; font-family: var(--serif); }
+.score span { font-size: .82rem; color: var(--muted); }
+@media (max-width: 680px) { .score { grid-template-columns: 1fr 1fr; } }
+.good { background: var(--good-soft); border: 1px solid #c4e5cc; border-radius: 14px; padding: 16px 20px; display: grid; gap: 8px; }
+.prob { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.prob .ph { display: flex; gap: 12px; align-items: center; padding: 14px 20px; background: #f7f1e6; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.prob .n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; flex: none; font-size: .9rem; }
+.prob .ph h3 { flex: 1; min-width: 200px; }
+.prob .pb { padding: 16px 20px 18px; display: grid; gap: 10px; }
+.prob .fix { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.hi { background: var(--bad-soft); color: var(--bad); }
+.mid { background: var(--warn-soft); color: var(--warn); }
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: #f7f1e6; font-size: .8rem; letter-spacing: .05em; color: #8c7f6a; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sources { font-size: .85rem; color: var(--muted); }
+.sources li { word-break: break-word; }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>分析：用户端收费 v3（我们自己创造的 14 个产品）</h1>
+  <p class="meta">Kids Map · 分析原文 <a href="consumer-paid-ideas-v3.html">《用户端收费 · 第 3 版：我们自己创造的产品》（2026-11-11）</a> · 2026-11-13 · <span class="tag">分析中</span></p>
+</header>
+
+<section>
+  <div class="verdict">
+    <p><b>结论：这一版的排名第一已经过时了。原文最推荐的"$49 新家庭落地包"，在第二天的<a href="newcomer-welcome-pack-analysis.html">欢迎礼包研究</a>里被推翻：免费信息太多，向家庭收钱卖信息很难，所以改成了"家庭免费、商家付钱"。这份文档应该标成"已被取代"，只保留其他 13 个点子当备选。</b></p>
+    <p>剩下的点子里有两件事要马上处理：<b>①"季节盒"给孩子寄暖手贴，跟暖贴调研里"儿童禁用"的警告直接冲突；②"圣诞窗口"要在 12 月 1 日前同时上 3 样东西，但今天是 11 月 13 日，体验礼物卡连一个签约的向导都还没有。</b></p>
+    <p>写得好的地方也不少：只看"用户掏钱买的产品"、用比较表排先后、每个点子都标了证据或"我的判断"、注意事项写到了执照和保险。</p>
+  </div>
+  <div class="score" role="list">
+    <div role="listitem"><b>过时</b><span>第一名已被取代</span></div>
+    <div role="listitem"><b>强</b><span>比较表和证据标注</span></div>
+    <div role="listitem"><b>要改</b><span>孩子用暖贴</span></div>
+    <div role="listitem"><b>太赶</b><span>圣诞 3 样同时上</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>写得好的地方</h2>
+  <div class="good">
+    <ul class="plain">
+      <li><b>问题收窄了。</b>v1 是 App 内功能，v2 是卖东西和办活动，v3 只看"我们自己能创造的产品"。每一版都在前一版上收窄。</li>
+      <li><b>比较表实用。</b>用"要不要很多用户、毛利、多快能测、能不能复制、独有优势"五列排先后，一眼能看出哪个最便宜。</li>
+      <li><b>有失败标准。</b>落地包写了"访问多但没人买 → 改成免费拉新入口"。第二天的欢迎礼包研究，其实就是这条失败标准提前成立了。</li>
+      <li><b>证据和判断分开。</b>中文导游、一日营这类没有数据的，都写了"这是我的判断"。</li>
+      <li><b>注意事项方向对。</b>只卖有执照、有保险的向导；营地要查 Alberta 规定；零食只卖有包装和标签的成品；托儿所信息"以官方为准"。</li>
+      <li><b>零食盒先收 30 单再进货。</b>不压货，这个做法很好。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5 个问题，以及怎么改</h2>
+
+  <div class="prob">
+    <div class="ph"><span class="n">1</span><h3>第一名"$49 落地包"已经被第二天的研究推翻</h3><span class="pill hi">标为已取代</span></div>
+    <div class="pb">
+      <p>v3 说落地包是"不得不第一个测的"，卖 $49 / $199 / $129。第二天（11-12）的<a href="newcomer-welcome-pack.html">欢迎礼包研究</a>开头就写了："v3 里我建议向新家庭收 $49……研究完我改主意了"。原因是市政府、RBC Arrive、WelcomeAide、安置机构、Canoo 都免费，向家庭收钱卖信息很难。新方案是礼包免费，商家按核销付 $20。</p>
+      <p>还有两处跟后面的分析冲突：</p>
+      <ul class="plain">
+        <li><b>$199 顾问</b>：<a href="newcomer-welcome-pack-analysis.html">欢迎礼包分析</a>建议改名为"本地生活顾问"，写明不讲签证和 PR（联邦移民法规定只有持牌的人能收钱给移民建议）。v3 的"回答所有问题"要改。</li>
+        <li><b>"可以用中文""懂中文社区"</b>：欢迎礼包研究特意删掉了"主打中文家庭"，对象改成所有有孩子的新家庭。</li>
+      </ul>
+      <div class="fix"><b>改：</b>在 v3 顶部加一行"落地包部分已被 2026-11-12 欢迎礼包研究取代"，建议的顺序里把"落地包上线测 2 周"换成欢迎礼包的 3 周测试。其他 13 个点子保留当备选。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">2</span><h3>"季节盒"给孩子寄暖手贴</h3><span class="pill hi">风险高</span></div>
+    <div class="pb">
+      <p>"每个孩子的季节盒"冬季版写着：<b>暖手贴</b>、雪地玩具、冰场地图、热可可，按孩子年龄寄。</p>
+      <p>但我们自己的<a href="warm-patch-regulatory.html">暖贴合规速查</a>要求的警告就是<b>"儿童禁用"</b>。暖贴最常见的事故是低温烫伤（2008 年 Tensor、Icy Hot 发热贴都因烫伤在加拿大召回），而小孩不会说、也不会自己拿掉。一个儿童品牌的盒子里出现儿童烫伤，后果比卖不出去严重得多。</p>
+      <div class="fix"><b>改：</b>季节盒里<b>去掉暖手贴</b>，换成不发热的东西（保暖手套内衬、反光贴、冰场地图）。暖贴只作为 Hush &amp; Ember 的成人产品，不进任何儿童产品。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">3</span><h3>圣诞窗口：18 天里同时上 3 样，体验礼物卡还没有供应方</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>原文建议 11 月下旬同时上：落地包、体验礼物卡（3 个 Calgary 体验）、圣诞零食盒预订，都要在 12 月 1 日前。今天是 11 月 13 日。</p>
+      <p>体验礼物卡卖的是"送爸妈一次 Bow River 飞钓""送孩子一次挖恐龙"。卖之前要先有<b>签好的、有执照和保险的向导</b>，谈好分成和退款规则，否则卖出去的卡没人兑现。原文的价格是向导的公开价（飞钓 $550–800/船、挖恐龙 $450/人），我们要拿 15–20%，还要向导同意。这些一个都还没谈。</p>
+      <p>礼物卡还有规定：Alberta 固定金额的礼物卡不能设过期日。之前的分析查过，"为特定服务出售、没有固定金额"的卡不受这一条限制，所以卡上应该写"一次 Bow River 飞钓"，而不是"$199"。</p>
+      <div class="fix"><b>改：</b>圣诞只做一样。如果这周能签下 2 个向导，就做体验礼物卡，卡面写具体体验，不写金额；签不下就放弃圣诞，不要硬上。零食盒可以做"预订页 + 收满 30 单再进货"，因为它不需要别人同意。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">4</span><h3>Dayhome 软件：有现成的对手，而且要保管孩子的照片</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>原文说"小 dayhome 用不起大系统，正好是空白"。但：</p>
+      <ul class="plain">
+        <li>加拿大公司 <b>Lillio（以前叫 HiMama）</b>和原文提到的 Brightwheel 都在做托儿所管理和家长沟通，也有面向小机构的方案。原文只提了 Brightwheel 的估值，没有说它在加拿大的价格。</li>
+        <li>Alberta 的持牌 family day home 一般挂靠在一个 agency 下面，由 agency 决定用什么系统。真正"自己选软件"的，多半是不持牌的私人 dayhome，规模更小、更难收费。</li>
+        <li>软件要存<b>孩子的照片、吃了什么、签到时间</b>。这是最敏感的个人信息，出一次泄露就会毁掉 Kids Map 的名声。一个人做的产品很难承担这个安全责任。</li>
+      </ul>
+      <div class="fix"><b>改：</b>降到"以后"。真要做，第一步不是写软件，而是问 5 个 dayhome：现在用什么、多少钱、是不是 agency 决定的。"托儿所空位接到地图上"这个想法单独拿出来，可以先做成 dayhome 自己填的空位表，不存孩子的任何信息。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">5</span><h3>人口数字是 2024 年的高点，后来已经放慢</h3><span class="pill mid">小</span></div>
+    <div class="pb">
+      <p>原文用"2024 年 Alberta 新永久居民 66,359 人，历史最高""Calgary 5 年人口 +19%"来说明"人一直在来"。第二天的欢迎礼包研究引用的是更新的数字：<b>2025 年 Calgary 新 PR 比上年少 24.8%</b>，市政府预测 2026 年人口增长从 3.2% 降到 1.6%。</p>
+      <p>另外几个收入数字是毛收入：夏令营"20 个孩子 × 8 周 × $329 ≈ $52,640"还没扣老师、包车、保险；零食盒 40% 毛利是估计。原文都标了，但放在比较表里容易被当成利润。</p>
+      <div class="fix"><b>改：</b>人口数字换成 2025 年的数字，写明"在放慢"。夏令营那行加一句"这是收入，不是利润"。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>修改后的顺序</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>时间</th><th>做什么</th></tr></thead>
+    <tbody>
+      <tr><td>现在</td><td>落地包换成<a href="newcomer-welcome-pack-analysis.html">欢迎礼包</a>的 3 周测试（家庭免费、商家付钱）</td></tr>
+      <tr><td>这周决定</td><td>圣诞只做一样：能签下 2 个向导 → 体验礼物卡（写体验，不写金额）；签不下 → 零食盒预订（收满 30 单再进货），或者都不做</td></tr>
+      <tr><td>1 月</td><td>决定办不办夏令营（1–3 月开报名）；先办一个 PD day 一日营测牌子（原文的建议）</td></tr>
+      <tr><td>以后</td><td>儿童房设计板、季节盒（不放暖贴）、Dayhome 软件（先问 5 家）</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>原文需要改的地方（汇总）</h2>
+  <ol class="plain">
+    <li>顶部加"落地包部分已被 2026-11-12 欢迎礼包研究取代"，并链接过去。</li>
+    <li>$199 顾问：写明不讲签证和 PR；"可以用中文"改成"对所有新家庭"。</li>
+    <li>季节盒：删掉暖手贴。</li>
+    <li>建议的顺序：圣诞从 3 样改成最多 1 样；体验礼物卡写明"先签向导"。</li>
+    <li>Dayhome 软件：加上 Lillio（HiMama）和"持牌 dayhome 多由 agency 决定"，降到"以后"。</li>
+    <li>人口数字换成 2025 年的；夏令营金额注明是收入。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>资料来源</h2>
+  <ul class="plain sources">
+    <li>后续研究和分析（同一文档中心）：<a href="newcomer-welcome-pack.html">Calgary 新家庭欢迎礼包（原文）</a>；<a href="newcomer-welcome-pack-analysis.html">欢迎礼包分析</a>；<a href="warm-patch-regulatory.html">暖贴合规速查</a>；<a href="warm-patch-regulatory-analysis.html">暖贴分析</a>（含 2008 年发热贴烫伤召回）</li>
+    <li>Calgary 2025 年新 PR（比上年少 24.8%）：<a href="https://regionaldashboard.alberta.ca/region/calgary/new-permanent-residents/">Alberta Regional Dashboard</a></li>
+    <li>Calgary 2026 春季经济展望（人口增长放慢）：<a href="https://www.calgary.ca/content/dam/www/cfod/finance/documents/corporate-economics/calgary-and-region-economic-outlook/Calgary-and-Region-Economic-Outlook-2026-Spring.pdf">calgary.ca</a></li>
+    <li>Health Canada，Tensor 发热贴召回（2008）：<a href="https://recalls-rappels.canada.ca/en/alert-recall/archived-safety-information-concerning-tensor-heat-therapy-public">recalls-rappels.canada.ca</a></li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
