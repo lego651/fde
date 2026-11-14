@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>北美城市验证过的本地产品：下一个该测哪个</title><style>
+:root{--ink:#1d2433;--mute:#5b6577;--line:#e3e7ee;--bg:#f7f8fb;--card:#fff;--blue:#2563eb;--good:#15803d;--bad:#b91c1c;--warn:#b45309}
+*{box-sizing:border-box}body{margin:0;font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+.nav{display:flex;gap:6px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}.nav span{border:1px solid var(--line);background:#fff;border-radius:99px;padding:3px 10px;color:var(--mute)}.nav .on{background:var(--ink);color:#fff;border-color:var(--ink)}
+h1{font-size:26px;margin:0}h2{font-size:21px;margin:0 0 10px}h3{font-size:17px;margin:26px 0 8px}
+.sub{color:var(--mute);margin:4px 0 16px}.mute{color:var(--mute)}
+.note{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:12px;padding:12px 16px;margin:0 0 16px}.note li{margin:3px 0}
+.toggle{display:flex;gap:6px;align-items:center;margin:0 0 14px;font-size:14px}.toggle button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 14px;cursor:pointer}.toggle button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:760px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}.tile.dark{background:var(--ink);color:#fff}.tile.dark .tl,.tile.dark .th{color:#c9cfdb}
+.tl{margin:0;font-size:12px;font-weight:600;color:var(--mute)}.tv{margin:2px 0;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}.th{margin:0;font-size:12px;color:var(--mute)}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.box h3{margin:0;padding:12px 14px;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:14px;margin:8px 0}.box table{margin:0}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f1f3f8;font-size:12.5px}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.rng{font-size:11.5px;color:var(--mute);font-weight:400}
+tr.tot td{background:#f7f8fb}tr.net td{background:#eef4ff}.big{font-size:18px}
+a{color:var(--blue);text-decoration:none}.go{font-size:12.5px;font-weight:600;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:99px;padding:0 7px;vertical-align:1px}.real{background:#ecfdf3;color:var(--good)}.est{background:#fff7e6;color:var(--warn)}.rule{background:#eef2f6;color:#475467}
+.warn{background:#fff7e6;border:1px solid #fde3b3;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}.fix{background:#fdecec;border:1px solid #f7c9c9;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+.detail{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:22px 0}.crumb{font-size:12.5px;color:var(--mute);margin-bottom:6px}
+.bars{display:flex;gap:28px;align-items:flex-end;height:240px;padding:10px 20px 0;border-bottom:1px solid var(--line)}.bcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:110px;height:100%}
+.bar{width:46px;background:var(--blue);border-radius:4px 4px 0 0}.bval{font-size:12.5px;font-weight:700;margin-bottom:4px}.blab{font-size:12px;color:var(--mute);padding:4px 0}.bcol:hover .bar{opacity:.8}
+.sc{display:none}body.s-low .sc-low,body.s-base .sc-base,body.s-high .sc-high{display:inline}body.s-low .bars.sc-low,body.s-base .bars.sc-base,body.s-high .bars.sc-high{display:flex}
+code{font-size:12.5px;background:#f1f3f8;padding:1px 5px;border-radius:5px}
+.q li{margin:6px 0}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 6px;font-size:17px}.card p{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1px 9px;margin-right:4px}
+.p1{background:#dbeafe;color:#1d4ed8}.p2{background:#fef3c7;color:#b45309}.p3{background:#dcfce7;color:#15803d}
+.proof{background:#f7f8fb;border-radius:10px;padding:8px 12px;font-size:13.5px}
+.hero{background:linear-gradient(135deg,#1d2433,#2563eb);color:#fff;border-radius:18px;padding:22px 24px;margin:18px 0}
+.hero h2{color:#fff;font-size:26px;margin:0 0 6px}.hero .mute{color:#c9d6f5}.hero b{color:#fff}
+.hero table{background:transparent;color:#fff;font-size:14px}.hero th{background:rgba(255,255,255,.12);color:#fff}.hero td,.hero th{border-color:rgba(255,255,255,.2)}
+.hero a{color:#bfdbfe}
+.tier{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}@media(max-width:760px){.tier{grid-template-columns:1fr}}
+.tier div{background:rgba(255,255,255,.1);border-radius:12px;padding:12px}.tier .n{font-size:24px;font-weight:800}
+.door{margin:28px 0 4px;font-size:21px}
+</style></head>
+<body><div class="wrap" id="top"><h1>🏙️ 北美城市里「已经被证明」的本地产品：下一个该测哪个</h1>
+<p class="sub">Nov 11, 2026 · Kids Map + Roam · 只看有真数字的（卖完、做了很多年、开到更多城市、有会员或收入数字）· 按「App 里先开入口、到 ~100 人再去谈商家」的适合程度排名 · [n] = 来源 · <span class="tag est">估计</span> = 我自己的估计，没有来源</p>
+
+<div class="note"><b>一句话结论</b><ul>
+<li><b>真正有硬证据的本地产品不多，大约 10 种。</b>最强的是「每家店送一样东西」的城市通票（Edmonton CoffeePass 2026 版 40 家咖啡馆已卖完<sup><a href="#s1">[1]</a></sup>）、瑜伽「每家第一节课免费」通票（Passport to Prana，7 个以上城市<sup><a href="#s2">[2]</a></sup>）、陌生人晚餐（Timeleft，€1,800 万年收入<sup><a href="#s3">[3]</a></sup>）、免费打卡路线（Calgary 自己的景点通票一年 28,356 人注册<sup><a href="#s4">[4]</a></sup>），还有卖给营地的「营地指南」（NJ Kids 做了 21 年<sup><a href="#s5">[5]</a></sup>）。</li>
+<li><b>最适合我们方法的 4 个：</b>① Roam「瑜伽/普拉提第一节课通票」；② Roam「周三和 5 个陌生人吃晚饭」；③ Kids Map「夏天冰淇淋通票」（用孩子的护照盖章）；④ Kids Map「暑假营地规划」→ 再卖营地推荐位。</li>
+<li><b>要诚实面对的一点：</b>和我们最像的产品，<b>几乎都是先签好商家再卖的</b>（CoffeePass、Too Good To Go、Timeleft）。真正「先卖后签」的只有 DoorDash 和 6AM City 这类。所以我们的方法要改一点：<b>入口不写商家名字；用 $5 可退定金来打分，不只看免费报名；开入口前先拿到 3–5 家「到 100 人就做」的口头答应。</b></li>
+<li>Coffee Pass 和诊所推广照常做，下面有一节讲这些发现怎么改它们。派对服务、团购已经放弃，这里不推荐。</li>
+</ul></div>
+
+<div class="hero">
+<p class="mute" style="margin:0 0 4px">⚠️ 最重要的发现</p>
+<h2>别人大多是「先签商家，再卖」</h2>
+<table><tr><th>先签商家再卖（大多数）</th><th>先收需求再签（少数，但有）</th></tr>
+<tr><td>CoffeePass 开卖时就有 22 家咖啡馆<sup><a href="#s6">[6]</a></sup>；Too Good To Go 进 Calgary 时已有 100+ 家店<sup><a href="#s7">[7]</a></sup>；Timeleft 只是「先看看本地人有没有兴趣」，没说要多少人<sup><a href="#s8">[8]</a></sup>。</td>
+<td>DoorDash：用餐厅的 PDF 菜单做了个网页，没签约，自己送<sup><a href="#s9">[9]</a></sup>。6AM City：第一期还没发就有 4,731 人订阅，然后才找广告商<sup><a href="#s10">[10]</a></sup>。222：先用一个表单收报名，还没有 App<sup><a href="#s11">[11]</a></sup>。</td></tr></table>
+<p style="margin-top:12px"><b>对我们意味着什么：</b>① 我们的方法最像 6AM City：先攒一群能联系上的真人，再拿去和商家谈，这条路走得通。② 但一个连商家名字都没有的等候名单，信号比较弱。办法是：开入口前先找 3–5 家「到 100 人就加入」的商家，<b>他们同意了才写名字</b>。③ ClassPass 的教训：一堆只想要免费的人，说服不了商家，还会伤商家<sup><a href="#s12">[12]</a></sup>。和商家谈时要给「你店 3 公里内有多少人」，而不是全市总数。</p>
+</div>
+
+<h2 style="margin-top:28px">📋 排名总表（最适合的在最上面）</h2>
+<p class="mute">「适合度」看的是：商家成本小、可控；报名或定金是有意义的信号；100 人就够谈；不用自己买场地设备；法律简单；适合我们的用户。证据强 ≠ 适合度高。</p>
+<div class="box"><table>
+<tr><th>排名</th><th>产品（城市、例子）</th><th>验证证据（数字+来源）</th><th>我们 App 里的入口长什么样</th><th>收钱方式</th><th>先测门槛（多少人 / 多久）</th><th>适合度 ★</th></tr>
+<tr><td>现有</td><td><b>☕ Coffee Pass</b>（Roam；Edmonton CoffeePass、多伦多咖啡护照）</td><td>22 → 40 家，2026 卖完<sup><a href="#s1">[1]</a></sup>；多伦多卖出目标的 2 倍以上<sup><a href="#s13">[13]</a></sup></td><td>已设计好</td><td>通票价格</td><td>保留 100 人，加一个 $5 定金组</td><td>进行中</td></tr>
+<tr><td>现有</td><td><b>💆 诊所推广</b>（Roam；Zocdoc、Mindbody 体验课）</td><td>每个新病人预约 $35–110<sup><a href="#s14">[14]</a></sup></td><td>已设计好</td><td>诊所付钱</td><td>不需要 100 人（商家付费）</td><td>待测</td></tr>
+<tr><td><b>1</b></td><td><b>🧘 瑜伽第一节课通票</b>（Roam；Passport to Prana：多伦多 → 温哥华 → LA）</td><td>多伦多 48 家、温哥华约 40 家、LA 35 家<sup><a href="#s2">[2]</a></sup><sup><a href="#s15">[15]</a></sup>；访客问卷是瑜伽馆参加的主要原因<sup><a href="#s16">[16]</a></sup></td><td>Today 卡片 + 每个瑜伽馆页面：「Save my spot」</td><td>通票约 $25–35 <span class="tag est">估计</span></td><td>3 周内 100 人；问 15 家有 8 家答应</td><td style="color:#f59e0b">★★★★★</td></tr>
+<tr><td><b>2</b></td><td><b>🍽️ Roam Table：和 5 个陌生人吃晚饭</b>（Roam；Timeleft、222）</td><td>€1,800 万年收入、每月约 15 万人<sup><a href="#s3">[3]</a></sup>；饭钱自己付，餐厅是普通订位<sup><a href="#s17">[17]</a></sup></td><td>「Hold my seat for Wednesday」+ 2 分钟小测验</td><td>$5 占位 → 每顿约 $12–18 <span class="tag est">估计</span></td><td>3 周内 48 个定金（8 桌）</td><td style="color:#f59e0b">★★★★★</td></tr>
+<tr><td><b>3</b></td><td><b>🍦 夏天冰淇淋通票 + 盖章</b>（Kids Map；咖啡护照 + 冰淇淋路线）</td><td>Calgary 景点通票 28,356 人（免费）<sup><a href="#s4">[4]</a></sup>；冰淇淋路线约 7,000 人<sup><a href="#s18">[18]</a></sup></td><td>孩子护照页：「Reserve [孩子名]'s pass」</td><td>每个孩子约 $15–20 <span class="tag est">估计</span></td><td>4–5 月，4 周内 100 个孩子</td><td style="color:#f59e0b">★★★★☆</td></tr>
+<tr><td><b>4</b></td><td><b>🏕️ 暑假营地规划 → 卖营地推荐位</b>（Kids Map；NJ Kids、ParentMap、510 Families）</td><td>NJ Kids 营地指南 21 年，广告 $475–1,500<sup><a href="#s5">[5]</a></sup>；列表 $350<sup><a href="#s19">[19]</a></sup></td><td>「Plan summer 2027」：年龄、哪几周、哪个区</td><td>营地付钱，约 CA$300–400 <span class="tag est">估计</span></td><td>1 月 31 日前 300 个家庭；5 个营地付钱</td><td style="color:#f59e0b">★★★★☆</td></tr>
+<tr><td><b>5</b></td><td><b>💘 单身之夜</b>（Roam；Eventbrite 快速约会）</td><td>一年 37.6 万人参加<sup><a href="#s20">[20]</a></sup>；加拿大 +76%<sup><a href="#s21">[21]</a></sup></td><td>「Join the next singles night」按年龄段</td><td>$5 占位 → 门票 <span class="tag est">估计</span></td><td>3 周内 40 个定金，男女平衡</td><td style="color:#f59e0b">★★★★☆</td></tr>
+<tr><td><b>6</b></td><td><b>📸 家庭照片小场</b>（Kids Map；美国南瓜/节日小场）</td><td>20 分钟 $130–295，定金 $60–95<sup><a href="#s22">[22]</a></sup><sup><a href="#s23">[23]</a></sup></td><td>公园页面：「Reserve a 20-min slot」</td><td>定金 → 摄影师</td><td>3 周内 30 个时段</td><td style="color:#f59e0b">★★★★☆</td></tr>
+<tr><td><b>7</b></td><td><b>🌙 Parents' Night Out（周五晚托）</b>（Kids Map；YMCA、My Gym）</td><td>每个孩子 $20–49<sup><a href="#s24">[24]</a></sup><sup><a href="#s25">[25]</a></sup>；没有卖完的数据</td><td>周五卡片：「Reserve a spot」</td><td>$5 占位 → 体操馆原价</td><td>3 周内 40 个孩子</td><td style="color:#f59e0b">★★★☆☆</td></tr>
+<tr><td><b>8</b></td><td><b>🧖 周日桑拿社交</b>（Roam；Othership、SweatHouz）</td><td>Othership 单次 $65，多伦多 2 家 + 纽约<sup><a href="#s26">[26]</a></sup>；SweatHouz 100+ 家<sup><a href="#s27">[27]</a></sup></td><td>「Join a group session」</td><td>$5 占位 → 团体价</td><td>3 周内 40 人</td><td style="color:#f59e0b">★★★☆☆</td></tr>
+<tr><td><b>9</b></td><td><b>🧩 街区寻宝 / 问答之夜</b>（Roam + Kids Map 家庭版；Let's Roam、Geeks Who Drink）</td><td>每周 900+ 场问答<sup><a href="#s28">[28]</a></sup>；寻宝 700+ 个地点<sup><a href="#s29">[29]</a></sup></td><td>「Book a team for the Inglewood Hunt」</td><td>每队门票 <span class="tag est">估计</span></td><td>4 周内 25 队</td><td style="color:#f59e0b">★★★☆☆</td></tr>
+<tr><td><b>10</b></td><td><b>🏆 家庭最爱评选</b>（Kids Map + Roam；地方报纸读者评选）</td><td>一家小报 $41,000+（厂商案例）<sup><a href="#s30">[30]</a></sup>；约 40% 地方杂志在办<sup><a href="#s31">[31]</a></sup></td><td>护照里「提名你最爱的地方」</td><td>商家赞助类别</td><td>1,000 票；3 个赞助</td><td style="color:#f59e0b">★★★☆☆</td></tr>
+<tr><td>11</td><td><b>📰 周报广告套餐</b>（两个 App；VancouverMom、6AM City）</td><td>约 8,000 订阅，横幅 $500，套餐 $1,550–9,550<sup><a href="#s32">[32]</a></sup><sup><a href="#s33">[33]</a></sup></td><td>不用入口，做一份媒体介绍</td><td>商家付钱</td><td>卖出 3 个套餐</td><td style="color:#f59e0b">★★★☆☆<br><span class="mute" style="font-size:12px">方法不同，可同时做</span></td></tr>
+<tr><td>12</td><td><b>👕 儿童二手寄卖会</b>（Kids Map；JBF、Rhea Lana's）</td><td>JBF 136 家，平均年营业额约 $42.2 万（第三方摘要）<sup><a href="#s34">[34]</a></sup></td><td>「Reserve a seller spot」</td><td>卖家费 + 抽成 <span class="tag est">估计</span></td><td>100 个卖家</td><td style="color:#f59e0b">★★☆☆☆</td></tr>
+<tr><td>13</td><td><b>🎟️ 家庭景点套票</b>（Kids Map；CityPASS、多伦多图书馆通票）</td><td>CityPASS 累计约 3,000 万人<sup><a href="#s35">[35]</a></sup>；图书馆通票 86,573 次<sup><a href="#s36">[36]</a></sup></td><td>「Notify me」</td><td>套票价</td><td>100 人太少，谈不动</td><td style="color:#f59e0b">★★☆☆☆</td></tr>
+<tr><td>14</td><td><b>🚶 美食步行团</b>（Roam；Alberta Food Tours、Chicago Food Planet）</td><td>Calgary 已有，CA$111<sup><a href="#s37">[37]</a></sup>；芝加哥 9 年付餐厅 $100 万+<sup><a href="#s38">[38]</a></sup></td><td>「Reserve a tour seat」</td><td>转卖现有团</td><td>30 个位子</td><td style="color:#f59e0b">★★☆☆☆</td></tr>
+</table></div>
+
+<h2 style="margin-top:30px">🗂️ 前 10 名的详细卡片</h2>
+<p class="mute">所有门槛和价格如果没有来源，都是 <span class="tag est">估计</span>。共同规则：$0「先占位」组和 $5「可退定金」组分开给不同的人看；商家没答应前不写名字；写清楚「某天前不开就全部退款」。App 里的文字用英文（用户看的），下面给出原文。</p>
+
+<div class="detail"><div class="crumb">第 1 名 · Roam · ★★★★★</div><h3 style="margin-top:0">🧘 瑜伽 / 普拉提「第一节课免费」通票</h3>
+<div class="grid">
+<div class="card"><h3>证据</h3><p>Passport to Prana（多伦多起家的合作社）：一张卡 <b>$20–30</b>，每家瑜伽馆上一节课。多伦多 48 家、温哥华约 40 家（「每节课 $1」）、湾区 38 家、LA 35 家、圣地亚哥 19 家<sup><a href="#s2">[2]</a></sup><sup><a href="#s15">[15]</a></sup>。瑜伽馆让来客填问卷，这是它们愿意参加的<b>主要原因</b><sup><a href="#s16">[16]</a></sup>。以前有过 Calgary 版<sup><a href="#s39">[39]</a></sup>。</p>
+<div class="warn"><b>证据弱的地方：</b>Prana 的报道都在 2010–2012 年，现在还在不在不知道，也没找到关门消息。瑜伽馆那边的转化数字只有厂商的：Mindbody 说 47% 体验课会转化，但没说「转化」是什么意思<sup><a href="#s40">[40]</a></sup>。</div></div>
+<div class="card"><h3>为什么适合</h3><p>它就是「瑜伽版 Coffee Pass」：每家送一次、护照盖章、不碰酒、空着的瑜伽垫几乎不花钱。卡上写「每家一节课」而不是金额，在 Alberta 好像属于礼物卡规定的例外，可以有结束日期<sup><a href="#s41">[41]</a></sup>。1 月是最好的时间（新年计划）<span class="tag est">估计</span>。Coffee Pass 的页面、兑换流程、护照打卡都能直接用。</p></div>
+<div class="card"><h3>App 里怎么做、怎么写</h3><p>Roam Today 卡片 + 每个瑜伽/普拉提地点页 + 地图上一个「Studio Pass」筛选。</p><p class="proof">"Studio Pass is coming to Calgary: one free first class at up to 15 hand-picked yoga &amp; pilates studios. Save your spot — no payment now. We only launch if 100 people join, and you'll see the final studio list and price before you pay."</p><p>定金组：「Hold your pass for $5 — fully refundable, auto-refunded if we don't launch by [日期]」。只问一个问题：「你想要哪个区的瑜伽馆？」</p></div>
+<div class="card"><h3>找商家怎么说 · 成功/失败</h3><p><b>要什么：</b>「每个持卡人一节免费体验课，<b>你自己挑哪几节</b>（冷门时段也行）。你拿到来客的问卷（对方同意）。你店 3 公里内已经有 N 个人报名。」让瑜伽馆自己挑课，避开 ClassPass「给满课打折」的抱怨<sup><a href="#s42">[42]</a></sup>。</p><p><b>算成功：</b>3 周内 100 人报名（或 30+ 个定金），并且问的前 15 家里有 8 家答应。<b>算失败：</b>4 周不到 40 人，或问了 15 家不到 5 家答应。</p></div>
+</div>
+<div class="fix"><b>风险：</b>瑜伽馆中途关门——Calgary 就有一家突然关门，客人的预付卡作废<sup><a href="#s43">[43]</a></sup>。照 CoffeePass 的做法：发通知、换一家、延长有效期<sup><a href="#s44">[44]</a></sup>。先查 Passport to Prana 在 Calgary 还卖不卖；还在卖就找它合作，不要硬碰。</div></div>
+
+<div class="detail"><div class="crumb">第 2 名 · Roam · ★★★★★</div><h3 style="margin-top:0">🍽️ Roam Table：周三和 5 个陌生人吃晚饭</h3>
+<div class="grid">
+<div class="card"><h3>证据</h3><p>Timeleft：<b>€1,800 万年收入、每月约 15 万人参加、约 100 名员工</b><sup><a href="#s3">[3]</a></sup>；每周约 6,500 顿饭，给餐厅带来每周约 100 万美元消费<sup><a href="#s45">[45]</a></sup>；Google Play 400 万+ 用户<sup><a href="#s46">[46]</a></sup>。费城一顿 <b>$16</b>，饭钱自己付给餐厅；一位餐厅老板说订位就是走 OpenTable<sup><a href="#s17">[17]</a></sup>。餐厅要 Google 4.3 分以上、不要套餐<sup><a href="#s47">[47]</a></sup>。</p>
+<div class="warn"><b>证据弱 / 互相矛盾的地方：</b>Timeleft 扩到 325 个城市后又缩到约 200 个；它说一个城市<b>每周要 50+ 人</b>才活得下去；只有加了酒吧聚会、女生专场、跑步团之后，每人每月才从 1.4 次涨到 2.2 次<sup><a href="#s3">[3]</a></sup>。它页面上的城市数可能虚高<sup><a href="#s48">[48]</a></sup>。<b>Timeleft 是否已经在 Calgary，没有查到。</b>任何陌生人聚会产品都没找到安全事故数据。</div></div>
+<div class="card"><h3>为什么适合</h3><p>它<b>完全不用和商家签约</b>：周三晚上在一家 4.3 分以上的餐厅订一张 6 人桌，就是普通订位。这是我们最纯粹的「先卖」测试，而且 Roam 本来就在挑 Timeleft 要的那种餐厅。</p></div>
+<div class="card"><h3>App 里怎么做、怎么写</h3><p>每周一 Roam Today 卡片：</p><p class="proof">"Roam Table · Wednesday 7pm · dinner with 5 Calgarians you haven't met. Take a 2-minute quiz, hold your seat for $5 (refunded if your table doesn't happen). You pay for your own meal at the restaurant; we tell you where on Tuesday."</p><p>收钱：每顿约 $12–18 <span class="tag est">估计</span>，以后可以月费。酒水不包含在费用里（见下面 AGLC）。</p></div>
+<div class="card"><h3>找商家怎么说 · 成功/失败</h3><p><b>前几轮：</b>什么都不用谈，正常订位。<b>坐满 4 周后：</b>「我们每周三带 12–18 个客人来，能不能送一个小菜，或者每桌收一点费用？」（222 就向场地收引流费<sup><a href="#s11">[11]</a></sup>）</p><p><b>算成功：</b>第一个周三前 3 周内 48 个定金（8 桌），到场 ≥80%，一个月内 ≥40% 再订一次。<b>算失败：</b>4 周不到 24 个定金，或回头率 &lt;20%。长期标准：Timeleft 的每周 50+ 人。</p></div>
+</div>
+<div class="fix"><b>风险：</b>安全（公共场所、6 人一桌、举报按钮、女生专场）；160 万人的城市密度够不够；Timeleft 进来竞争。</div></div>
+
+<div class="detail"><div class="crumb">第 3 名 · Kids Map · ★★★★☆</div><h3 style="margin-top:0">🍦 夏天冰淇淋通票（孩子护照盖章）</h3>
+<div class="grid">
+<div class="card"><h3>证据</h3><p>分两半看。<b>付钱的方式</b>来自咖啡护照（每家一样，升级自己补）。<b>家庭的兴趣</b>来自免费路线：Calgary 景点通票 2024 年 28,356 人<sup><a href="#s4">[4]</a></sup>、半年 13,600+ 注册<sup><a href="#s49">[49]</a></sup>；Lancaster 冰淇淋路线约 7,000 人、4,695 次打卡<sup><a href="#s18">[18]</a></sup>；Westfield 甜甜圈路线 12 家店各送一个<sup><a href="#s50">[50]</a></sup>；Calgary 图书馆夏季挑战每年约 2 万人<sup><a href="#s51">[51]</a></sup>。</p>
+<div class="warn"><b>证据弱的地方：</b><b>没有找到任何「付费的儿童甜品通票」的销量。</b>这些路线都是免费的，大多是旅游局出钱。这个测试最可能出现「免费的人很多，付钱的很少」。</div></div>
+<div class="card"><h3>为什么适合</h3><p>Kids Map 已经有每个孩子的护照和盖章，这是第一个把它变成产品的东西。小份冰淇淋成本低，家长自己也会买一份（就是 CoffeePass 的「升级」逻辑）。</p></div>
+<div class="card"><h3>App 里怎么做、怎么写</h3><p>4 月起，每个孩子的护照页：</p><p class="proof">"Summer Scoop Pass is coming: one kid-size treat at each of up to 12 family-favourite ice cream &amp; treat shops, plus a stamp for each. Reserve [kid]'s pass — free now. Price and shop list before you pay."</p><p>另一组用户看「免费路线 + 抽奖」版本，用来量出两者差多少。价格：每个孩子约 $15–20 <span class="tag est">估计</span>。</p></div>
+<div class="card"><h3>找商家怎么说 · 成功/失败</h3><p><b>要什么：</b>「6 月 15 日–8 月 31 日，每张卡一个小份；家长通常自己也买；你那个区有 N 个家庭。」可选：每兑换一次付约 $1（匹兹堡的咖啡护照就按杯付钱<sup><a href="#s52">[52]</a></sup>）。</p><p><b>算成功：</b>4 周内 100 个孩子、30+ 个定金，8 家店答应。<b>算失败：</b>付费组人数不到免费组的 25% → 改做免费、找赞助的路线。</p></div>
+</div>
+<div class="fix"><b>风险：</b>夏天很短；要限量，保护小店（Denver 限 5,000 本就是这个道理<sup><a href="#s53">[53]</a></sup>）；每家店标过敏原。</div></div>
+
+<div class="detail"><div class="crumb">第 4 名 · Kids Map · ★★★★☆</div><h3 style="margin-top:0">🏕️ 暑假营地规划 → 卖营地推荐位</h3>
+<div class="grid">
+<div class="card"><h3>证据</h3><p>家庭媒体里卖得最好的就是营地：NJ Kids 营地指南做了 <b>21 年</b>，整页 $1,050、四分之一页 $650，参加营地展的更便宜<sup><a href="#s5">[5]</a></sup>；ParentMap 每年出指南、办 5 个地区的营地展<sup><a href="#s54">[54]</a></sup>；510 Families 列表 $350<sup><a href="#s19">[19]</a></sup>；Marin Mommies $395<sup><a href="#s55">[55]</a></sup>。Calgary：Calgary's Child 印刷 30 年<sup><a href="#s56">[56]</a></sup>；市里游泳课报名要排虚拟等候室<sup><a href="#s57">[57]</a></sup>。</p>
+<div class="warn"><b>证据弱的地方：</b>这是商家付钱，不是家长付钱。没有来源比较营地和其他类别谁花钱多；Calgary's Child 的价格只能打电话问。</div></div>
+<div class="card"><h3>为什么适合</h3><p>就是 6AM City 的路子：先攒一群「留了联系方式、说清楚需求」的家庭，再把这群人卖给营地。时间正好：NJ Kids 在 1–6 月每月发营地电子书。</p></div>
+<div class="card"><h3>App 里怎么做、怎么写</h3><p class="proof">"Plan summer 2027: tell us your kids' ages, the weeks you need and your area. We'll send matching camps — and ping you the day registration opens."</p><p>免费。Dudu 回答「第 3 周 Signal Hill 附近有什么营地？」。营地推荐位约 CA$300–400，加周报一次约 CA$600–1,000 <span class="tag est">估计</span>。</p></div>
+<div class="card"><h3>找商家怎么说 · 成功/失败</h3><p>「你那个区有 N 个家庭要第 X 周、孩子 Y 岁。推荐位让你排在他们匹配结果的最前面，还上周报。」</p><p><b>算成功：</b>1 月 31 日前 300 个家庭填完需求；2 月 5 个营地付钱。<b>算失败：</b>不到 100 个家庭，或问了 15 个营地 0 个付钱。</p></div>
+</div>
+<div class="fix"><b>风险：</b>Calgary's Child 是老牌对手；付费的标「Featured」；不能承诺一定有位子。</div></div>
+
+<div class="detail"><div class="crumb">第 5 名 · Roam · ★★★★☆</div><h3 style="margin-top:0">💘 单身之夜</h3>
+<div class="grid">
+<div class="card"><h3>证据</h3><p>Eventbrite 上一年 <b>37.6 万人</b>参加单身活动，57% 是快速约会<sup><a href="#s20">[20]</a></sup>；2022–2025 翻倍<sup><a href="#s58">[58]</a></sup>；加拿大 2023→2024 增长 <b>76%</b><sup><a href="#s21">[21]</a></sup>。</p><div class="warn">证据是「整个类别在涨」，不是某一家公司的收入。资料里没有票价和卖完率，下面的价格完全是估计。</div></div>
+<div class="card"><h3>App 里怎么写 · 收钱</h3><p class="proof">"Roam Singles Night · ages 28–38 · Thursday [date] · at one of our hand-picked bars. Hold your spot for $5 — refunded if we can't fill a balanced room."</p><p>门票约 $25–40 <span class="tag est">估计</span>，场地确定后再收。票里不含酒。</p></div>
+<div class="card"><h3>找商家怎么说</h3><p>酒吧冷清的晚上把后面的房间免费给我们，换 20–30 个客人的吃喝消费。</p></div>
+<div class="card"><h3>成功/失败 · 风险</h3><p><b>算成功：</b>3 周内 40 个定金，男女任何一边不超过 60%。<b>算失败：</b>4 周不到 20 个，或男女严重不平衡。<b>风险：</b>安全和管理；AGLC 不许用免费酒做诱因。</p></div>
+</div></div>
+
+<div class="detail"><div class="crumb">第 6 名 · Kids Map · ★★★★☆</div><h3 style="margin-top:0">📸 家庭照片小场（20 分钟）</h3>
+<div class="grid">
+<div class="card"><h3>证据</h3><p>20 分钟约 10 张照片，<b>$130–295</b>；摄影师本来就先收 <b>$60–95</b> 定金，并写「只剩 N 个」；Dallas 植物园南瓜小场 $199<sup><a href="#s22">[22]</a></sup><sup><a href="#s23">[23]</a></sup>。有的农场禁止外来摄影师，所以场地必须是合作方<sup><a href="#s59">[59]</a></sup>。VancouverMom 专门有给摄影师的广告包<sup><a href="#s60">[60]</a></sup>，说明摄影师愿意花钱找客人。</p><div class="warn">证据只是价格和挂出来的商品，没有规模数字。Calgary 公园拍照许可没有查。</div></div>
+<div class="card"><h3>为什么适合</h3><p>收定金本来就是行规；只有一个商家（摄影师）；门槛很小：一天约 15–20 个时段 <span class="tag est">估计</span>，30 个预约就够两天。</p></div>
+<div class="card"><h3>App 里怎么写 · 收钱</h3><p class="proof">"Spring mini-sessions at [park] · 20 min · ~10 edited photos. Reserve a slot free now; we'll confirm the photographer and price before you pay."</p><p>按摄影师的价格收，我们拿 10–20% 或固定费 <span class="tag est">估计</span>。</p></div>
+<div class="card"><h3>找商家 · 成功/失败</h3><p>「两个周六 30 个家庭已经约好，你只管拍，我们负责填满和提醒。」<b>算成功：</b>3 周内 30 个预约，≥70% 付定金。<b>算失败：</b>不到 12 个。<b>风险：</b>场地许可、下雨改期。</p></div>
+</div></div>
+
+<div class="detail"><div class="crumb">第 7–10 名 · ★★★☆☆</div><h3 style="margin-top:0">🌙 🧖 🧩 🏆 四个「可以测，但证据或适合度弱一点」的</h3>
+<div class="grid">
+<div class="card"><h3>🌙 Parents' Night Out（Kids Map）</h3><p><b>证据：</b>YMCA 和体操馆的常规产品：会员 $20 / 非会员 $30<sup><a href="#s24">[24]</a></sup>、My Gym $49<sup><a href="#s25">[25]</a></sup>、按孩子数 $35–95<sup><a href="#s61">[61]</a></sup>。<b>没有卖完数据。</b></p><p class="proof">"Parents' Night Out · Fri 6–9pm · ages 4–10 · at a partner gym near you. Reserve [kid]'s spot — $5 hold, refunded if it doesn't run."</p><p><b>为什么还行：</b>体操馆本来就在办，我们只是用原价帮它填满（商家更喜欢原价客人，这是推断）。只列本来就在办的馆，我们自己绝不办托管。<b>门槛：</b>3 周 40 个孩子；不到 15 个算失败。拿 10–15% 推荐费 <span class="tag est">估计</span>。</p></div>
+<div class="card"><h3>🧖 周日桑拿社交（Roam）</h3><p><b>证据：</b>Othership 2022 年在多伦多开第一家，后来第二家 + 纽约<sup><a href="#s62">[62]</a></sup>，单次 $65<sup><a href="#s26">[26]</a></sup>；SweatHouz 100+ 家<sup><a href="#s27">[27]</a></sup>。<b>Calgary 有哪些桑拿、多少钱没有查</b>；两家都没公开收入。</p><p class="proof">"Sauna Social · Sunday 10am · 90 min sauna + cold plunge with a small Roam group. Hold your spot for $5."</p><p>找冷门时段的团体价。<b>门槛：</b>3 周 40 人；不到 15 失败。</p></div>
+<div class="card"><h3>🧩 街区寻宝 / 问答之夜（Roam + Kids Map 家庭版）</h3><p><b>证据：</b>Geeks Who Drink 每周 900+ 场、3 万+ 人，酒吧付钱填冷清的晚上<sup><a href="#s28">[28]</a></sup>；Let's Roam 700+ 地点，一半以上收入是公司团建（顾问估计）<sup><a href="#s63">[63]</a></sup>；Watson 在 6–7 个城市有真人主持<sup><a href="#s64">[64]</a></sup>。</p><p class="proof">"The Inglewood Hunt · teams of 2–6 · 90 minutes · 8 Roam places. Book your team."</p><p>用我们自己的地点，不用找商家；以后每一站可以卖赞助。<b>弱点：</b>证明了的收入多是公司客户，个人需求不确定。<b>门槛：</b>4 周 25 队；不到 8 队失败。</p></div>
+<div class="card"><h3>🏆 家庭最爱评选（Kids Map + Roam）</h3><p><b>证据：</b>一家小报的读者评选带来 $41,000+ 收入，外加 $18,840 赞助（厂商自己的案例）<sup><a href="#s30">[30]</a></sup>；约 40% 地方杂志每年办（非科学估计）<sup><a href="#s31">[31]</a></sup>。</p><p class="proof">"Family Favourites 2027: nominate the best splash pad, birthday spot and rainy-day place in Calgary."</p><p>提名和投票免费，在护照里做；有了票数再卖类别赞助。<b>门槛：</b>1,000 票 + 3 个赞助；不到 300 票失败。卖奖牌贴纸没有来源。</p></div>
+</div></div>
+
+<h2 style="margin-top:30px">☕💆 这些发现对两个现有测试意味着什么</h2>
+<div class="grid">
+<div class="card"><h3>☕ Coffee Pass：方向对，改三处</h3>
+<p><b>1. 加一个 $5 定金组。</b>100 人这个门槛比多伦多的 2,000+<sup><a href="#s13">[13]</a></sup>、Oregon 第一季 200 张<sup><a href="#s65">[65]</a></sup>都保守，但那是<b>免费</b>的 100 人。免费名单一个月内开放约 20% 会付钱，三个月后不到 10%（二手转述）<sup><a href="#s66">[66]</a></sup>。所以 100 个免费报名可能只有 10–20 个买家。用定金数去跟咖啡馆谈。</p>
+<p><b>2. 开入口前先找 3–5 家「到 100 就加入」。</b>所有同类通票都是先签咖啡馆的。商家同意之前，入口里不写名字。</p>
+<p><b>3. 照抄 CoffeePass 的条件：</b>一杯基础滴滤，升级客人自己补差价，「让咖啡馆成本可控」<sup><a href="#s67">[67]</a></sup>。有一条没核实的搜索摘要说 CoffeePass 每卖一张付咖啡馆约 $5，当传闻看。有来源的选项是匹兹堡的「每兑换一杯付钱」<sup><a href="#s52">[52]</a></sup>。写成「每家一杯滴滤」（不写金额），这样可以有截止日期<sup><a href="#s41">[41]</a></sup>。要限量。<b>不要靠「大家用不完」赚钱</b>：MoviePass 就是赌这个，2019 年关门<sup><a href="#s68">[68]</a></sup>。</p>
+<p class="mute">好处：瑜伽通票（第 1 名）和冰淇淋通票（第 3 名）可以直接用 Coffee Pass 的页面、兑换和护照打卡。</p></div>
+<div class="card"><h3>💆 诊所推广：改收费方式</h3>
+<p><b>1. 按「真的来了第一次」收钱，不按点击或预约。</b>最像的 Zocdoc 每个新病人预约收 <b>$35–110</b> + 年费<sup><a href="#s14">[14]</a></sup>，后来医生反对「病人没来也收钱」，还提出转介费的法律问题，Zocdoc 部分退让<sup><a href="#s69">[69]</a></sup>。用前台输入代码来算。</p>
+<p><b>2. 先查 Alberta 的规定。</b>物理治疗、按摩这些受监管的职业能不能「按病人付推荐费」，<b>这次没有查</b>。查清楚之前，用固定月费更安全，参考 VancouverMom 健康类套餐 $2,500<sup><a href="#s70">[70]</a></sup>。</p>
+<p><b>3. 优惠本身：</b>Mindbody 建议体验课「一个月 3 次、便宜 30–45%」<sup><a href="#s40">[40]</a></sup>，比送一小时按摩便宜很多。</p>
+<p class="mute">瑜伽通票和诊所推广都在 Roam 的「健康」里，放在不同月份测，数字才不会混在一起。</p></div>
+</div>
+
+<h2 style="margin-top:30px">📏 怎么给测试打分（标准）</h2>
+<p class="mute">公开的标准很少，多数是厂商自己的。先当起点用，<b>最重要的是看定金数</b>。</p>
+<div class="box"><table>
+<tr><th>步骤 / 标准</th><th>弱</th><th>还行</th><th>强</th><th>来源和可信度</th></tr>
+<tr><td>看到入口 → 点进去</td><td>&lt;2%</td><td>2–5%</td><td>&gt;5–10%</td><td>没有引用数据的页面<sup><a href="#s71">[71]</a></sup> <span class="tag est">估计</span></td></tr>
+<tr><td>点进去 → $0 占位</td><td>&lt;20%</td><td>20–40%</td><td>&gt;40%</td><td>没有来源 <span class="tag est">估计</span></td></tr>
+<tr><td>$0 占位 → 开卖后付钱（30 天内）</td><td>&lt;10%</td><td>10–20%</td><td>&gt;20%</td><td>Lenny's，二手<sup><a href="#s66">[66]</a></sup></td></tr>
+<tr><td>$5 定金 → 付全款</td><td>&lt;50%</td><td>50–70%</td><td>&gt;70%</td><td>没有来源 <span class="tag est">估计</span></td></tr>
+<tr><td>到 100 个报名要多久（现有用户）</td><td>&gt;8 周</td><td>4–8 周</td><td>&lt;4 周</td><td><span class="tag est">估计</span></td></tr>
+<tr><td>免费邮件名单 → 买家</td><td></td><td>约 1–2%</td><td></td><td>厂商「方向性」说法<sup><a href="#s72">[72]</a></sup></td></tr>
+<tr><td>收定金让爽约减少</td><td></td><td>约 55%</td><td></td><td>Acuity 说法<sup><a href="#s73">[73]</a></sup></td></tr>
+<tr><td>付费城市通票第一年卖多少</td><td>200（Oregon 酒庄）<sup><a href="#s65">[65]</a></sup></td><td></td><td>2,000+（多伦多咖啡）<sup><a href="#s13">[13]</a></sup></td><td>真数字</td></tr>
+<tr><td>免费路线，Calgary</td><td></td><td>半年 13,600<sup><a href="#s49">[49]</a></sup></td><td>一年 28,356<sup><a href="#s4">[4]</a></sup></td><td>真数字（但免费）</td></tr>
+<tr><td>聚餐类：一个城市每周要多少人</td><td></td><td>50+</td><td></td><td>Timeleft 创始人<sup><a href="#s3">[3]</a></sup></td></tr>
+<tr><td>本地食品/店铺众筹成功率</td><td></td><td>20–25%</td><td></td><td><sup><a href="#s74">[74]</a></sup></td></tr>
+</table></div>
+<div class="card"><h3>商家那边也要打分</h3><p>卖完了但伤了商家，第二年就没了。Rice 大学 150 家商家：<b>66% 赚钱、32% 亏</b>；亏的那些只有约 15% 的客人回头；折扣大小和赚不赚钱没关系，员工开不开心才有关系<sup><a href="#s75">[75]</a></sup>。另一份 300+ 家：<b>35.9% 多花了钱、21.7% 从没来用</b><sup><a href="#s76">[76]</a></sup>。Marda Loop：用礼物卡的客人通常多花 50–70%<sup><a href="#s77">[77]</a></sup>。</p><p>每次测完问每个商家 3 个数：兑换了几次、几成客人多花了钱、60 天内又来的有几成。目标是至少三分之一多花钱 <span class="tag est">估计</span>；员工不喜欢的商家就换掉。</p></div>
+
+<h2 style="margin-top:30px">⚖️ 在 Alberta 怎么诚实地「先卖」</h2>
+<div class="box"><table>
+<tr><th>情况</th><th>规定</th><th>我们怎么做</th></tr>
+<tr><td><b>$0 占位</b></td><td>写清楚只是「有兴趣」，不承诺价格、不写商家名字，风险低。</td><td>"Save your spot — no payment now."</td></tr>
+<tr><td><b>收钱（定金、预购）</b></td><td>Alberta：超过 $50 的网上合同，约定日期 30 天后还没交付可以取消，卖家 15 天内退款<sup><a href="#s78">[78]</a></sup>。</td><td>$5 低于门槛，但还是写「[日期，≤30 天] 前不开就自动退款」。</td></tr>
+<tr><td><b>写了没答应的商家</b></td><td>联邦竞争法：广告里的便宜货没有足够数量，属于 bait and switch；只写「数量有限」不够<sup><a href="#s79">[79]</a></sup>。</td><td><b>这是最大的风险。</b>商家书面同意之后才写名字。</td></tr>
+<tr><td><b>后加费用</b></td><td>「滴漏定价」现在直接算误导<sup><a href="#s80">[80]</a></sup>。</td><td>手续费、服务费全部算进标价。</td></tr>
+<tr><td><b>通票能不能有截止日期</b></td><td>有金额的礼物卡不能过期；「特定服务、没有金额」的卡和促销卡除外<sup><a href="#s41">[41]</a></sup>。</td><td>写「每家一杯 / 一节课」，不写「$X 额度」。</td></tr>
+<tr><td><b>酒吧、酒</b></td><td>引用 AGLC 的指引：不能用免费酒做诱因，不能买一送一，有最低价<sup><a href="#s81">[81]</a></sup><sup><a href="#s82">[82]</a></sup>。</td><td>Denver 那种「买一送一」通票在这里不能照搬。单身之夜门票不含酒。</td></tr>
+</table></div>
+<div class="warn"><b>还没查清、动钱之前问律师：</b>① Alberta 网购规定在改名为 Consumer Protection Act 之后的现行条款号；② 报名表上的 CASL（反垃圾邮件法）同意写法——用一个<b>默认不勾选</b>的「email me about this」。</div>
+
+<h2 style="margin-top:30px">🚫 别处证明了，但不适合我们（以及为什么）</h2>
+<div class="box"><table>
+<tr><th>产品（城市）</th><th>证明了什么</th><th>为什么不适合我们</th></tr>
+<tr><td>Denver 酒吧买一送一通票；啤酒、葡萄酒通票</td><td>限 5,000 本、卖得很快<sup><a href="#s53">[53]</a></sup>；酒庄通票 9,000+ 张<sup><a href="#s83">[83]</a></sup></td><td>AGLC 不许免费酒和买一送一。最多做「盖章换非酒类奖品」。Tourism Calgary 2022 年的啤酒通票只办了一年<sup><a href="#s84">[84]</a></sup>。</td></tr>
+<tr><td>Hooch 每天一杯酒会员（LA → 纽约）</td><td>$99/年，2018 年前开到 6+ 城市<sup><a href="#s85">[85]</a></sup></td><td>同样的 AGLC 问题；近年没有还活着的迹象。</td></tr>
+<tr><td>KidPass 儿童活动点数订阅（纽约）</td><td>2 万家庭、900+ 机构（2017）<sup><a href="#s86">[86]</a></sup></td><td>被收购后显示「已关闭」<sup><a href="#s87">[87]</a></sup>；多家机构共用点数，两头都被挤。</td></tr>
+<tr><td>ClassPass 式多次通票</td><td>付给合作方 31 亿美元<sup><a href="#s88">[88]</a></sup></td><td>第一版让瑜伽馆得不到回头客<sup><a href="#s12">[12]</a></sup>；每人低至 $7 惹怒瑜伽馆<sup><a href="#s89">[89]</a></sup>。我们只做「每家第一次」。</td></tr>
+<tr><td>MoviePass 无限看电影</td><td>300 万+ 订阅</td><td>赌「大家用不完」，2019 年关门<sup><a href="#s68">[68]</a></sup>。</td></tr>
+<tr><td>家庭景点套票（CityPASS、多伦多图书馆通票）</td><td>CityPASS 约 3,000 万人<sup><a href="#s35">[35]</a></sup></td><td>大景点不会为 100 人让步；Calgary 已经有过免费的 10 景点通票（2023–24）<sup><a href="#s49">[49]</a></sup>。链接它就好。</td></tr>
+<tr><td>街区礼物卡 / 餐厅预存（Miconex、AnyCard、inKind）</td><td>Calgary 17th Ave、Marda Loop 都有<sup><a href="#s90">[90]</a></sup>；inKind 3.2 亿美元融资<sup><a href="#s91">[91]</a></sup></td><td>有金额就不能过期；BIA 已经在做；inKind 要大量资金。</td></tr>
+<tr><td>Too Good To Go、Flashfood</td><td>美国 1,700 万+ 用户<sup><a href="#s92">[92]</a></sup></td><td>已在 Calgary，开始就有 100+ 家店<sup><a href="#s7">[7]</a></sup>；拼规模的生意。</td></tr>
+<tr><td>Entertainment 优惠券 App</td><td>还在卖，$15–35/年<sup><a href="#s93">[93]</a></sup></td><td>要几百个商家；商家不认优惠券是老问题。</td></tr>
+<tr><td>儿童二手寄卖会（JBF、Rhea Lana's）</td><td>JBF 136 家，平均约 $42.2 万（第三方）<sup><a href="#s34">[34]</a></sup></td><td>是真的，但要仓库级场地和寄卖管理；没查到在 Calgary。以后可以做合作列表。</td></tr>
+<tr><td>美食步行团</td><td>芝加哥 9 年付餐厅 $100 万+<sup><a href="#s38">[38]</a></sup></td><td>Alberta Food Tours 已经在卖 CA$111<sup><a href="#s37">[37]</a></sup>；转卖，不自己做。</td></tr>
+<tr><td>Sofar Sounds 秘密音乐会</td><td>约 400 个城市<sup><a href="#s94">[94]</a></sup></td><td>靠志愿者，赔了 $46 万劳动和解<sup><a href="#s95">[95]</a></sup>；艺人报酬被批评。</td></tr>
+<tr><td>Camp No Counselors 成人夏令营、Secret Cinema</td><td>多城市成人营地；约 1 亿美元被收购</td><td>制作太重、季节性强、数字不可靠<sup><a href="#s96">[96]</a></sup>。</td></tr>
+<tr><td>Othership / SweatHouz 自己开店</td><td>增长快</td><td>每家店要 $57–119 万<sup><a href="#s97">[97]</a></sup>；我们只能订团体场（第 8 名）。</td></tr>
+<tr><td>Epic / Banff 滑雪季卡、Calgary 动物园会员</td><td>早鸟截止日有效</td><td>是雪场和动物园自己的；雪少的冬天之后 Epic 销量降约 12%<sup><a href="#s98">[98]</a></sup>。</td></tr>
+<tr><td>共享办公日票、登山班车</td><td>Deskpass、Seattle 登山巴士</td><td>用户不同；Calgary–Banff 已有 Brewster<sup><a href="#s99">[99]</a></sup>。</td></tr>
+<tr><td>222、Pie、Bumble BFF、Peanut</td><td>拿到风投的交友 App<sup><a href="#s100">[100]</a></sup></td><td>是整个 App，不是一个功能；能测的部分就是 Roam Table（第 2 名）。</td></tr>
+<tr><td>Macaroni KID 授权、6AM City、Axios Local</td><td>4,000+ 地方版；约 1,000 万美元收入；200 万+ 订阅<sup><a href="#s101">[101]</a></sup></td><td>规模化媒体；Patch 说明人多的本地媒体会亏<sup><a href="#s102">[102]</a></sup>。我们只拿「周报广告套餐」（第 11 名）。</td></tr>
+<tr><td>团购（Groupon）、派对服务</td><td>—</td><td>你已经决定放弃。</td></tr>
+</table></div>
+
+<h2 style="margin-top:30px">🗓️ 建议的顺序（按日历）</h2>
+<div class="box"><table>
+<tr><th>时间</th><th>做什么</th></tr>
+<tr><td>现在 – 12 月</td><td>☕ Coffee Pass 继续，<b>加一个 $5 定金组</b>；🍽️ 开 Roam Table 入口（不用谈商家）；🏕️ 开 Kids Map 暑假营地规划（1–4 月是营地季）</td></tr>
+<tr><td>1 月</td><td>🧘 瑜伽第一节课通票，直接用 Coffee Pass 的页面</td></tr>
+<tr><td>2 – 3 月</td><td>💆 诊所推广，单独一个月；查清 Alberta 推荐费规定前先用固定月费</td></tr>
+<tr><td>4 – 5 月</td><td>🍦 冰淇淋通票 + 📸 春季照片小场（Kids Map）</td></tr>
+<tr><td>一直</td><td>每个 App 同时最多 2 个「coming soon」入口，这样每个结果才看得清 <span class="tag est">估计</span></td></tr>
+</table></div>
+<div class="note"><b>最后一句：</b>证据把范围缩小了，而不是放大了。有证明的形式只有两种：商家送<b>一次便宜的第一次</b>（一杯咖啡、一节课、一个冰淇淋），或者我们用<b>原价帮商家填空位</b>（一张餐桌、一个后厅、一个拍照时段）。这两种商家几乎没有损失，100 人就能谈。要存钱、要酒、要大景点、要自己场地的，还没碰到市场就先卡在方法上了。每次测试都用同一条规则：<b>看定金，不只看报名；开门前先找几个答应的商家。</b></div>
+<p class="mute" style="font-size:13px">英文完整版：<code>reports/北美城市验证过的本地产品.md</code>。相关旧报告：<code>research/city-passes-research-2026-11-08.html</code>、<code>research/roam-coffee-pass-clinic-in-app-2026-11-08.html</code>。</p>
+<h2 style="margin-top:30px">来源</h2>
+<ol style="font-size:12.5px;color:var(--mute)"><li id="s1"><a href="https://www.coffeepass.ca/shop/p/coffeepass-2026">CoffeePass 官网：2026 版 40 家咖啡馆，已卖完，限量印刷</a></li><li id="s2"><a href="https://www.metro.us/your-yoga-passport/">Metro：Passport to Prana，多伦多 48 家瑜伽馆</a></li><li id="s3"><a href="https://timfrin.substack.com/p/inside-timelefts-journey-to-connecting">Timeleft 创始人访谈：€1,800 万年收入、每月约 15 万人参加；一个城市每周要 50+ 人才活得下去；扩到 325 城后收缩</a></li><li id="s4"><a href="https://www.bandwango.com/resources/bandwango-2024-wrapped-a-year-of-success-and-growth">Bandwango 2024：Calgary 景点通票 28,356 注册，全平台第一</a></li><li id="s5"><a href="https://cdn.agilitycms.com/new-jersey-kids/Attachments/marketing/NJ%20KIDS%20Camp%20Guide%20Ad%20Rates%202026.pdf">NJ Kids 2026 营地指南价目表：做了 21 年，广告 $475–1,500</a></li><li id="s6"><a href="https://edmonton.taproot.news/news/2020/12/08/local-initiatives-boost-awareness-of-small-businesses">Taproot Edmonton（2020-12）：CoffeePass 22 家咖啡馆冷启动</a></li><li id="s7"><a href="https://canadiangrocer.com/too-good-go-launches-calgary">Canadian Grocer：Too Good To Go 进 Calgary 时已有 100+ 家店上线</a></li><li id="s8"><a href="https://www.axios.com/local/san-antonio/2024/07/18/timeleft-app-lonely-meet-san-antonio">Axios San Antonio：Timeleft 进新城市前先「看看本地人有没有兴趣」</a></li><li id="s9"><a href="https://sequoiacap.com/podcast/crucible-moments-doordash">Sequoia 播客：DoorDash 先用餐厅的 PDF 菜单做网页，没签约，自己送</a></li><li id="s10"><a href="https://6amcity.com/how-6am-city-launched-our-26th-market?p=80">6AM City：Winston-Salem 第一期发出前就有 4,731 人订阅，然后再找广告商</a></li><li id="s11"><a href="https://techcrunch.com/2022/11/14/2440702/">TechCrunch：222 先用 Typeform 收报名，没有 App；也向场地收钱</a></li><li id="s12"><a href="https://www.indicative.com/resource/classpass-data-driven-business-pivot/">Indicative：ClassPass 第一版通票卖得好，但没给瑜伽馆带来回头客，只好改成按次付钱</a></li><li id="s13"><a href="https://blogto.com/news_flash/2010/12/indie_coffee_passports_on_sale_for_20">BlogTO（2010-12）：多伦多咖啡护照卖出超过目标的两倍（搜索摘要）</a></li><li id="s14"><a href="https://www.fiercehealthcare.com/practices/some-new-york-doctors-unhappy-about-zocdoc-s-new-pricing-model-company-says-it-was">Fierce Healthcare：Zocdoc 每个新病人预约收 $35–110 + 年费</a></li><li id="s15"><a href="https://dailyhive.com/vancouver/fourty-vancouver-yoga-studios-participate-in-this-amazing-promo-1-per-class">Daily Hive：温哥华 40 家瑜伽馆参加，「每节课 $1」</a></li><li id="s16"><a href="https://thedeliberatemom.com/inexpensive-yoga-classes/">The Deliberate Mom：Prana 约 $30，LA 35 家；访客问卷是瑜伽馆参加的主要原因</a></li><li id="s17"><a href="https://www.inquirer.com/food/timeleft-review-philadelphia-group-dining-20241022.html">Philadelphia Inquirer：Timeleft 一顿 $16，饭钱自己付；餐厅说是通过 OpenTable 订位</a></li><li id="s18"><a href="https://www.bandwango.com/resources/discover-lancaster-ice-cream-trail">Bandwango：Lancaster 冰淇淋路线约 7,000 注册、4,695 次打卡</a></li><li id="s19"><a href="https://www.510families.com/camp-guide-faq-for-camp-advertisers">510 Families：营地基础列表 $350</a></li><li id="s20"><a href="https://www.eventbrite.com/blog/?p=422156">Eventbrite：一年 37.6 万人参加单身活动，57% 是快速约会</a></li><li id="s21"><a href="https://www.ctvnews.ca/lifestyle/article/speed-dating-can-offer-a-safe-space-to-find-love-relief-from-swipe-fatigue/">CTV：加拿大单身活动 2023→2024 增长 76%</a></li><li id="s22"><a href="https://brandimccombphotography.bigcartel.com/product/2024-limited-family-mini-sessions-dallas-arboretum-pumpkin-village">摄影师小场：Dallas 植物园南瓜主题 $199 + 税</a></li><li id="s23"><a href="https://mountain-house-studio.checkcherry.com/mini_sessions/7428-childrens-pumpkin-crate-minis">Mountain House Studio：小场先收定金</a></li><li id="s24"><a href="https://ymcatulsa.org/programs/34002/parent-s-night-out">YMCA Tulsa：Parents&#x27; Night Out 会员 $20、非会员 $30 / 孩子</a></li><li id="s25"><a href="https://www.mygym.com/southloop/camp">My Gym：Parents&#x27; Night Out $49 / 孩子</a></li><li id="s26"><a href="https://goop.com/wellness/health/othership-bathhouse-review/">Goop：Othership 单次 $65</a></li><li id="s27"><a href="https://athletechnews.com/sweathouz-sets-nyc-debut-plans-12-studios-across-manhattan-brooklyn/">Athletech：SweatHouz 100+ 家店</a></li><li id="s28"><a href="https://www.geekswhodrink.com/work-with-us/pub-owners/trivia/">Geeks Who Drink：每周 900+ 场酒吧问答，3 万+ 人；酒吧付钱来填冷清的晚上</a></li><li id="s29"><a href="https://www.scavengerhunt.com/about_scavenger_hunt_tours.html">Let&#x27;s Roam：寻宝游戏 700+ 个地点</a></li><li id="s30"><a href="https://uplandsoftware.com/secondstreet/?p=6688">Second Street（厂商案例）：一家小报的「读者评选」带来 $41,000+ 收入</a></li><li id="s31"><a href="https://publishers.locable.com/posts/2831/">Locable：约 40% 的地方杂志每年办「Best of」评选（非科学估计）</a></li><li id="s32"><a href="https://www.vancouvermom.ca/advertise/">VancouverMom 广告页：约 8,000 邮件订阅，周报横幅 $500</a></li><li id="s33"><a href="https://www.vancouvermom.ca/product/community-builder/">VancouverMom：Community Builder 套餐 $9,550</a></li><li id="s34"><a href="https://franchiseoverview.com/company/just-between-friends">FranchiseOverview（第三方 FDD 摘要）：JBF 136 家，平均年营业额约 $42.2 万</a></li><li id="s35"><a href="https://imm.travmedia.com/showPRPreview/100111853">CityPASS 2025 新闻稿：累计约 3,000 万游客</a></li><li id="s36"><a href="https://tpl.ca/about-the-library/annual-report-2015/key-facts-2015/">多伦多图书馆 2015 年报：景点通票借出 86,573 次</a></li><li id="s37"><a href="https://www.travelocity.com/things-to-do/light-brunch-food-tour-at-calgary-farmers-market-west.a47922371.activity-details">Alberta Food Tours：Calgary 美食步行团 CA$111</a></li><li id="s38"><a href="https://www.umami.site/travel/an-inside-look-at-chicago-food-planet-and-what-it-takes-to-run-a-food-tour-in-chicago/">Chicago Food Planet：9 年付给餐厅 100 万美元以上</a></li><li id="s39"><a href="https://www.gaycalgary.com/news.aspx?id=180">GayCalgary：Passport to Prana 有过 Calgary 版</a></li><li id="s40"><a href="https://www.mindbodyonline.com/business/education/guide/6x-your-roi-client-intro-offers">Mindbody：体验课建议「一个月 3 次、便宜 30–45%」；称 47% 转化（厂商数字）</a></li><li id="s41"><a href="https://www.alberta.ca/information-about-gift-cards">Alberta 政府：礼物卡不能有过期日；「特定服务、没有金额」的卡和促销卡除外</a></li><li id="s42"><a href="https://athletechnews.com/is-classpass-good-for-fitness-studios/">Athletech：ClassPass 给已满的课打折会伤瑜伽馆</a></li><li id="s43"><a href="https://calgary.ctvnews.ca/namaste-no-more-yoga-studio-s-abrupt-closure-leaves-client-holding-prepaid-passes-1.3247046">CTV Calgary：一家瑜伽馆突然关门，客人手里的预付卡作废</a></li><li id="s44"><a href="https://www.coffeepass.ca/2025-coffeepass">CoffeePass 2025：咖啡馆关店/搬家时发通知，并按大家反馈延长有效期</a></li><li id="s45"><a href="https://fooddrinklife.com/timeleft/">Food Drink Life：Timeleft 每周约 6,500 顿饭，给餐厅带来每周约 100 万美元消费</a></li><li id="s46"><a href="https://play.google.com/store/apps/details?id=com.timeleft.app">Google Play：Timeleft 400 万+ 用户</a></li><li id="s47"><a href="https://timeleft.com/post/the-ultimate-guide-to-timeleft-restaurants/">Timeleft 餐厅指南：Google 4.3 分以上，人均 €20–40，不要套餐</a></li><li id="s48"><a href="https://nexspark.org/journal/timeleft-review">Nexspark：Timeleft 页面上的城市数可能虚高</a></li><li id="s49"><a href="https://www.bandwango.com/resources/free-attractions-pass-case-study">Bandwango：Tourism Calgary 免费景点通票，6 个月 13,600+ 注册、3,100+ 兑换</a></li><li id="s50"><a href="https://readthereporter.com/earn-sweet-treats-on-westfield-donut-trail/">Westfield 甜甜圈路线：打卡 12 个点，每家店送一个甜甜圈</a></li><li id="s51"><a href="https://livewirecalgary.com/2025/06/17/calgary-library-reading-program-combats-summer-learning-loss-offers-prizes">LiveWire Calgary：图书馆夏季挑战每年约 2 万人报名</a></li><li id="s52"><a href="https://local-pittsburgh.com/?p=4982">Local Pittsburgh：匹兹堡咖啡护照按兑换的杯数付钱给咖啡店</a></li><li id="s53"><a href="https://5280.com/get-summer-passport-now/">5280：Denver Passport 每版最多 5,000 本，「为了不让酒吧被挤爆」，卖得很快</a></li><li id="s54"><a href="https://issuu.com/parentmap/docs/summer_camps_and_activities_guide_2026">ParentMap 2026 夏令营指南</a></li><li id="s55"><a href="https://www.marinmommies.com/node/11">Marin Mommies：$395 推广包</a></li><li id="s56"><a href="https://albertamagazines.com/award-winning-calgarys-child-magazine-celebrates-30-years/">Alberta Magazines：Calgary&#x27;s Child 印刷 30 年</a></li><li id="s57"><a href="https://www.calgary.ca/council/ward-2/articles/summer-swimming-lessons.html">City of Calgary：游泳课报名要排虚拟等候室</a></li><li id="s58"><a href="https://www.axios.com/2026/05/13/singles-events-dating-app-fatigue">Axios 2026：Eventbrite 单身活动 2022–2025 翻倍</a></li><li id="s59"><a href="https://www.tickettailor.com/events/bigjimfarms/1369444">Big Jim Farms：有的农场禁止外来摄影师拍小场</a></li><li id="s60"><a href="https://www.vancouvermom.ca/product/vm-enhanced-photography-package/">VancouverMom：专门给摄影师的广告包 $1,550</a></li><li id="s61"><a href="https://rocksolidwarrior.pike13.com/group_classes/228534">Rock Solid Warrior 体操馆：1 个孩子 $35 … 4 个以上 $95</a></li><li id="s62"><a href="https://retail-insider.com/retail-insider/2024/04/ice-bath-spa-concept-othership-opens-2nd-toronto-location-with-expansion-plans/">Retail Insider：Othership 2022 开多伦多第一家，2024 开第二家</a></li><li id="s63"><a href="https://www.profitmill.io/case-studies/lets-roam">ProfitMill：Let&#x27;s Roam 一半以上收入来自公司团建（顾问估计）</a></li><li id="s64"><a href="https://watsonadventures.com/public">Watson Adventures：美国 6–7 个城市有真人主持的寻宝</a></li><li id="s65"><a href="https://www.bandwango.com/resources/teaming-up-to-drive-wine-drinkers-into-the-heart-of-willamette">Bandwango：Oregon 小酒庄通票第一季卖出 200 张</a></li><li id="s66"><a href="https://www.lennysnewsletter.com/p/what-is-good-waitlist-conversion?open=false">Lenny&#x27;s Newsletter（付费墙，二手转述）：一个月内开放约 20% 付费，三个月后低于 10%</a></li><li id="s67"><a href="https://dailyhive.com/edmonton/coffeepass-2026-edmonton">Daily Hive：CoffeePass 2026，$42.75，每家一杯滴滤，升级补差价</a></li><li id="s68"><a href="https://www.theringer.com/2019/09/13/movies/moviepass-theater-ticket-subscription-shut-down">The Ringer：MoviePass 2019 年关闭</a></li><li id="s69"><a href="https://www.healthcaredive.com/news/zocdoc-steps-back-on-pricing-change-amid-physician-pushback/529591/">Healthcare Dive：医生反对「病人没来也收钱」和转介费问题，Zocdoc 部分退让</a></li><li id="s70"><a href="https://www.vancouvermom.ca/product/vm-premium-healthy-balance-package/">VancouverMom：健康类「Healthy Balance」套餐 $2,500</a></li><li id="s71"><a href="https://knowledgelib.io/business/customer-validation/demand-signal-testing/2026">knowledgelib：「假门」点击率 2% / 5% / 10%（没有引用数据，估计）</a></li><li id="s72"><a href="https://echai.ventures/d2c/d2c-prelaunch-audience/email-list-vs-paid-deposit-waitlist">echai：免费邮件名单只有约 1–2% 变买家；小额定金能筛出真买家（方向性）</a></li><li id="s73"><a href="https://schedulingkit.com/fr/statistics/appointment-deposit-statistics">SchedulingKit（引 Acuity）：收定金让爽约减少约 55%</a></li><li id="s74"><a href="https://thehustle.co/kickstarter-crowdfunding-chances-of-success">The Hustle：Kickstarter 食品类成功率约 20–25%</a></li><li id="s75"><a href="https://digitalwellbeing.org/downloads/Rice_Report_Groupon.pdf">Rice 大学（150 家商家）：66% 赚钱、32% 亏；亏钱那些只有约 15% 的人回头</a></li><li id="s76"><a href="https://clickz.com/?p=54466">ClickZ（300+ 家商家）：35.9% 多花了钱，21.7% 从没来用</a></li><li id="s77"><a href="https://www.visitmardaloop.com/wp-content/uploads/2024/03/Marda-Loop-Anycard-Manual.pdf">Marda Loop BIA：用礼物卡的客人通常多花 50–70%</a></li><li id="s78"><a href="https://open.alberta.ca/dataset/07cdf766-de64-473f-b57a-dda11c63f05e/resource/f7874d1f-3a63-41dc-8978-ed78f7cb0879/download/internet-shopping.pdf">Alberta 网购须知：超过 $50 的网上合同，30 天没交付可取消，15 天内退款</a></li><li id="s79"><a href="https://laws-lois.justice.gc.ca/eng/acts/c-34/section-74.04.html">竞争法 s.74.04：低价诱饵（bait and switch）</a></li><li id="s80"><a href="https://www.fasken.com/en/knowledge/2024/07/the-evolving-competition-law-landscape-in-ca-4">Fasken：「滴漏定价」（后加收费）现在直接算误导</a></li><li id="s81"><a href="https://www.ualberta.ca/en/finance-procurement-planning/insurance/alcohol-events/policy-procedures/advertising-purchasing.html">U of Alberta（引 AGLC）：不能用免费酒做诱因，不能买一送一</a></li><li id="s82"><a href="https://www.theglobeandmail.com/news/national/alberta-imposes-minimum-drink-prices/article25580031/">Globe and Mail：Alberta 酒水最低价</a></li><li id="s83"><a href="https://www.bandwango.com/resources/woodinville-wine-country-case-study">Bandwango：Woodinville 酒庄通票 9,000+ 张</a></li><li id="s84"><a href="https://brewersjournal.ca/?p=8173">Brewers Journal：Tourism Calgary 2022 年的啤酒通票（只办了一年）</a></li><li id="s85"><a href="https://builtinnyc.com/articles/hooch-cocktail-subscription-app">BuiltIn NYC：Hooch 每天一杯酒，$99/年</a></li><li id="s86"><a href="https://techcrunch.com/2017/05/26/kidpass-raises-5-1-million-for-its-childrens-activity-subscription-service/">TechCrunch：KidPass 2 万家庭、900+ 机构（2017）</a></li><li id="s87"><a href="https://www.crunchbase.com/organization/kidpass">Crunchbase：KidPass 状态「已关闭」</a></li><li id="s88"><a href="https://athletechnews.com/classpass-tops-3-billion-in-partner-revenue/">Athletech：ClassPass 累计给合作方 31 亿美元</a></li><li id="s89"><a href="https://www.vice.com/en/article/classpass-is-squeezing-studios-to-the-point-of-death">Vice：ClassPass 每位学员只付瑜伽馆低至 $7</a></li><li id="s90"><a href="https://mi-cnx.com/news/calgarys-17th-avenue-launches-new-gift-card-a-new-way-to-eat-shop-play-and-explore-local">Miconex：Calgary 17th Ave 街区礼物卡</a></li><li id="s91"><a href="https://restauranttechnologynews.com/2026/07/liberty-mutual-backs-inkind-with-320-million-financing-to-help-restaurants-access-capital-and-drive-guest-demand/">inKind：3.2 亿美元融资额度（2026）</a></li><li id="s92"><a href="https://www.toogoodtogo.com/en-us/press/wfm-new-surprise-bags">Too Good To Go：美国 1,700 万+ 用户</a></li><li id="s93"><a href="https://slickdeals.net/f/18886942-entertainment-app-membership-1-year-15-reg-35-through-dec-1-2025">Entertainment 优惠券 App：一年 $15（原价 $35）</a></li><li id="s94"><a href="https://www.sofarsounds.com/tiqets-sf-lnd">Sofar Sounds：约 400 个城市</a></li><li id="s95"><a href="https://www.kqed.org/arts/13872608/concert-startup-sofar-sounds-to-pay-460000-to-uncompensated-workers">KQED：Sofar Sounds 因没付钱给志愿者赔了 $46 万</a></li><li id="s96"><a href="https://www.sharktankblog.com/business/camp-no-counselors">Shark Tank Blog：Camp No Counselors</a></li><li id="s97"><a href="https://sweathouz.com/franchise/">SweatHouz 加盟：每家店投资约 $57–119 万</a></li><li id="s98"><a href="https://townlift.com/2026/09/epic-pass-product-sales-fall-12-as-vail-resorts-looks-for-rebound-after-historic-low-snow-winter/">TownLift：雪少的冬天之后 Epic 通票销量降约 12%</a></li><li id="s99"><a href="https://www.banffjaspercollection.com/brewster-express/fares/">Brewster Express：Calgary–Banff 班车全年运营</a></li><li id="s100"><a href="https://techcrunch.com/2024/11/19/irl-social-app-pie-is-coming-to-sf-to-make-you-less-lonely">TechCrunch：Pie 约 2.3 万用户，融资 2,400 万美元</a></li><li id="s101"><a href="https://theaudiencers.com/in-conversation-with-6am-city-tech-stack-audience-strategy-and-unit-economics/">The Audiencers：6AM City 每城 5 万订阅才能活，每人每年 $10</a></li><li id="s102"><a href="https://talkingbiznews.com/media-moves/aol-sells-patch/">Talking Biz News：Patch 人太多、一直亏，2014 年被卖掉</a></li></ol>
+</div></body></html>
