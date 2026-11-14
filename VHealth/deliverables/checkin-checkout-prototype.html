@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VHealth Check-in / Check-out 系统：脑洞 + 原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 灰度线框：用户要求先不要颜色 */
+  --paper: #fbf8f2; --card: #fff; --ink: #222; --muted: #6a6a6a; --line: #dedede; --soft: #f1f1f1; --mid: #bdbdbd;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); }
+main { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.3; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.45rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.1rem; }
+p { margin: 0; }
+section { display: grid; gap: 16px; }
+.meta { color: var(--muted); font-size: .92rem; }
+.box { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+.verdict { border: 2px solid var(--ink); }
+.tag { display: inline-block; font-size: .75rem; font-weight: 700; border: 1px solid var(--ink); border-radius: 99px; padding: 0 8px; margin-right: 4px; white-space: nowrap; }
+.tag.fill { background: var(--ink); color: #fff; }
+.tag.dash { border-style: dashed; }
+table { width: 100%; border-collapse: collapse; background: var(--card); font-size: .93rem; }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+th { background: var(--soft); font-weight: 700; }
+ul, ol { margin: 0; padding-left: 1.3em; }
+li { margin: 3px 0; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 760px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+.pick { border: 2px solid var(--ink); }
+.pick::before { content: "★ 最看好"; display: block; font-size: .75rem; font-weight: 800; margin-bottom: 4px; }
+.idea h3 { font-size: 1rem; margin-bottom: 6px; }
+.idea li.star { font-weight: 700; }
+.idea li.star::marker { content: "★ "; }
+.flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 10px; align-items: stretch; }
+.flow .arrow { align-self: center; font-size: 1.4rem; color: var(--muted); }
+@media (max-width: 760px) { .flow { grid-template-columns: 1fr; } .flow .arrow { transform: rotate(90deg); justify-self: center; } }
+.note { font-size: .88rem; color: var(--muted); }
+.src { font-size: .82rem; color: var(--muted); }
+.src a, a { color: var(--ink); }
+sup a { text-decoration: none; font-size: .75em; }
+
+/* ---------- 原型 ---------- */
+.proto-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.proto-tabs button { font: 600 .9rem var(--font); border: 1px solid var(--ink); background: #fff; border-radius: 99px; padding: 5px 12px; cursor: pointer; }
+.proto-tabs button.on { background: var(--ink); color: #fff; }
+.stage { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
+@media (max-width: 860px) { .stage { grid-template-columns: 1fr; } }
+.device { background: #2b2b2b; border-radius: 26px; padding: 16px; }
+.device.phone { max-width: 380px; margin: 0 auto; border-radius: 34px; }
+.screen { background: #fff; border-radius: 12px; min-height: 560px; padding: 26px 30px; display: none; flex-direction: column; gap: 14px; font-size: 15px; }
+.screen.on { display: flex; }
+.device.phone .screen { padding: 20px 18px; min-height: 600px; }
+.bar { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.screen h4 { font: 700 1.5rem/1.25 var(--font); margin: 6px 0 0; }
+.screen h5 { font: 700 1rem var(--font); margin: 4px 0 0; }
+.screen .sub { color: var(--muted); }
+label.f { display: grid; gap: 4px; font-weight: 600; font-size: .9rem; }
+input[type=text], input[type=tel], input[type=email], select, textarea { font: 400 1rem var(--font); border: 1.5px solid var(--mid); border-radius: 8px; padding: 10px 12px; width: 100%; background: #fff; }
+textarea { min-height: 64px; }
+.or { text-align: center; color: var(--muted); font-size: .85rem; }
+.btn { font: 700 1rem var(--font); background: var(--ink); color: #fff; border: 0; border-radius: 10px; padding: 13px 16px; cursor: pointer; width: 100%; }
+.btn[disabled] { background: var(--mid); cursor: not-allowed; }
+.btn.ghost { background: #fff; color: var(--ink); border: 1.5px solid var(--ink); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { border: 1.5px solid var(--mid); border-radius: 10px; padding: 9px 12px; cursor: pointer; background: #fff; font: 500 .95rem var(--font); }
+.chip.on { border-color: var(--ink); background: var(--ink); color: #fff; }
+.chips.col { display: grid; grid-template-columns: 1fr 1fr; }
+.scale { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+.scale .chip { padding: 9px 0; text-align: center; }
+.scale-l { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); }
+.consent { border: 1.5px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 8px; }
+.consent .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.yn { display: flex; gap: 6px; }
+.yn .chip { padding: 6px 14px; }
+.small { font-size: .78rem; color: var(--muted); line-height: 1.45; }
+.hint { font-size: .8rem; color: var(--muted); }
+.err { font-size: .8rem; font-weight: 700; }
+.card2 { border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.progress { display: flex; gap: 4px; }
+.progress span { flex: 1; height: 10px; border: 1.5px solid var(--ink); border-radius: 3px; }
+.progress span.done { background: var(--ink); }
+.chart { display: flex; align-items: flex-end; gap: 14px; height: 120px; padding: 0 6px; border-bottom: 1.5px solid var(--ink); }
+.chart div { flex: 1; background: var(--mid); position: relative; border-radius: 3px 3px 0 0; }
+.chart div:last-child { background: var(--ink); }
+.chart div b { position: absolute; top: -20px; left: 0; right: 0; text-align: center; font-size: .8rem; }
+.chart-l { display: flex; gap: 14px; padding: 0 6px; font-size: .72rem; color: var(--muted); }
+.chart-l span { flex: 1; text-align: center; }
+.slots { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.slots .chip { text-align: center; font-size: .85rem; padding: 10px 4px; }
+.gifts { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.gifts .chip { text-align: center; padding: 14px 6px; font-size: .85rem; }
+.gifts .chip i { display: block; font-style: normal; font-size: 1.4rem; }
+.done-big { text-align: center; margin: auto 0; display: grid; gap: 10px; }
+.done-big .check { font-size: 3rem; }
+.side { display: grid; gap: 12px; position: sticky; top: 12px; }
+.side .box { font-size: .9rem; line-height: 1.6; }
+.side h3 { font-size: 1rem; margin-bottom: 6px; }
+.sms { background: var(--soft); border-radius: 16px; padding: 10px 14px; font-size: .92rem; max-width: 88%; }
+.sms.me { align-self: flex-end; background: var(--ink); color: #fff; }
+.dash { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.kpi { border: 1.5px solid var(--line); border-radius: 10px; padding: 10px; }
+.kpi b { display: block; font-size: 1.5rem; }
+.kpi span { font-size: .78rem; color: var(--muted); }
+.mini td, .mini th { padding: 5px 8px; font-size: .82rem; }
+.bars { display: grid; gap: 4px; font-size: .8rem; }
+.bars div { display: grid; grid-template-columns: 110px 1fr 34px; gap: 6px; align-items: center; }
+.bars i { display: block; height: 10px; background: var(--ink); border-radius: 2px; }
+.lock { border: 1.5px dashed var(--ink); border-radius: 10px; padding: 10px 12px; font-size: .85rem; }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:8px">
+  <h1>Check-in / Check-out 系统：脑洞、调研和原型</h1>
+  <p class="meta">V-Health Rehab Clinic · 给诊所老板 · 2026-11-13 · 分析中 · 原型是灰度线框，先不定颜色</p>
+</header>
+
+<section class="box verdict">
+  <p><b>我最看好的方案：一块平板，接住客户的三个时刻。</b>客户<b>到店</b>时自己 check in；治疗师在<b>治疗结束</b>时，在系统里写下"建议下次什么时候来"；客户<b>离开前</b>在同一块平板上看到 check-out 页面。</p>
+  <p style="margin-top:10px">这样，你提的5个问题都落在同一套流程里：</p>
+  <ul style="margin-top:6px">
+    <li><b>客户来源</b>：新客户 check in 时必须选来源，不选就无法完成，可以替代现在的纸质登记表</li>
+    <li><b>治疗师有没有约下次</b>：治疗师不填建议，check-out 页面就打不开，所以每一次都有记录</li>
+    <li><b>惊喜</b>：check-out 页面显示客户自己报的疼痛分数，第1次到今天的变化，零成本</li>
+    <li><b>Google 评价</b>：第2次来访后，系统给每一位客户发同一条短信请他留评价，不挑人，也不给奖励</li>
+    <li><b>小礼品</b>：可以做，但先确认合规；原型里先放成"第一次来的欢迎礼，自己选"</li>
+  </ul>
+  <p style="margin-top:10px"><b>需要改的一点：</b>"默认勾选接受营销"在加拿大不算有效同意。我改成让客户点"Yes"或"No"二选一，详见第2节。</p>
+</section>
+
+<!-- 1 需求整理 -->
+<section>
+  <h2>1 · 需求整理</h2>
+  <table>
+    <tr><th style="width:24%">需求</th><th>具体内容</th><th style="width:26%">我的处理</th></tr>
+    <tr><td><b>网页版 check in</b></td><td>现在客户到店都是前台人工登记，改成网页，客户自己填</td><td>前台放一块平板，用浏览器打开；也可以扫码在自己手机上填</td></tr>
+    <tr><td><b>联系方式必填</b></td><td>电话或邮箱至少填一个</td><td>两个都可以填，至少一个，否则不能继续。老客户输入电话就能找到自己</td></tr>
+    <tr><td><b>是否接受后续联系</b></td><td>邮件和短信分开问，你希望默认接受，以后可以发优惠、请写 Google 评价</td><td>改成二选一，<b>不预先勾选</b>（法律原因见第2节）</td></tr>
+    <tr><td><b>记录客户来源</b></td><td>之前的方案是纸质登记表，以后用 check in 做</td><td>新客户必选来源，选项沿用纸质表的11个类别和代码，选"朋友"会追问是谁</td></tr>
+    <tr><td><b>Q1 治疗师帮客户约后面几周</b></td><td>我怎么知道他们做了没有？怎么保证做到？怎么奖励？</td><td>第5节</td></tr>
+    <tr><td><b>Q2 Google 评价</b></td><td>别人有1,000多条，我们只有约260条。什么时候要？谁去要？</td><td>第6节</td></tr>
+    <tr><td><b>Q3 小礼品让客户自己选</b></td><td>艾灸贴、蒸汽眼罩等</td><td>第7节</td></tr>
+    <tr><td><b>Q4 和 check in 结合</b></td><td>以上几件事怎么放进 check in 系统</td><td>第4节流程 + 原型</td></tr>
+    <tr><td><b>Q5 惊喜和 check out</b></td><td>能不能也做 check out？页面上放什么？</td><td>第4节和原型第4屏</td></tr>
+  </table>
+</section>
+
+<!-- 2 规则 -->
+<section>
+  <h2>2 · 先看3条规则，它们决定了设计</h2>
+  <div class="grid3">
+    <div class="box">
+      <h3>① 默认勾选不算同意（CASL）</h3>
+      <p style="margin-top:6px">加拿大反垃圾信息法（CASL）的监管机构 CRTC 明确说，<b>预先勾选的框属于"opt-out"，不能算明示同意</b>。客户必须自己主动点。<sup><a href="#s1">[1]</a></sup></p>
+      <p style="margin-top:6px">好消息：客户在你们这里付过钱，接下来<b>2年内</b>算"默示同意"，可以给他发商业信息，每条都要能退订。<sup><a href="#s2">[2]</a></sup>预约提醒、收据这类服务信息本来就不需要同意。</p>
+      <p style="margin-top:6px"><b>做法：</b>每项都让客户点 Yes 或 No 二选一，两个都不预先选中，"Yes"放在前面。这样拿到的是真正的明示同意，2年后也能继续发。</p>
+    </div>
+    <div class="box">
+      <h3>② Google 评价的4条禁令</h3>
+      <p style="margin-top:6px">Google 的政策原文<sup><a href="#s3">[3]</a></sup>禁止：</p>
+      <ul>
+        <li>给任何奖励换评价，包括折扣和免费商品</li>
+        <li><b>只挑满意的客户去要</b>（review gating）</li>
+        <li>要求员工拿到<b>一定数量</b>的评价，或要求评价里写某些内容</li>
+        <li>在店里要求或施压客户当场写</li>
+      </ul>
+      <p style="margin-top:6px"><b>所以：</b>不能"打分高才弹出评价链接"，不能"送礼换评价"，也不能按评价数给治疗师发奖金，或者要求客户在评价里写上治疗师的名字。</p>
+    </div>
+    <div class="box">
+      <h3>③ 礼品和保险直付</h3>
+      <p style="margin-top:6px">之前的分析已经查过：保险行业协会 CLHIA 把"免费商品"和"收据上没有的东西"列为可疑信号<sup><a href="#s4">[4]</a></sup>；针灸 College 的守则第6.2条禁止"为了转介绍给任何有价值的东西"<sup><a href="#s5">[5]</a></sup>。</p>
+      <p style="margin-top:6px"><b>所以：</b>礼品<b>不能和评价、推荐或来访次数挂钩</b>。可以考虑的是"每位新客户都一样的欢迎礼"，价值很低，但做之前要先问主要保险公司。原型里把它标成<span class="tag dash">待确认</span>。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 调研 -->
+<section>
+  <h2>3 · 别人怎么做（不限行业）</h2>
+  <table>
+    <tr><th style="width:18%">谁</th><th>怎么做</th><th style="width:30%">V-Health 能借鉴什么</th></tr>
+    <tr><td><b>牙科诊所</b></td><td>把"离开前约好下一次"当作核心指标（pre-appointment / re-appointment）。洗牙复约率的目标常见是 <b>85–90%</b>，行业平均约77%，最好的诊所约94%。<sup><a href="#s6">[6]</a><a href="#s7">[7]</a></sup></td><td>同一个指标：<b>离开前已约好下次的比例</b>，每周按治疗师看</td></tr>
+    <tr><td><b>美发沙龙</b></td><td>"预约率"（rebooking rate）是发型师的关键指标，目标60%以上。但有数据说，第一次复约里有很多后来被取消<sup><a href="#s8">[8]</a></sup>，所以只数"约了"没用</td><td>考核<b>真正来了的复诊</b>，不是约了多少</td></tr>
+    <tr><td><b>物理治疗诊所</b></td><td>看"疗程完成率"：完成计划的人 ÷ 计划应该结束的人；按治疗师看，差距通常来自第一次就诊时有没有讲清楚计划<sup><a href="#s9">[9]</a></sup></td><td>治疗师在系统里写下计划，客户在 check-out 页面看到"第2次 / 共6次"</td></tr>
+    <tr><td><b>Jane App</b>（加拿大最常见的诊所软件）</td><td>客户到店后用自己的手机自助 check in，前台系统里的预约实时变色并记下时间<sup><a href="#s10">[10]</a></sup></td><td>平板 + 二维码两种都支持；前台屏幕实时显示"已到"</td></tr>
+    <tr><td><b>Chewy</b>（宠物电商）</td><td>寄出上千万张手写卡；还会不定期送顾客宠物的油画像，<b>顾客不能申请，也买不到</b><sup><a href="#s11">[11]</a></sup></td><td>惊喜的关键是<b>个人化 + 意料之外</b>，不是贵。第5次、第10次来访送治疗师手写卡</td></tr>
+    <tr><td><b>峰终定律</b>（Kahneman）</td><td>人记住一段体验，主要靠最强烈的时刻和最后的时刻；有研究发现<b>放在结尾的意外惊喜</b>效果最好，一周后仍有影响<sup><a href="#s12">[12]</a></sup></td><td>check-out 就是"终点"，这一刻值得认真设计</td></tr>
+    <tr><td><b>洗车店集章卡实验</b></td><td>同样洗8次才有奖励，送了2个章的10格卡完成率约34%，空白的8格卡约19%（Nunes &amp; Drèze 2006，已在集章卡分析中引用）</td><td>显示"第2次 / 共6次"，借用"已经开始了"的心理，不需要任何奖励</td></tr>
+    <tr><td><b>医疗诊所请评价</b></td><td>多家厂商的数据都说：<b>当面请</b>效果最好，其次是<b>就诊后1–2小时</b>发短信，隔天再发就差很多<sup><a href="#s13">[13]</a></sup>（厂商数据，只能看方向）</td><td>治疗师当面提一句，系统1–2小时后发短信</td></tr>
+    <tr><td><b>餐厅 NFC / 二维码评价卡</b></td><td>结账时放一张"碰一下或扫一下就能写评价"的卡，减少步骤<sup><a href="#s14">[14]</a></sup></td><td>前台放一个评价二维码立牌，不推、不催，只是让客户方便</td></tr>
+  </table>
+</section>
+
+<!-- 脑洞 -->
+<section>
+  <h2>4 · 脑洞：每个问题的想法（★ 是我选进方案的）</h2>
+  <div class="grid2 idea">
+    <div class="box">
+      <h3>Check in 本身</h3>
+      <ul>
+        <li class="star">前台平板，客户自己填；老客户输入电话后显示"Welcome back"</li>
+        <li class="star">柜台放二维码，客户可以用自己的手机填</li>
+        <li class="star">新客户必选来源，选"朋友"会追问是谁（替代纸质登记表）</li>
+        <li class="star">每次 check in 问一题："今天疼痛几分？0–10"，2秒钟</li>
+        <li>预约短信里附 check in 链接，客户在停车场就能填完</li>
+        <li>check in 后，前台屏幕显示"Sarah 已到，第3次，按摩60分钟"</li>
+        <li>按地理位置自动 check in（太复杂，不做）</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Q1 让治疗师约下次</h3>
+      <ul>
+        <li class="star">治疗结束时，治疗师必须在系统里写"建议下次时间 + 共几次"，不写就无法 check out</li>
+        <li class="star">check-out 页面把建议展示给客户，客户点一下就能约</li>
+        <li class="star">推荐的时间优先显示上午和周一、周二，正好填空档</li>
+        <li class="star">治疗后短信里问一题："治疗师有没有跟你说下次什么时候来？"由客户来核实</li>
+        <li class="star">每周看板：按治疗师看"写了计划的比例"和"60天回头率"</li>
+        <li>治疗室里放一张"今天的计划"卡片，治疗师手写后交给客户</li>
+        <li>前台每天下班前打电话给没约下次的客户（工作量大，先不做）</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Q2 Google 评价</h3>
+      <ul>
+        <li class="star">第2次来访后1–2小时，系统给<b>每一位</b>客户发同一条短信（不挑人）</li>
+        <li class="star">治疗师在治疗快结束时提一句："如果觉得有帮助，我们会发一条短信，写个评价对我们很有帮助"</li>
+        <li class="star">一次性给过去所有老客户发一条请评价的短信，快速追上一部分数量</li>
+        <li class="star">前台放评价二维码立牌</li>
+        <li>请说英语的客户多写（不能只请他们，但可以确保他们也收到）</li>
+        <li><s>打分高才弹出评价链接</s>：属于 review gating，被禁止</li>
+        <li><s>送礼换评价、按评价数给员工发奖金</s>：被禁止</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Q3 小礼品</h3>
+      <ul>
+        <li class="star">第一次来的欢迎礼，每人都有，自己从3样里挑一样<span class="tag dash">待确认</span></li>
+        <li>治疗师根据治疗需要给"居家护理小样"，比如针灸后的耳豆、热敷贴，写进治疗记录</li>
+        <li>前台卖这些小东西，变成小额收入</li>
+        <li>随机送（惊喜感强，但看起来更像 inducement，不推荐）</li>
+        <li><s>写评价送礼 / 推荐送礼 / 来5次送礼</s>：不做</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Q5 惊喜和 check out</h3>
+      <ul>
+        <li class="star">"你的进步"：疼痛分数从第1次到今天的变化，用图显示</li>
+        <li class="star">治疗师写的一句话 + 一个居家小动作（例如"每天两次门框拉伸"）</li>
+        <li class="star">第5次和第10次来访，前台交给客户治疗师的手写感谢卡</li>
+        <li>生日当周来访，前台说一句"Happy birthday"（只祝福，不送优惠）</li>
+        <li>天气提醒：卡尔加里 Chinook 天气前发"头痛的人注意"</li>
+        <li>check out 后发一条"今天的护理小结"短信，客户可以留着看</li>
+        <li>保险额度估算："你今年可能还剩约 $X"（需要客户提供保险额度，先不做）</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Q4 怎么连起来</h3>
+      <ul>
+        <li class="star">同一个预约系统（你们自己开发的）加3个页面：Check in、治疗师计划、Check out</li>
+        <li class="star">同一块平板：客户到店时用来 check in，离开时用来 check out</li>
+        <li class="star">每个页面都会记一条数据，汇总到老板的每周看板</li>
+        <li class="star">推荐人名字自动生成"给推荐人写感谢卡"的待办（接上转介绍方案1）</li>
+        <li>做一个 App（不做，客户不会下载）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 5 方案 -->
+<section>
+  <h2>5 · 推荐方案：一块平板，三个时刻</h2>
+  <div class="flow">
+    <div class="box"><h3>① 到店 · Check in</h3><p class="note" style="margin-top:6px">客户在平板上填</p><ul style="margin-top:6px"><li>电话或邮箱（至少一个）</li><li>新客户：名字、首选语言、<b>来源</b>、是否接受邮件和短信（二选一）</li><li>今天疼痛几分</li></ul><p class="note" style="margin-top:6px">约30秒，老客户约10秒</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>② 治疗结束 · 治疗师写计划</h3><p class="note" style="margin-top:6px">治疗师用手机或治疗室平板</p><ul style="margin-top:6px"><li>建议多久后再来、共几次</li><li>或"不需要再来"并写原因</li><li>给客户的一句话和居家动作</li></ul><p class="note" style="margin-top:6px">约20秒。<b>不写就不能 check out</b></p></div>
+    <div class="arrow">→</div>
+    <div class="box"><h3>③ 离开 · Check out</h3><p class="note" style="margin-top:6px">前台把平板转向客户</p><ul style="margin-top:6px"><li>你的进步（疼痛分数变化）</li><li>治疗师的话 + 第几次 / 共几次</li><li>点一下约好下次</li><li>第一次来：欢迎礼 <span class="tag dash">待确认</span></li></ul><p class="note" style="margin-top:6px">1–2小时后系统发短信</p></div>
+  </div>
+  <p class="note">技术上：都在 app.vhealth.ca 里，AI 工程师约做 <b>1–2周</b>。check in 的数据直接存进现有的客户档案，不需要另外的系统。前台平板约 $300–500，或者用现有的 iPad。</p>
+</section>
+
+<!-- 原型 -->
+<section id="proto">
+  <h2>6 · 原型（可以点）</h2>
+  <p class="note">上面的按钮切换屏幕；屏幕里的按钮也能点。客户看到的页面是英文，因为前台和大部分新客户说英语；右边的中文是说明。</p>
+  <div class="proto-tabs" id="tabs">
+    <button data-tab="new" class="on">① Check in · 新客户</button>
+    <button data-tab="ret">② Check in · 老客户</button>
+    <button data-tab="thr">③ 治疗师写计划</button>
+    <button data-tab="out">④ Check out</button>
+    <button data-tab="sms">⑤ 治疗后短信</button>
+    <button data-tab="dash">⑥ 老板看板</button>
+  </div>
+
+  <div class="stage">
+    <div>
+      <!-- 平板 -->
+      <div class="device" id="tablet">
+
+        <!-- ===== ① 新客户 ===== -->
+        <div class="screen on" data-s="new-1">
+          <div class="bar"><span>V-HEALTH · Check in</span><span>Front desk iPad</span></div>
+          <h4>Welcome to V-Health</h4>
+          <p class="sub">Enter your phone or email to check in.</p>
+          <label class="f">Mobile phone <input type="tel" id="n-phone" placeholder="(403) 555-0123"></label>
+          <div class="or">— or / and —</div>
+          <label class="f">Email <input type="email" id="n-email" placeholder="you@example.com"></label>
+          <p class="err" id="n-err" hidden>Please enter a phone number or an email.</p>
+          <button class="btn" data-next="new-2" data-check="contact">Continue</button>
+          <p class="small">New here? We'll set you up in a few taps. Returning? Try the "② Check in · 老客户" tab above.</p>
+        </div>
+
+        <div class="screen" data-s="new-2">
+          <div class="bar"><span>V-HEALTH · New client · 1 of 3</span><span>◀ <a href="#" data-go="new-1">Back</a></span></div>
+          <h4>Nice to meet you</h4>
+          <label class="f">Your name * <input type="text" placeholder="First and last name" value="Sarah Thompson"></label>
+          <div class="f" style="display:grid;gap:6px"><b style="font-size:.9rem">Preferred language *</b>
+            <div class="chips single"><span class="chip on">English</span><span class="chip">中文</span><span class="chip">廣東話</span><span class="chip">Other</span></div></div>
+          <div style="display:grid;gap:6px"><b style="font-size:.9rem">How did you hear about us? *</b>
+            <div class="chips col single" id="src">
+              <span class="chip" data-d="">Google search / Maps</span>
+              <span class="chip" data-d="ref">Friend or family</span>
+              <span class="chip" data-d="pos">Poster in a store</span>
+              <span class="chip" data-d="wrk">My workplace</span>
+              <span class="chip" data-d="">Walked or drove by</span>
+              <span class="chip" data-d="">Instagram / Facebook</span>
+              <span class="chip" data-d="">Insurer list / Medimap</span>
+              <span class="chip" data-d="oth">Other</span>
+            </div></div>
+          <label class="f" id="src-ref" hidden>Who referred you? We'd love to thank them. <input type="text" placeholder="Their name or phone"></label>
+          <label class="f" id="src-pos" hidden>Which store? <select><option>Safeway Crowchild</option><option>T&amp;T Market</option><option>Co-op Dalhousie</option><option>Other</option></select></label>
+          <label class="f" id="src-wrk" hidden>Which workplace? <input type="text" placeholder="e.g. Foothills Hospital, U of C"></label>
+          <label class="f" id="src-oth" hidden>Please tell us where * <input type="text"></label>
+          <button class="btn" data-next="new-3" data-check="src" id="src-btn" disabled>Continue</button>
+        </div>
+
+        <div class="screen" data-s="new-3">
+          <div class="bar"><span>V-HEALTH · New client · 2 of 3</span><span>◀ <a href="#" data-go="new-2">Back</a></span></div>
+          <h4>Can we stay in touch?</h4>
+          <p class="sub">Appointment reminders and receipts are always sent. These are extra:</p>
+          <div class="consent">
+            <div class="row"><span><b>Email</b>: tips, clinic news and occasional offers</span><span class="yn single need"><span class="chip">Yes, please</span><span class="chip">No thanks</span></span></div>
+            <div class="row"><span><b>Text</b>: a short check-in after your visit and a request for feedback</span><span class="yn single need"><span class="chip">Yes, please</span><span class="chip">No thanks</span></span></div>
+            <p class="small">You can unsubscribe anytime. V-Health, #110 5403 Crowchild Trail NW, Calgary · 403-966-6386</p>
+          </div>
+          <p class="hint">Nothing is pre-selected. Please choose for each.</p>
+          <button class="btn" data-next="new-4" data-check="consent" disabled id="consent-btn">Continue</button>
+        </div>
+
+        <div class="screen" data-s="new-4">
+          <div class="bar"><span>V-HEALTH · New client · 3 of 3</span><span>◀ <a href="#" data-go="new-3">Back</a></span></div>
+          <h4>How much pain are you in today?</h4>
+          <p class="sub">0 = none · 10 = worst imaginable. Your therapist will see this.</p>
+          <div class="scale single need" id="pain-new"></div>
+          <div class="scale-l"><span>No pain</span><span>Worst</span></div>
+          <label class="f">Where? (optional) <input type="text" placeholder="e.g. neck, lower back"></label>
+          <button class="btn" data-next="new-5" data-check="pain" disabled>Check in</button>
+        </div>
+
+        <div class="screen" data-s="new-5">
+          <div class="done-big">
+            <div class="check">✓</div>
+            <h4>You're checked in, Sarah</h4>
+            <p class="sub">Please have a seat. Your therapist <b>Kevin</b> will come get you.<br>Your consent form is next on this iPad.</p>
+            <button class="btn ghost" data-go="new-1" style="max-width:260px;margin:10px auto 0">Done (screen resets in 10s)</button>
+          </div>
+        </div>
+
+        <!-- ===== ② 老客户 ===== -->
+        <div class="screen" data-s="ret-1">
+          <div class="bar"><span>V-HEALTH · Check in</span><span>Front desk iPad</span></div>
+          <h4>Welcome to V-Health</h4>
+          <p class="sub">Enter your phone or email to check in.</p>
+          <label class="f">Mobile phone <input type="tel" value="(403) 555-0123"></label>
+          <div class="or">— or / and —</div>
+          <label class="f">Email <input type="email"></label>
+          <button class="btn" data-go="ret-2">Continue</button>
+        </div>
+        <div class="screen" data-s="ret-2">
+          <div class="bar"><span>V-HEALTH · Check in</span><span>◀ <a href="#" data-go="ret-1">Not you?</a></span></div>
+          <h4>Welcome back, Sarah</h4>
+          <p class="sub">Massage 60 min with Kevin · 10:00 am · Visit 3</p>
+          <h5>How much pain are you in today?</h5>
+          <div class="scale single need" id="pain-ret"></div>
+          <div class="scale-l"><span>No pain</span><span>Worst</span></div>
+          <p class="small">Last time you said <b>5</b>.</p>
+          <button class="btn" data-go="ret-3" data-check="pain" disabled>Check in</button>
+        </div>
+        <div class="screen" data-s="ret-3">
+          <div class="done-big">
+            <div class="check">✓</div>
+            <h4>You're checked in</h4>
+            <p class="sub">Kevin will be with you shortly.</p>
+            <button class="btn ghost" data-go="ret-1" style="max-width:260px;margin:10px auto 0">Done</button>
+          </div>
+        </div>
+
+        <!-- ===== ③ 治疗师 ===== -->
+        <div class="screen" data-s="thr-1">
+          <div class="bar"><span>V-HEALTH · Therapist · Kevin L.</span><span>Room 2 · 10:00</span></div>
+          <h4>Sarah T. · Visit 3</h4>
+          <div class="card2"><b>Today's pain: 4</b> &nbsp;<span class="small">(visit 1: 7 · visit 2: 5) · Area: neck, right shoulder</span></div>
+          <h5>Before Sarah leaves: your recommendation *</h5>
+          <div class="chips single need" id="plan">
+            <span class="chip" data-p="1">Come back in 1 week</span>
+            <span class="chip" data-p="2">In 2 weeks</span>
+            <span class="chip" data-p="3">In 3–4 weeks</span>
+            <span class="chip" data-p="0">No follow-up needed</span>
+          </div>
+          <label class="f" id="plan-n">Total visits in this plan <select><option>4</option><option selected>6</option><option>8</option></select></label>
+          <label class="f" id="plan-why" hidden>Why no follow-up? * <select><option>Goal reached</option><option>Referred to another provider</option><option>Client declined</option></select></label>
+          <label class="f">A note for Sarah (she sees this at check out) <textarea>Shoulder is moving much better. Keep the doorway stretch, 2× a day.</textarea></label>
+          <p class="small">The recommendation must be clinically justified. It is saved in the chart.</p>
+          <button class="btn" data-go="thr-2" data-check="plan" disabled>Send to check out</button>
+        </div>
+        <div class="screen" data-s="thr-2">
+          <div class="done-big">
+            <div class="check">✓</div>
+            <h4>Sent to front desk</h4>
+            <p class="sub">Sarah's check-out screen is ready.<br>Your plan rate this week: <b>23 / 24 visits</b></p>
+            <button class="btn ghost" data-tabgo="out" style="max-width:260px;margin:10px auto 0">See her check-out screen →</button>
+          </div>
+        </div>
+
+        <!-- ===== ④ Check out ===== -->
+        <div class="screen" data-s="out-1">
+          <div class="bar"><span>V-HEALTH · Check out</span><span>Facing the client</span></div>
+          <h4>Nice work today, Sarah</h4>
+          <div class="card2">
+            <h5>Your progress</h5>
+            <p class="small">Pain you reported at check-in</p>
+            <div class="chart" style="margin-top:26px"><div style="height:70%"><b>7</b></div><div style="height:50%"><b>5</b></div><div style="height:40%"><b>4</b></div></div>
+            <div class="chart-l"><span>Visit 1 · Oct 30</span><span>Visit 2 · Nov 6</span><span>Today</span></div>
+            <p style="margin-top:8px"><b>Down 3 points since your first visit.</b></p>
+          </div>
+          <div class="card2">
+            <h5>From Kevin</h5>
+            <p>"Shoulder is moving much better. Keep the doorway stretch, 2× a day."</p>
+            <p class="small" style="margin-top:6px">Your plan: visit <b>3 of 6</b></p>
+            <div class="progress"><span class="done"></span><span class="done"></span><span class="done"></span><span></span><span></span><span></span></div>
+          </div>
+          <div class="card2">
+            <h5>Kevin recommends: next visit in 2 weeks</h5>
+            <p class="small">Tap a time to book it now</p>
+            <div class="slots single need" id="slot" style="margin-top:6px">
+              <span class="chip">Mon Nov 27<br><b>9:30 am</b><br><small>quiet morning</small></span>
+              <span class="chip">Tue Nov 28<br><b>10:00 am</b><br><small>quiet morning</small></span>
+              <span class="chip">Thu Nov 30<br><b>6:30 pm</b></span>
+            </div>
+            <p class="small" style="margin-top:6px">Your insurer is billed directly, as today.</p>
+          </div>
+          <button class="btn" data-go="out-2" data-check="slot" disabled>Book this time</button>
+          <button class="btn ghost" data-go="out-2">I'll book later</button>
+        </div>
+        <div class="screen" data-s="out-2">
+          <div class="bar"><span>V-HEALTH · Check out</span><span>First visit only</span></div>
+          <h4>A small welcome gift</h4>
+          <p class="sub">Every new client gets one. Pick what you'd like:</p>
+          <div class="gifts single need" id="gift">
+            <span class="chip"><i>☁</i>Steam eye mask</span>
+            <span class="chip"><i>◎</i>Heat patch</span>
+            <span class="chip"><i>☕</i>Herbal tea</span>
+          </div>
+          <div class="lock"><b>待确认</b>：先问主要保险公司和 College 再上线。只给第一次来的客户，每人都一样，和评价、推荐、来访次数无关。原型里 Sarah 是第3次来，这一屏只是演示。</div>
+          <button class="btn" data-go="out-3">Done</button>
+        </div>
+        <div class="screen" data-s="out-3">
+          <div class="done-big">
+            <div class="check">✓</div>
+            <h4>See you Monday, Nov 27 at 9:30</h4>
+            <p class="sub">We'll text you a reminder the day before.</p>
+            <div class="card2" style="text-align:left;margin-top:8px">
+              <p class="small">On the counter: a small stand with a QR code, "Enjoyed your visit? Reviews help others find us." Nobody hands it over or asks you to write one here.</p>
+            </div>
+            <button class="btn ghost" data-go="out-1" style="max-width:260px;margin:10px auto 0">Reset</button>
+          </div>
+        </div>
+
+        <!-- ===== ⑥ 看板 ===== -->
+        <div class="screen" data-s="dash-1">
+          <div class="bar"><span>V-HEALTH · Owner dashboard</span><span>Week of Nov 20 · sample numbers</span></div>
+          <h4>This week</h4>
+          <div class="dash">
+            <div class="kpi"><b>100%</b><span>new clients with a source (14 / 14)</span></div>
+            <div class="kpi"><b>96%</b><span>visits with a therapist plan</span></div>
+            <div class="kpi"><b>58%</b><span>left with next visit booked</span></div>
+            <div class="kpi"><b>9</b><span>new Google reviews</span></div>
+          </div>
+          <div class="grid2" style="gap:12px">
+            <div>
+              <h5>New clients by source</h5>
+              <div class="bars" style="margin-top:6px">
+                <div><span>Google / Maps</span><i style="width:70%"></i><span>5</span></div>
+                <div><span>Friend</span><i style="width:56%"></i><span>4</span></div>
+                <div><span>Poster</span><i style="width:28%"></i><span>2</span></div>
+                <div><span>Workplace</span><i style="width:14%"></i><span>1</span></div>
+                <div><span>Walk-by</span><i style="width:14%"></i><span>1</span></div>
+                <div><span>Other</span><i style="width:14%"></i><span>1</span></div>
+              </div>
+              <p class="small" style="margin-top:8px">Referrers to thank this week: 4 → cards to write</p>
+            </div>
+            <div>
+              <h5>Contact opt-in (new clients)</h5>
+              <p class="small">Email yes: 11 / 14 · Text yes: 12 / 14</p>
+              <h5 style="margin-top:8px">Review texts</h5>
+              <p class="small">Sent after visit 2: 22 · Reviews this week: 9</p>
+            </div>
+          </div>
+          <h5>By therapist (last 4 weeks)</h5>
+          <table class="mini">
+            <tr><th>Therapist</th><th>Plan written</th><th>Booked before leaving</th><th>Client says "plan discussed"</th><th>60-day return</th></tr>
+            <tr><td>Kevin</td><td>98%</td><td>64%</td><td>95%</td><td>71%</td></tr>
+            <tr><td>Amy</td><td>100%</td><td>61%</td><td>92%</td><td>68%</td></tr>
+            <tr><td>Daniel</td><td>91%</td><td>38%</td><td>60%</td><td>44%</td></tr>
+          </table>
+          <p class="small">Daniel: the system has a plan for 91% of visits, but only 60% of clients say they heard one. → talk with him this week.</p>
+        </div>
+      </div>
+
+      <!-- 手机：短信 -->
+      <div class="device phone" id="phone" hidden>
+        <div class="screen on" data-s="sms-1">
+          <div class="bar"><span>Messages · V-Health</span><span>11:42 am</span></div>
+          <p class="small" style="text-align:center">Today 11:40 · about 1 hour after Sarah's 2nd visit</p>
+          <div class="sms">Hi Sarah, thanks for coming in today! Quick question: did Kevin talk with you about when to come back? Reply 1 = Yes, 2 = No</div>
+          <div class="sms me">1</div>
+          <div class="sms">Thanks! If you have a minute, a Google review helps neighbours find us: g.page/r/vhealth-review<br><br>Questions about your plan? Just reply here.<br>Reply STOP to opt out.</div>
+          <p class="small" style="text-align:center;margin-top:auto">The review link is sent whatever Sarah replies. No gating.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side" id="side">
+      <div class="box" data-n="new">
+        <h3>① 新客户 check in</h3>
+        <ul>
+          <li>电话和邮箱<b>至少填一个</b>才能继续。试试都不填直接点 Continue</li>
+          <li>来源是<b>必选</b>的，选项和纸质登记表的代码一一对应。选"Friend"会追问是谁，系统自动生成"给推荐人写感谢卡"的待办</li>
+          <li>邮件和短信<b>分开问</b>，都要点 Yes 或 No，没有预先选中</li>
+          <li>疼痛分数是之后"惊喜"的数据来源</li>
+          <li>最后接着签现有的同意书</li>
+        </ul>
+        <p class="note" style="margin-top:6px">取代纸质登记表：前台不用再抄，覆盖率自动100%。电话和 walk-in 客户也用这块平板。</p>
+      </div>
+      <div class="box" data-n="ret" hidden>
+        <h3>② 老客户 check in</h3>
+        <ul>
+          <li>输入电话就找到人，<b>不再问来源和同意</b>，只问疼痛分数，约10秒</li>
+          <li>显示上次的分数，客户自己会注意到变化</li>
+          <li>前台屏幕上 Sarah 的预约变成"已到"</li>
+          <li>隐私：页面只显示名字和今天的预约，10秒后自动回到首页</li>
+        </ul>
+      </div>
+      <div class="box" data-n="thr" hidden>
+        <h3>③ 治疗师写计划</h3>
+        <ul>
+          <li>回答"我怎么知道他们做了没有"：<b>不写建议，就不能 check out</b>，所以每次都有记录</li>
+          <li>"不需要再来"也是合法选项，但要写原因。这样不会逼治疗师给每个人都排计划</li>
+          <li>写给客户的话会出现在 check-out 页面。治疗师知道客户会看到，就会写得认真</li>
+          <li>页面上提醒：建议必须有临床理由（针灸守则第7.3条禁止不必要的治疗）</li>
+        </ul>
+      </div>
+      <div class="box" data-n="out" hidden>
+        <h3>④ Check out</h3>
+        <ul>
+          <li><b>惊喜</b>：客户自己报的疼痛分数，第一次 7 → 今天 4。是客户自己的数据，不是诊所在宣传疗效</li>
+          <li>"第3次 / 共6次"：让客户觉得已经开始了，想把它做完</li>
+          <li>推荐时间<b>先显示周一、周二上午</b>，正好填空档</li>
+          <li>前台不用问"要不要约"，直接说"Kevin 建议两周后，这几个时间可以吗？"</li>
+          <li>第2屏是欢迎礼，标成待确认</li>
+          <li>Google 评价<b>不在这里要</b>，因为不能在店里施压。只放一个立牌</li>
+        </ul>
+      </div>
+      <div class="box" data-n="sms" hidden>
+        <h3>⑤ 治疗后短信</h3>
+        <ul>
+          <li>第2次来访后约1小时发送，发给<b>每一位</b>同意接收短信的客户</li>
+          <li>第一句话是<b>核实</b>：客户说治疗师有没有讲下次什么时候来。这个数字和系统记录一对比，就知道治疗师是真讲了，还是只是在系统里点了</li>
+          <li>不管客户回答什么，第二句都会附上评价链接，所以不算 gating</li>
+          <li>不给任何奖励</li>
+        </ul>
+      </div>
+      <div class="box" data-n="dash" hidden>
+        <h3>⑥ 老板看板（示例数字）</h3>
+        <ul>
+          <li>每周一花30分钟看，和 OKR 的8个数字放在一起</li>
+          <li>最有用的是表里的第4列："客户说讲过计划"。如果它比"写了计划"低很多，说明治疗师只是在系统里点一下</li>
+          <li>看<b>60天回头率</b>（真的来了），不只是"约了"，因为约了还会取消</li>
+          <li>Google 评价只看全诊所的总数，<b>不按治疗师统计</b></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- Q1 -->
+<section>
+  <h2>7 · Q1 详细：怎么知道、怎么保证、怎么奖励</h2>
+  <div class="box">
+    <p><b>先说一个容易忽略的事实：</b>治疗师拿每次收入的约60%，客户多来一次，治疗师就多赚约 $66。他们本来就有动力。问题通常不在于"不想约"，而在于<b>没有习惯、不好意思开口、没人检查</b>。所以重点是流程和检查，奖金只是补充。</p>
+  </div>
+  <table>
+    <tr><th style="width:22%">问题</th><th>做法</th></tr>
+    <tr><td><b>怎么知道做了没有</b></td><td>
+      ① 系统记录：每次就诊都有治疗师的建议（不写就无法 check out）<br>
+      ② 客户核实：治疗后短信问"治疗师有没有讲下次什么时候来"，用客户的回答和系统记录对比<br>
+      ③ 结果数据：离开前约好下次的比例，60天回头率，按治疗师统计</td></tr>
+    <tr><td><b>怎么保证做到</b></td><td>
+      ① 系统强制：没有建议就没有 check-out 页面，前台也就没法帮客户约<br>
+      ② 客户看得见：建议显示在客户面前，治疗师写了"2周后"，前台就会照着约<br>
+      ③ 一句固定的话，培训时练一遍："Based on today, I'd like to see you again in two weeks. The front desk will show you some times."<br>
+      ④ 每周一看表，比例低的治疗师当面聊一次，看是沟通的问题还是计划的问题</td></tr>
+    <tr><td><b>怎么奖励</b></td><td>
+      ① <b>团队奖</b>：全诊所60天回头率比基线高5个百分点，当月请全员吃饭，或每人 $50。按团队给，避免治疗师之间抢客户或过度推销<br>
+      ② <b>优先选热门时段</b>：每季度"写了计划的比例"和"客户说讲过"都在90%以上的治疗师，先选晚上和周末的班。对拿提成的治疗师来说，这比现金更有吸引力，诊所也不用花钱<br>
+      ③ <b>公开表扬</b>：每月看板截图贴在员工区，写上进步最大的人<br>
+      ④ 前台：离开前约好下次的比例达到60%，当月发一张 $25 咖啡卡</td></tr>
+    <tr><td><b>不要这样奖励</b></td><td>
+      ✗ 按"每个客户来了多少次"发奖金：会鼓励不必要的治疗，违反针灸守则第7.3条<br>
+      ✗ 只按"约了多少"：约了还会取消，要看真正来了的<br>
+      ✗ 按 Google 评价数发奖金，或给员工定评价指标：Google 明确禁止</td></tr>
+  </table>
+</section>
+
+<!-- Q2 -->
+<section>
+  <h2>8 · Q2 详细：Google 评价什么时候要，谁去要</h2>
+  <div class="grid2">
+    <div class="box">
+      <h3>谁、什么时候</h3>
+      <table class="mini" style="margin-top:8px">
+        <tr><th>谁</th><th>做什么</th></tr>
+        <tr><td><b>治疗师</b></td><td>在<b>第2次</b>治疗快结束、客户说"好多了"的时候，提一句："We'll send you a short text. If today helped, a Google review means a lot to a small clinic." 客户和治疗师的关系最近，由他开口最自然</td></tr>
+        <tr><td><b>系统</b></td><td>就诊后约1小时，给每一位同意接收短信的客户发链接。不挑人</td></tr>
+        <tr><td><b>前台</b></td><td>不主动要。柜台放一个二维码立牌</td></tr>
+      </table>
+      <p class="note" style="margin-top:8px">为什么是第2次：第1次客户还不确定效果；到第2次客户已经决定再来，比较愿意写。之前的计划里也定的是第2次。</p>
+    </div>
+    <div class="box">
+      <h3>260 → 1,000 要多久</h3>
+      <ul style="margin-top:6px">
+        <li>OKR 的目标是每月25条，按这个速度，<b>1年后约560条，追到1,000条要2年多</b></li>
+        <li>竞争对手的1,000多条是很多年积累的。对排名来说，<b>最近有没有新评价</b>也很重要，每月稳定25条比一次多来100条更好</li>
+        <li><b>一次性追一把</b>：给过去所有来过2次以上的老客户发一条请评价的短信（同样的话，发给所有人，不算 gating）。假设名单有1,500人、5–8%会写，就是75–120条。这是假设，名单人数要问 AI 工程师</li>
+        <li>回复每一条评价，新客户会看</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Q3 -->
+<section>
+  <h2>9 · Q3 详细：小礼品</h2>
+  <div class="box">
+    <p><b>让客户自己选是好主意</b>：自己挑的东西，人会觉得更有价值，也更记得住。问题在于<b>什么时候给、为什么给</b>：</p>
+    <table class="mini" style="margin-top:10px">
+      <tr><th>给法</th><th>建议</th><th>原因</th></tr>
+      <tr><td>第一次来的欢迎礼，每人一样，自己从3样里挑</td><td><span class="tag dash">先确认再做</span></td><td>和评价、推荐、来访次数都无关；价值低（$2–4）。但保险公司仍可能把"免费商品"看作可疑信号，要先问 Canada Life、Manulife 和 Alberta Blue Cross</td></tr>
+      <tr><td>治疗师根据治疗需要给居家护理小样，写进治疗记录</td><td><span class="tag">风险较低</span></td><td>属于治疗的一部分，不是奖励。例如针灸后的耳豆、按摩后的热敷贴</td></tr>
+      <tr><td>前台卖这些小东西</td><td><span class="tag">可以做</span></td><td>没有合规问题，还多一点收入</td></tr>
+      <tr><td>写评价送 / 推荐送 / 来几次送</td><td><span class="tag fill">不做</span></td><td>Google 禁止；针灸守则第6.2条；CLHIA</td></tr>
+    </table>
+    <p class="note" style="margin-top:10px">如果确认之后不能送，check-out 的惊喜靠"你的进步"和手写卡就够了，这两样完全没有风险，而且比礼品更个人化。</p>
+  </div>
+</section>
+
+<!-- 上线 -->
+<section>
+  <h2>10 · 上线顺序</h2>
+  <table>
+    <tr><th style="width:16%">时间</th><th>做什么</th><th style="width:18%">谁</th></tr>
+    <tr><td>第1周</td><td>Check in 页面（联系方式、来源、同意、疼痛分数）；前台平板；纸质登记表再用1周，两边对数</td><td>AI 工程师</td></tr>
+    <tr><td>第2周</td><td>治疗师计划页面 + check-out 页面（进步、计划、点一下约下次）；培训治疗师说那句话</td><td>AI 工程师、老板</td></tr>
+    <tr><td>第3周</td><td>治疗后短信（核实 + 评价链接）；老板看板；给老客户的一次性请评价短信</td><td>AI 工程师</td></tr>
+    <tr><td>第4周起</td><td>每周一看数；第一个月结束后宣布团队奖规则（先拿到1个月基线）</td><td>老板</td></tr>
+    <tr><td>同时</td><td>写邮件问保险公司欢迎礼可不可以；确认之前不上线礼品那一屏</td><td>FDE 写，老板发</td></tr>
+  </table>
+  <div class="box">
+    <h3>需要你确认的问题</h3>
+    <ol style="margin-top:6px">
+      <li>平板放在前台，check out 时前台把它转向客户，这样可以吗？还是每个治疗室各放一块？</li>
+      <li>疼痛分数是写进治疗记录，还是只用于 check-out 展示？（写进记录就要符合治疗记录的要求）</li>
+      <li>治疗师用自己的手机写计划，还是治疗室放一块平板？</li>
+      <li>团队奖的金额和形式</li>
+      <li>过去来过2次以上的客户大约有多少人？（用来估算一次性请评价的效果）</li>
+    </ol>
+  </div>
+  <p class="note">隐私：客户的健康信息只出现在客户面对的屏幕上，10秒没操作就回到首页；数据只存在诊所自己的预约系统里，适用阿尔伯塔的 PIPA。本页所有名字和数字都是示例。</p>
+</section>
+
+<section>
+  <h2>资料来源</h2>
+  <ol class="src">
+    <li id="s1">CRTC, Compliance and Enforcement Information Bulletin 2012-549（预先勾选不算明示同意）: <a href="https://crtc.gc.ca/eng/archive/2012/2012-549.htm">crtc.gc.ca/eng/archive/2012/2012-549.htm</a></li>
+    <li id="s2">CASL 默示同意（已有交易关系，2年）概述: <a href="https://substancelaw.ca/casl-compliance/">substancelaw.ca/casl-compliance</a>；<a href="https://gowlingwlg.com/fr-fr/insights-resources/guides/2023/doing-business-in-canada-casl">Gowling WLG CASL guide</a>（上线前请对照 CRTC 原文确认）</li>
+    <li id="s3">Google Maps, Prohibited and restricted content（奖励、挑选好评、员工评价数量、在店内施压）: <a href="https://support.google.com/contributionpolicy/answer/7400114">support.google.com/contributionpolicy/answer/7400114</a></li>
+    <li id="s4">CLHIA, Exploring the practice of offering incentives: <a href="https://www.clhia.ca/Consumers/Fraud-and-Abuse/Exploring-the-practice-of-offering-incentives">clhia.ca</a>（另见 WTHN 研究和集章卡分析）</li>
+    <li id="s5">College of Acupuncturists of Alberta, Code of Professional Conduct（6.2、7.3）: <a href="https://acupuncturealberta.ca/wp-content/uploads/2021/11/code-of-professional-conduct-new-logo.pdf">acupuncturealberta.ca</a></li>
+    <li id="s6">ACT Dental, Hygiene re-appointment percentage: <a href="https://www.actdental.com/blog/940-miranda-beeson">actdental.com</a>；Dental Intel benchmarks: <a href="https://intercom.help/dental-intel/en/articles/12579825-data-driven-benchmarks-to-guide-your-practice-growth">intercom.help/dental-intel</a></li>
+    <li id="s7">Clerri, Dental practice scheduling statistics: <a href="https://clerri.com/blog/dental-practice-scheduling-statistics/">clerri.com</a></li>
+    <li id="s8">Zenoti, 30 KPIs for salons and spas: <a href="https://www.zenoti.com/thecheckin/30-key-performance-indicators-kpis-for-salons-and-spas">zenoti.com</a>；Square, salon staff data: <a href="https://squareup.com/au/en/the-bottom-line/growing-your-team/data-retain-motivate-incentivize-salon-staff">squareup.com</a></li>
+    <li id="s9">Physitrack, KPIs for small PT practices: <a href="https://www.physitrack.com/insights/physical-therapy-practice-kpis-small-clinics">physitrack.com</a>；Pabau, patient retention in PT: <a href="https://pabau.com/blog/patient-retention-in-physical-therapy/">pabau.com</a></li>
+    <li id="s10">Jane App, Self check-in for patients: <a href="https://jane.app/guide/self-check-in-for-patients">jane.app/guide/self-check-in-for-patients</a></li>
+    <li id="s11">Customer Contact Week, Chewy's unique customer gifts: <a href="https://www.customercontactweekdigital.com/customer-experience/articles/chewys-unique-customer-gifts-win-over-loyal-pet-owners">customercontactweekdigital.com</a></li>
+    <li id="s12">Peak events: how surprise and anticipation shape service experiences（二手摘要）: <a href="https://thebftonline.com/?p=230772">thebftonline.com</a>；Peak-end rule in CX: <a href="https://www.yotpo.com/blog/the-peak-end-rule-in-cx/">yotpo.com</a></li>
+    <li id="s13">Curogram, post-visit review text response rate（厂商数据）: <a href="https://curogram.com/blog/emr-integration/eclinicalworks/patient-text-review-request-post-visit-response-rate">curogram.com</a>；Pabau, how to ask patients for reviews: <a href="https://pabau.com/blog/how-to-ask-patients-for-reviews/">pabau.com</a></li>
+    <li id="s14">NFC review cards, Niagara restaurant case study（厂商案例）: <a href="https://niagarastandsout.ca/blogs/business-resources/niagara-falls-restaurant-nfc-google-reviews-case-study">niagarastandsout.ca</a></li>
+  </ol>
+  <p class="src">内部资料：客户来源记录 3个方案、转介绍计划分析、集章卡分析、WTHN 研究、6个月 OKR。本页不是法律意见；欢迎礼、营销短信的措辞上线前请和保险公司、College 确认。</p>
+</section>
+
+</main>
+
+<script>
+(function () {
+  // 疼痛量表
+  document.querySelectorAll('.scale').forEach(function (s) {
+    for (var i = 0; i <= 10; i++) { var c = document.createElement('span'); c.className = 'chip'; c.textContent = i; s.appendChild(c); }
+  });
+
+  var tablet = document.getElementById('tablet'), phone = document.getElementById('phone');
+  function show(id) {
+    tablet.querySelectorAll('.screen').forEach(function (s) { s.classList.toggle('on', s.dataset.s === id); });
+  }
+  function tab(name) {
+    document.querySelectorAll('#tabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.tab === name); });
+    document.querySelectorAll('#side [data-n]').forEach(function (b) { b.hidden = b.dataset.n !== name; });
+    if (name === 'sms') { tablet.hidden = true; phone.hidden = false; }
+    else { tablet.hidden = false; phone.hidden = true; show(name + '-1'); }
+  }
+  document.getElementById('tabs').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (b) tab(b.dataset.tab);
+  });
+
+  // 单选
+  document.addEventListener('click', function (e) {
+    var c = e.target.closest('.single > .chip');
+    if (c) {
+      c.parentNode.querySelectorAll('.chip').forEach(function (x) { x.classList.remove('on'); });
+      c.classList.add('on');
+      var scr = c.closest('.screen');
+      // 来源细节
+      if (c.parentNode.id === 'src') {
+        ['ref', 'pos', 'wrk', 'oth'].forEach(function (k) { document.getElementById('src-' + k).hidden = c.dataset.d !== k; });
+      }
+      if (c.parentNode.id === 'plan') {
+        document.getElementById('plan-n').hidden = c.dataset.p === '0';
+        document.getElementById('plan-why').hidden = c.dataset.p !== '0';
+      }
+      // 必选都选了才能继续
+      var groups = scr.querySelectorAll('.single');
+      var ok = Array.prototype.every.call(groups, function (g) { return g.querySelector('.chip.on'); });
+      var btn = scr.querySelector('.btn[disabled], .btn[data-check]');
+      if (btn && btn.dataset.check) btn.disabled = !ok;
+    }
+    var g = e.target.closest('[data-go]');
+    if (g) { e.preventDefault(); show(g.dataset.go); }
+    var n = e.target.closest('[data-next]');
+    if (n) {
+      if (n.dataset.check === 'contact') {
+        var ph = document.getElementById('n-phone').value.trim(), em = document.getElementById('n-email').value.trim();
+        var err = document.getElementById('n-err');
+        if (!ph && !em) { err.hidden = false; return; }
+        err.hidden = true;
+      }
+      show(n.dataset.next);
+    }
+    var t = e.target.closest('[data-tabgo]');
+    if (t) tab(t.dataset.tabgo);
+  });
+})();
+</script>
+</body>
+</html>
