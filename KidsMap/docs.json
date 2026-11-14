@@ -36,6 +36,15 @@
   "docs": [
     {
       "cat": "grow",
+      "title": "让用户每周、甚至每天都打开：14 个功能（Kids Map 7 + Roam 7）",
+      "type": "HTML",
+      "date": "2026-11-11",
+      "status": "wip",
+      "path": "deliverables/habit-features.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
       "title": "分析：用户端收费 v3（14 个自创产品）",
       "type": "HTML",
       "date": "2026-11-13",
