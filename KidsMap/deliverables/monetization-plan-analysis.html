@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分析：Kids Map 怎么赚钱（分阶段方案）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one reading column. Verdict, what works, 5 problems, revised test, sources. Paper palette shared with the FDE site. */
+  --paper: #fbf8f2; --card: #fff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --warn: #8a5a00; --warn-soft: #fff1d6; --bad: #b3261e; --bad-soft: #fde8e6;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); }
+main { max-width: 860px; margin: 0 auto; padding: 40px 20px 90px; display: grid; gap: 38px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.3; }
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.08rem; }
+p { margin: 0; max-width: 70ch; }
+a { color: var(--accent-ink); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 16px; }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 2px 9px; border-radius: 999px; background: #e3eefb; color: #1d5fa8; }
+.verdict { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.score { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.score div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.score b { font-size: 1.35rem; font-family: var(--serif); }
+.score span { font-size: .82rem; color: var(--muted); }
+@media (max-width: 680px) { .score { grid-template-columns: 1fr 1fr; } }
+.good { background: var(--good-soft); border: 1px solid #c4e5cc; border-radius: 14px; padding: 16px 20px; display: grid; gap: 8px; }
+.prob { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.prob .ph { display: flex; gap: 12px; align-items: center; padding: 14px 20px; background: #f7f1e6; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.prob .n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; flex: none; font-size: .9rem; }
+.prob .ph h3 { flex: 1; min-width: 200px; }
+.prob .pb { padding: 16px 20px 18px; display: grid; gap: 10px; }
+.prob .fix { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.hi { background: var(--bad-soft); color: var(--bad); }
+.mid { background: var(--warn-soft); color: var(--warn); }
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: #f7f1e6; font-size: .8rem; letter-spacing: .05em; color: #8c7f6a; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sources { font-size: .85rem; color: var(--muted); }
+.sources li { word-break: break-word; }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>分析：Kids Map 怎么赚钱（分 4 个阶段）</h1>
+  <p class="meta">Kids Map · 分析原文 <a href="monetization-plan.html">《Kids Map 怎么赚钱：分阶段方案》（2026-11-06）</a> · 2026-11-14 · <span class="tag">分析中</span></p>
+</header>
+
+<section>
+  <div class="verdict">
+    <p><b>结论：大方向仍然对，"家长永远免费，钱从想被家长找到的商家那里来"。但这份是最早的赚钱方案，后面一周的研究已经改了它的3个前提：时间表、近期先赚哪笔钱、家长会员卖什么。</b>建议保留它作为 Kids Map 的<b>长期商业模式</b>，在顶部注明"近期怎么赚钱，以 11-08 之后的文档为准"。</p>
+    <p>具体来说：①时间表假设第3个月（约2027年2月）就有5,000月活，但按 11-09 的 beta 计划，现在还在 alpha，beta 首批上限是1,000人；②近期的钱已经改成先卖服务和 Pass，不是先卖"精选商家"；③Kids Map Plus 已经改成以孩子年册为核心的 Family+。另外，原文漏了一个最直接的本地对手 <b>Family Fun Calgary</b>。</p>
+  </div>
+  <div class="score" role="list">
+    <div role="listitem"><b>对</b><span>商家付钱，家长免费</span></div>
+    <div role="listitem"><b>过时</b><span>时间表和用户数</span></div>
+    <div role="listitem"><b>已更新</b><span>Plus → Family+</span></div>
+    <div role="listitem"><b>漏了</b><span>本地对手</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>写得好的地方</h2>
+  <div class="good">
+    <ul class="plain">
+      <li><b>"钱从谁那里来"分得清楚。</b>按本地商家、交易、家长、品牌、机构分类，每一类都配了类似产品，一张表就能看完所有方向。</li>
+      <li><b>用门槛决定什么时候进入下一阶段。</b>"5,000 月活、1,000 邮件订阅、3,000 出门点击、20 家认领"，这比按日期推进更可靠。问题出在门槛旁边写了日期（见第1点）。</li>
+      <li><b>信任底线写得很好。</b>付费不改排名、所有付费位置标"赞助"、地图和 Dudu 里不放横幅广告、不卖个人数据。这几条后面的文档都沿用了。</li>
+      <li><b>先收集"证据"再卖。</b>记录每个地点的导航、官网和电话点击，这是以后谈商家的底牌，成本也很低（开发约1天）。</li>
+      <li><b>反面教训有用。</b>Peanut、KidPass、Komoot 说明"过早向家长收费""把免费功能锁起来"会出问题。11-08 的订阅研究也得出了同样的结论。</li>
+      <li><b>估算和未证实分开标注。</b>收入表写明是估算，第三方数字写"未证实"。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5 个问题，以及怎么改</h2>
+
+  <div class="prob">
+    <div class="ph"><span class="n">1</span><h3>时间表跟不上实际进度：门槛是对的，日期不对</h3><span class="pill hi">要改</span></div>
+    <div class="pb">
+      <p>原文说阶段 0 是"现在到第3个月"，门槛是 5,000 月活。收入表从"第9个月月活 1万 / 3万 / 6万"开始算。</p>
+      <p>但三天后的 beta 计划写的是：本周还在 alpha，先给大约10个朋友用；beta 让<b>前1,000个注册的人</b>进来，之后排队。也就是说，到2027年2月，用户量更可能是几百到一千，不是5,000。</p>
+      <p>收入表本身没错，只是起点太高：保守列的"1万月活"，是 beta 上限的10倍。</p>
+      <p class="fix"><b>改：</b>阶段名去掉日期，改成"<b>达到门槛才进入</b>"。beta 结束时（大约1月下旬），用真实数据重新做一张收入表：月活、邮件订阅、每月出门点击、认领的商家数。同时把"每月月活增长多少"设成要盯的第一个数字。</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">2</span><h3>近期先赚哪笔钱，后面的文档已经改了</h3><span class="pill mid">加说明</span></div>
+    <div class="pb">
+      <p>原文的顺序是：先攒用户，第3个月起卖"精选商家"和邮件赞助。后面的文档改成了：</p>
+      <div class="wrap"><table>
+        <tr><th>文档</th><th>改成什么</th></tr>
+        <tr><td>11-08《尽快赚钱》（未上传）</td><td>用户太少时，靠流量赚不到钱。先<b>直接卖服务</b>：诊所年底福利活动、餐厅推广套餐、生日派对套餐。目标是12月31日前收入 $1,500–4,000（估算）</td></tr>
+        <tr><td>11-08 <a href="city-passes.html">各城市 Pass</a>、<a href="premium-subscription.html">$4.99/月订阅</a></td><td>Roam 先做 Coffee Pass / Roam Pass。不需要很多用户，咖啡店承担成本</td></tr>
+        <tr><td>原文（11-06）</td><td>只讲 Kids Map，那时还没有 Roam</td></tr>
+      </table></div>
+      <p>这些改动不和原文冲突：都是"商家付钱，家长免费"，只是<b>先做不需要流量的那部分</b>。但单看原文，会以为下一步就是去卖精选位置。</p>
+      <p class="fix"><b>改：</b>原文顶部加一行："近期（alpha / beta）怎么赚钱，见 11-08《尽快赚钱》和 Pass 研究；本文是 Kids Map 用户量起来后的长期模式。"</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">3</span><h3>Kids Map Plus 已经被 Family+ 取代</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>原文的 Plus（G）主要卖：Dudu 无限对话、新地点提醒、收藏和行程、离线地图、家庭共享、商家折扣，价格 $29–39/年。</p>
+      <p>两天后的<a href="premium-subscription.html">订阅研究</a>结论不同："人不会为一张更好的地图付钱"。家长愿意按月付钱的是<b>孩子的回忆</b>（Tinybeans 约9.5万付费家长，续费率89–91%）和省钱的会员优惠。所以 Family+ 改成以<b>每个孩子的探险年册</b>为核心，$39.99/年，Dudu 无限只算附加，离线地图放到"以后"。</p>
+      <p>还有一个成本问题：原文把"Dudu 无限对话"放在 Plus 里。beta 计划实测每次回答约 $0.015，重度用户一个月就能吃掉一大块会费，"无限"必须有合理使用上限。</p>
+      <p class="fix"><b>改：</b>G 节改成指向 Family+，写上"先做'即将推出'按钮，只数有多少人点，不收钱"（订阅研究里的测试2）。"Dudu 无限"改成"Dudu Plus（有使用上限）"。</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">4</span><h3>漏了本地对手：Family Fun Calgary 和 camps.ca</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>原文只把 Calgary's Child 当作本地竞品。但阶段1的模式（商家广告、邮件赞助位、活动推广）已经有人在 Calgary 做了：</p>
+      <ul class="plain">
+        <li><b>Family Fun Calgary</b>（Family Fun Canada 的 Calgary 站）：卖横幅广告、软文、首页位置、邮件和社交媒体推广，按需定制套餐<a href="#r1">[1]</a>。这就是阶段1的模式，而且它已经有现成的 Calgary 读者和广告客户。</li>
+        <li><b>camps.ca</b>：全国的营地目录，有 Calgary 页面<a href="#r2">[2]</a>，抢的是营地这批广告主。</li>
+      </ul>
+      <p>这不代表做不了，但跟商家谈的时候，他们一定会拿 Kids Map 和这两家比。</p>
+      <p class="fix"><b>改：</b>在"类似产品案例"里加上 Family Fun Calgary 和 camps.ca。向它们要一份广告报价（Family Fun Canada 的2025媒体资料<a href="#r1">[1]</a>），用来给"精选 $39–79/月"定价。卖点写成它们给不了的东西：<b>每个地点每月有多少家长点了导航</b>，以及在地图上的位置。</p>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">5</span><h3>几条规则和时间要补</h3><span class="pill mid">小</span></div>
+    <div class="pb">
+      <ul class="plain">
+        <li><b>每周邮件要符合 CASL。</b>邮件里一旦有赞助位，就是商业电子信息：订阅时要客户自己勾选（预先勾选不算同意），每封都要有退订和发件人信息<a href="#r3">[3]</a>。</li>
+        <li><b>隐私法主要是 Alberta 的 PIPA，不只是 PIPEDA。</b>在 Alberta 和 BC 省内收集个人信息，主要适用各自省的 PIPA，跨省、跨境才是 PIPEDA<a href="#r4">[4]</a>。"给城市卖需求数据"仍然只能卖匿名、汇总的数据。</li>
+        <li><b>推送赞助要遵守"每天最多1条推送"。</b>这是<a href="habit-features.html">《14 个功能》</a>定的规则。赞助内容只能放进已有的周末推送，不能另发一条。</li>
+        <li><b>营地抽成最早是2028年。</b>2027年营地报名很早：市里的夏令营2027年2月开放报名<a href="#r5">[5]</a>，Heritage Park 2026年是1月21日<a href="#r6">[6]</a>。按阶段2的时间，2027年这一季已经错过了。2027年能做的，是在1–2月做一份"Calgary 夏令营指南"，测试营地愿不愿意付费上精选。</li>
+        <li><b>收钱就要升级托管。</b>beta 计划查过，Vercel 免费版不允许商用。开始卖精选或接联盟链接，就要用 Pro（$20/月），这笔要算进成本。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>修改后的顺序</h2>
+  <div class="wrap"><table>
+    <tr><th>时间</th><th>Kids Map 做什么</th></tr>
+    <tr><td>现在 → beta 结束（约1月下旬）</td><td>原文"下一步"里的①记录出门点击和②商家认领照做（不需要很多用户）；③每周四邮件先开始收订阅，用 CASL 合规的勾选框。近期收入按《尽快赚钱》和 Roam Pass 来</td></tr>
+    <tr><td>1–2月</td><td>"Calgary 夏令营指南"：免费给5–10家营地上精选，换反馈和数据；向 Family Fun Calgary 要报价</td></tr>
+    <tr><td>beta 结束时</td><td>用真实数据重做收入表；Family+ 放"即将推出"按钮，只数有多少人点</td></tr>
+    <tr><td>达到门槛后</td><td>5,000 月活、1,000 订阅、3,000 出门点击、20 家认领：开始卖精选和邮件赞助（原文阶段1）</td></tr>
+    <tr><td>以后</td><td>营地抽成（2028季）、生日派对线索、品牌合作、本地合伙人扩城</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>原文需要改的地方（汇总）</h2>
+  <ul class="plain">
+    <li>顶部加："近期赚钱以 11-08《尽快赚钱》和 Pass 研究为准；本文是长期模式"。</li>
+    <li>阶段名去掉"第 X 个月"，改成"达到门槛才进入"；收入表注明起点要用 beta 的真实数据重算。</li>
+    <li>G（Plus）改成指向 Family+（年册为核心，$39.99/年，先测"即将推出"按钮）；Dudu 不写"无限"。</li>
+    <li>类似产品里加 Family Fun Calgary 和 camps.ca。</li>
+    <li>加 CASL 和 Alberta PIPA；推送赞助只放在已有推送里；营地抽成从2028年算起。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>资料来源</h2>
+  <ol class="sources">
+    <li id="r1">Family Fun Calgary，Advertising（横幅、软文、首页、邮件和社交媒体套餐；2025 媒体资料）：<a href="https://www.familyfuncanada.com/calgary/advertising/">familyfuncanada.com/calgary/advertising</a> · <a href="https://www.familyfuncanada.com/advertise/">familyfuncanada.com/advertise</a></li>
+    <li id="r2">camps.ca，Calgary camps：<a href="https://www.camps.ca/calgary.php">camps.ca/calgary.php</a></li>
+    <li id="r3">CRTC，Compliance and Enforcement Information Bulletin 2012-549（预先勾选不算明示同意）：<a href="https://crtc.gc.ca/eng/archive/2012/2012-549.htm">crtc.gc.ca</a></li>
+    <li id="r4">Bennett Jones，PIPA vs PIPEDA：<a href="https://www.bennettjones.com/Insights/Updates/PIPA-vs-PIPEDA-An-Update">bennettjones.com</a> · Lex Mundi，Canada data privacy guide：<a href="https://www.lexmundi.com/guides/global-data-privacy-guide/jurisdictions/canada/canada-federal-law">lexmundi.com</a></li>
+    <li id="r5">City of Calgary，Summer day camps（"Registration will open in Feb. 2027"）：<a href="https://www.calgary.ca/parks-rec-programs/day-camps/summer.html">calgary.ca</a></li>
+    <li id="r6">Heritage Park，Summer camps（2026 年 1 月 21 日开放报名）：<a href="https://heritagepark.ca/summer-camps/">heritagepark.ca</a></li>
+  </ol>
+  <p class="sources">内部文档：<a href="premium-subscription.html">$4.99/月订阅研究</a>、<a href="city-passes.html">各城市 Pass</a>、<a href="habit-features.html">14 个功能</a>（都在本文档中心）；《尽快赚钱》（11-08）、《Calgary beta 计划》和《beta 准备计划》（11-09）还没有上传。原文的其他数字（Yelp、Mommy Poppins、Macaroni KID、Winnie 等）这次没有逐一核对。</p>
+</section>
+
+</main>
+</body>
+</html>

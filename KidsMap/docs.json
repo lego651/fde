@@ -36,6 +36,24 @@
   "docs": [
     {
       "cat": "grow",
+      "title": "分析：Kids Map 怎么赚钱（分阶段方案）",
+      "type": "HTML",
+      "date": "2026-11-14",
+      "status": "wip",
+      "path": "deliverables/monetization-plan-analysis.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
+      "title": "Kids Map 怎么赚钱：分 4 个阶段（原文）",
+      "type": "HTML",
+      "date": "2026-11-06",
+      "status": "wip",
+      "path": "deliverables/monetization-plan.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
       "title": "Kids Map / Roam 能卖 $4.99/月 吗？（订阅研究，English）",
       "type": "HTML",
       "date": "2026-11-08",
