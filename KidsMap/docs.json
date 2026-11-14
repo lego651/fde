@@ -36,6 +36,24 @@
   "docs": [
     {
       "cat": "grow",
+      "title": "分析：北美城市验证过的本地产品",
+      "type": "HTML",
+      "date": "2026-11-13",
+      "status": "wip",
+      "path": "deliverables/proven-local-products-analysis.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
+      "title": "北美城市验证过的本地产品（原文）",
+      "type": "HTML",
+      "date": "2026-11-11",
+      "status": "wip",
+      "path": "deliverables/proven-local-products.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
       "title": "分析：Calgary 新家庭欢迎礼包",
       "type": "HTML",
       "date": "2026-11-13",
@@ -149,24 +167,6 @@
       "date": "2026-11-13",
       "status": "wip",
       "path": "deliverables/costco97-fit-analysis.html",
-      "featured": true
-    },
-    {
-      "cat": "grow",
-      "title": "分析：北美城市验证过的本地产品",
-      "type": "HTML",
-      "date": "2026-11-13",
-      "status": "wip",
-      "path": "deliverables/proven-local-products-analysis.html",
-      "featured": true
-    },
-    {
-      "cat": "grow",
-      "title": "北美城市验证过的本地产品（原文）",
-      "type": "HTML",
-      "date": "2026-11-11",
-      "status": "wip",
-      "path": "deliverables/proven-local-products.html",
       "featured": true
     }
   ],
