@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kids Map × costco97：能不能融合？——带证据的分析</title>
+<style>
+:root{--dudu:#6a4fd1;--ink:#1d1d29;--mute:#666;--line:#e6e3ef;--bg:#faf9fd;--blue:#eaf2ff;--blueb:#3b82f6;--org:#fff4e6;--orgb:#f59e0b;--red:#d93838;--green:#16a34a}
+*{box-sizing:border-box}body{margin:0;font:16px/1.65 -apple-system,"PingFang SC","Helvetica Neue",sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1000px;margin:0 auto;padding:28px 20px 80px}
+h1{font-size:30px;margin:0 0 6px}h2{font-size:23px;margin:44px 0 12px;padding-top:10px;border-top:2px solid var(--line)}h3{font-size:18px;margin:22px 0 8px}
+.sub{color:var(--mute)}
+.verdict{background:#fff;border:2px solid var(--dudu);border-radius:14px;padding:18px 22px;margin:20px 0}
+.verdict b.big{font-size:20px;color:var(--dudu)}
+.proof{background:var(--blue);border-left:4px solid var(--blueb);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14.5px}
+.proof::before{content:"🔎 证据 ";font-weight:700;color:var(--blueb)}
+.guess{background:var(--org);border-left:4px solid var(--orgb);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14.5px}
+.guess::before{content:"🤔 判断/估计 ";font-weight:700;color:#b45309}
+.ours{background:#effaf3;border-left:4px solid var(--green);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:14.5px}
+.ours::before{content:"🧩 我们代码里已有 ";font-weight:700;color:var(--green)}
+.risk{color:var(--red);font-weight:600}
+table{border-collapse:collapse;width:100%;background:#fff;margin:10px 0;font-size:14.5px}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}th{background:#f2effa}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card h4{margin:0 0 6px;font-size:16px}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:#eee;margin-right:4px}
+.t-r{background:#fde2e2;color:#a11}.t-y{background:#fff1c2;color:#8a5a00}.t-g{background:#dcf5e3;color:#0c6b2c}
+.bar{height:22px;border-radius:6px;background:var(--dudu);color:#fff;font-size:12px;line-height:22px;padding-left:8px;white-space:nowrap}
+.barrow{display:grid;grid-template-columns:150px 1fr;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+/* phone */
+.phones{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin:16px 0}
+.phone{width:290px;background:#111;border-radius:34px;padding:12px}
+.scr{background:#fff;border-radius:24px;overflow:hidden;min-height:540px;font-size:13.5px}
+.top{background:var(--dudu);color:#fff;padding:14px 14px 10px;font-weight:700}
+.top small{display:block;font-weight:400;opacity:.85}
+.item{padding:10px 12px;border-bottom:1px solid #eee}
+.item .n{font-weight:700}
+.item .p{color:var(--red);font-weight:800}
+.meter{display:flex;align-items:center;gap:6px;font-size:12px;margin-top:4px}
+.meter i{display:block;height:8px;border-radius:4px}
+.pill{display:inline-block;font-size:11.5px;border-radius:99px;padding:1px 7px;margin:3px 3px 0 0;border:1px solid #ddd}
+.btn{display:block;text-align:center;border-radius:10px;padding:9px;margin:8px 12px;font-weight:700}
+.b1{background:var(--dudu);color:#fff}.b2{background:#f2effa;color:var(--dudu)}
+.cap{text-align:center;color:var(--mute);font-size:13px;margin-top:6px}
+.dudu{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--dudu);color:#fff;font-weight:800;font-size:11px;vertical-align:middle}
+ol li,ul li{margin:4px 0}
+.src{font-size:13.5px;word-break:break-all}
+</style>
+</head>
+<body><div class="wrap">
+
+<h1>Kids Map × costco97：能不能融合？</h1>
+<div class="sub">2026-11-13 · 你的三个问题：① 能不能融合 ② 有什么 concern、是不是全靠 crowdsourcing ③ 去了发现 2 小时前的帖子已经没货了怎么办<br>
+蓝框是查到的证据，橙框是我的判断或估计，绿框是 Kids Map 代码里已经有的东西。</div>
+
+<div class="verdict">
+<b class="big">一句话结论：能融合，但不要照搬 costco97。只做「Calgary 带娃相关的 Costco 门店线索」这一小块，并且要挂在已有的 Roam deals 和 live reports 上。</b>
+<ul>
+<li><b>为什么值得做：</b>costco97 只做美国。加拿大最大的同类站 cocowest 自己说它<b>没有任何单个门店的库存信息</b>。「Calgary 哪家店现在还有」这件事没人在做。</li>
+<li><b>最大的 concern 不是没货，是没人发：</b>costco97 有 6,483 条线索，其中 <b>39% 来自一家店（Danville, CA）</b>，前 3 个城市占 <b>84%</b>。所谓众包，其实是少数几个人在发。冷启动时，发帖的就是你和你老婆。</li>
+<li><b>2 小时就没货的问题解决不了，只能管住：</b>按商品类型给不同的过期时间，帖子越旧在界面上越淡，请正在店里的人按「还在／没了」，出门前先用 Costco 官方方法查一下。另外把这趟行程和附近的遛娃地点绑在一起，就算没买到也不算白跑。</li>
+<li><b>好消息：</b>Kids Map 已经有 Waze 式的过期时间、「Useful／Not right」投票、300 米地理围栏和拍照 AI 读价格。整个功能大约 <b>80% 已经写好了</b>。</li>
+</ul>
+</div>
+
+<!-- ============ 1 ============ -->
+<h2>1. costco97 到底是什么（先看清楚再学）</h2>
+<table>
+<tr><th>问题</th><th>答案</th><th>证据</th></tr>
+<tr><td>谁在发？</td><td>网友投稿（可匿名）＋ 编辑团队审核。创始人 Jeff Shenk，2016 年上线。</td><td>投稿页：“We review every submission before it goes live.” About 页：“officially launched in 2016”</td></tr>
+<tr><td>投稿要填什么？</td><td>最多 5 张照片（建议一张商品、一张价签）、商品名*、货号、售价*、原价、描述、<b>门店*</b>、邮箱（选填）。<b>没有日期字段</b>。</td><td>costco97.com/post-a-deal</td></tr>
+<tr><td>有没有「还在不在」的机制？</td><td><b>没有。</b>帖子卡片不显示发布日期，没有投票，也没有确认次数，只写了一句 “When it's gone, it's gone”。</td><td>首页 5 张最新卡片都没有日期和投票，只有新品卡写了 “Spotted Nov 12, 2026”</td></tr>
+<tr><td>覆盖哪里？</td><td>美国 50 个州＋DC＋波多黎各，682 个城市，6,483 条线索。<b>没有加拿大</b>（“Vancouver” 指的是华盛顿州的 Vancouver）。</td><td>costco97.com/deals-by-location</td></tr>
+<tr><td>怎么赚钱？</td><td>邮件订阅（140K+，打开率 51%，每周 3 封）、广告（赞助位、专题邮件、软文、抽奖）、付费指南（$9.97 感恩节手册、$14.97 节日季通行证）。</td><td>Advertise 页：“140K+ newsletter subscribers… 2M+ annual pageviews… 94% are based in the U.S.”</td></tr>
+</table>
+<div class="proof">costco97 的核心资产不是众包数据，而是 <b>14 万人的邮件列表</b>。广告页上卖的全是邮件位和软文，没有一样是数据产品。所以它其实是一份「Costco 好物周报」，网友投稿只是内容来源之一。</div>
+<div class="guess">这一点对 Kids Map 很关键。想学 costco97 的赚钱方式，必须先有几万人的邮件列表。我们现在只有 alpha 阶段的十来个朋友，所以<b>不能指望像 costco97 那样卖广告赚钱</b>。融合的价值应该放在<b>留存</b>上：给家长一个每周都打开 Kids Map 的理由。</div>
+
+<!-- ============ 2 ============ -->
+<h2>2. 加拿大现在谁在做？空白在哪里？</h2>
+<table>
+<tr><th>谁</th><th>做什么</th><th>缺什么</th></tr>
+<tr><td><b>cocowest.ca</b>（西加：BC/AB/SK/MB，2011 年起）</td><td>每周发 Costco 的未公开促销清单。会员 $29.97/年（去广告、提前看），其他人看免费版加广告。</td><td>FAQ 原话：网站<b>没有任何单个门店的库存信息</b>，只有店内价格。</td></tr>
+<tr><td>Costco 官方 App</td><td>2024 年 6 月起美国 App 有 “Inventory on Hand”，可以查门店库存。</td><td>没查到加拿大能用的证据。媒体引述客服说法：库存是<b>定期更新，不是实时</b>的。</td></tr>
+<tr><td>Reddit / RFD / 微信群 / FB 群</td><td>有人随手发照片。</td><td>没结构，搜不到，不知道是哪家店、什么时间。</td></tr>
+<tr><td>Brickpicker 论坛 “Costco Canada Deals”</td><td>LEGO <b>倒卖者</b>互相通报 Costco 加拿大的 LEGO 清仓（比如 Rey's Speeder $12.97）。</td><td>这说明一件事：<b>玩具清仓有职业买家在盯</b>。</td></tr>
+</table>
+<div class="proof">cocowest FAQ：“Prices shown on the blog are the in store prices ONLY”，而且<b>不提供任何特定门店的库存信息</b>。Calgary 有 5 家 Costco（E、S、NW、N，以及 Tsuut'ina 那家 SW）。</div>
+<div class="guess"><b>空白：</b>每周促销清单不用我们做，cocowest 已经做得很好，而且价格全区统一。我们只做<b>门店级别、会过期的线索</b>：哪家店有 .97 清仓、星号（不补货）商品、季节性儿童用品（雪裤、雪靴、万圣节服装、圣诞玩具）。这正是 cocowest 明说不做的部分。</div>
+
+<!-- ============ 3 ============ -->
+<h2>3. 「靠 crowdsourcing」是真的吗？——不是，是靠 1% 的人</h2>
+<p>我把 costco97 自己公布的各城市线索数画成了图：</p>
+<div class="barrow"><span>Danville, CA</span><div class="bar" style="width:38.7%">2,508（38.7%）</div></div>
+<div class="barrow"><span>Livermore, CA</span><div class="bar" style="width:28%">1,818（28.0%）</div></div>
+<div class="barrow"><span>Concord, CA</span><div class="bar" style="width:16.8%">1,090（16.8%）</div></div>
+<div class="barrow"><span>其余 679 个城市</span><div class="bar" style="width:16.5%;background:#aaa">1,067（16.5%）</div></div>
+<div class="barrow"><span>例：Cape Coral, FL</span><div class="bar" style="width:0.6%;background:#aaa;min-width:30px">1</div></div>
+<div class="proof">costco97 「Deals by Location」：总计 6,483 条，Danville 2,508、Livermore 1,818、Concord 1,090（这三个城市都在旧金山东湾，彼此相距 20 公里左右）。Marana, AZ 只有 6 条，Cape Coral, FL 只有 1 条。<br>
+Jakob Nielsen（2006）的参与不平等规律：“90% of users are lurkers… 9% contribute from time to time… 1% participate a lot and account for most contributions.”</div>
+<div class="guess">前 3 个城市占 84%，而且都在同一片区域，最可能的解释是<b>编辑团队或几个超级用户就住在那里</b>。这只是推测，网站没有说明。所以 costco97 的真实模式是：<b>几个本地铁粉每周逛店拍照，其他人投稿只是补充</b>。<br><br>
+<b>对 Kids Map 的意思：</b>冷启动不用等大家来发。<b>你和你老婆就是 Calgary 的「Danville」</b>，再招 2–3 个本来就每周去 Costco 的妈妈当「店长」（比如每家店一个人）。按 90-9-1 规律，100 个活跃家长里大约只有 1 个会经常发帖，所以要用金币和称号把这 1% 找出来、留下来。</div>
+<div class="ours">Roam deals 已经有投稿金币（COINS_DEAL = 10）和确认金币（COINS_DEAL_CHECK = 2），每人每天最多投 3 条（DEAL_DAILY），还有 300 米地理围栏（DEAL_MAX_M）。<code>src/lib/deals.ts:17-22</code></div>
+
+<!-- ============ 4 ============ -->
+<h2>4. 核心问题：去了发现 2 小时前的帖子没货了，怎么办？</h2>
+<h3>4.1 先分清楚：不是所有「Costco 线索」都会 2 小时就没</h3>
+<table>
+<tr><th>类型</th><th>例子</th><th>半衰期（估计）</th><th>白跑风险</th></tr>
+<tr><td>每周未公开促销（全区统一）</td><td>“本周 Huggies 便宜 $5”</td><td>有明确的起止日期，通常 1–4 周</td><td><span class="tag t-g">低</span> 有日期，不用众包</td></tr>
+<tr><td>门店 .97 降价</td><td>某家店的童装 $9.97</td><td>几天到 1–2 周</td><td><span class="tag t-y">中</span></td></tr>
+<tr><td>.97 加星号（*）的最后一批</td><td>LEGO $34.97*</td><td>几小时到几天</td><td><span class="tag t-r">高</span> 有倒卖者在抢</td></tr>
+<tr><td>季节性热门童品</td><td>雪裤、圣诞玩具、万圣节服装</td><td>旺季可能只有半天</td><td><span class="tag t-r">高</span></td></tr>
+</table>
+<div class="proof">价签规律（媒体和员工的说法，<b>不是 Costco 官方</b>）：价格以 .97 结尾表示降价或清仓，可能是店长自己定的；价签右上角有星号（*）表示不再补货，“once it's gone, it's gone”。另有说法是 .97 还可能再降。Slickdeals 上也有人提醒：一家店的清仓价，换一家店未必一样。</div>
+
+<h3>4.2 七个办法（按效果排序）</h3>
+<div class="grid">
+<div class="card"><h4>① 线索按类型自动过期</h4>每周促销按截止日期下线，.97 降价 3 天，加星号的 24 小时，季节热门 6 小时。时间到了就自动隐藏，不让过期的帖子骗人跑一趟。<div class="ours">live reports 已经是按类型设寿命（LIFE_MIN），比如 busy 2 小时、broken 3 天，过期时间存在 <code>expires_at</code>。<code>src/lib/live-reports.ts:18</code></div></div>
+<div class="card"><h4>② 越旧越淡，并且直说「这是线索，不是保证」</h4>每条线索都显示「2 小时前 · 剩一托盘 / 剩约 10 件」，再加一条新鲜度条。costco97 连发布时间都不显示，我们一显示就比它诚实。<div class="ours"><code>freshness()</code> 已经会算出 0–1 的新鲜度，低于 0.25 就淡化显示，<code>ago()</code> 会显示「2 h ago」。</div></div>
+<div class="card"><h4>③ 请正在店里的人帮忙确认</h4>有人进了这家 Costco（地理围栏内），App 就问一句：「LEGO 34.97 还在吗？」按「还在」重新计时，两个人按「没了」就隐藏。这就是 Waze 的做法。<div class="proof">Waze 官方：靠近一条报告时会弹出 Still there / Not there，“a report is displayed for a period that changes according to how many Wazers react. Selecting Not there reduces the remaining time”</div><div class="ours">已有 Useful 投票会延长寿命，两个 Not right（HIDE_AT = 2）就隐藏。</div></div>
+<div class="card"><h4>④ 拍到件数，不只拍价格</h4>投稿时多问一个问题：大概还剩多少？（一托盘 / 一层 / 几件）。剩几件的线索寿命自动缩短。<div class="ours">已有 <code>readDealPhoto</code>，用 AI 从照片里读出价格，可以顺便读出货号。</div></div>
+<div class="card"><h4>⑤ 出门前先「一键核实」</h4>把官方方法放在线索旁边：打给这家店（显示货号，方便电话里报给店员）、在 Costco App 里查库存（美国已有，加拿大待验证）。我们不抓 Costco 的数据，只告诉用户怎么自己查。</div>
+<div class="card"><h4>⑥ 「不白跑」：把买东西和遛娃绑在一起</h4>这是 Kids Map 独有的角度。每家 Costco 旁边自动推荐「顺路遛娃」：附近的游乐场、室内 play、图书馆。就算没货，孩子也玩了一趟。cocowest 和 costco97 都做不到这一点。</div>
+<div class="card"><h4>⑦ 白跑补偿（金币）</h4>你按某条线索去了，到店按「没了」，系统返你几个金币，同时扣发帖人的信誉。损失不大，但用户会觉得这个平台讲理。<div class="ours">已有 <code>award()</code> / <code>clawBack()</code> 来发金币和收回金币。</div></div>
+</div>
+<div class="guess"><b>说实话：</b>上面这些办法都不能让「没货」变成零，只能把白跑的概率从「经常」降到「偶尔」，并让用户事先知道风险有多大。热门清仓最根本的问题是：<b>线索一发出来，就会被更多人抢光</b>，越有用的线索死得越快。所以我们<b>不主打「抢清仓」</b>，而主打「本周这家店有什么适合孩子的」，这类商品衰减得慢，白跑风险也小。</div>
+
+<!-- phones -->
+<h3>4.3 长什么样</h3>
+<div class="phones">
+<div><div class="phone"><div class="scr">
+<div class="top">🛒 Costco 带娃线索 · NW Calgary<small>Sarcee Trail · 4 条线索，最近一条 35 分钟前</small></div>
+<div class="item"><div class="n">🧤 Kirkland 儿童雪裤 2–7 岁</div><span class="p">$14.97</span> <s style="color:#999">$24.99</s>
+<div class="meter"><i style="width:70px;background:#16a34a"></i>35 分钟前 · 剩约一层 · 3 人说「还在」</div>
+<span class="pill">.97 门店降价</span><span class="pill">约 3 天后过期</span></div>
+<div class="item"><div class="n">🧱 LEGO 星战套装</div><span class="p">$34.97*</span>
+<div class="meter"><i style="width:28px;background:#f59e0b"></i>5 小时前 · 剩几件 · ⚠️ 星号＝卖完不补</div>
+<span class="pill" style="border-color:#f59e0b;color:#b45309">可能已没货</span></div>
+<div class="item" style="opacity:.45"><div class="n">🎃 万圣节服装</div><span class="p">$9.97</span>
+<div class="meter"><i style="width:8px;background:#aaa"></i>2 天前 · 已有 2 人说「没了」</div></div>
+<a class="btn b2">📞 打给这家店（报货号 1234567）</a>
+<a class="btn b1">🛝 顺路遛娃：附近 3 个地方</a>
+</div></div><div class="cap">线索列表：越旧越淡，显示剩多少件</div></div>
+
+<div><div class="phone"><div class="scr">
+<div class="top">📍 你在 NW Calgary Costco<small>帮下一个家长省一趟路</small></div>
+<div style="padding:16px 14px">
+<div class="item" style="border:1px solid #eee;border-radius:12px"><div class="n">🧱 LEGO 星战 $34.97*</div><div style="color:#666">5 小时前有人发的。还在吗？</div>
+<div style="display:flex;gap:8px;margin-top:10px"><a class="btn b1" style="flex:1;margin:0">✅ 还在</a><a class="btn b2" style="flex:1;margin:0">❌ 没了</a></div>
+<div style="margin-top:8px;font-size:12px;color:#666">还在的话，大概剩：<span class="pill">一托盘</span><span class="pill">一层</span><span class="pill">几件</span></div></div>
+<div style="margin-top:14px;font-size:13px">确认一条 <b>+2 🪙</b>，发一条新线索 <b>+10 🪙</b></div>
+<a class="btn b2" style="margin:14px 0 0">📷 拍价签发新线索</a>
+<div style="margin-top:16px;font-size:12.5px;color:#666"><span class="dudu">D</span> 不拍店员，不拍其他顾客，只拍价签和商品。</div>
+</div></div></div><div class="cap">到店时的确认弹窗（Waze 式）</div></div>
+
+<div><div class="phone"><div class="scr">
+<div class="top">❌ 你按了「没了」<small>LEGO 星战 $34.97* · NW Calgary</small></div>
+<div style="padding:16px 14px">
+<div style="font-size:15px;font-weight:700">抱歉让你白跑 🙏</div>
+<div style="margin:6px 0 12px">已经退给你 <b>+5 🪙</b>，这条线索也已经下线。</div>
+<div style="font-weight:700">既然来了，带孩子去附近玩一下？</div>
+<div class="item" style="padding-left:0">🛝 Royal Oak 游乐场 · 1.2 km · <span style="color:#16a34a">✅ 1 小时前有人说「All good」</span></div>
+<div class="item" style="padding-left:0">📚 Rocky Ridge 图书馆 · 2.0 km · 今天开到 8 点</div>
+<div class="item" style="padding-left:0">🏊 Shane Homes YMCA · 1.5 km</div>
+<div style="font-weight:700;margin-top:12px">别家店还有吗？</div>
+<div class="item" style="padding-left:0">N Calgary · 3 小时前有人说「还在」· 18 分钟车程</div>
+</div></div></div><div class="cap">白跑之后：补偿金币＋顺路遛娃</div></div>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2>5. 全部 concern（按严重程度）</h2>
+<table>
+<tr><th>#</th><th>Concern</th><th>严重</th><th>证据 / 判断</th><th>怎么办</th></tr>
+<tr><td>1</td><td><b>没人发（冷启动）</b></td><td><span class="tag t-r">高</span></td><td>costco97 84% 的线索来自 3 个相邻城市；按 90-9-1，100 个活跃家长里约 1 个常发。</td><td>你们自己每周去 1 次就发；每家店招 1 个「店长」妈妈；用金币和称号奖励。</td></tr>
+<tr><td>2</td><td><b>白跑（时效）</b></td><td><span class="tag t-r">高</span></td><td>加星号的商品卖完不补；有倒卖者在盯玩具清仓（Brickpicker）；官方库存也不是实时的。</td><td>见第 4 节的七个办法；不主打抢清仓。</td></tr>
+<tr><td>3</td><td><b>品牌跑偏</b></td><td><span class="tag t-y">中</span></td><td>判断：Kids Map 是遛娃地图。全面做 Costco 打折会变成第二个 cocowest，也让人搞不清 Kids Map 是干什么的。</td><td>只收儿童和家庭相关的商品（玩具、童装、雪具、生日用品、零食）；放在 Kids 下的一个分类里，不单独做 Tab。</td></tr>
+<tr><td>4</td><td><b>商标 / 和 Costco 的关系</b></td><td><span class="tag t-y">中</span></td><td>cocowest 和 costco97 都写了 “not affiliated with Costco”。</td><td>不用 Costco 的 logo，不用 Costco 当产品名（叫「仓储店带娃线索」之类），写清楚免责声明，不抓 costco.ca 的数据。</td></tr>
+<tr><td>5</td><td><b>店内拍照</b></td><td><span class="tag t-y">中</span></td><td>没查到 Costco 明文禁止拍照的规定（<b>未验证</b>）；有报道说熟食区员工不喜欢被拍。</td><td>规则写死：只拍价签和商品，不拍人；App 内提示。</td></tr>
+<tr><td>6</td><td><b>帮倒卖者抢货</b></td><td><span class="tag t-y">中</span></td><td>Brickpicker 上就有倒卖者在互相通报 Costco 加拿大的 LEGO 清仓。</td><td>线索只对登录的家长显示，只限 Calgary；不做「新清仓推送」这种对倒卖者最有用的功能。</td></tr>
+<tr><td>7</td><td><b>假帖 / 刷金币</b></td><td><span class="tag t-g">低</span></td><td>已有防护。</td><td>沿用地理围栏 300 米、每天 3 条上限、两个「没了」就隐藏、金币可以收回。</td></tr>
+<tr><td>8</td><td><b>赚不到钱</b></td><td><span class="tag t-y">中</span></td><td>costco97 靠的是 140K 邮件列表的广告；cocowest 靠广告加 $29.97/年会员。</td><td>短期不指望靠它赚钱，目标是<b>留存和拉新</b>：周一邮件里加一节「本周 Calgary Costco 童品」。用户多了以后再考虑赞助位。</td></tr>
+</table>
+
+<!-- ============ 6 ============ -->
+<h2>6. Kids Map 版本 vs costco97</h2>
+<table>
+<tr><th></th><th>costco97</th><th>Kids Map 版本</th></tr>
+<tr><td>范围</td><td>美国，全部商品</td><td>Calgary，只做儿童和家庭相关商品</td></tr>
+<tr><td>发布时间</td><td>卡片上不显示</td><td>显示「x 小时前」，越旧越淡</td></tr>
+<tr><td>还在不在</td><td>没有机制</td><td>到店确认（还在 / 没了 / 剩多少），按类型自动过期</td></tr>
+<tr><td>防假帖</td><td>编辑人工审核</td><td>地理围栏、AI 读价签、众包投票，管理员兜底</td></tr>
+<tr><td>白跑了</td><td>“When it's gone, it's gone”</td><td>补偿金币，推荐附近遛娃地点，告诉你别家店有没有</td></tr>
+<tr><td>赚钱</td><td>邮件广告、付费指南</td><td>先做留存；以后加周一邮件赞助、童品品牌赞助</td></tr>
+</table>
+
+<!-- ============ 7 ============ -->
+<h2>7. 建议：4 周小测试，几乎不写新代码</h2>
+<ol>
+<li><b>第 0 周（1–2 天开发）：</b>在 Roam deals 加一个「仓储店童品」分类，或者在 Kids 这边复用 deals 表。把 Calgary 5 家 Costco 加成 deal place，设好按类型过期（6 小时、24 小时、3 天）。</li>
+<li><b>第 1–4 周：</b>你和你老婆每次去 Costco 都发 3–5 条，再拉 2–3 个常去 Costco 的妈妈一起发。</li>
+<li><b>每周一的邮件</b>加一节「本周 Calgary Costco 童品」，链回 App。</li>
+<li><b>看 4 个数：</b>
+  <ul>
+  <li>① 每周有多少不同的人看了线索；</li>
+  <li>② 确认率：有人按了「还在」或「没了」的线索占多少；</li>
+  <li>③ 白跑率：「没了」占所有到店确认的比例；</li>
+  <li>④ 除了你们俩，有没有人主动发帖。</li>
+  </ul></li>
+</ol>
+<div class="guess"><b>判断标准（拍脑袋的，可以改）：</b>4 周后，除了你们俩至少有 3 个人主动发过帖，白跑率低于 30%，就继续做。如果全是你们俩在发，说明它只是一份「你们家的 Costco 周报」，那就把这节内容留在邮件里，不在 App 里做功能。</div>
+
+<!-- ============ sources ============ -->
+<h2>来源</h2>
+<ul class="src">
+<li>costco97 首页、投稿页、About、Advertise、Deals by Location：<a href="https://costco97.com/">costco97.com</a> · <a href="https://costco97.com/post-a-deal/">/post-a-deal</a> · <a href="https://costco97.com/about-costco97/">/about-costco97</a> · <a href="https://costco97.com/advertise/">/advertise</a> · <a href="https://costco97.com/deals-by-location/">/deals-by-location</a>（2026-11-13 访问）</li>
+<li>cocowest FAQ：<a href="https://cocowest.ca/?p=19310">cocowest.ca/?p=19310</a>；Daily Hive 介绍：<a href="https://dailyhive.com/calgary/best-deals-canada-costco-west">dailyhive.com</a></li>
+<li>Jakob Nielsen, Participation Inequality (2006)：<a href="https://www.nngroup.com/articles/participation-inequality/">nngroup.com</a></li>
+<li>Waze Still there / Not there：<a href="https://support.google.com/waze/answer/14716475?hl=en">Waze Help</a> · <a href="https://www.waze.com/discuss/t/verifying-hazards/80134">Waze 论坛</a></li>
+<li>Costco App 库存查询（美国，2024）：<a href="https://www.eatthis.com/costco-launching-inventory-search-feature-june-2024">Eat This</a> · <a href="https://businessinsider.nl/costcos-app-is-finally-starting-to-show-whats-in-stock-at-your-warehouse/">Business Insider</a> · <a href="https://visualping.io/blog/costco-in-stock-alerts">Visualping（“updates periodically, not in real time”）</a></li>
+<li>价签 .97 和星号：<a href="https://chowhound.com/1547313/costco-price-tags-discount-code">Chowhound</a> · <a href="https://www.chowhound.com/1548705/costco-price-tag-asterisk-meaning">Chowhound 星号</a> · <a href="https://slickdeals.net/f/18477097-a-group-of-costco-in-store-deals-sheridan-colorado">Slickdeals</a></li>
+<li>倒卖者盯 LEGO 清仓：<a href="https://www.brickpicker.com/topic/15458-costco-canada-deals">Brickpicker “Costco Canada Deals”</a></li>
+<li>熟食区员工不喜欢被拍：<a href="https://www.mashed.com/654808/costco-employees-are-begging-you-to-stop-filming-the-deli">Mashed</a></li>
+<li>Calgary 门店：<a href="https://www.costco.ca/w/-/ab/calgary/1217">costco.ca</a>（E/S/NW/N Calgary + Tsuut'ina）</li>
+<li>Kids Map 代码：<code>src/lib/live-reports.ts</code>、<code>src/lib/deals.ts</code>、<code>src/app/deal-actions.ts</code>、<code>supabase/migrations/0038_live_reports.sql</code></li>
+</ul>
+</div></body></html>

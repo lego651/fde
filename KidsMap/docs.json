@@ -87,6 +87,15 @@
       "status": "wip",
       "path": "deliverables/airbnb-host-family-guide.html",
       "featured": true
+    },
+    {
+      "cat": "grow",
+      "title": "分析：Kids Map × costco97 能不能融合",
+      "type": "HTML",
+      "date": "2026-11-13",
+      "status": "wip",
+      "path": "deliverables/costco97-fit-analysis.html",
+      "featured": true
     }
   ],
   "ignore": {}
