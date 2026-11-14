@@ -35,6 +35,15 @@
   "docs": [
     {
       "cat": "desk",
+      "title": "Check-in / Check-out 系统：产品界面（品牌配色版，可交互）",
+      "type": "HTML",
+      "date": "2026-11-14",
+      "status": "wip",
+      "path": "deliverables/checkin-checkout-ui.html",
+      "featured": true
+    },
+    {
+      "cat": "desk",
       "title": "Check-in / Check-out 系统：脑洞 + 原型",
       "type": "HTML",
       "date": "2026-11-13",

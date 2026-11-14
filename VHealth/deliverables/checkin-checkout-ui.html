@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-Health Check-in / Check-out · 产品界面（品牌版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 品牌色：取自 logo */
+  --teal: #1dab91; --teal-ink: #11806c; --teal-soft: #e3f5f0; --teal-mist: #f2faf8;
+  --leaf: #93c13d; --leaf-ink: #5f8a1c; --leaf-soft: #eef6df;
+  --char: #333534;
+  /* 文档中心主题 */
+  --paper: #fbf8f2; --card: #fff; --line: #ebe3d4; --muted: #6d6558; --ink: #2a2620;
+  --accent: #c9772e; --accent-soft: #fbf1e4;
+  --rose: #c2564b; --rose-soft: #fbecea;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  --brand: "Playfair Display", Georgia, serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font); color: var(--ink); background: var(--paper); line-height: 1.55; }
+button { font: inherit; color: inherit; cursor: pointer; }
+input, textarea, select { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+
+/* ---------- 页面头 ---------- */
+.top { max-width: 1240px; margin: 0 auto; padding: 28px 24px 8px; display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+.logo-plate { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 8px 14px; }
+.logo-plate img { height: 58px; width: auto; display: block; }
+.top h1 { font: 700 1.55rem/1.3 var(--serif); }
+.top p { color: var(--muted); font-size: .95rem; }
+.swatches { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.sw { display: inline-flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px 3px 4px; }
+.sw i { width: 16px; height: 16px; border-radius: 50%; display: block; }
+
+/* ---------- tabs ---------- */
+.tabs { max-width: 1240px; margin: 16px auto 0; padding: 0 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+.tabs button { border: 1px solid var(--line); background: #fff; border-radius: 99px; padding: 8px 15px; font-size: .88rem; font-weight: 600; transition: .15s; }
+.tabs button:hover { border-color: var(--teal); }
+.tabs button.on { background: var(--char); color: #fff; border-color: var(--char); }
+.tabs button .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--leaf); margin-left: 6px; vertical-align: middle; }
+
+.stage { max-width: 1240px; margin: 18px auto 40px; padding: 0 24px; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px; align-items: start; }
+@media (max-width: 980px) { .stage { grid-template-columns: 1fr; } }
+
+/* ---------- 设备外框 ---------- */
+.device-wrap { display: flex; justify-content: center; }
+.device { background: #1f2221; border-radius: 34px; padding: 16px; box-shadow: 0 24px 60px -24px rgba(40,50,45,.45); width: 100%; max-width: 860px; }
+.device.phone { max-width: 390px; border-radius: 46px; padding: 12px; }
+.device.desk { max-width: 960px; border-radius: 16px; padding: 10px 10px 26px; position: relative; }
+.device.desk::after { content: ""; position: absolute; left: 50%; bottom: 9px; width: 60px; height: 6px; border-radius: 3px; background: #444; transform: translateX(-50%); }
+.glass { background: #fff; border-radius: 22px; overflow: hidden; position: relative; min-height: 600px; display: flex; flex-direction: column; }
+.device.phone .glass { border-radius: 36px; min-height: 740px; }
+.device.desk .glass { border-radius: 8px; min-height: 560px; }
+.notch { height: 26px; display: flex; justify-content: center; align-items: center; }
+.notch i { width: 110px; height: 24px; background: #1f2221; border-radius: 0 0 16px 16px; display: block; margin-top: -2px; }
+
+.screen { display: none; flex: 1; flex-direction: column; padding: 26px 34px 30px; gap: 14px; animation: fade .25s ease; }
+.screen.on { display: flex; }
+.device.phone .screen { padding: 14px 18px 24px; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* 屏幕顶栏 */
+.sbar { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: .82rem; color: var(--muted); }
+.brandmark { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--char); }
+.brandmark img { height: 40px; }
+.vmark { width: 26px; height: 26px; border-radius: 7px; background: var(--teal); color: #fff; display: grid; place-items: center; font: 800 .9rem var(--brand); position: relative; }
+.vmark::after { content: ""; position: absolute; right: -3px; top: -3px; width: 9px; height: 9px; border-radius: 0 60% 0 60%; background: var(--leaf); }
+.steps { display: flex; align-items: center; gap: 8px; font-weight: 600; color: var(--char); }
+.steps i { width: 44px; height: 6px; border-radius: 3px; background: var(--teal-soft); display: block; }
+.steps i.on { background: var(--teal); }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 99px; overflow: hidden; }
+.lang button { border: 0; background: #fff; padding: 5px 12px; font-size: .8rem; font-weight: 600; color: var(--muted); }
+.lang button.on { background: var(--teal); color: #fff; }
+.back { border: 0; background: none; color: var(--teal-ink); font-weight: 600; font-size: .85rem; }
+
+.h-xl { font: 700 1.9rem/1.2 var(--brand); color: var(--char); }
+.zh .h-xl { font-family: var(--serif); }
+.sub { color: var(--muted); }
+.q { font-weight: 700; font-size: 1.02rem; color: var(--char); margin-top: 6px; }
+.small { font-size: .8rem; color: var(--muted); }
+
+/* 表单 */
+.field { display: grid; gap: 6px; font-weight: 600; font-size: .92rem; }
+.field input, .field textarea { border: 1.5px solid var(--line); border-radius: 12px; padding: 13px 14px; font-size: 1.05rem; background: #fff; font-weight: 500; outline: none; transition: .15s; }
+.field input:focus, .field textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft); }
+.field textarea { min-height: 96px; font-size: .92rem; resize: vertical; }
+.hint { font-size: .8rem; color: var(--muted); font-weight: 400; }
+.link { border: 0; background: none; color: var(--teal-ink); font-weight: 600; text-align: left; font-size: .9rem; text-decoration: underline; text-underline-offset: 3px; width: fit-content; }
+.err { color: var(--rose); font-size: .85rem; font-weight: 600; }
+.try { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.try button { border: 1px dashed var(--accent); background: var(--accent-soft); color: var(--accent); border-radius: 8px; font-size: .74rem; padding: 3px 8px; font-weight: 600; }
+
+/* 找到预约 */
+.found { display: flex; gap: 12px; align-items: flex-start; background: var(--teal-mist); border: 1.5px solid var(--teal); border-radius: 14px; padding: 12px 14px; animation: fade .3s ease; }
+.found .ic { width: 34px; height: 34px; border-radius: 10px; background: var(--teal); color: #fff; display: grid; place-items: center; flex: none; font-size: 1rem; }
+.found.desk { background: var(--accent-soft); border-color: var(--accent); }
+.found.desk .ic { background: var(--accent); }
+
+/* 技师选择 */
+.ther { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.ther button { border: 1.5px solid var(--line); border-radius: 16px; background: #fff; padding: 12px 6px 10px; display: grid; justify-items: center; gap: 4px; transition: .15s; }
+.ther button:hover { border-color: var(--teal); }
+.ther button.on { border-color: var(--teal); background: var(--teal-mist); box-shadow: 0 0 0 3px var(--teal-soft); }
+.av { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: #fff; font-size: 1.1rem; position: relative; }
+.ther button.on .av::after { content: "✓"; position: absolute; right: -4px; bottom: -2px; width: 20px; height: 20px; border-radius: 50%; background: var(--leaf); color: #fff; font-size: .7rem; display: grid; place-items: center; border: 2px solid #fff; }
+.ther b { font-size: .95rem; }
+.ther span { font-size: .72rem; color: var(--leaf-ink); font-weight: 600; }
+.ther .av { color: #fff; font-size: 1.15rem; font-weight: 800; }
+.ther em { font-style: normal; font-size: .7rem; color: var(--muted); }
+
+/* chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+.chip { border: 1.5px solid var(--line); background: #fff; border-radius: 12px; padding: 10px 12px; font-weight: 600; font-size: .9rem; transition: .15s; text-align: center; }
+.chip:hover { border-color: var(--teal); }
+.chip.on { border-color: var(--teal); background: var(--teal); color: #fff; }
+.chip small { display: block; font-weight: 500; font-size: .75rem; opacity: .8; }
+
+/* 疼痛刻度 */
+.scale { display: grid; grid-template-columns: repeat(11, 1fr); gap: 6px; }
+.scale button { aspect-ratio: 1; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; font-weight: 800; font-size: 1.05rem; transition: .15s; min-height: 44px; }
+.scale button:hover { transform: translateY(-2px); }
+.scale button.on { color: #fff; border-color: transparent; transform: scale(1.08); }
+.scale-l { display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); margin-top: -6px; }
+
+/* 按钮 */
+.btn { border: 0; border-radius: 14px; background: var(--teal); color: #fff; font-weight: 700; font-size: 1.05rem; padding: 15px 20px; min-height: 52px; transition: .15s; margin-top: auto; }
+.btn:hover:not(:disabled) { background: var(--teal-ink); }
+.btn:disabled { background: #d9dedc; color: #fff; cursor: not-allowed; }
+.btn.ghost { background: #fff; color: var(--teal-ink); border: 1.5px solid var(--teal); }
+.btn.sm { font-size: .88rem; padding: 9px 14px; min-height: 40px; margin-top: 0; border-radius: 10px; }
+.btn.char { background: var(--char); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+.row2 .btn { margin-top: 0; }
+
+/* 完成页 */
+.done { margin: auto; text-align: center; display: grid; gap: 10px; justify-items: center; max-width: 520px; }
+.ok { width: 84px; height: 84px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; font-size: 2.4rem; position: relative; animation: pop .5s cubic-bezier(.2,1.6,.4,1); }
+.ok::after { content: ""; position: absolute; right: 2px; top: 2px; width: 22px; height: 22px; border-radius: 0 70% 0 70%; background: var(--leaf); }
+@keyframes pop { from { transform: scale(.3); opacity: 0; } to { transform: none; opacity: 1; } }
+.idle { font-size: .72rem; color: var(--muted); background: var(--paper); border-radius: 99px; padding: 3px 10px; }
+
+/* 卡片 */
+.card { border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; background: #fff; display: grid; gap: 8px; }
+.card h5 { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--teal-ink); }
+.card.quote { background: var(--teal-mist); border-color: transparent; border-left: 4px solid var(--teal); border-radius: 6px 16px 16px 6px; }
+.quote p { font-style: italic; }
+.optin { display: flex; gap: 12px; align-items: flex-start; border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; background: #fff; text-align: left; }
+.optin .bx { width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--line); flex: none; display: grid; place-items: center; color: #fff; font-size: .8rem; }
+.optin.on .bx { background: var(--teal); border-color: var(--teal); }
+
+/* 结果屏 */
+.result { border-radius: 20px; padding: 22px 24px 20px; display: grid; gap: 6px; position: relative; overflow: hidden; }
+.result.better { background: linear-gradient(135deg, var(--teal-mist), var(--leaf-soft)); }
+.result.same { background: var(--paper); }
+.result.worse { background: var(--rose-soft); }
+.result .big { font: 800 2.2rem/1.1 var(--brand); color: var(--char); }
+.zh .result .big { font-family: var(--serif); }
+.result.better .big { color: var(--teal-ink); }
+.meter { position: relative; height: 70px; margin: 20px 6px 0; }
+.meter .track { position: absolute; left: 0; right: 0; top: 34px; height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--leaf), #e8c547 55%, var(--rose)); opacity: .9; }
+.meter .tick { position: absolute; top: 50px; font-size: .7rem; color: var(--muted); transform: translateX(-50%); }
+.meter .pin { position: absolute; top: 0; transform: translateX(-50%); display: grid; justify-items: center; gap: 2px; transition: left 1.4s cubic-bezier(.2,.8,.2,1); }
+.meter .pin span { font-size: .7rem; font-weight: 700; white-space: nowrap; color: var(--muted); }
+.meter .pin i { width: 26px; height: 26px; border-radius: 50%; border: 3px solid var(--char); background: #fff; display: block; }
+.meter .pin.now i { background: var(--char); box-shadow: 0 0 0 5px rgba(255,255,255,.8); }
+.meter .pin.now span { color: var(--char); }
+.delta { position: absolute; right: 18px; top: 16px; background: var(--leaf); color: #fff; font-weight: 800; font-size: 1.3rem; border-radius: 14px; padding: 6px 12px; opacity: 0; transform: scale(.4); transition: .4s cubic-bezier(.2,1.6,.4,1) 1.3s; }
+.delta.show { opacity: 1; transform: none; }
+
+/* 时间选择 */
+.slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+/* 手机：技师 App */
+.ph-head { display: flex; justify-content: space-between; align-items: center; }
+.ph-head .who { display: flex; gap: 10px; align-items: center; }
+.ph-title { font: 800 1.4rem var(--font); color: var(--char); }
+.noti { border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; display: grid; gap: 4px; background: #fff; text-align: left; position: relative; }
+.noti.hot { border: 1.5px solid var(--teal); background: var(--teal-mist); box-shadow: 0 8px 20px -14px var(--teal); cursor: pointer; }
+.noti.hot::before { content: ""; position: absolute; left: -1px; top: 14px; bottom: 14px; width: 4px; border-radius: 0 4px 4px 0; background: var(--teal); }
+.noti.dim { opacity: .6; }
+.tag { display: inline-block; font-size: .68rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: var(--leaf-soft); color: var(--leaf-ink); }
+.tag.t { background: var(--teal-soft); color: var(--teal-ink); }
+.tag.a { background: var(--accent-soft); color: var(--accent); }
+.tag.r { background: var(--rose-soft); color: var(--rose); }
+.push { position: absolute; left: 10px; right: 10px; top: 34px; z-index: 5; background: rgba(250,250,250,.96); backdrop-filter: blur(10px); border-radius: 18px; padding: 10px 12px; box-shadow: 0 10px 30px -10px rgba(0,0,0,.35); display: flex; gap: 10px; align-items: center; font-size: .82rem; animation: drop .5s cubic-bezier(.2,1.4,.4,1); cursor: pointer; }
+@keyframes drop { from { transform: translateY(-80px); opacity: 0; } to { transform: none; opacity: 1; } }
+.push b { display: block; font-size: .85rem; }
+
+/* 短信 */
+.sms-wrap { display: flex; flex-direction: column; gap: 8px; }
+.sms { background: #ececec; border-radius: 18px 18px 18px 4px; padding: 9px 13px; font-size: .86rem; max-width: 86%; }
+.sms.me { background: var(--teal); color: #fff; border-radius: 18px 18px 4px 18px; align-self: flex-end; }
+.sms a { color: var(--teal-ink); }
+.day { text-align: center; font-size: .72rem; color: var(--muted); margin: 6px 0 2px; }
+
+/* 前台屏幕 */
+.desk-top { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; flex: 1; }
+.col { background: var(--paper); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.col h4 { font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; display: flex; justify-content: space-between; color: var(--char); }
+.col h4 span { background: var(--char); color: #fff; border-radius: 99px; padding: 0 8px; font-size: .72rem; }
+.item { background: #fff; border-radius: 12px; padding: 10px 12px; border: 1px solid var(--line); display: grid; gap: 4px; font-size: .86rem; }
+.item.new { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-soft); animation: fade .4s; }
+.item.warn { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.item.sore { border-color: var(--rose); box-shadow: 0 0 0 3px var(--rose-soft); }
+.item .acts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.item select { border: 1px solid var(--line); border-radius: 8px; padding: 6px; font-size: .82rem; }
+.empty { font-size: .8rem; color: var(--muted); text-align: center; padding: 16px 6px; border: 1.5px dashed var(--line); border-radius: 12px; }
+
+/* 看板 */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.kpi { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 2px; }
+.kpi b { font: 800 1.7rem var(--font); color: var(--char); }
+.kpi span { font-size: .76rem; color: var(--muted); }
+.kpi .goal { font-size: .7rem; font-weight: 700; color: var(--leaf-ink); }
+.kpi .goal.miss { color: var(--accent); }
+.dgrid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; }
+.bars { display: grid; gap: 7px; }
+.bars div { display: grid; grid-template-columns: 110px 1fr 22px; align-items: center; gap: 8px; font-size: .8rem; }
+.bars i { height: 12px; border-radius: 0 6px 6px 0; background: var(--teal); display: block; width: 0; transition: width .9s cubic-bezier(.2,.8,.2,1); }
+.bars b { text-align: right; }
+.pain-pair { display: flex; align-items: end; gap: 18px; height: 120px; padding: 0 8px; border-bottom: 1px solid var(--line); }
+.pain-pair div { display: grid; justify-items: center; gap: 4px; font-size: .75rem; color: var(--muted); }
+.pain-pair i { width: 46px; border-radius: 6px 6px 0 0; display: block; }
+table.mini { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.mini th { text-align: left; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.mini td { padding: 8px; border-bottom: 1px solid var(--line); }
+.mini td.lo { color: var(--accent); font-weight: 800; }
+.mini td.hi { color: var(--teal-ink); font-weight: 700; }
+.flag { background: var(--accent-soft); border-radius: 12px; padding: 10px 12px; font-size: .84rem; }
+
+/* 右侧说明 */
+.side { position: sticky; top: 16px; display: grid; gap: 12px; }
+.note { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+.note h3 { font: 700 1.05rem var(--serif); margin-bottom: 8px; display: flex; gap: 8px; align-items: center; }
+.note h3::before { content: ""; width: 10px; height: 10px; border-radius: 0 60% 0 60%; background: var(--leaf); }
+.note ul { padding-left: 18px; display: grid; gap: 6px; font-size: .88rem; }
+.note li::marker { color: var(--teal); }
+.state { background: var(--char); color: #e9eeec; border-radius: 16px; padding: 14px 16px; font-size: .8rem; display: grid; gap: 4px; }
+.state b { color: #fff; }
+.state .k { color: #9fd9cc; }
+.state h4 { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--leaf); margin-bottom: 4px; }
+.demo { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.demo button { border: 1px solid var(--line); background: var(--paper); border-radius: 8px; padding: 5px 10px; font-size: .8rem; font-weight: 600; }
+.demo button:hover { border-color: var(--teal); }
+.reset { border: 1px solid var(--line); background: #fff; border-radius: 10px; padding: 8px; font-weight: 600; font-size: .85rem; }
+
+footer { max-width: 1240px; margin: 0 auto 40px; padding: 0 24px; color: var(--muted); font-size: .8rem; }
+
+.device, .glass, .screen > * { min-width: 0; }
+@media (max-width: 640px) {
+  .stage, .tabs, .top { padding-left: 12px; padding-right: 12px; }
+  .device { padding: 8px; border-radius: 22px; }
+  .glass { border-radius: 16px; }
+  .sbar { flex-wrap: wrap; }
+  .sbar .brandmark img { height: 30px; }
+  .steps i { width: 24px; }
+  .h-xl { font-size: 1.5rem; }
+  .screen { padding: 18px 16px 22px; }
+  .ther, .chips.grid4 { grid-template-columns: repeat(2, 1fr); }
+  .scale { grid-template-columns: repeat(6, 1fr); }
+  .slots, .kpis, .cols, .dgrid { grid-template-columns: 1fr 1fr; }
+  .cols { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <span class="logo-plate"><img src="../assets/logo.jpg" alt="V-Health Rehab Clinic logo"></span>
+  <div style="flex:1;min-width:260px">
+    <h1>Check-in / Check-out 系统 · 产品界面（品牌配色版）</h1>
+    <p>按 PRD v1.0 做的可交互界面：平板 check in → 技师手机 → 平板 check out → 前台屏幕 → 短信 → 老板看板。几个界面共用同一份数据，你在一个界面里的操作会带到下一个界面。名字和分数都是示例。</p>
+    <div class="swatches">
+      <span class="sw"><i style="background:#1dab91"></i>Teal #1dab91 · 主色</span>
+      <span class="sw"><i style="background:#93c13d"></i>Leaf #93c13d · 点缀</span>
+      <span class="sw"><i style="background:#333534"></i>Charcoal #333534 · 文字</span>
+      <span class="sw"><i style="background:#fbf8f2;border:1px solid #ddd"></i>Paper #fbf8f2 · 底色</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="new" class="on">① Check in · 新客户</button>
+  <button data-tab="ret">② Check in · 老客户</button>
+  <button data-tab="thr">③ 技师手机</button>
+  <button data-tab="out">④ Check out</button>
+  <button data-tab="desk">⑤ 前台屏幕</button>
+  <button data-tab="sms">⑥ 治疗后短信</button>
+  <button data-tab="dash">⑦ 老板看板</button>
+</nav>
+
+<main class="stage">
+  <div class="device-wrap">
+
+    <!-- ================= 平板（客户） ================= -->
+    <div class="device" id="tablet">
+      <div class="glass" id="tabletGlass">
+
+        <!-- 新客户 · 第 1 步 -->
+        <section class="screen on" data-s="new-1">
+          <div class="sbar">
+            <span class="steps"><span data-t="step1">Step 1 of 2</span><i class="on"></i><i></i></span>
+            <span class="brandmark"><img src="../assets/logo.jpg" alt="V-Health"></span>
+            <span class="lang"><button data-lang="en" class="on">English</button><button data-lang="zh">中文</button></span>
+          </div>
+          <h2 class="h-xl" data-t="welcome">Welcome! Just 2 quick steps.</h2>
+          <label class="field" id="n-phone-f"><span data-t="mobile">Mobile phone</span>
+            <input type="tel" id="n-phone" inputmode="tel" placeholder="(403) 555-0123" autocomplete="off">
+            <span class="hint" data-t="mobileHint">We'll text your appointment reminders here.</span>
+          </label>
+          <label class="field" id="n-email-f" hidden><span data-t="email">Email</span>
+            <input type="email" id="n-email" placeholder="you@example.com" autocomplete="off">
+          </label>
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+            <button class="link" id="n-swap" data-t="useEmail">No mobile? Use email instead</button>
+            <span class="try"><button data-fill="4035550123">试试：有预约的号码</button><button data-fill="5875550199">试试：没有预约的号码</button></span>
+          </div>
+          <p class="err" id="n-err" hidden></p>
+          <div class="found" id="n-found" hidden><span class="ic">📅</span><span id="n-found-t"></span></div>
+          <p class="q" data-t="whoTher">Who's your therapist today?</p>
+          <div class="ther" id="n-ther"></div>
+          <button class="link" id="n-desk" data-t="cantRemember">Can't remember? The front desk will check</button>
+          <div class="found desk" id="n-desk-msg" hidden><span class="ic">🛎</span><span data-t="deskMsg"><b>OK, we've told the front desk.</b> They'll let your therapist know you're here.</span></div>
+          <button class="btn" id="n-next" disabled data-t="next">Next</button>
+        </section>
+
+        <!-- 新客户 · 第 2 步 -->
+        <section class="screen" data-s="new-2">
+          <div class="sbar">
+            <span class="steps"><span data-t="step2">Step 2 of 2</span><i class="on"></i><i class="on"></i></span>
+            <button class="back" data-go="new-1" data-t="back">◀ Back</button>
+          </div>
+          <h2 class="h-xl" data-t="niceMeet">Nice to meet you</h2>
+          <label class="field"><span data-t="yourName">Your name</span><input type="text" id="n-name" value="Sarah Thompson"></label>
+          <p class="q" data-t="hear">How did you hear about us?</p>
+          <div class="chips grid4" id="src">
+            <button class="chip" data-v="Google">Google</button>
+            <button class="chip" data-v="Friend or family" data-d="ref" data-t="srcFriend">Friend or family</button>
+            <button class="chip" data-v="Poster" data-d="pos" data-t="srcPoster">Poster in a store</button>
+            <button class="chip" data-v="Instagram">Instagram</button>
+            <button class="chip" data-v="Facebook">Facebook</button>
+            <button class="chip" data-v="小红书 / WeChat">小红书 / WeChat</button>
+            <button class="chip" data-v="Walked by" data-t="srcWalk">Walked by</button>
+            <button class="chip" data-v="Other" data-d="oth" data-t="srcOther">Other</button>
+          </div>
+          <label class="field" data-detail="ref" hidden><span data-t="whoRef">Who referred you? We'd love to thank them.</span><input type="text" placeholder="Their name"></label>
+          <div data-detail="pos" hidden style="display:grid;gap:6px"><span class="q" style="margin:0;font-size:.92rem" data-t="whichStore">Which store?</span>
+            <div class="chips single"><button class="chip">Safeway Crowchild</button><button class="chip">T&amp;T Market</button><button class="chip">Co-op Dalhousie</button><button class="chip" data-t="notSure">Other / not sure</button></div></div>
+          <label class="field" data-detail="oth" hidden><span data-t="where">Where? (optional)</span><input type="text" placeholder="e.g. newspaper, community event"></label>
+          <p class="q" data-t="painNow">How much pain are you in right now?</p>
+          <div class="scale" data-key="before"></div>
+          <div class="scale-l"><span data-t="none">0 · none</span><span data-t="worst">10 · worst</span></div>
+          <button class="btn" id="n-checkin" disabled data-t="checkin">Check in</button>
+        </section>
+
+        <!-- 新客户 · 完成 -->
+        <section class="screen" data-s="new-3">
+          <div class="done">
+            <div class="ok">✓</div>
+            <h2 class="h-xl" id="n3-title">You're checked in, Sarah</h2>
+            <p class="sub" id="n3-sub"></p>
+            <span class="idle" data-t="idle">Back to the start screen in 10 seconds</span>
+            <div class="row2" style="width:100%;margin-top:14px">
+              <button class="btn ghost" data-tabgo="desk">看前台屏幕 →</button>
+              <button class="btn" id="n3-next">看技师手机 →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 老客户 · 第 1 步 -->
+        <section class="screen" data-s="ret-1">
+          <div class="sbar">
+            <span class="steps"><span data-t="step1">Step 1 of 2</span><i class="on"></i><i></i></span>
+            <span class="brandmark"><img src="../assets/logo.jpg" alt="V-Health"></span>
+            <span class="lang"><button data-lang="en" class="on">English</button><button data-lang="zh">中文</button></span>
+          </div>
+          <h2 class="h-xl" data-t="welcome">Welcome! Just 2 quick steps.</h2>
+          <label class="field"><span data-t="mobile">Mobile phone</span><input type="tel" value="(403) 555-0147" readonly></label>
+          <div class="found"><span class="ic">👋</span><span data-t="hiLily"><b>Hi Lily!</b> Your booking: <b>today 2:30 pm with Amy</b>.<br><span class="small">Not right? Pick your therapist below.</span></span></div>
+          <p class="q" data-t="whoTher">Who's your therapist today?</p>
+          <div class="ther" id="r-ther"></div>
+          <button class="btn" data-go="ret-2" data-t="next">Next</button>
+        </section>
+
+        <section class="screen" data-s="ret-2">
+          <div class="sbar">
+            <span class="steps"><span data-t="step2">Step 2 of 2</span><i class="on"></i><i class="on"></i></span>
+            <button class="back" data-go="ret-1" data-t="back">◀ Back</button>
+          </div>
+          <h2 class="h-xl" data-t="welcomeBack">Welcome back, Lily</h2>
+          <p class="sub" data-t="visit3">Visit 3 with Amy</p>
+          <p class="q" data-t="painNow">How much pain are you in right now?</p>
+          <div class="scale" data-key="retBefore"></div>
+          <div class="scale-l"><span data-t="none">0 · none</span><span data-t="worst">10 · worst</span></div>
+          <div class="card" style="grid-template-columns:auto 1fr;align-items:center;gap:14px">
+            <div style="display:flex;align-items:end;gap:4px;height:42px">
+              <i style="width:14px;height:50%;background:#e2b7b1;border-radius:3px 3px 0 0;display:block"></i>
+              <i style="width:14px;height:20%;background:var(--teal);border-radius:3px 3px 0 0;display:block"></i>
+            </div>
+            <span class="small" data-t="lastVisit">Last visit: came in at 5, left at 2.</span>
+          </div>
+          <button class="btn" id="r-checkin" disabled data-t="checkin">Check in</button>
+        </section>
+
+        <section class="screen" data-s="ret-3">
+          <div class="done">
+            <div class="ok">✓</div>
+            <h2 class="h-xl" data-t="retDone">You're checked in, Lily</h2>
+            <p class="sub" data-t="retDoneSub">Amy knows you're here. Please have a seat.</p>
+            <span class="idle" data-t="idle">Back to the start screen in 10 seconds</span>
+            <button class="btn ghost" data-go="ret-1" style="max-width:260px;margin-top:14px" data-t="done">Done</button>
+          </div>
+        </section>
+
+        <!-- Check out · 等技师 -->
+        <section class="screen" data-s="out-wait">
+          <div class="sbar"><span class="brandmark"><img src="../assets/logo.jpg" alt="V-Health"> · Check out</span><span class="lang"><button data-lang="en" class="on">English</button><button data-lang="zh">中文</button></span></div>
+          <div class="done">
+            <div class="vmark" style="width:64px;height:64px;font-size:2rem;border-radius:18px">V</div>
+            <h2 class="h-xl" id="ow-title">Kevin is finishing your notes…</h2>
+            <p class="sub">技师还没在手机上写建议。PRD 规定：<b>技师不写，就没有 check-out 页面</b>，前台会去提醒。</p>
+            <div class="row2" style="width:100%;margin-top:10px">
+              <button class="btn ghost" data-tabgo="thr">去技师手机写 →</button>
+              <button class="btn" id="ow-skip">用示例建议继续</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Check out · 现在几分 -->
+        <section class="screen" data-s="out-1">
+          <div class="sbar"><span class="brandmark"><img src="../assets/logo.jpg" alt="V-Health"> · Check out</span><span class="lang"><button data-lang="en" class="on">English</button><button data-lang="zh">中文</button></span></div>
+          <h2 class="h-xl" id="o1-title">Before you go, Sarah</h2>
+          <p class="q" data-t="feelNow">How does it feel now?</p>
+          <div class="scale" data-key="after"></div>
+          <div class="scale-l"><span data-t="none">0 · none</span><span data-t="worst">10 · worst</span></div>
+          <p class="small" id="o1-before"></p>
+          <button class="btn" id="o1-next" disabled data-t="seeResult">See my result</button>
+        </section>
+
+        <!-- Check out · 结果 + 建议 + 时间 -->
+        <section class="screen" data-s="out-2">
+          <div class="sbar"><span class="brandmark"><img src="../assets/logo.jpg" alt="V-Health"> · Check out</span><button class="back" data-go="out-1" data-t="back">◀ Back</button></div>
+          <div class="result" id="res"></div>
+          <div class="card quote">
+            <h5 id="o2-from">From Kevin</h5>
+            <p id="o2-note"></p>
+          </div>
+          <div class="card" id="o2-plan">
+            <h5 id="o2-rec"></h5>
+            <p class="small" id="o2-rec-sub"></p>
+            <div class="slots" id="slots"></div>
+            <p class="small" id="o2-asof"></p>
+          </div>
+          <button class="optin on" id="optin"><span class="bx">✓</span><span data-t="optin"><b>Send me tips and occasional offers</b> by text or email. Unsubscribe anytime.</span></button>
+          <button class="btn" id="o2-done" data-t="done">Done</button>
+        </section>
+
+        <section class="screen" data-s="out-3">
+          <div class="done">
+            <div class="ok">✓</div>
+            <h2 class="h-xl" id="o3-title">Thanks, Sarah. See you soon.</h2>
+            <p class="sub" id="o3-sub"></p>
+            <div class="card" style="text-align:left;width:100%;margin-top:6px">
+              <p class="small">柜台上放一个 Google 评价二维码立牌。没人递给客户，也没人要求当场写。</p>
+            </div>
+            <div class="row2" style="width:100%;margin-top:10px">
+              <button class="btn ghost" data-tabgo="desk">前台屏幕 →</button>
+              <button class="btn" data-tabgo="sms">1 小时后的短信 →</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ================= 手机（技师 / 短信） ================= -->
+    <div class="device phone" id="phone" hidden>
+      <div class="glass">
+        <div class="notch"><i></i></div>
+        <div class="push" id="push" hidden></div>
+
+        <section class="screen" data-s="thr-1">
+          <div class="ph-head">
+            <div class="who"><div class="vmark">V</div><div><div class="small">V-Health · Therapist</div><b id="thr-me">Kevin</b></div></div>
+            <span class="small">Fri Nov 13</span>
+          </div>
+          <div class="ph-title">Today</div>
+          <div id="thr-list" style="display:grid;gap:10px"></div>
+          <p class="small" style="margin-top:auto;text-align:center">网页 App，加到主屏幕，不用上架 App Store。iOS 16.4 起可以收推送。</p>
+        </section>
+
+        <section class="screen" data-s="thr-2">
+          <div class="ph-head"><button class="back" data-go="thr-1">◀ Today</button><span class="tag t" id="thr2-tag">Visit 1</span></div>
+          <div>
+            <div class="ph-title" id="thr2-name">Sarah T.</div>
+            <div class="small" id="thr2-meta"></div>
+          </div>
+          <p class="q">Your recommendation *</p>
+          <div class="chips grid4" id="plan" style="grid-template-columns:1fr 1fr">
+            <button class="chip" data-p="1w">1 week</button>
+            <button class="chip" data-p="2w">2 weeks</button>
+            <button class="chip" data-p="3-4w">3–4 weeks</button>
+            <button class="chip" data-p="none">No follow-up</button>
+          </div>
+          <div id="plan-n" hidden style="display:grid;gap:6px"><span class="q" style="margin:0;font-size:.9rem">About how many visits in total?</span>
+            <div class="chips single" id="plan-total"><button class="chip">2–3</button><button class="chip on">4</button><button class="chip">6</button><button class="chip">8+</button></div></div>
+          <div id="plan-why" hidden style="display:grid;gap:6px"><span class="q" style="margin:0;font-size:.9rem">Why? *</span>
+            <div class="chips single" id="plan-why-c"><button class="chip">Goal reached</button><button class="chip">Referred out</button><button class="chip">Client declined</button></div></div>
+          <label class="field" style="font-size:.86rem"><span id="thr2-notelabel">Note for Sarah (she sees it at check out)</span>
+            <textarea id="thr-note">Your right shoulder and upper back were very tight, likely from desk work. Try the doorway stretch, 2× a day.</textarea></label>
+          <p class="small">Only recommend what the client clinically needs.</p>
+          <button class="btn" id="thr-send" disabled>Send to check out</button>
+        </section>
+
+        <section class="screen" data-s="thr-3">
+          <div class="done">
+            <div class="ok">✓</div>
+            <h2 class="h-xl" style="font-size:1.6rem">Sent</h2>
+            <p class="sub" id="thr3-sub">Sarah's check-out screen is ready at the front desk.</p>
+            <button class="btn" data-tabgo="out" style="width:100%;margin-top:12px">看她的 check out →</button>
+          </div>
+        </section>
+
+        <section class="screen" data-s="sms-1">
+          <div class="ph-head" style="border-bottom:1px solid var(--line);padding-bottom:10px">
+            <span class="back">◀</span>
+            <div style="display:grid;justify-items:center"><div class="vmark">V</div><b style="font-size:.8rem">V-Health</b></div>
+            <span></span>
+          </div>
+          <div class="sms-wrap" id="sms"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ================= 前台屏幕 / 看板（电脑） ================= -->
+    <div class="device desk" id="desk" hidden>
+      <div class="glass">
+        <section class="screen" data-s="desk-1" style="padding:20px 22px">
+          <div class="desk-top">
+            <span class="brandmark"><img src="../assets/logo.jpg" alt="V-Health"> Front desk</span>
+            <span class="small">Fri Nov 13 · 预约 7:00 am 已拉取 · 26 bookings</span>
+          </div>
+          <div class="cols">
+            <div class="col"><h4>Needs a therapist <span id="c-assign">0</span></h4><div id="col-assign"></div></div>
+            <div class="col"><h4>Arrived <span id="c-arr">0</span></h4><div id="col-arr" style="display:grid;gap:8px"></div></div>
+            <div class="col"><h4>To book / follow up <span id="c-book">0</span></h4><div id="col-book" style="display:grid;gap:8px"></div></div>
+          </div>
+        </section>
+
+        <section class="screen" data-s="dash-1" style="padding:20px 22px">
+          <div class="desk-top">
+            <span class="brandmark"><img src="../assets/logo.jpg" alt="V-Health"> Owner dashboard</span>
+            <span class="small">Week of Nov 16 · 示例数字</span>
+          </div>
+          <div class="kpis">
+            <div class="kpi"><b>100%</b><span>new clients with a source (14 / 14)</span><span class="goal">目标 ≥ 98% ✓</span></div>
+            <div class="kpi"><b>96%</b><span>visits with a therapist plan</span><span class="goal">目标 ≥ 95% ✓</span></div>
+            <div class="kpi"><b>58%</b><span>picked a time at check out</span><span class="goal miss">基线 +15 pt：还差 4 pt</span></div>
+            <div class="kpi"><b>9</b><span>new Google reviews this week</span><span class="goal">每月 ≥ 25 ✓ 进度正常</span></div>
+          </div>
+          <div class="dgrid">
+            <div class="card">
+              <h5>New clients by source</h5>
+              <div class="bars" id="bars"></div>
+              <p class="small">要写感谢卡的推荐人：4 位</p>
+            </div>
+            <div class="card">
+              <h5>Pain, came in → left (avg this week)</h5>
+              <div class="pain-pair">
+                <div><b style="color:var(--char)">6.1</b><i style="height:61px;background:#e2b7b1"></i>Came in</div>
+                <div><b style="color:var(--teal-ink)">3.2</b><i style="height:32px;background:var(--teal)"></i>Left</div>
+              </div>
+              <p class="small">Kept "tips and offers" on: 13 / 14 · Review texts sent: 14</p>
+            </div>
+          </div>
+          <div class="card">
+            <h5>By therapist · last 4 weeks</h5>
+            <table class="mini">
+              <tr><th>Therapist</th><th>Plan written</th><th>Picked a time</th><th>Client says "plan discussed"</th><th>60-day return</th></tr>
+              <tr><td>Kevin</td><td class="hi">98%</td><td>64%</td><td class="hi">95%</td><td>71%</td></tr>
+              <tr><td>Amy</td><td class="hi">100%</td><td>61%</td><td>92%</td><td>68%</td></tr>
+              <tr><td>Grace</td><td>96%</td><td>57%</td><td>89%</td><td>63%</td></tr>
+              <tr><td>Daniel</td><td>91%</td><td class="lo">38%</td><td class="lo">60%</td><td class="lo">44%</td></tr>
+            </table>
+          </div>
+          <div class="flag">⚑ <b>Daniel</b> 91% 的就诊都写了建议，但只有 60% 的客户说听到了 → 这周和他聊一下那句话怎么说。</div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 右侧说明 ================= -->
+  <aside class="side">
+    <div class="note" data-n="new">
+      <h3>① 新客户 check in</h3>
+      <ul>
+        <li>一个电话框。没有手机才点 <b>Use email instead</b></li>
+        <li>点上面的"试试"按钮：有预约的号码会显示 <b>today 10:00 with Kevin</b> 并自动选好 Kevin</li>
+        <li>只列<b>今天上班</b>的技师，必须选一位；不记得就交给前台（前台屏幕会出现"需要分配技师"）</li>
+        <li>右上角 English / 中文 会切换整个客户界面，并记为客户的首选语言</li>
+        <li>第 2 步：来源 8 选 1，点 Friend / Poster / Other 才出追问</li>
+      </ul>
+    </div>
+    <div class="note" data-n="ret" hidden>
+      <h3>② 老客户 check in</h3>
+      <ul>
+        <li>电话找到人，按预约自动选好技师，直接 Next</li>
+        <li>第 2 步只有一题疼痛分数，约 10 秒</li>
+        <li>显示上次进来 / 离开的分数</li>
+        <li>不再问名字、来源和联系方式</li>
+      </ul>
+    </div>
+    <div class="note" data-n="thr" hidden>
+      <h3>③ 技师手机</h3>
+      <ul>
+        <li>客户 check in 后马上推送：谁、几分、新客户还是老客户、来源</li>
+        <li>点进去选"多久后再来"和大概几次，写一句给客户的话，约 20 秒</li>
+        <li>"No follow-up"可以选，但要选原因</li>
+        <li>点 <b>Send to check out</b>，平板的 check-out 页面才会出现</li>
+      </ul>
+    </div>
+    <div class="note" data-n="out" hidden>
+      <h3>④ Check out（平板转向客户）</h3>
+      <p class="small">直接试三种结果：</p>
+      <div class="demo" id="demo"><button data-a="better">变好</button><button data-a="zero">0 分</button><button data-a="same">持平</button><button data-a="worse">更高</button></div>
+      <ul style="margin-top:10px">
+        <li>变好：刻度上的点从进来的分数<b>滑到</b>现在的分数，再弹出 "−n"</li>
+        <li>持平：不庆祝，第二天短信再问</li>
+        <li>更高：不庆祝，前台屏幕提醒技师出来说一句</li>
+        <li>下次时间：按技师的建议给 4 个时间，周一、周二排前面，最后一个是"和今天同一时间"</li>
+        <li>"接收信息"默认勾选（CASL 默示同意），随时可退订</li>
+      </ul>
+    </div>
+    <div class="note" data-n="desk" hidden>
+      <h3>⑤ 前台屏幕</h3>
+      <ul>
+        <li><b>Needs a therapist</b>：客户点了"前台会查"。选技师 → 推送给那位技师</li>
+        <li><b>Arrived</b>：今天到店的人，新的那条会高亮</li>
+        <li><b>To book</b>：客户在 check out 选的时间，前台去预约网站约好后点 Booked；时间被约走就点 Conflict 换一个</li>
+        <li>疼痛更高的客户会出现红色提醒</li>
+      </ul>
+    </div>
+    <div class="note" data-n="sms" hidden>
+      <h3>⑥ 治疗后短信</h3>
+      <ul>
+        <li>就诊后约 1 小时，每位新客户一条，每人只发一次</li>
+        <li>先问"技师有没有讲下次什么时候来"，用来核实技师有没有讲</li>
+        <li>不管分数和回答，都附评价链接，所以不算 review gating</li>
+        <li>持平或更高时，第 2 天再问一次；第 3 天技师署名问候</li>
+        <li>取消了"接收信息"的客户不发营销内容</li>
+      </ul>
+    </div>
+    <div class="note" data-n="dash" hidden>
+      <h3>⑦ 老板看板（示例数字）</h3>
+      <ul>
+        <li>每周一花 30 分钟看</li>
+        <li>最有用的一列："客户说讲过建议"。比"写了建议"低很多，说明技师只在手机上点了一下</li>
+        <li>看 <b>60 天回头率</b>（真的来了），不只看"选了时间"</li>
+        <li>Google 评价只看全诊所，不按技师统计</li>
+      </ul>
+    </div>
+
+    <div class="state" id="state"></div>
+    <button class="reset" id="reset">↺ 从头再来一遍</button>
+  </aside>
+</main>
+
+<footer>V-Health Rehab Clinic · Calgary NW · 依据 PRD v1.0（2026-11-14）· 界面里的客户、技师和数字都是示例。灰色线框版原型见文档中心「Check-in / Check-out 系统：脑洞 + 原型」。</footer>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  var THER = [
+    { id: "kevin", name: "Kevin", role: "Massage", color: "#1dab91", work: true },
+    { id: "amy", name: "Amy", role: "Osteopathy", color: "#5b8f2a", work: true },
+    { id: "daniel", name: "Daniel", role: "Massage", color: "#3d6f8f", work: true },
+    { id: "grace", name: "Grace", role: "Acupuncture", color: "#c9772e", work: true },
+    { id: "mia", name: "Mia", role: "Massage", color: "#999", work: false }
+  ];
+  var tname = function (id) { var t = THER.filter(function (x) { return x.id === id; })[0]; return t ? t.name : ""; };
+
+  function fresh() {
+    return {
+      lang: "en", contactMode: "phone", phone: "", booking: false, ther: null, deskRouted: false,
+      name: "Sarah Thompson", source: null, before: null, checkedIn: false, assignedByDesk: false,
+      plan: null, total: "4", note: "", planSent: false, after: null, slot: null, optin: true,
+      retBefore: null, checkedOut: false, bookDone: false, conflict: false
+    };
+  }
+  var S = fresh();
+  var first = function () { return (S.name.trim().split(/\s+/)[0]) || "there"; };
+  var initial = function () { var p = S.name.trim().split(/\s+/); return p[0] + (p[1] ? " " + p[1][0] + "." : ""); };
+
+  /* ---------- i18n（客户界面） ---------- */
+  var T = {
+    en: {
+      step1: "Step 1 of 2", step2: "Step 2 of 2", welcome: "Welcome! Just 2 quick steps.", mobile: "Mobile phone",
+      mobileHint: "We'll text your appointment reminders here.", email: "Email", useEmail: "No mobile? Use email instead",
+      useMobile: "Use my mobile instead", whoTher: "Who's your therapist today?", cantRemember: "Can't remember? The front desk will check",
+      deskMsg: "<b>OK, we've told the front desk.</b> They'll let your therapist know you're here.", next: "Next", back: "◀ Back",
+      niceMeet: "Nice to meet you", yourName: "Your name", hear: "How did you hear about us?", srcFriend: "Friend or family",
+      srcPoster: "Poster in a store", srcWalk: "Walked by", srcOther: "Other", whoRef: "Who referred you? We'd love to thank them.",
+      whichStore: "Which store?", notSure: "Other / not sure", where: "Where? (optional)", painNow: "How much pain are you in right now?",
+      none: "0 · none", worst: "10 · worst", checkin: "Check in", idle: "Back to the start screen in 10 seconds",
+      hereToday: "here today", errPhone: "Please enter your mobile number.", errEmail: "Please enter your email.",
+      found: "We found your booking: <b>today 10:00 with Kevin</b>.<br><span class='small'>Not right? Pick your therapist below.</span>",
+      notFound: "No booking found for today. Please pick your therapist below.",
+      doneT: "You're checked in, {n}", doneSub: "Please have a seat. <b>{t}</b> knows you're here.",
+      doneDesk: "Please have a seat. The front desk will let your therapist know you're here.",
+      hiLily: "<b>Hi Lily!</b> Your booking: <b>today 2:30 pm with Amy</b>.<br><span class='small'>Not right? Pick your therapist below.</span>",
+      welcomeBack: "Welcome back, Lily", visit3: "Visit 3 with Amy", lastVisit: "Last visit: came in at 5, left at 2.",
+      retDone: "You're checked in, Lily", retDoneSub: "Amy knows you're here. Please have a seat.", done: "Done",
+      beforeGo: "Before you go, {n}", feelNow: "How does it feel now?", seeResult: "See my result", cameIn: "You came in at {b} today.",
+      lighter: "{d} points lighter", lighter1: "1 point lighter", walked: "You walked in at {b}. You're leaving at {a}.",
+      zero: "Pain-free right now", zeroSub: "You walked in at {b}. You're leaving at 0.",
+      steady: "Holding steady at {a}", steadySub: "Sometimes the change shows up tomorrow. We'll text you tomorrow to ask how it feels.",
+      sore: "A bit more sore right now", soreSub: "Thanks for telling us. {t} will come and have a word before you go, and we'll text you tomorrow to check in.",
+      walkedIn: "walked in", now: "now", from: "From {t}",
+      rec: "{t} recommends: come back in {i}", recSub: "About {n} visits in total. Pick a time and the front desk will book it:",
+      asof: "{t}'s open times as of 7:00 am today.", other: "Other time", later: "I'll book later", sameAs: "same as today",
+      noFU: "{t}: no follow-up needed for now", noFUSub: "Come back any time if it flares up.",
+      optin: "<b>Send me tips and occasional offers</b> by text or email. Unsubscribe anytime.",
+      thanks: "Thanks, {n}. See you soon.", thanksSlot: "The front desk will confirm <b>{s}</b> with you now.",
+      thanksLater: "No rush. We'll send you a reminder in a week.", thanksNone: "Take care, and keep up the stretches.",
+      intv: { "1w": "1 week", "2w": "2 weeks", "3-4w": "3–4 weeks" }
+    },
+    zh: {
+      step1: "第 1 步，共 2 步", step2: "第 2 步，共 2 步", welcome: "欢迎！只要 2 步。", mobile: "手机号",
+      mobileHint: "我们会用短信提醒你的预约。", email: "邮箱", useEmail: "没有手机？用邮箱",
+      useMobile: "改用手机号", whoTher: "今天是哪位技师给你治疗？", cantRemember: "不记得？前台帮你查",
+      deskMsg: "<b>好的，已经告诉前台。</b>前台会通知你的技师你到了。", next: "下一步", back: "◀ 返回",
+      niceMeet: "很高兴认识你", yourName: "你的名字", hear: "你是怎么知道我们的？", srcFriend: "朋友或家人",
+      srcPoster: "店里的海报", srcWalk: "路过", srcOther: "其他", whoRef: "是谁推荐你来的？我们想谢谢 TA。",
+      whichStore: "哪家店？", notSure: "其他 / 不确定", where: "在哪里？（选填）", painNow: "你现在的疼痛是几分？",
+      none: "0 · 不痛", worst: "10 · 最痛", checkin: "签到", idle: "10 秒后回到首页",
+      hereToday: "今天上班", errPhone: "请输入手机号。", errEmail: "请输入邮箱。",
+      found: "找到你的预约：<b>今天 10:00，Kevin</b>。<br><span class='small'>不对？在下面选你的技师。</span>",
+      notFound: "没有找到你今天的预约，请在下面选你的技师。",
+      doneT: "签到好了，{n}", doneSub: "请先坐一下，<b>{t}</b> 已经知道你到了。",
+      doneDesk: "请先坐一下，前台会通知你的技师。",
+      hiLily: "<b>Lily 你好！</b>你的预约：<b>今天 2:30 pm，Amy</b>。<br><span class='small'>不对？在下面选你的技师。</span>",
+      welcomeBack: "欢迎回来，Lily", visit3: "和 Amy 的第 3 次", lastVisit: "上次：进来 5 分，离开 2 分。",
+      retDone: "签到好了，Lily", retDoneSub: "Amy 已经知道你到了，请先坐一下。", done: "完成",
+      beforeGo: "走之前，{n}", feelNow: "现在感觉几分？", seeResult: "看看我的结果", cameIn: "你今天进来时是 {b} 分。",
+      lighter: "轻了 {d} 分", lighter1: "轻了 1 分", walked: "进来时 {b} 分，离开时 {a} 分。",
+      zero: "现在完全不痛", zeroSub: "进来时 {b} 分，离开时 0 分。",
+      steady: "保持在 {a} 分", steadySub: "有时候变化要到第二天才感觉得到。明天我们发短信问问你。",
+      sore: "现在有点更酸痛", soreSub: "谢谢你告诉我们。{t} 会在你走之前过来和你说几句，明天我们也会发短信问问你。",
+      walkedIn: "进来", now: "现在", from: "{t} 的话",
+      rec: "{t} 建议：{i}后再来", recSub: "一共大约 {n} 次。选一个时间，前台帮你约：",
+      asof: "{t} 今天早上 7:00 的空档。", other: "其他时间", later: "我稍后再约", sameAs: "和今天同一时间",
+      noFU: "{t}：暂时不需要复诊", noFUSub: "如果再不舒服，随时回来。",
+      optin: "<b>给我发小贴士和偶尔的优惠</b>（短信或邮件），随时可以退订。",
+      thanks: "谢谢你，{n}，下次见。", thanksSlot: "前台现在和你确认 <b>{s}</b>。",
+      thanksLater: "不着急，一周后我们发短信提醒你。", thanksNone: "保重，继续做拉伸。",
+      intv: { "1w": "1 周", "2w": "2 周", "3-4w": "3–4 周" }
+    }
+  };
+  var t = function (k, v) {
+    var s = T[S.lang][k] || T.en[k] || k;
+    if (v) Object.keys(v).forEach(function (x) { s = s.split("{" + x + "}").join(v[x]); });
+    return s;
+  };
+  function applyLang() {
+    $("#tabletGlass").classList.toggle("zh", S.lang === "zh");
+    $$("[data-t]", $("#tablet")).forEach(function (el) {
+      var k = el.getAttribute("data-t");
+      if (k === "useEmail" && S.contactMode === "email") k = "useMobile";
+      el.innerHTML = t(k);
+    });
+    $$(".lang button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-lang") === S.lang); });
+    renderTher(); renderFound(); renderErr();
+    if (cur.tablet === "new-3") renderNew3();
+    if (cur.tablet === "out-1") renderOut1();
+    if (cur.tablet === "out-2") renderOut2(false);
+    if (cur.tablet === "out-3") renderOut3();
+  }
+
+  /* ---------- 屏幕切换 ---------- */
+  var cur = { tablet: "new-1", phone: "thr-1", desk: "desk-1" };
+  var devOf = function (s) { return $('[data-s="' + s + '"]').closest(".device"); };
+  function go(s) {
+    var dev = devOf(s);
+    $$(".screen", dev).forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-s") === s); });
+    cur[dev.id] = s;
+    var hook = HOOKS[s]; if (hook) hook();
+    renderState();
+  }
+  var HOOKS = {
+    "new-3": renderNew3,
+    "thr-1": renderThrList,
+    "thr-2": renderThr2,
+    "out-1": renderOut1,
+    "out-2": function () { renderOut2(true); },
+    "out-3": renderOut3,
+    "desk-1": renderDesk,
+    "sms-1": renderSms,
+    "dash-1": renderDash
+  };
+
+  var TAB = { new: ["tablet", "new-1"], ret: ["tablet", "ret-1"], thr: ["phone", "thr-1"], out: ["tablet", "out-1"], desk: ["desk", "desk-1"], sms: ["phone", "sms-1"], dash: ["desk", "dash-1"] };
+  function tab(k) {
+    $$("#tabs button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === k); });
+    $$(".note[data-n]").forEach(function (n) { n.hidden = n.getAttribute("data-n") !== k; });
+    var d = TAB[k][0];
+    ["tablet", "phone", "desk"].forEach(function (x) { $("#" + x).hidden = x !== d; });
+    var s = TAB[k][1];
+    if (k === "new" && cur.tablet.indexOf("new-") === 0) s = cur.tablet;
+    if (k === "out") s = S.planSent ? (cur.tablet.indexOf("out-") === 0 && cur.tablet !== "out-wait" ? cur.tablet : "out-1") : "out-wait";
+    if (k === "thr" && cur.phone.indexOf("thr-") === 0) s = cur.phone === "thr-3" && !S.planSent ? "thr-1" : cur.phone;
+    go(s);
+    if (k === "thr" && S.checkedIn && !S.planSent && !S.deskRouted) showPush();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ---------- 技师选择 ---------- */
+  function renderTher() {
+    [["#n-ther", "ther"], ["#r-ther", "retTher"]].forEach(function (pair) {
+      var box = $(pair[0]);
+      var sel = pair[1] === "ther" ? S.ther : (S.retTher || "amy");
+      box.innerHTML = THER.filter(function (x) { return x.work; }).map(function (x) {
+        return '<button data-id="' + x.id + '" class="' + (sel === x.id ? "on" : "") + '" aria-pressed="' + (sel === x.id) + '">' +
+          '<span class="av" style="background:' + x.color + '">' + x.name[0] + '</span><b>' + x.name + '</b><em>' + x.role + '</em><span>' + t("hereToday") + '</span></button>';
+      }).join("");
+    });
+  }
+  $("#n-ther").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    S.ther = b.getAttribute("data-id"); S.deskRouted = false; $("#n-desk-msg").hidden = true;
+    renderTher(); validateN1(); renderState();
+  });
+  $("#r-ther").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    S.retTher = b.getAttribute("data-id"); renderTher();
+  });
+
+  /* ---------- 新客户 第 1 步 ---------- */
+  var digits = function (v) { return v.replace(/\D/g, "").slice(-10); };
+  var fmt = function (d) { return d.length === 10 ? "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6) : d; };
+  var showErr = false;
+  function renderFound() {
+    var d = digits(S.phone);
+    var box = $("#n-found");
+    if (S.contactMode !== "phone" || d.length < 10) { box.hidden = true; return; }
+    box.hidden = false;
+    $("#n-found-t").innerHTML = S.booking ? t("found") : t("notFound");
+    box.querySelector(".ic").textContent = S.booking ? "📅" : "🔎";
+  }
+  function renderErr() {
+    var el = $("#n-err");
+    el.hidden = !showErr;
+    el.textContent = S.contactMode === "phone" ? t("errPhone") : t("errEmail");
+  }
+  function contactOk() {
+    return S.contactMode === "phone" ? digits(S.phone).length === 10 : /\S+@\S+\.\S+/.test($("#n-email").value);
+  }
+  function validateN1() {
+    var btn = $("#n-next");
+    btn.disabled = !(S.ther || S.deskRouted);
+  }
+  function onPhone() {
+    var d = digits(S.phone);
+    var had = S.booking;
+    S.booking = d === "4035550123";
+    if (S.booking && !had) { S.ther = "kevin"; S.deskRouted = false; $("#n-desk-msg").hidden = true; }
+    if (d.length === 10) showErr = false;
+    renderFound(); renderErr(); renderTher(); validateN1(); renderState();
+  }
+  $("#n-phone").addEventListener("input", function (e) { S.phone = e.target.value; onPhone(); });
+  $("#n-phone").addEventListener("blur", function (e) { var d = digits(e.target.value); if (d.length === 10) e.target.value = fmt(d); });
+  $$("[data-fill]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (S.contactMode !== "phone") $("#n-swap").click();
+      var d = b.getAttribute("data-fill"); $("#n-phone").value = fmt(d); S.phone = d; onPhone();
+    });
+  });
+  $("#n-swap").addEventListener("click", function () {
+    S.contactMode = S.contactMode === "phone" ? "email" : "phone";
+    $("#n-phone").value = ""; $("#n-email").value = ""; S.phone = ""; S.booking = false; showErr = false;
+    $("#n-phone-f").hidden = S.contactMode !== "phone";
+    $("#n-email-f").hidden = S.contactMode !== "email";
+    $("#n-swap").innerHTML = t(S.contactMode === "phone" ? "useEmail" : "useMobile");
+    renderFound(); renderErr();
+  });
+  $("#n-email").addEventListener("input", function () { if (contactOk()) { showErr = false; renderErr(); } });
+  $("#n-desk").addEventListener("click", function () {
+    S.ther = null; S.deskRouted = true; $("#n-desk-msg").hidden = false; renderTher(); validateN1(); renderState();
+  });
+  $("#n-next").addEventListener("click", function () {
+    if (!contactOk()) { showErr = true; renderErr(); return; }
+    go("new-2");
+  });
+
+  /* ---------- 新客户 第 2 步 ---------- */
+  $("#src").addEventListener("click", function (e) {
+    var b = e.target.closest(".chip"); if (!b) return;
+    $$(".chip", $("#src")).forEach(function (c) { c.classList.toggle("on", c === b); });
+    S.source = b.getAttribute("data-v");
+    var d = b.getAttribute("data-d");
+    $$("[data-detail]").forEach(function (el) { el.hidden = el.getAttribute("data-detail") !== d; });
+    validateN2();
+  });
+  $$(".chips.single").forEach(function (box) {
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      $$(".chip", box).forEach(function (c) { c.classList.toggle("on", c === b); });
+    });
+  });
+  $("#n-name").addEventListener("input", function (e) { S.name = e.target.value; validateN2(); });
+  function validateN2() { $("#n-checkin").disabled = !(S.source && S.before !== null && S.name.trim().split(/\s+/).length >= 2); }
+  $("#n-checkin").addEventListener("click", function () {
+    S.checkedIn = true; S.planSent = false; S.checkedOut = false; S.after = null; S.slot = null;
+    go("new-3");
+  });
+  function renderNew3() {
+    $("#n3-title").textContent = t("doneT", { n: first() });
+    $("#n3-sub").innerHTML = S.deskRouted ? t("doneDesk") : t("doneSub", { t: tname(S.ther) });
+    $("#n3-next").textContent = S.deskRouted ? "前台先分配技师 →" : "看 " + tname(S.ther) + " 的手机 →";
+  }
+  $("#n3-next").addEventListener("click", function () { tab(S.deskRouted ? "desk" : "thr"); });
+
+  /* ---------- 疼痛刻度 ---------- */
+  function painColor(n) {
+    var stops = [[0, [147, 193, 61]], [5, [232, 197, 71]], [10, [194, 86, 75]]];
+    var a = n <= 5 ? stops[0] : stops[1], b = n <= 5 ? stops[1] : stops[2];
+    var f = (n - a[0]) / (b[0] - a[0]);
+    var c = a[1].map(function (v, i) { return Math.round(v + (b[1][i] - v) * f); });
+    return "rgb(" + c.join(",") + ")";
+  }
+  function buildScale(box) {
+    var key = box.getAttribute("data-key");
+    box.innerHTML = "";
+    for (var i = 0; i <= 10; i++) {
+      var b = document.createElement("button");
+      b.textContent = i; b.setAttribute("aria-label", "Pain " + i);
+      b.style.borderBottom = "4px solid " + painColor(i);
+      (function (n, btn) {
+        btn.addEventListener("click", function () {
+          $$("button", box).forEach(function (x) { x.classList.remove("on"); x.style.background = "#fff"; });
+          btn.classList.add("on"); btn.style.background = painColor(n);
+          S[key] = n;
+          if (key === "before") validateN2();
+          if (key === "retBefore") $("#r-checkin").disabled = false;
+          if (key === "after") $("#o1-next").disabled = false;
+          renderState();
+        });
+      })(i, b);
+      box.appendChild(b);
+    }
+  }
+  $$(".scale").forEach(buildScale);
+  function setScale(key, n) {
+    var box = $('.scale[data-key="' + key + '"]');
+    var b = $$("button", box)[n]; if (b) b.click();
+  }
+  $("#r-checkin").addEventListener("click", function () { go("ret-3"); });
+
+  /* ---------- 技师手机 ---------- */
+  function showPush() {
+    var p = $("#push");
+    p.innerHTML = '<div class="vmark">V</div><div><b>' + initial() + ' checked in · 9:58</b>New client · pain ' + (S.before === null ? "–" : S.before) + (S.assignedByDesk ? " · assigned by front desk" : "") + '</div>';
+    p.hidden = false;
+    clearTimeout(showPush.tm);
+    showPush.tm = setTimeout(function () { p.hidden = true; }, 3600);
+  }
+  $("#push").addEventListener("click", function () { $("#push").hidden = true; go("thr-2"); });
+  function renderThrList() {
+    var me = S.ther || "kevin";
+    $("#thr-me").textContent = tname(me);
+    var h = "";
+    if (S.checkedIn && S.ther) {
+      if (S.planSent) {
+        h += '<div class="noti dim"><b>' + initial() + ' · 9:58 · done</b><span class="small">Plan sent ✓ · check out ready</span></div>';
+      } else {
+        h += '<button class="noti hot" id="go-thr2"><span style="display:flex;justify-content:space-between"><b>' + initial() + ' checked in · 9:58</b><span class="tag">New</span></span>' +
+          '<span class="small">Pain <b>' + S.before + '</b> · source: ' + (S.source || "–") + (S.assignedByDesk ? " · assigned by front desk" : "") + '</span>' +
+          '<span class="small" style="color:var(--teal-ink);font-weight:700">Tap when you finish →</span></button>';
+      }
+    } else {
+      h += '<div class="noti" style="border-style:dashed"><b>还没有人 check in</b><span class="small">先在 ① 新客户 check in 走一遍，这里会收到推送。</span><button class="btn sm" id="thr-demo" style="margin-top:6px">用示例客户</button></div>';
+    }
+    h += '<div class="noti dim"><span style="display:flex;justify-content:space-between"><b>Mike R. · 11:00</b><span class="tag t">Visit 4</span></span><span class="small">Not checked in yet</span></div>';
+    h += '<div class="noti dim"><span style="display:flex;justify-content:space-between"><b>Jenny W. · 8:45 · done</b><span class="tag t">Visit 2</span></span><span class="small">Plan sent ✓ · picked Tue Nov 17</span></div>';
+    $("#thr-list").innerHTML = h;
+    var g = $("#go-thr2"); if (g) g.addEventListener("click", function () { go("thr-2"); });
+    var d = $("#thr-demo"); if (d) d.addEventListener("click", function () { demoCheckin(); renderThrList(); showPush(); });
+  }
+  function demoCheckin() {
+    if (S.before === null) S.before = 7;
+    if (!S.source) S.source = "Google";
+    if (!S.ther) S.ther = "kevin";
+    S.deskRouted = false; S.checkedIn = true;
+  }
+  function renderThr2() {
+    if (!S.checkedIn) demoCheckin();
+    $("#thr2-name").textContent = initial();
+    $("#thr2-meta").innerHTML = "Checked in 9:58 · pain <b>" + S.before + "</b> · source: " + S.source;
+    $("#thr2-notelabel").textContent = "Note for " + first() + " (shown at check out)";
+    validatePlan();
+  }
+  $("#plan").addEventListener("click", function (e) {
+    var b = e.target.closest(".chip"); if (!b) return;
+    $$(".chip", $("#plan")).forEach(function (c) { c.classList.toggle("on", c === b); });
+    S.plan = b.getAttribute("data-p");
+    $("#plan-n").hidden = S.plan === "none";
+    $("#plan-why").hidden = S.plan !== "none";
+    validatePlan();
+  });
+  $("#plan-total").addEventListener("click", function (e) { var b = e.target.closest(".chip"); if (b) S.total = b.textContent; });
+  $("#plan-why-c").addEventListener("click", function () { setTimeout(validatePlan, 0); });
+  function validatePlan() {
+    var ok = !!S.plan && (S.plan !== "none" || !!$("#plan-why-c .chip.on")) && $("#thr-note").value.trim().length > 0;
+    $("#thr-send").disabled = !ok;
+  }
+  $("#thr-note").addEventListener("input", validatePlan);
+  $("#thr-send").addEventListener("click", function () {
+    S.note = $("#thr-note").value.trim(); S.planSent = true;
+    $("#thr3-sub").textContent = first() + "'s check-out screen is ready at the front desk.";
+    go("thr-3");
+  });
+
+  /* ---------- Check out ---------- */
+  $("#ow-skip").addEventListener("click", function () {
+    demoCheckin();
+    if (!S.plan) S.plan = "1w";
+    S.note = S.note || $("#thr-note").value.trim();
+    S.planSent = true; go("out-1");
+  });
+  function renderOut1() {
+    $("#o1-title").textContent = t("beforeGo", { n: first() });
+    $("#o1-before").textContent = t("cameIn", { b: S.before });
+  }
+  $("#o1-next").addEventListener("click", function () { go("out-2"); });
+
+  var SLOTS = {
+    "1w": [["Mon Nov 16", "10:00 am"], ["Tue Nov 17", "10:00 am"], ["Tue Nov 17", "5:30 pm"], ["Fri Nov 20", "10:00 am", 1]],
+    "2w": [["Mon Nov 23", "10:00 am"], ["Tue Nov 24", "11:30 am"], ["Tue Nov 24", "6:00 pm"], ["Fri Nov 27", "10:00 am", 1]],
+    "3-4w": [["Mon Dec 7", "10:00 am"], ["Tue Dec 8", "10:00 am"], ["Tue Dec 8", "6:00 pm"], ["Fri Dec 11", "10:00 am", 1]]
+  };
+  function renderOut2(animate) {
+    var b = S.before, a = S.after, th = tname(S.ther) || "Kevin";
+    var kind = a < b ? (a === 0 ? "zero" : "better") : a === b ? "same" : "worse";
+    var html;
+    if (kind === "better" || kind === "zero") {
+      var d = b - a;
+      html = '<div class="big">' + (kind === "zero" ? t("zero") : (d === 1 ? t("lighter1") : t("lighter", { d: d }))) + '</div>' +
+        '<div class="sub">' + (kind === "zero" ? t("zeroSub", { b: b }) : t("walked", { b: b, a: a })) + '</div>' +
+        meter(b, a) + '<span class="delta">−' + d + '</span>';
+    } else if (kind === "same") {
+      html = '<div class="big">' + t("steady", { a: a }) + '</div><div class="sub">' + t("steadySub") + '</div>' + meter(b, a, true);
+    } else {
+      html = '<div class="big" style="color:var(--rose)">' + t("sore") + '</div><div class="sub">' + t("soreSub", { t: th }) + '</div>' + meter(b, a);
+    }
+    var res = $("#res");
+    res.className = "result " + (kind === "zero" ? "better" : kind);
+    res.innerHTML = html;
+    var pinNow = res.querySelector(".pin.now");
+    if (pinNow) {
+      if (animate) {
+        pinNow.style.left = (b * 10) + "%";
+        requestAnimationFrame(function () { requestAnimationFrame(function () {
+          pinNow.style.left = (a * 10) + "%";
+          var dl = res.querySelector(".delta"); if (dl) dl.classList.add("show");
+        }); });
+      } else {
+        pinNow.style.left = (a * 10) + "%";
+        var dl = res.querySelector(".delta"); if (dl) dl.classList.add("show");
+      }
+    }
+    $("#o2-from").textContent = t("from", { t: th });
+    $("#o2-note").textContent = "“" + (S.note || $("#thr-note").value.trim()) + "”";
+    var plan = S.plan || "1w";
+    if (plan === "none") {
+      $("#o2-rec").textContent = t("noFU", { t: th });
+      $("#o2-rec-sub").textContent = t("noFUSub");
+      $("#slots").innerHTML = ""; $("#o2-asof").textContent = "";
+    } else {
+      $("#o2-rec").textContent = t("rec", { t: th, i: T[S.lang].intv[plan] });
+      $("#o2-rec-sub").textContent = t("recSub", { n: S.total });
+      var list = SLOTS[plan].map(function (s) {
+        var v = s[0] + ", " + s[1];
+        return '<button class="chip' + (S.slot === v ? " on" : "") + '" data-v="' + v + '">' + s[0] + '<small>' + s[1] + (s[2] ? " · " + t("sameAs") : "") + '</small></button>';
+      });
+      list.push('<button class="chip' + (S.slot === "other" ? " on" : "") + '" data-v="other">' + t("other") + '</button>');
+      list.push('<button class="chip' + (S.slot === "later" ? " on" : "") + '" data-v="later">' + t("later") + '</button>');
+      $("#slots").innerHTML = list.join("");
+      $("#o2-asof").textContent = t("asof", { t: th });
+    }
+    $("#optin").classList.toggle("on", S.optin);
+    $("#optin .bx").textContent = S.optin ? "✓" : "";
+  }
+  function meter(b, a, same) {
+    var ticks = "";
+    [0, 5, 10].forEach(function (n) { ticks += '<span class="tick" style="left:' + (n * 10) + '%">' + n + '</span>'; });
+    var was = same ? "" : '<div class="pin was" style="left:' + (b * 10) + '%"><span>' + t("walkedIn") + " " + b + '</span><i></i></div>';
+    return '<div class="meter"><div class="track"></div>' + ticks + was +
+      '<div class="pin now" style="left:' + (a * 10) + '%"><span>' + t("now") + " " + a + '</span><i></i></div></div>';
+  }
+  $("#slots").addEventListener("click", function (e) {
+    var b = e.target.closest(".chip"); if (!b) return;
+    S.slot = b.getAttribute("data-v");
+    $$(".chip", $("#slots")).forEach(function (c) { c.classList.toggle("on", c === b); });
+    renderState();
+  });
+  $("#optin").addEventListener("click", function () {
+    S.optin = !S.optin;
+    $("#optin").classList.toggle("on", S.optin); $("#optin .bx").textContent = S.optin ? "✓" : "";
+    renderState();
+  });
+  $("#o2-done").addEventListener("click", function () { S.checkedOut = true; S.bookDone = false; S.conflict = false; go("out-3"); });
+  function renderOut3() {
+    $("#o3-title").textContent = t("thanks", { n: first() });
+    var s = S.plan === "none" ? t("thanksNone") : (!S.slot || S.slot === "later") ? t("thanksLater") :
+      S.slot === "other" ? t("thanksSlot", { s: S.lang === "zh" ? "其他时间" : "another time" }) : t("thanksSlot", { s: S.slot });
+    $("#o3-sub").innerHTML = s;
+  }
+  $("#demo").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    if (!S.planSent) { demoCheckin(); if (!S.plan) S.plan = "1w"; S.note = S.note || $("#thr-note").value.trim(); S.planSent = true; }
+    var a = b.getAttribute("data-a");
+    var bf = S.before;
+    if (a === "better" && bf < 2) { S.before = bf = 7; }
+    if (a === "worse" && bf > 9) { S.before = bf = 6; }
+    if (a === "zero" && bf === 0) { S.before = bf = 4; }
+    var val = a === "better" ? Math.max(1, bf - 4) : a === "zero" ? 0 : a === "same" ? bf : bf + 1;
+    go("out-1"); setScale("after", val); go("out-2");
+  });
+
+  /* ---------- 前台屏幕 ---------- */
+  function renderDesk() {
+    var assign = [], arr = [], book = [];
+    var who = initial();
+    if (S.checkedIn && S.deskRouted && !S.assignedByDesk) {
+      assign.push('<div class="item warn"><b>' + who + ' · 9:58</b><span class="small">New client · pain ' + S.before + ' · 点了"不记得技师"</span>' +
+        '<div class="acts"><select id="asg">' + THER.filter(function (x) { return x.work; }).map(function (x) { return '<option value="' + x.id + '">' + x.name + '</option>'; }).join("") +
+        '</select><button class="btn sm" id="asg-go">Assign &amp; notify</button></div></div>');
+    }
+    if (S.checkedIn && (!S.deskRouted || S.assignedByDesk)) {
+      arr.push('<div class="item new"><span style="display:flex;justify-content:space-between"><b>' + who + ' · 9:58</b><span class="tag">New</span></span><span class="small">with ' + tname(S.ther) + ' · pain ' + S.before +
+        (S.checkedOut ? " → " + S.after + ' · checked out' : S.planSent ? " · plan ready" : " · in treatment") + '</span></div>');
+    }
+    arr.push('<div class="item"><span style="display:flex;justify-content:space-between"><b>Jenny W. · 8:41</b><span class="tag t">Visit 2</span></span><span class="small">with Amy · checked out</span></div>');
+    arr.push('<div class="item"><span style="display:flex;justify-content:space-between"><b>Tom H. · 9:30</b><span class="tag t">Visit 6</span></span><span class="small">with Daniel · in treatment</span></div>');
+
+    if (S.checkedOut && S.after > S.before) {
+      book.push('<div class="item sore"><b>⚠ ' + who + ' 更酸痛了（' + S.before + ' → ' + S.after + '）</b><span class="small">请 ' + tname(S.ther) + ' 在客户走之前出来说几句</span><div class="acts"><button class="btn sm char" data-done>已通知技师</button></div></div>');
+    }
+    if (S.checkedOut && S.plan !== "none" && S.slot && S.slot !== "later") {
+      if (S.bookDone) {
+        book.push('<div class="item"><b>✓ Booked: ' + who + ' with ' + tname(S.ther) + '</b><span class="small">' + (S.slot === "other" ? "another time" : S.slot) + '</span></div>');
+      } else {
+        var label = S.slot === "other" ? "pick another time together" : S.slot;
+        book.push('<div class="item new"><b>Book ' + who + ' with ' + tname(S.ther) + '</b><span class="small">' + label + (S.conflict ? ' · <b style="color:var(--rose)">已被约走，请换一个</b>' : '') + '</span>' +
+          '<div class="acts"><button class="btn sm" id="bk-ok">Booked ✓</button>' + (S.conflict || S.slot === "other" ? "" : '<button class="btn sm ghost" id="bk-cf">Conflict</button>') + '</div></div>');
+      }
+    } else if (S.checkedOut && S.slot === "later") {
+      book.push('<div class="item"><b>' + who + ' · "I\'ll book later"</b><span class="small">第 7 天如果还没约，系统自动发提醒短信</span></div>');
+    }
+    book.push('<div class="item"><b>✓ Booked: Jenny W. with Amy</b><span class="small">Tue Nov 17, 10:00 am</span></div>');
+
+    $("#col-assign").innerHTML = assign.length ? assign.join("") : '<div class="empty">没有需要分配的客户</div>';
+    $("#col-arr").innerHTML = arr.join("");
+    $("#col-book").innerHTML = book.join("");
+    $("#c-assign").textContent = assign.length; $("#c-arr").textContent = arr.length; $("#c-book").textContent = book.length;
+
+    var g = $("#asg-go");
+    if (g) g.addEventListener("click", function () {
+      S.ther = $("#asg").value; S.assignedByDesk = true; renderDesk(); renderState();
+      setTimeout(function () { tab("thr"); }, 500);
+    });
+    var ok = $("#bk-ok"); if (ok) ok.addEventListener("click", function () { S.bookDone = true; renderDesk(); });
+    var cf = $("#bk-cf"); if (cf) cf.addEventListener("click", function () { S.conflict = true; renderDesk(); });
+    $$("[data-done]").forEach(function (b) { b.addEventListener("click", function () { b.closest(".item").style.opacity = .45; b.remove(); }); });
+  }
+
+  /* ---------- 短信 ---------- */
+  function renderSms() {
+    var n = first(), th = tname(S.ther) || "Kevin";
+    var b = S.before === null ? 7 : S.before, a = S.after === null ? 3 : S.after;
+    var zh = S.lang === "zh";
+    var h = '<p class="day">' + (zh ? "今天 · 第一次就诊后约 1 小时" : "Today · about 1 hour after the first visit") + '</p>';
+    if (zh) {
+      h += '<div class="sms">' + n + ' 你好，谢谢你今天来 V-Health。' + (a < b ? '你进来时 <b>' + b + '</b> 分，离开时 <b>' + a + '</b> 分，希望能一直这样！' : '') +
+        '<br><br>想问一下：' + th + ' 有没有和你说下次什么时候来？回复 1 = 有，2 = 没有</div>';
+      h += '<div class="sms me">1</div>';
+      h += '<div class="sms">谢谢！' + th + ' 给你选了一个 30 秒的拉伸：<a>vhealth.ca/s/doorway</a><br><br>如果有一分钟，写个评价能帮邻居找到我们：<br>Google：<a>g.page/r/vhealth-review</a><br>Facebook：<a>fb.com/vhealthcalgary/reviews</a><br><br>回复 STOP 退订。</div>';
+    } else {
+      h += '<div class="sms">Hi ' + n + ', thanks for visiting V-Health today. ' + (a < b ? 'You came in at a <b>' + b + '</b> and left at a <b>' + a + '</b>. We hope it stays that way!' : '') +
+        '<br><br>Quick question: did ' + th + ' talk with you about when to come back? Reply 1 = Yes, 2 = No</div>';
+      h += '<div class="sms me">1</div>';
+      h += '<div class="sms">Thank you! ' + th + ' picked this 30-second stretch for you: <a>vhealth.ca/s/doorway</a><br><br>If you have a minute, a review helps neighbours find us:<br>Google: <a>g.page/r/vhealth-review</a><br>Facebook: <a>fb.com/vhealthcalgary/reviews</a><br><br>Reply STOP to opt out.</div>';
+    }
+    if (a >= b) {
+      h += '<p class="day">' + (zh ? "第 2 天（因为持平或更高）" : "Next day · because it held steady or got sorer") + '</p>';
+      h += '<div class="sms">' + (zh ? n + ' 你好，今天感觉怎么样？回复 0–10 告诉我们现在几分。' : 'Hi ' + n + ', how does it feel today? Reply with a number 0–10.') + '</div>';
+      h += '<div class="sms me">' + Math.max(0, a - 2) + '</div>';
+    }
+    h += '<p class="day">' + (zh ? "第 3 天 · 技师问候" : "Day 3 · from the therapist") + '</p>';
+    h += '<div class="sms">' + (zh ? n + ' 你好，我是 V-Health 的 ' + th + '。今天肩膀怎么样？记得继续做拉伸！' : 'Hi ' + n + ", it's " + th + ' from V-Health. How\'s the shoulder today? Keep up the doorway stretch!') + '</div>';
+    h += '<div class="sms me">' + (zh ? "好多了，谢谢！" : "Much better, thanks " + th + "!") + '</div>';
+    if (!S.optin) h += '<p class="day" style="color:var(--accent)">客户取消了"接收信息"：只发上面这些服务类短信，不发优惠。</p>';
+    $("#sms").innerHTML = h;
+  }
+
+  /* ---------- 看板 ---------- */
+  var SRC = [["Google", 5], ["Friend / family", 4], ["Poster", 2], ["小红书 / WeChat", 1], ["Instagram", 1], ["Walked by", 1], ["Facebook", 0]];
+  function renderDash() {
+    $("#bars").innerHTML = SRC.map(function (s) { return '<div><span>' + s[0] + '</span><i data-w="' + (s[1] / 5 * 100) + '"></i><b>' + s[1] + '</b></div>'; }).join("");
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      $$("#bars i").forEach(function (i) { i.style.width = i.getAttribute("data-w") + "%"; });
+    }); });
+  }
+
+  /* ---------- 共享数据面板 ---------- */
+  function renderState() {
+    var row = function (k, v) { return '<div><span class="k">' + k + '</span> <b>' + v + '</b></div>'; };
+    $("#state").innerHTML = '<h4>这次演示的数据</h4>' +
+      row("客户", S.name) +
+      row("语言", S.lang === "en" ? "English" : "中文") +
+      row("接收人", S.deskRouted && !S.assignedByDesk ? "前台" : (tname(S.ther) || "–")) +
+      row("来源", S.source || "–") +
+      row("疼痛", (S.before === null ? "–" : S.before) + " → " + (S.after === null ? "–" : S.after)) +
+      row("技师建议", S.planSent ? (S.plan === "none" ? "No follow-up" : (T.en.intv[S.plan] || "1 week") + " · ~" + S.total + " visits") : "–") +
+      row("下次时间", S.slot ? (S.slot === "later" ? "I'll book later" : S.slot === "other" ? "Other time" : S.slot) : "–") +
+      row("接收信息", S.optin ? "✓" : "✗");
+  }
+
+  /* ---------- 绑定 ---------- */
+  document.addEventListener("click", function (e) {
+    var g = e.target.closest("[data-go]"); if (g) { e.preventDefault(); go(g.getAttribute("data-go")); return; }
+    var tg = e.target.closest("[data-tabgo]"); if (tg) { tab(tg.getAttribute("data-tabgo")); return; }
+    var tb = e.target.closest("#tabs button"); if (tb) { tab(tb.getAttribute("data-tab")); return; }
+    var l = e.target.closest("[data-lang]"); if (l) { S.lang = l.getAttribute("data-lang"); applyLang(); renderState(); }
+  });
+  $("#reset").addEventListener("click", function () {
+    S = fresh(); showErr = false;
+    $("#n-phone").value = ""; $("#n-email").value = ""; $("#n-name").value = S.name;
+    $("#n-phone-f").hidden = false; $("#n-email-f").hidden = true; $("#n-desk-msg").hidden = true;
+    $$(".chip.on").forEach(function (c) { if (!c.closest("#plan-total")) c.classList.remove("on"); });
+    $$("[data-detail]").forEach(function (el) { el.hidden = true; });
+    $("#plan-n").hidden = true; $("#plan-why").hidden = true;
+    $$(".scale").forEach(buildScale);
+    $("#n-checkin").disabled = true; $("#r-checkin").disabled = true; $("#o1-next").disabled = true;
+    cur = { tablet: "new-1", phone: "thr-1", desk: "desk-1" };
+    applyLang(); tab("new");
+  });
+
+  applyLang(); renderState(); validateN1();
+})();
+</script>
+</body>
+</html>
