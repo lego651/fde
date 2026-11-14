@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分析：暖贴合规速查</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one reading column. Verdict, what works, 5 problems, revised test, sources. Paper palette shared with the FDE site. */
+  --paper: #fbf8f2; --card: #fff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --warn: #8a5a00; --warn-soft: #fff1d6; --bad: #b3261e; --bad-soft: #fde8e6;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); }
+main { max-width: 860px; margin: 0 auto; padding: 40px 20px 90px; display: grid; gap: 38px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.3; }
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.08rem; }
+p { margin: 0; max-width: 70ch; }
+a { color: var(--accent-ink); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 16px; }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 2px 9px; border-radius: 999px; background: #e3eefb; color: #1d5fa8; }
+.verdict { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.score { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.score div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.score b { font-size: 1.35rem; font-family: var(--serif); }
+.score span { font-size: .82rem; color: var(--muted); }
+@media (max-width: 680px) { .score { grid-template-columns: 1fr 1fr; } }
+.good { background: var(--good-soft); border: 1px solid #c4e5cc; border-radius: 14px; padding: 16px 20px; display: grid; gap: 8px; }
+.prob { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.prob .ph { display: flex; gap: 12px; align-items: center; padding: 14px 20px; background: #f7f1e6; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.prob .n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; flex: none; font-size: .9rem; }
+.prob .ph h3 { flex: 1; min-width: 200px; }
+.prob .pb { padding: 16px 20px 18px; display: grid; gap: 10px; }
+.prob .fix { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.hi { background: var(--bad-soft); color: var(--bad); }
+.mid { background: var(--warn-soft); color: var(--warn); }
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: #f7f1e6; font-size: .8rem; letter-spacing: .05em; color: #8c7f6a; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sources { font-size: .85rem; color: var(--muted); }
+.sources li { word-break: break-word; }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>分析：暖贴合规速查（Hush &amp; Ember 艾草暖贴）</h1>
+  <p class="meta">Kids Map · 分析原文 <a href="warm-patch-regulatory.html">《自发热艾草贴：加拿大 / 美国合规速查》（2026-11-12）</a> · 2026-11-13 · <span class="tag">分析中</span></p>
+</header>
+
+<section>
+  <div class="verdict">
+    <p><b>结论：原文的大方向是对的，关键数字我都核对过，基本准确。大方向是只卖"暖"，不讲任何身体功效。但"艾草"这一项的风险比原文写的大：Health Canada 的原文说，不用于艾灸的艾草产品"仍然属于天然保健品（NHP）"。</b></p>
+    <p>所以我建议：<b>第一批先做不含艾草的普通暖贴</b>，或者在下单前拿到 Health Canada 的书面分类确认。另外，有一句被标为"低风险"的文案（"8pm wind-down"）跟"不可睡觉时使用"的警告互相矛盾，而低温烫伤正是暖贴最常见的事故。美国部分的关税信息也过时了。</p>
+  </div>
+  <div class="score" role="list">
+    <div role="listitem"><b>准</b><span>费用和法规条文</span></div>
+    <div role="listitem"><b>对</b><span>大方向：只卖"暖"</span></div>
+    <div role="listitem"><b>低估</b><span>艾草的分类风险</span></div>
+    <div role="listitem"><b>过时</b><span>美国关税部分</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>写得好、而且核对过的地方</h2>
+  <div class="good">
+    <ul class="plain">
+      <li><b>文案分级是对的。</b>"缓解疼痛、放松肌肉、促进循环"会让产品变成医疗器械；只讲温暖就是一般消费品。原文还提醒"转发顾客说的'治好了背痛'，就等于你自己做了这个宣称"，这一点很多人会忽略。</li>
+      <li><b>Health Canada 艾灸公告：准确。</b>2022 年 3 月的公告确实把艾灸产品归为 Class I 医疗器械，卖、进口、分销都要 MDEL。分类咨询邮箱也对。</li>
+      <li><b>MDEL 费用 C$5,519：准确。</b>这是 2026 年 4 月 1 日起的官方费用（之前是 C$5,426）。</li>
+      <li><b>美国 21 CFR 890.5710：准确。</b>一次性冷热敷包属于 Class I，免 510(k)（用于婴儿的除外）；OMW 是"背胶式发热贴"的产品代码。FDA 2027 财年的企业注册费确实是 US$13,785（从 2026 年 10 月 1 日起）。</li>
+      <li><b>CCPSA 事故上报：</b>一般消费品出现严重事故，要在知道后 2 天内上报，这一点写对了。</li>
+      <li><b>标注了不确定项。</b>税率、保险、顾问报价、外用艾草是否属于 NHP，原文都写了"待核实"。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5 个问题，以及怎么改</h2>
+
+  <div class="prob">
+    <div class="ph"><span class="n">1</span><h3>艾草不只是"灰区"：Health Canada 原文说它属于天然保健品</h3><span class="pill hi">先决定</span></div>
+    <div class="pb">
+      <p>原文把"外用艾草是否属于 NHP"列为不确定项。但原文引用的那份 Health Canada 公告里有一句话：<b>"不用于艾灸的艾草产品，仍然属于天然保健品（natural health products）。"</b></p>
+      <p>也就是说，暖贴如果不是艾灸，Health Canada 默认的方向就是 NHP。NHP 要先拿产品许可（NPN）才能卖，标签和生产也有要求，比 MDEL 还麻烦。要不要真的按 NHP 管，还取决于产品怎么宣传。但文案里写了 "dried mugwort leaf"，再加上艾叶图案，很难说只是为了"香味"。</p>
+      <p>原文只给了医疗器械分类的邮箱。NHP 的分类问题要发到<b>另一个邮箱</b>（ingredient_support@hc-sc.gc.ca）。</p>
+      <div class="fix"><b>改：</b>二选一。<b>A（推荐）</b>：第一批做<b>不含艾草</b>的普通暖贴，包装上不出现艾叶、mugwort，先把"暖"这个产品卖起来，验证需求。<b>B</b>：坚持用艾草的话，下单前同时给两个邮箱写信（器械分类 + NHP 分类），拿到书面答复再进货。包装设计里的"③ 艾叶 Sage Leaf"在方案 A 下就不能用了。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">2</span><h3>"8pm wind-down"跟"不可睡觉时使用"互相矛盾</h3><span class="pill hi">风险高</span></div>
+    <div class="pb">
+      <p>原文把 <b>"Make warmth part of your 8pm wind-down"</b> 列为"较低风险"的文案，同时又要求双语警告<b>"不可睡觉时使用"</b>。晚上 8 点放松、暖 8 小时，等于在暗示睡前贴、贴着睡，而睡着时皮肤感觉迟钝，正是<b>低温烫伤</b>最常见的情况。</p>
+      <p>这不是假设：2008 年加拿大召回过 Tensor 和 Icy Hot 的空气发热贴，原因都是用户被烫伤（Icy Hot 在加拿大有 4 起烧伤报告）。暖贴最大的产品责任风险是烫伤，不是法规。</p>
+      <div class="fix"><b>改：</b>删掉 "8pm wind-down"，换成白天的场景（"for cold commutes, rinks and school pickups"）。"Better sleep" 不用（原文已标灰区）。警告里加上：<b>贴在衣服上、不要直接贴皮肤（以工厂说明为准）、不要睡觉时用、不要压在身下、皮肤发红就拿掉、感觉迟钝的人慎用</b>。向工厂要最高温度的测试报告和 SDS。产品责任险在第一单之前就买好。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">3</span><h3>美国部分已经过时</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <ul class="plain">
+        <li>原文说"中国商品的 de minimis 免税额度暂停中"。现在是<b>所有国家都暂停了</b>（2025 年 8 月起），2026 年 2 月的总统令延续了暂停，6 月 CBP 又出了正式规则；另一项法律规定 2027 年 7 月起永久取消。</li>
+        <li>2026 年 2 月最高法院判 IEEPA 关税无效之后，美国改成对进口加征 10%（Section 122）。原文写的"301 关税约 25%"是否适用于这个 HS 编码，要按现在的税表重新查。</li>
+      </ul>
+      <div class="fix"><b>改：</b>美国部分标为"过时，先不做"。<b>第一阶段只卖加拿大</b>（Kids Map 的用户也在加拿大），美国等加拿大卖起来、关税稳定之后再查。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">4</span><h3>儿童产品品牌在卖"儿童禁用"的东西</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>这份文档在 Kids Map 的 research 文件夹里，包装文档也说要做一个 <code>/admin/warm</code> 页面。但暖贴的警告写着<b>"儿童禁用"</b>，目标人群是 30–45 岁的妈妈和年轻人。</p>
+      <p>如果在 Kids Map 里卖或者推广暖贴：一是家长会觉得"一个孩子的地图在卖什么"；二是产品出现在孩子会看的界面里，孩子可能拿来贴。Hush &amp; Ember 已经是一个独立的牌子名，这一点做得好。</p>
+      <div class="fix"><b>改：</b>Hush &amp; Ember 做成<b>独立的牌子和独立的店</b>，不在 Kids Map 的家长或孩子页面里卖。Kids Map 后台管理可以共用，但对外不挂 Kids Map 的名字。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">5</span><h3>只有来源名称，没有链接；有几项还没出处</h3><span class="pill mid">小</span></div>
+    <div class="pb">
+      <p>原文最后写了"来源：canada.ca 艾灸分类公告、GUI-0016、eCFR……"，但没有链接，以后要核对很麻烦。另外，标签要求里的"写明 Made in China"、HS 编码 3824.99 的 MFN 税率 Free、FDA 2017 年那封警告信，都没给出处。我也没有核实这三项。</p>
+      <div class="fix"><b>改：</b>把下面"资料来源"里的链接补进原文。"Made in China"、税率、警告信这三项，在找报关行或顾问时一起确认。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>修改后的下一步</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>步骤</th><th>做什么</th><th>做完的标准</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><b>决定：第一批要不要艾草</b>（推荐不要）</td><td>做了决定</td></tr>
+      <tr><td>2</td><td>如果要艾草：同时写信给 Health Canada 的器械分类邮箱和 NHP 分类邮箱</td><td>拿到书面答复</td></tr>
+      <tr><td>3</td><td>改文案：删掉 "8pm wind-down"，加上完整的双语警告</td><td>包装文字定稿</td></tr>
+      <tr><td>4</td><td>向工厂要：最高温度测试报告、SDS、使用说明（贴衣服还是贴皮肤）</td><td>三份文件到手</td></tr>
+      <tr><td>5</td><td>产品责任险询价（原文估 C$1,000–3,000/年）</td><td>拿到 2 个报价</td></tr>
+      <tr><td>6</td><td>只在加拿大卖，用独立的 Hush &amp; Ember 店，不挂 Kids Map</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>原文需要改的地方（汇总）</h2>
+  <ol class="plain">
+    <li>"加拿大"表：把 Health Canada 公告里"不用于艾灸的艾草产品仍属 NHP"这句话写进去，加上 NHP 分类邮箱 ingredient_support@hc-sc.gc.ca。</li>
+    <li>"文案"表：把 "Make warmth part of your 8pm wind-down" 从"较低风险"移到"高风险"。</li>
+    <li>"标签与物流"：警告里加"贴在衣服上 / 不要压在身下 / 发红就拿掉"；加上 2008 年 Tensor、Icy Hot 因烫伤召回的例子。</li>
+    <li>"美国"：de minimis 改成"所有国家暂停，2027 年 7 月起永久取消"；301 关税标为"过时，需要重查"。</li>
+    <li>"来源"：补上链接。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>资料来源</h2>
+  <ul class="plain sources">
+    <li>Health Canada，艾灸产品分类公告（2022-03-14，含"不用于艾灸的艾草仍属 NHP"和三个联系邮箱）：<a href="https://www.canada.ca/en/health-canada/services/drugs-health-products/medical-devices/application-information/policies/classification-moxibustion-notice-stakeholders.html">canada.ca … classification-moxibustion-notice-stakeholders</a></li>
+    <li>Health Canada，MDEL 费用（2026-04-01 起 C$5,519）：<a href="https://www.canada.ca/en/health-canada/services/drugs-health-products/funding-fees/fees-respect-human-drugs-medical-devices/medical-device-establishment-licence-funding-fees-drugs-health-products.html">canada.ca … medical-device-establishment-licence fees</a>；GUI-0016：<a href="https://www.canada.ca/en/health-canada/services/drugs-health-products/compliance-enforcement/establishment-licences/directives-guidance-documents-policies/guidance-medical-device-establishment-licensing-0016.html">canada.ca … GUI-0016</a></li>
+    <li>21 CFR 890.5710：<a href="https://www.law.cornell.edu/cfr/text/21/890.5710">law.cornell.edu</a>；FDA 产品代码 OMW：<a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfPCD/classification.cfm?id=OMW">accessdata.fda.gov</a></li>
+    <li>FDA 2027 财年器械费用（注册费 US$13,785）：<a href="https://www.federalregister.gov/documents/2026/07/30/2026-15335/medical-device-user-fee-rates-for-fiscal-year-2027">federalregister.gov</a></li>
+    <li>美国 de minimis 对所有国家暂停（2026 年 2 月延续）：<a href="https://www.whitehouse.gov/presidential-actions/2026/02/continuing-the-suspension-of-duty-free-de-minimis-treatment-for-all-countries">whitehouse.gov</a>；CBP 2026 年 6 月规则：<a href="https://kpmg.com/us/en/taxnewsflash/news/2026/06/cbp-suspends-de-minimis-exemption.html">KPMG</a>；Section 122 加征 10%：<a href="https://www.ghy.com/?p=25869">GHY</a></li>
+    <li>2008 年暖贴因烫伤召回：<a href="https://recalls-rappels.canada.ca/en/alert-recall/archived-safety-information-concerning-tensor-heat-therapy-public">Health Canada：Tensor Heat Therapy</a>；<a href="https://www.drugtopics.com/view/heat-therapy-products-recalled-causing-burns">Drug Topics：Icy Hot</a></li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
