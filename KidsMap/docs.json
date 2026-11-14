@@ -36,6 +36,24 @@
   "docs": [
     {
       "cat": "grow",
+      "title": "分析：Kids Map 疯狂赚钱点子（51 个）",
+      "type": "HTML",
+      "date": "2026-11-13",
+      "status": "wip",
+      "path": "deliverables/crazy-money-ideas-analysis.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
+      "title": "Kids Map 疯狂赚钱点子：51 个脑洞（原文）",
+      "type": "HTML",
+      "date": "2026-11-12",
+      "status": "wip",
+      "path": "deliverables/crazy-money-ideas.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
       "title": "分析：Kids Map 赚钱 v2（14 种方式）",
       "type": "HTML",
       "date": "2026-11-13",
