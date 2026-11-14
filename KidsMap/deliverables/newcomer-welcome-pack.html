@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calgary 新家庭欢迎礼包：深度研究</title><style>
+:root{--ink:#1d2433;--mute:#5b6577;--line:#e3e7ee;--bg:#f7f8fb;--card:#fff;--blue:#2563eb;--good:#15803d;--bad:#b91c1c;--warn:#b45309}
+*{box-sizing:border-box}body{margin:0;font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+.nav{display:flex;gap:6px;flex-wrap:wrap;font-size:13px;margin-bottom:18px}.nav span{border:1px solid var(--line);background:#fff;border-radius:99px;padding:3px 10px;color:var(--mute)}.nav .on{background:var(--ink);color:#fff;border-color:var(--ink)}
+h1{font-size:26px;margin:0}h2{font-size:21px;margin:0 0 10px}h3{font-size:17px;margin:26px 0 8px}
+.sub{color:var(--mute);margin:4px 0 16px}.mute{color:var(--mute)}
+.note{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:12px;padding:12px 16px;margin:0 0 16px}.note li{margin:3px 0}
+.toggle{display:flex;gap:6px;align-items:center;margin:0 0 14px;font-size:14px}.toggle button{font:inherit;border:1px solid var(--line);background:#fff;border-radius:99px;padding:4px 14px;cursor:pointer}.toggle button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:760px){.tiles{grid-template-columns:1fr 1fr}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}.tile.dark{background:var(--ink);color:#fff}.tile.dark .tl,.tile.dark .th{color:#c9cfdb}
+.tl{margin:0;font-size:12px;font-weight:600;color:var(--mute)}.tv{margin:2px 0;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}.th{margin:0;font-size:12px;color:var(--mute)}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:14px 0}.box h3{margin:0;padding:12px 14px;border-bottom:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:14px;margin:8px 0}.box table{margin:0}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f1f3f8;font-size:12.5px}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.rng{font-size:11.5px;color:var(--mute);font-weight:400}
+tr.tot td{background:#f7f8fb}tr.net td{background:#eef4ff}.big{font-size:18px}
+a{color:var(--blue);text-decoration:none}.go{font-size:12.5px;font-weight:600;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:99px;padding:0 7px;vertical-align:1px}.real{background:#ecfdf3;color:var(--good)}.est{background:#fff7e6;color:var(--warn)}.rule{background:#eef2f6;color:#475467}
+.warn{background:#fff7e6;border:1px solid #fde3b3;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}.fix{background:#fdecec;border:1px solid #f7c9c9;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:14px}
+.detail{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:22px 0}.crumb{font-size:12.5px;color:var(--mute);margin-bottom:6px}
+.bars{display:flex;gap:28px;align-items:flex-end;height:240px;padding:10px 20px 0;border-bottom:1px solid var(--line)}.bcol{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:110px;height:100%}
+.bar{width:46px;background:var(--blue);border-radius:4px 4px 0 0}.bval{font-size:12.5px;font-weight:700;margin-bottom:4px}.blab{font-size:12px;color:var(--mute);padding:4px 0}.bcol:hover .bar{opacity:.8}
+.sc{display:none}body.s-low .sc-low,body.s-base .sc-base,body.s-high .sc-high{display:inline}body.s-low .bars.sc-low,body.s-base .bars.sc-base,body.s-high .bars.sc-high{display:flex}
+code{font-size:12.5px;background:#f1f3f8;padding:1px 5px;border-radius:5px}
+.q li{margin:6px 0}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0}
+.card h3{margin:0 0 6px;font-size:17px}.card p{margin:6px 0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:99px;padding:1px 9px;margin-right:4px}
+.p1{background:#dbeafe;color:#1d4ed8}.p2{background:#fef3c7;color:#b45309}.p3{background:#dcfce7;color:#15803d}
+.proof{background:#f7f8fb;border-radius:10px;padding:8px 12px;font-size:13.5px}
+.hero{background:linear-gradient(135deg,#1d2433,#2563eb);color:#fff;border-radius:18px;padding:22px 24px;margin:18px 0}
+.hero h2{color:#fff;font-size:26px;margin:0 0 6px}.hero .mute{color:#c9d6f5}.hero b{color:#fff}
+.hero table{background:transparent;color:#fff;font-size:14px}.hero th{background:rgba(255,255,255,.12);color:#fff}.hero td,.hero th{border-color:rgba(255,255,255,.2)}
+.hero a{color:#bfdbfe}
+.tier{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}@media(max-width:760px){.tier{grid-template-columns:1fr}}
+.tier div{background:rgba(255,255,255,.1);border-radius:12px;padding:12px}.tier .n{font-size:24px;font-weight:800}
+.door{margin:28px 0 4px;font-size:21px}
+</style></head><body>
+<div class="wrap">
+<h1>🧳 Calgary 新家庭「欢迎礼包」：深度研究</h1>
+<p class="sub">Nov 12, 2026（更新：去掉了「主打中文家庭」，那是我自己加的，你没这么说过；对象是所有有孩子的新家庭） · 简单版 + App 截图：<a href="newcomer-welcome-pack-eli5-2026-11-12.html">ELI5</a> · 接着 <a href="consumer-paid-ideas-v3-2026-11-11.html">v3 用户端收费</a> 里的「新家庭落地包」往下挖 · 回答：卖什么、怎么收费、为什么这个价、谁买、杀手功能、痛点、别人做过没有 · <span class="tag real">有来源</span> = 有出处，<span class="tag est">估计</span> = 我的判断</p>
+
+<div class="hero">
+<h2>结论：你的方向是对的，礼包对家庭免费，由商家买单</h2>
+<p>v3 里我建议向新家庭收 $49 卖「信息手册」。研究完我改主意了：<b>新移民能拿到的免费信息太多了</b>（市政府多语言 PDF、RBC 的 Arrive App、WelcomeAide 免费 AI、政府资助的安置机构、Canoo 免费门票）。向他们收钱买信息很难。</p>
+<p><b>能赚钱的是你说的模式</b>：礼包对家庭免费，里面是本地商家的优惠券，<b>商家按带来的新客人付钱</b>。这个模式已经被验证了 90 年（Welcome Wagon、Our Town America），但 <b>Calgary 现在没人做，更没人专门做有孩子的家庭</b>。</p>
+<div class="tier">
+<div><div class="n">免费</div>🎁 给家庭：「Calgary 第一个月」礼包<br><span class="mute">按孩子年龄 + 住的社区，30 天计划 + 15 张本地优惠券，全在 Kids Map 里</span></div>
+<div><div class="n">$20<span style="font-size:14px">/新客</span></div>🏪 向商家收：每带来一个到店核销的新家庭<br><span class="mute">先免费试 3 个月；之后也可选 $79/月 包下一个品类</span></div>
+<div><div class="n">$149</div>🧑‍💼 唯一向家庭收费的：1 小时本地顾问<br><span class="mute">来之前选区、排托儿所、第一个月怎么安排</span></div>
+</div>
+<p class="mute" style="margin:0">真正的大奖不是礼包本身的钱，而是：<b>每个刚落地的家庭，第一天就装上了 Kids Map</b>。这是我们最想要、最难拉到的用户。</p>
+</div>
+
+<h2 class="door">1. 别人做过吗？做过，而且做了很久</h2>
+<div class="box"><table>
+<tr><th>谁</th><th>怎么做</th><th>谁付钱</th><th>现在怎样</th><th>给我们的教训</th></tr>
+<tr><td><b>Welcome Wagon Canada</b><br><span class="tag real">有来源</span></td><td>派「女主人」上门送礼物篮：小礼品 + 本地商家优惠券</td><td>本地商家签合同、付钱进篮子</td><td><b>1930 年开始，2020 年 5 月关门</b>，做了 90 年。美国版 1998 年就停了上门，原因是「白天家里没人」</td><td>商家付钱这条路通，<b>上门派送太贵，死在成本上</b>。我们全数字化，没有这个成本 <a href="https://en.wikipedia.org/wiki/Welcome_Wagon">[1]</a> <a href="https://www.pressreader.com/canada/windsor-star/20190206/281590946810559">[2]</a></td></tr>
+<tr><td><b>Our Town America</b><br><span class="tag real">有来源</span></td><td>从水电公司拿新搬家名单，每月寄「欢迎包」：本地商家的一次性礼券。<b>每个品类只放一家</b>，核销可追踪，商家拿到客人名字</td><td>本地商家（价格不公开，各区加盟商自己定）</td><td>还在做，自称每年覆盖美加 600 万+ 新搬家户；44 家加盟</td><td>两个关键设计：<b>品类独占</b> 和 <b>核销追踪</b>。他们强调「这是礼物，不是折扣」，响应率才高 <a href="https://chiefmarketer.com/our-town-america-finds-new-local-customers">[3]</a> <a href="https://www.entrepreneur.com/franchises/directory/our-town-america/321610">[4]</a></td></tr>
+<tr><td><b>WelcomePack Canada</b>（多伦多）<br><span class="tag real">有来源</span></td><td>通过安省 60+ 个安置机构，给新移民送免费礼盒：30+ 品牌、号称价值 $1,000 的样品和优惠券、134 页杂志</td><td>大品牌（银行、电信、地产、汽车）</td><td>2016 年 4 万会员，<b>之后找不到任何新消息</b>，大概率停了</td><td><b>安置机构是很好的分发渠道</b>。只靠全国大品牌、做实体盒子，难持续 <a href="https://www.globenewswire.com/news-release/2015/08/11/1379331/0/en/30-000-More-New-Immigrants-to-Receive-a-Welcome-to-Remember-Gift-from-WelcomePack-Canada.html">[5]</a> <a href="https://www.newswire.com/news/welcomepack-canada-reaches-new-milestone-of-40-000-new-immigrant-members-9294941">[6]</a></td></tr>
+<tr><td><b>Canoo</b>（加拿大公民协会）<br><span class="tag real">有来源</span></td><td>新公民（第 1 年）和新 PR（前 5 年）免费进 1,400–2,000+ 个博物馆、科学馆、国家公园，最多带 4 个孩子；还有 Telus、Bell 的优惠</td><td>非营利 + 企业赞助</td><td>很活跃</td><td><b>大景点它已经免费了，我们不要去卖这些</b>。反过来，在 Kids Map 上给这些地方标「Canoo 免费」，帮家庭省钱 <a href="https://newswire.ca/news-releases/meet-canoo-2-0-free-access-to-over-1400-experiences-for-millions-of-newcomers-890535358.html">[7]</a> <a href="https://inclusion.ca/article/the-institute-for-canadian-citizenship-and-telus-join-forces-to-provide-exclusive-offers-and-no-credit-checks-for-newcomers-to-canada-via-the-canoo-app">[8]</a></td></tr>
+<tr><td>RBC Arrive、各大银行、WelcomeAide</td><td>免费的落地清单、AI 问答、银行开户优惠</td><td>银行 / 非营利</td><td>活跃</td><td>「落地信息」已经是免费品，<b>别收钱卖信息</b> <a href="https://www.nerdwallet.com/ca/banking/best-banks-for-newcomers">[9]</a> <a href="https://welcomeaide.com/en">[10]</a></td></tr>
+<tr><td>Calgary 本地</td><td>Trico 建商的 Red Card（合作商家优惠）、CREB 搬家服务包（含经纪 $75 抵扣）、市政府多语言新移民指南、Calgary Newcomers Club（女性社交俱乐部）</td><td>建商 / 经纪 / 政府</td><td>零散，各做各的</td><td><b>没有一个是给有孩子的家庭的，也没有一个在 App 里</b> <a href="https://tricohomes.com/the-trico-red-card/">[11]</a> <a href="https://creb.com/News/CREBNow/2024/August/rumi_move_in_bundle">[12]</a> <a href="https://www.calgary.ca/newcomers.html">[13]</a></td></tr>
+</table></div>
+<div class="note"><b>一句话：</b>「商家出钱，给新来的人送优惠」是老生意，证明商家愿意为新住户付钱。在 Calgary 有两个空白：<b>① 没有数字版、能追踪核销的</b>；<b>② 没有专门给有孩子家庭的</b>。这两个正好是 Kids Map 已有的东西：Coffee Pass 的核销页、Offers 追踪、按年龄的 1,700+ 地点。</div>
+
+<h2 class="door">2. 痛点：新家庭第一年最头疼什么</h2>
+<div class="grid">
+<div class="card"><h3>👶 托儿所：最急、最痛</h3><p>几百人排队，没位子。CTV 报道一位乌克兰妈妈，3 岁女儿排了好几个名单都没位 <span class="tag real">有来源</span>。YMCA 每个孩子、每个中心收 $25 排队费，指南建议「搬来前就排 5–10 家」。</p><p class="proof"><a href="https://calgary.ctvnews.ca/the-perfect-solution-new-daycare-centre-offers-extended-hours-for-newcomers-1.6797126">CTV Calgary</a> · <a href="https://www.ymcacalgary.org/locations/quarry-park-child-development-centre">YMCA Calgary</a></p></div>
+<div class="card"><h3>😔 孤单，交不到朋友</h3><p>来加拿大不到 10 年的新移民里，<b>43%</b> 说自己孤单 <span class="tag real">有来源</span>。很多人只和同乡来往，融不进社区。</p><p class="proof"><a href="https://hub.genwell.ca/adjusting-to-life-in-canada-combatting-isolation-as-a-newcomer/">GenWell 2023</a> · <a href="https://www.newcanadianmedia.ca/building-social-networks-is-good-for-mental-health-report/">New Canadian Media</a></p></div>
+<div class="card"><h3>❄️ 不知道周末带孩子去哪，冬天更难</h3><p>落地后的头几个周末最空，又不认识路、不懂冬天怎么玩。这是 Kids Map 本来就在解决的问题。</p><p class="proof"><span class="tag est">估计</span> 来自我们自己的产品定位，没有找到专门调查</p></div>
+<div class="card"><h3>💸 一下子什么都要花钱，又不知道该信哪家</h3><p>理发、牙医、游泳课、冬衣、亚洲超市……全要从零找。行业数据说新搬家的人第一年花钱最多，而且最先联系到他们的商家最容易变成长期客人 <span class="tag real">有来源</span>（注意：多是营销公司自己的数据）。</p><p class="proof"><a href="https://info.speedeondata.com/hubfs/Sales%20Material%20PDFs/Ebooks/Speedeon%20-%202026%20New%20Mover%20Spend%20Report.pdf">Speedeon 2026</a> · <a href="https://porchgroupmedia.com/blog/new-mover-marketing-customer-acquisition/">Porch Group Media</a></p></div>
+</div>
+<p><b>商家那边的痛点：</b>小商家（游泳学校、儿童理发、牙医、补习、室内乐园）拉一个新的「长期家庭客户」很贵，Google / Facebook 广告又不知道带来了谁。<b>我们给他们的是：只为真的到店的新家庭付钱，而且能看到是谁。</b></p>
+
+<h2 class="door">3. 礼包里有什么</h2>
+<div class="grid">
+<div class="card"><h3>🗓️ 「你家的第一个月」计划 <span class="pill p1">免费</span></h3><p>填 3 件事：孩子年龄、住哪个社区、哪天落地。Kids Map 生成 4 个周末 + 平日的计划，比如：第 1 个周末去附近的图书馆办卡（免费）+ 社区冰场；第 2 个周末去 Telus Spark（如果有 Canoo 就免费）……<b>每一步旁边就是能用的优惠券。</b></p></div>
+<div class="card"><h3>🎟️ 15 张本地优惠券（「礼物」，不是打折） <span class="pill p1">免费</span></h3><p>每个品类只放一家，例如：<br>游泳课第一节免费 · 儿童理发首次 $10 · 儿童牙医首诊送洁牙 · 室内乐园一次免费 · 亚洲超市满 $50 减 $10 · 冬衣店 15% · 家庭餐厅送儿童餐 · 补习 / 音乐试课 · 体操 / 足球试课 · 咖啡馆（我们 Coffee Pass 现有的）</p><p class="mute">核销：在店里打开手机给店员看，和 Coffee Pass 一样。</p></div>
+<div class="card"><h3>✅ 托儿所和学校清单 <span class="pill p1">免费</span></h3><p>你家附近的托儿所地图 + 「先排哪几家、哪家收排队费」+ 学区查询链接。写明「以官方为准」。<b>这是让人愿意来拿礼包的钩子。</b></p></div>
+<div class="card"><h3>🧑‍💼 1 小时本地顾问 <span class="pill p2">$149</span></h3><p>视频 1 小时：看房前帮你选区、排托儿所、规划第一个月。由你或一位本地家长来做。<b>这是唯一向家庭收钱的</b>，因为卖的是人的时间，不是信息。</p></div>
+</div>
+<div class="warn">先不做实体盒子。Welcome Wagon 和 WelcomePack 都死在实体成本上。等数字版跑通、有商家愿意出钱，再考虑「欢迎箱」，由赞助商出钱，或者让房产经纪买来当成交礼物。</div>
+
+<h2 class="door">4. 怎么收费，为什么是这个价</h2>
+<div class="box"><table>
+<tr><th>谁付</th><th>价格</th><th>为什么是这个数</th></tr>
+<tr><td><b>新家庭</b></td><td class="num">$0</td><td>要和一堆免费的东西竞争（市政府、Arrive、Canoo、安置机构）。免费才拿得到量，而我们真正要的是<b>用户</b>。</td></tr>
+<tr><td><b>商家：按新客付</b>（推荐先用）</td><td class="num">$20 / 核销<br><span class="rng">前 3 个月免费</span></td><td>Groupon 的路子：不用先付钱，只在有人真来的时候付，小商家最容易点头 <a href="https://thinkinsights.net/strategy/groupons-daily-deals-model">[14]</a>。一个家庭在游泳学校一年就是几百到上千块，$20 换一个长期家庭很便宜 <span class="tag est">估计</span>。设上限（例如每月最多 $300），商家就不怕。</td></tr>
+<tr><td><b>商家：品类独占</b>（有量以后）</td><td class="num">$79 / 月</td><td>学 Our Town America 的「一个品类只放一家」<a href="https://chiefmarketer.com/our-town-america-finds-new-local-customers">[3]</a>。比如「NW 区唯一的游泳学校」。价钱参考我们之前给餐厅定的 $150–300 推广包，降一档，方便小商家每月付 <span class="tag est">估计</span>。</td></tr>
+<tr><td><b>新家庭：顾问</b></td><td class="num">$149 / 小时</td><td>v3 定的是 $199。落地服务的单项（接机 US$40–80、短租一周 US$400–800）都是几十到几百 <a href="https://m.apearth.com/article/detail/40532">[15]</a>，一小时 $149 在一家人搬家的总花费里很小，又低于持牌移民顾问的价钱 <span class="tag est">估计</span>。</td></tr>
+<tr><td><b>房产经纪 / 雇主</b>（以后）</td><td class="num">$29–49 / 份</td><td>经纪买「高级版礼包」（含顾问 30 分钟）当成交礼物。CREB 已经有经纪 $75 抵扣的搬家包，说明经纪愿意出这类钱 <a href="https://creb.com/News/CREBNow/2024/August/rumi_move_in_bundle">[12]</a>。</td></tr>
+</table></div>
+
+<h2 class="door">5. 谁会用，有多少</h2>
+<div class="tiles">
+<div class="tile"><p class="tl">Calgary 2025 新 PR</p><p class="tv">22,650</p><p class="th">全省第一，但比上年少 24.8% <a href="https://regionaldashboard.alberta.ca/region/calgary/new-permanent-residents/">[16]</a></p></div>
+<div class="tile"><p class="tl">Calgary 人口增长</p><p class="tv">3.2%→1.6%</p><p class="th">2025 → 2026 预测，在放慢 <a href="https://www.calgary.ca/content/dam/www/cfod/finance/documents/corporate-economics/calgary-and-region-economic-outlook/Calgary-and-Region-Economic-Outlook-2026-Spring.pdf">[17]</a></p></div>
+<div class="tile"><p class="tl">外省搬来</p><p class="tv">&gt;2×</p><p class="th">仍是 10 年平均（约 4,000）的两倍多 <a href="https://www-prd.calgary.ca/content/dam/www/cfod/finance/documents/corporate-economics/housing-review/housing-review-q4-2025.pdf">[18]</a></p></div>
+<div class="tile dark"><p class="tl">有孩子的新家庭 / 年</p><p class="tv">~8,000</p><p class="th"><span class="tag est">估计</span> 新 PR + 外省 + 工签，约 30–40% 有孩子，按户算</p></div>
+</div>
+<div class="grid">
+<div class="card"><h3>谁会用（免费礼包）</h3><p>① <b>刚落地 0–6 个月、有 0–12 岁孩子的家庭</b>，新移民和外省搬来的都算；② <b>还没来、在准备的家庭</b>：最焦虑，也最愿意提前研究。不分来自哪里：国外来的新移民、外省搬来的、Calgary 内部搬到新区的家庭，用的是同一个礼包。</p></div>
+<div class="card"><h3>谁会付钱</h3><p>① <b>本地儿童类商家</b>：游泳 / 体操 / 音乐 / 补习、儿童理发、儿童牙医和眼科、室内乐园、亚洲超市、冬衣店；② <b>准备落地的中高收入家庭</b>买顾问；③ 以后：房产经纪、雇主 HR（员工搬家福利）。</p></div>
+</div>
+<p><b>诚实的规模估计 <span class="tag est">估计</span>：</b>一年 ~8,000 户，拿到 5% 就是 400 户；每户核销 4 张券 × $20 = $80，<b>约 $3 万/年</b>，再加每年 20–40 个顾问（$3,000–6,000）。<b>礼包自己发不了财</b>。值钱的是：400 个高意愿的新家庭第一天就用 Kids Map，再带出营地、生日派对、团购这些后面的生意。另外，移民在放慢，要同时抓外省搬来的人。</p>
+
+<h2 class="door">6. 杀手功能</h2>
+<div class="hero" style="background:linear-gradient(135deg,#0b7a5e,#1d2433)">
+<h2>「落地第一天，第一个月就排好了。每一步都有一张能用的券。」</h2>
+<p>别人给的是<b>清单</b>（市政府 PDF、Arrive），或者<b>一堆券</b>（Welcome Wagon）。我们把两样合在一起，而且按你家孩子的年龄和你住的社区来排：</p>
+<ul>
+<li><b>个性化</b>：同样是第 2 个周末，3 岁和 10 岁孩子的家庭拿到的计划不一样。这是 Kids Map 的数据才做得到的。</li>
+<li><b>券就在路线上</b>：「周六上午在 Southland 游泳池试课（免费券），中午附近这家餐厅送儿童餐」。不是一本你会忘掉的券册。</li>
+<li><b>商家看得到效果</b>：每张券核销都有记录，Offers 页已经能做。这是说服商家付钱的关键，也是 Welcome Wagon 做不到的。</li>
+<li><b>和 Canoo 配合，不竞争</b>：免费的大景点标「Canoo 免费」，礼包只放本地小商家，Canoo 不碰这一块。</li>
+<li><b>谁都能用</b>：国外来的、外省来的、城里换了区的家庭，用的是同一个礼包，只按孩子年龄和社区来排。</li>
+</ul>
+</div>
+
+<h2 class="door">7. 风险</h2>
+<div class="box"><table>
+<tr><th>风险</th><th>怎么办</th></tr>
+<tr><td>先有鸡还是先有蛋：没用户，商家不来；没商家，礼包空</td><td>前 3 个月商家免费；先找 10 家认识的、或已经在 Coffee Pass 里的店。自己先能凑出一个「SW 区」的礼包。</td></tr>
+<tr><td>看起来像广告、像垃圾券</td><td>每个品类只放一家，最多 15 张；说成「礼物」，学 Our Town America。</td></tr>
+<tr><td>托儿所、学校信息出错</td><td>只给链接和地图，写清楚「以官方为准」，不承诺有位子。</td></tr>
+<tr><td>移民在放慢（2025 年新 PR 少了 24.8%）</td><td>同时做外省搬来的家庭，还有在 Calgary 内部搬了新区的家庭。</td></tr>
+<tr><td>加拿大反垃圾邮件法（CASL）、隐私</td><td>只发给自己领了礼包、同意接收的人；不把家庭资料卖给商家，只告诉商家「核销了几张」。<span class="tag est">估计</span> 上线前要确认细节。</td></tr>
+<tr><td>商家核销作弊、员工不认券</td><td>沿用 Coffee Pass 的核销页；第一次去每家店，自己先试一遍。</td></tr>
+</table></div>
+
+<h2 class="door">8. 3 周测试</h2>
+<div class="box"><table>
+<tr><th>周</th><th>做什么</th></tr>
+<tr><td>第 1 周</td><td>谈 8–10 家商家（先 SW 或 NW 一个区），全部免费入驻。在 Kids Map 里做「Welcome to Calgary」页：填年龄和社区 → 第一个月计划 + 券。券和核销用现有的 deals / Coffee Pass 那套。</td></tr>
+<tr><td>第 2 周</td><td>发到 r/Calgary 的「moving to Calgary」帖 + 3–5 个 Calgary 新住户 / 家长的 Facebook 群 + 1 家安置机构（CCIS 或 Centre for Newcomers）+ 你认识的 1–2 个房产经纪。放一个 $149 顾问的预约按钮。</td></tr>
+<tr><td>第 3 周</td><td>看数字，然后问每家商家：「之后每个新客 $20，你愿意吗？」</td></tr>
+</table></div>
+<div class="note">
+<b>算成功：</b>① ≥ 150 个家庭领了礼包；② 其中 ≥ 20% 至少核销 1 张券；③ ≥ 3 家商家说愿意付钱；④ ≥ 2 个顾问订单。<br>
+<b>算失败：</b>家庭领了但不核销 → 券不够吸引，或者路线不对；商家都不愿付 → 礼包留着当免费拉新工具，不当生意做。
+</div>
+
+<h3>还不知道的（要打电话问）</h3>
+<ul class="q">
+<li>Our Town America 在 Calgary 有没有加盟商、收商家多少钱（网上查不到价钱）。</li>
+<li>安置机构（CCIS、Centre for Newcomers）愿不愿意转发商业礼包。WelcomePack 当年在安省做到了。</li>
+<li>Calgary Newcomers Club 现在还活跃吗、会费多少。可以当合作方。</li>
+<li>本地儿童类商家拉一个新家庭，现在实际花多少钱。这决定 $20 是贵还是便宜。</li>
+</ul>
+
+<h3>来源</h3>
+<ol style="font-size:13px">
+<li><a href="https://en.wikipedia.org/wiki/Welcome_Wagon">Wikipedia：Welcome Wagon（加拿大 1930–2020.5）</a></li>
+<li><a href="https://www.pressreader.com/canada/windsor-star/20190206/281590946810559">Windsor Star 2019：礼物篮里是商家的小礼品和优惠券</a></li>
+<li><a href="https://chiefmarketer.com/our-town-america-finds-new-local-customers">Chief Marketer：Our Town America 怎么运作</a></li>
+<li><a href="https://www.entrepreneur.com/franchises/directory/our-town-america/321610">Entrepreneur：Our Town America 加盟数据</a></li>
+<li><a href="https://www.globenewswire.com/news-release/2015/08/11/1379331/0/en/30-000-More-New-Immigrants-to-Receive-a-Welcome-to-Remember-Gift-from-WelcomePack-Canada.html">GlobeNewswire 2015：WelcomePack 通过 60+ 安置机构派送</a></li>
+<li><a href="https://www.newswire.com/news/welcomepack-canada-reaches-new-milestone-of-40-000-new-immigrant-members-9294941">Newswire 2016：WelcomePack 4 万会员</a></li>
+<li><a href="https://newswire.ca/news-releases/meet-canoo-2-0-free-access-to-over-1400-experiences-for-millions-of-newcomers-890535358.html">Canoo 2.0：1,400+ 免费体验</a></li>
+<li><a href="https://inclusion.ca/article/the-institute-for-canadian-citizenship-and-telus-join-forces-to-provide-exclusive-offers-and-no-credit-checks-for-newcomers-to-canada-via-the-canoo-app">ICC × TELUS：Canoo 里的新移民优惠</a></li>
+<li><a href="https://www.nerdwallet.com/ca/banking/best-banks-for-newcomers">NerdWallet：各银行新移民套餐</a></li>
+<li><a href="https://welcomeaide.com/en">WelcomeAide：免费 AI 安置指导</a></li>
+<li><a href="https://tricohomes.com/the-trico-red-card/">Trico Red Card</a></li>
+<li><a href="https://creb.com/News/CREBNow/2024/August/rumi_move_in_bundle">CREB 2024：Move-In Bundle（经纪 $75 抵扣）</a></li>
+<li><a href="https://www.calgary.ca/newcomers.html">City of Calgary：新移民页</a></li>
+<li><a href="https://thinkinsights.net/strategy/groupons-daily-deals-model">Groupon 的商家分成模式</a></li>
+<li><a href="https://m.apearth.com/article/detail/40532">落地服务参考价（接机、短租）</a></li>
+<li><a href="https://regionaldashboard.alberta.ca/region/calgary/new-permanent-residents/">Alberta Regional Dashboard：Calgary 2025 新 PR 22,650</a></li>
+<li><a href="https://www.calgary.ca/content/dam/www/cfod/finance/documents/corporate-economics/calgary-and-region-economic-outlook/Calgary-and-Region-Economic-Outlook-2026-Spring.pdf">City of Calgary：2026 春季经济展望</a></li>
+<li><a href="https://www-prd.calgary.ca/content/dam/www/cfod/finance/documents/corporate-economics/housing-review/housing-review-q4-2025.pdf">City of Calgary：2025 Q4 住房回顾</a></li>
+</ol>
+</div>
+</body></html>
