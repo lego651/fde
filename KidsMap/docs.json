@@ -36,6 +36,24 @@
   "docs": [
     {
       "cat": "grow",
+      "title": "分析：Dudu 防丢标签",
+      "type": "HTML",
+      "date": "2026-11-13",
+      "status": "wip",
+      "path": "deliverables/lost-found-labels-analysis.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
+      "title": "Dudu 防丢标签（原文）",
+      "type": "HTML",
+      "date": "2026-11-12",
+      "status": "wip",
+      "path": "deliverables/lost-found-labels.html",
+      "featured": true
+    },
+    {
+      "cat": "grow",
       "title": "分析：民宿房东的带娃指南",
       "type": "HTML",
       "date": "2026-11-13",

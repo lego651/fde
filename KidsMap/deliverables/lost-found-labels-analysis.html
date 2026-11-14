@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<!-- PIN-GATE:START -->
+<meta name="robots" content="noindex">
+<script src="/fde/assets/pin-gate.js" data-client="kidsmap" data-hash="86cdba9ab2ec9fc56d3e2407bb38d0daae913cf636584a78c2e01c1ff6af322d"></script>
+<!-- PIN-GATE:END -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>分析：Dudu 防丢标签</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout: one reading column. Verdict, what works, 5 problems, revised test, sources. Paper palette shared with the FDE site. */
+  --paper: #fbf8f2; --card: #fff; --ink: #2a2620; --muted: #6d6558; --line: #ebe3d4;
+  --accent: #c9772e; --accent-ink: #a85f1f; --accent-soft: #fbf1e4;
+  --good: #1f7a3a; --good-soft: #e3f4e6; --warn: #8a5a00; --warn-soft: #fff1d6; --bad: #b3261e; --bad-soft: #fde8e6;
+  --font: "Archivo", "Noto Sans SC", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Noto Serif SC", Georgia, serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 400 16px/1.7 var(--font); }
+main { max-width: 860px; margin: 0 auto; padding: 40px 20px 90px; display: grid; gap: 38px; }
+h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.3; }
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.4rem; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+h3 { font-size: 1.08rem; }
+p { margin: 0; max-width: 70ch; }
+a { color: var(--accent-ink); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.meta { color: var(--muted); }
+section { display: grid; gap: 16px; }
+ul.plain, ol.plain { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.tag { display: inline-block; font-size: .75rem; font-weight: 800; padding: 2px 9px; border-radius: 999px; background: #e3eefb; color: #1d5fa8; }
+.verdict { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--accent); border-radius: 0 14px 14px 0; padding: 18px 22px; display: grid; gap: 10px; }
+.score { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.score div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.score b { font-size: 1.35rem; font-family: var(--serif); }
+.score span { font-size: .82rem; color: var(--muted); }
+@media (max-width: 680px) { .score { grid-template-columns: 1fr 1fr; } }
+.good { background: var(--good-soft); border: 1px solid #c4e5cc; border-radius: 14px; padding: 16px 20px; display: grid; gap: 8px; }
+.prob { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.prob .ph { display: flex; gap: 12px; align-items: center; padding: 14px 20px; background: #f7f1e6; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.prob .n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; display: grid; place-items: center; flex: none; font-size: .9rem; }
+.prob .ph h3 { flex: 1; min-width: 200px; }
+.prob .pb { padding: 16px 20px 18px; display: grid; gap: 10px; }
+.prob .fix { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
+.pill { display: inline-block; font-size: .75rem; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.hi { background: var(--bad-soft); color: var(--bad); }
+.mid { background: var(--warn-soft); color: var(--warn); }
+.wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { background: #f7f1e6; font-size: .8rem; letter-spacing: .05em; color: #8c7f6a; }
+tr:last-child td { border-bottom: 0; }
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sources { font-size: .85rem; color: var(--muted); }
+.sources li { word-break: break-word; }
+</style>
+</head>
+<body>
+<main>
+
+<header style="display:grid;gap:10px">
+  <h1>分析：Dudu 防丢标签</h1>
+  <p class="meta">Kids Map · 分析原文 <a href="lost-found-labels.html">《Dudu 防丢标签：长什么样》（2026-11-12）</a> · 2026-11-13 · <span class="tag">分析中</span></p>
+</header>
+
+<section>
+  <div class="verdict">
+    <p><b>结论：可以测，但要换一个测法。原文的预售只能测出"家长想不想买"，测不出这门生意真正靠的那件事：陌生人捡到了会不会扫。</b></p>
+    <p>原文设计细节做得很好：外面不写名字、永远不印电话、印网址和 5 位码作备用、想到了"Kids Map 不做了怎么办"。"捡到的人也是附近家长 → 拉新"这个想法也有意思，原文自己也标了"要测"。</p>
+    <p>但有 3 件事要先处理：<b>①标签上印的 kidsmap.ca 还没注册；②扫码页显示"这是 Leo 的手套"，等于把书包挂牌上故意不写的名字又给了陌生人；③加拿大的 Oliver's Labels 已经有免费的"捡到了输入编号、我们转发"系统，"二维码 + 转发"本身不算新。</b></p>
+  </div>
+  <div class="score" role="list">
+    <div role="listitem"><b>强</b><span>标签设计和隐私细节</span></div>
+    <div role="listitem"><b>强</b><span>价格包和季节节奏</span></div>
+    <div role="listitem"><b>没验证</b><span>核心假设：陌生人会扫</span></div>
+    <div role="listitem"><b>要改</b><span>域名、扫码页、竞品</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>写得好的地方</h2>
+  <div class="good">
+    <ul class="plain">
+      <li><b>先承认有人在做。</b>Tinyme、Tile、PingTag 都列出来了，没有假装是第一个做二维码标签的。</li>
+      <li><b>安全决定是对的。</b>外面挂的书包牌不写名字；永远不印电话，所有联系走转发；家长可以换号码、关掉某个标签；限制每个标签的发送次数。</li>
+      <li><b>备用方案。</b>扫不了就输入网址加 5 位码；也写到了"标签贴好几年，Kids Map 不做了也要能用"。</li>
+      <li><b>整包一次绑定。</b>扫任何一张就绑整包，家长 30 秒设置完，这一点比 Tinyme 一张张设置好。</li>
+      <li><b>卖法和季节对得上。</b>10 月冬天包、8 月底上学包、圣诞全家包，跟 Calgary 家长真正买标签的时间一致。</li>
+      <li><b>有市场证据。</b>Mabel's Labels 证明加拿大家长愿意为孩子名字贴付钱（不过那个 C$9.5M 是 2016 年被收购时的预测数字，原文写成"预计年销售"，要注明年份）。</li>
+      <li><b>成本标了"没询价"。</b>原文诚实说明是估算，这一点很好。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>5 个问题，以及怎么改</h2>
+
+  <div class="prob">
+    <div class="ph"><span class="n">1</span><h3>标签上印的 kidsmap.ca 还没注册</h3><span class="pill hi">先做</span></div>
+    <div class="pb">
+      <p>每张标签都印了 <code>kidsmap.ca/f</code>，二维码也会指向一个网址。我 2026-11-13 查了 CIRA 的注册记录：<b>kidsmap.ca 显示"Domain not found"，还没有人注册</b>，现在网站在 kids-map-ca.vercel.app。项目自己的 HANDOFF.md 也把"自定义域名，例如 kidsmap.ca"列为以后要做的事。</p>
+      <p>标签一旦印出去就改不了，会贴在衣服上好几年。如果印了以后域名被别人抢注，所有标签都会把捡到的人带到别人的网站。</p>
+      <div class="fix"><b>改：</b>在做预售页、印任何东西之前，<b>先注册 kidsmap.ca</b>（以及想用的短域名）。二维码指向一个我们自己长期控制的短路径（如 <code>kidsmap.ca/f/12345</code>），后面接什么系统都可以换，但网址不能变。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">2</span><h3>扫码页把孩子的名字给了陌生人</h3><span class="pill hi">风险高</span></div>
+    <div class="pb">
+      <p>原文说"外面看得到的地方不写名字，因为陌生人可以叫出孩子的名字是个安全问题"。但扫码后的第一屏写着<b>"谢谢你！这是 Leo 的手套"</b>，第三屏也写"Leo 的妈妈说谢谢你"。任何人扫一下书包挂牌就知道这个孩子叫 Leo，挂牌上不写名字就白做了。</p>
+      <p>另外，系统会存孩子的名字、物品照片和捡到的位置，这些都是孩子的个人信息。Alberta 的私营机构隐私法（PIPA）和联邦的 PIPEDA 都管这些，要写清楚收集什么、存多久、给谁看。</p>
+      <div class="fix"><b>改：</b>扫码页<b>默认不显示名字</b>，只写"这是一个小朋友的东西，Dudu 帮你告诉他家里人"。名字只给家长自己看（在推送里）。家长也不能把名字设成对外显示，至少测试阶段不能。上线前写一页简单的隐私说明。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">3</span><h3>核心假设"陌生家长会扫"没验证，而且学校里可能不成立</h3><span class="pill hi">核心假设</span></div>
+    <div class="pb">
+      <p>原文说第三屏"是这门生意的关键"，标签的价值在拉新。这要求捡到东西的人<b>真的拿出手机扫</b>。但想想最常见的情况：</p>
+      <ul class="plain">
+        <li><b>学校里</b>：捡到手套的大多是学生、老师或清洁工，常见做法是丢进失物招领箱。Alberta 从 2024 年 9 月起规定 K-12 学生上课时手机要关机收好，小学生大多也没有手机。Calgary 的学校通常每隔几个月或学期末把没人领的东西捐掉。</li>
+        <li><b>公园、冰场</b>：捡到的人可能是家长，但也可能把东西挂在栏杆上就走。</li>
+      </ul>
+      <p>如果大多数丢的东西是在学校，那么最常见的结果是：家长自己去失物箱里翻，紫色标签帮他们<b>更快认出来</b>。这有用，但跟名字贴的作用一样，不需要二维码，也不会带来新用户。</p>
+      <div class="fix"><b>改：</b>测试时把<b>"每 100 张标签每月被扫几次"</b>当作第一指标，再看扫码的人里有多少点了"你也有孩子？"。如果扫码很少，这就是一个"更好认的名字贴"生意，要跟 Mabel's Labels 比价格，不能当成拉新渠道。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">4</span><h3>竞品比原文写的更近：加拿大已经有免费的转发系统</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>原文的对比表漏掉了最接近的一家：</p>
+      <div class="wrap"><table>
+        <thead><tr><th>产品</th><th>已经做到的</th><th>对我们的影响</th></tr></thead>
+        <tbody>
+          <tr><td><b>Oliver's Labels</b>（加拿大）</td><td>Found-it 系统：标签印 9 位编号，捡到的人在网站输入编号、写在哪里捡到的，Oliver's 当中间人发邮件给家长，<b>免费</b></td><td>"不留电话、我们转发"已经有加拿大公司在做，而且免费。我们只是多了二维码</td></tr>
+          <tr><td><b>Tinyme</b></td><td>有能烫在衣服上的二维码标签；不用订阅；有加拿大站 tinyme.ca</td><td>不只是"澳洲公司"，加拿大家长也能直接买到。不过它要求双方交换电话或邮箱，我们的匿名转发更好</td></tr>
+          <tr><td><b>Mabel's Labels</b>（加拿大）</td><td>名字贴的老大；我没找到它卖二维码防丢标签</td><td>原文说得对。但 C$9.5M 是 2016 年的预测，不是现在的数字</td></tr>
+        </tbody>
+      </table></div>
+      <p>所以真正的差异只剩两个：<b>①Calgary 本地的"交到这里"地点，②捡到的人有好心人章</b>。①要学校和社区中心同意才有，现在一个都没有；②要先证明有人扫。</p>
+      <div class="fix"><b>改：</b>把 Oliver's Labels 加进对比表。差异点写成"匿名转发 + 本地交还点 + 好心人章"，并在测试中先拿下 1–2 个交还点，没有交还点就不要在扫码页上显示这一项。</div>
+    </div>
+  </div>
+
+  <div class="prob">
+    <div class="ph"><span class="n">5</span><h3>预售测试的门槛太低，而且只测"想买"</h3><span class="pill mid">中</span></div>
+    <div class="pb">
+      <p>原文的成功标准是"20 个人留订金<b>或</b>邮箱"。留邮箱几乎没有成本，20 个邮箱说明不了家长会付 $29。而且预售只测了第一步（家长买），没有测第二步（陌生人扫），而第二步才是原文说的"关键"。</p>
+      <p>还有一点：成本 $4–7 是估算。每张一个独立二维码的烫贴要用可变数据印刷，小批量单价可能比估的高。耐洗性只有厂商自己的说法，我没找到第三方的洗涤测试。</p>
+      <div class="fix"><b>改：</b>分两段测，见下表。订金和邮箱分开统计，<b>只算付了订金的人</b>。印 50 套之前，至少拿到 2 家印刷商的报价，并自己洗 20 次、每洗 5 次用 3 部不同的手机扫一次。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>修改后的测试（4 周）</h2>
+  <div class="wrap"><table>
+    <thead><tr><th>步骤</th><th>做什么</th><th>成功标准</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td><b>注册 kidsmap.ca</b>；扫码页默认不显示名字；写一页隐私说明</td><td>做完才开始</td></tr>
+      <tr><td>1</td><td>预售页 + 发 2–3 个 Calgary 家长群（原文的做法）。<b>订金和邮箱分开统计</b></td><td>≥ 20 个人付 $1 订金</td></tr>
+      <tr><td>2</td><td><b>同时</b>做 30 套简易版：防水贴纸纸自己打印，二维码指向一个简单的"我捡到了"表单，送给 Ethan 学校和朋友圈的家长，贴在手套、水壶、头盔上</td><td>30 套都贴上</td></tr>
+      <tr><td>3</td><td>问 2 个学校前台或社区中心愿不愿意当交还点（原文的做法）</td><td>≥ 1 个同意</td></tr>
+      <tr><td>4</td><td>4 周后看简易版的扫码数据：扫了几次、谁扫的（家长 / 老师 / 小孩）、东西有没有回到家</td><td>每 100 张标签每月 ≥ 2 次真实扫码（先定个数，测完再调）</td></tr>
+    </tbody>
+  </table></div>
+  <p class="meta">步骤 1 和 3 是原文的计划；步骤 0、2、4 是新加的，用来验证问题 1–3。"每 100 张 ≥ 2 次"是我先设的门槛，没有行业数据。</p>
+  <p><b>怎么判断：</b>订金够 + 扫码够 → 按原文印 50 套。订金够、扫码很少 → 当"更好认的名字贴"卖，不当拉新渠道。订金不够 → 先放下。</p>
+</section>
+
+<section>
+  <h2>原文需要改的地方（汇总）</h2>
+  <ol class="plain">
+    <li>在"怎么测"第一步前面加：先注册 kidsmap.ca。</li>
+    <li>扫码页第一屏、第三屏：去掉"Leo"，默认不显示名字；"设计上的几个决定"里补一句"扫码页也不显示名字"。</li>
+    <li>"别人怎么做"：加 Oliver's Labels（加拿大，免费 Found-it 转发）；Tinyme 注明有加拿大站；Mabel's 的 C$9.5M 注明是 2016 年的预测。</li>
+    <li>"怎么测"：成功标准改成"20 个人付订金"；加一组 30 套简易版测扫码率。</li>
+    <li>"风险"：加"学校里捡到的人多半不扫、直接放进失物箱"，以及孩子个人信息的隐私说明。</li>
+  </ol>
+</section>
+
+<section>
+  <h2>资料来源</h2>
+  <ul class="plain sources">
+    <li>CIRA RDAP 查询 kidsmap.ca（2026-11-13 返回 "Domain not found"）：<a href="https://rdap.ca.fury.ca/rdap/domain/kidsmap.ca">rdap.ca.fury.ca … kidsmap.ca</a></li>
+    <li>Oliver's Labels，Found-it 免费线上失物招领：<a href="https://www.oliverslabels.com/en-ca/foundit">oliverslabels.com/en-ca/foundit</a>；FAQ：<a href="https://www.oliverslabels.com/aboutus/faqs">oliverslabels.com/aboutus/faqs</a></li>
+    <li>Tinyme，二维码名字贴（烫贴版、不用订阅、加拿大站）：<a href="https://www.tinyme.com/qr-code-name-labels">tinyme.com/qr-code-name-labels</a></li>
+    <li>CCL 收购 Mabel's Labels（2016 年 1 月，预测年销售 C$9.5M）：<a href="https://www.canadianpackaging.com/?p=145355">canadianpackaging.com</a>；<a href="https://www.labelsandlabeling.com/news/ccl-adds-mabels-labels-avery-segment-through-latest-acquisition">labelsandlabeling.com</a></li>
+    <li>Mabel's Labels 失物招领指南（名字贴是最有效的办法）：<a href="https://mabelslabels.com/guides/lost-and-found-school-survival-guide">mabelslabels.com … lost-and-found-school-survival-guide</a></li>
+    <li>CTV，Calgary 学校怎么执行 Alberta 课堂手机禁令：<a href="https://calgary.ctvnews.ca/here-s-how-calgary-school-boards-are-handling-alberta-s-classroom-cellphone-ban-1.7008196">calgary.ctvnews.ca … cellphone-ban</a></li>
+    <li>CBE 学校的失物招领做法（未领物品定期捐掉）：<a href="https://evanstonheights.cbe.ab.ca/personal-belongings">Evanston Heights</a>；<a href="https://cranston.cbe.ab.ca/personal-belongings">Cranston</a>；<a href="https://drgordonhiggins.cbe.ab.ca/personal-belongings">Dr. Gordon Higgins</a></li>
+    <li>Colleamoi（加拿大），烫贴使用说明（先洗衣服、贴后 12–24 小时再洗）：<a href="https://colleamoi.com/en_CA/mix-name-labels-combo">colleamoi.com</a></li>
+  </ul>
+</section>
+
+</main>
+</body>
+</html>
